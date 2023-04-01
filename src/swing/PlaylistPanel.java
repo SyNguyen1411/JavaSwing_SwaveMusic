@@ -4,8 +4,6 @@ package swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
-import swing.utilcomponent.ScrollBarCustom;
-
 /**
  *
  * @author NGUYEN VAN SI
@@ -18,7 +16,7 @@ public class PlaylistPanel extends javax.swing.JPanel {
     public PlaylistPanel() {
         initComponents();
         jscPlaylist.getViewport().setBackground(new Color(255, 255, 255, 0));
-        jscPlaylist.setVerticalScrollBar(new ScrollBarCustom());
+        
     }
 
     public void addPlayList(entity.PlayList data) {
@@ -53,6 +51,7 @@ public class PlaylistPanel extends javax.swing.JPanel {
 
         jscPlaylist = new javax.swing.JScrollPane();
         pnlPlaylist = new javax.swing.JPanel();
+        scrollBar1 = new component.ScrollBar();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1273, 510));
@@ -61,6 +60,7 @@ public class PlaylistPanel extends javax.swing.JPanel {
         jscPlaylist.setBorder(null);
         jscPlaylist.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jscPlaylist.setHorizontalScrollBar(null);
+        jscPlaylist.setVerticalScrollBar(scrollBar1);
 
         pnlPlaylist.setBackground(new java.awt.Color(255, 255, 255));
         pnlPlaylist.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -75,13 +75,20 @@ public class PlaylistPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jscPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 1244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jscPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jscPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(scrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -90,5 +97,6 @@ public class PlaylistPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jscPlaylist;
     private javax.swing.JPanel pnlPlaylist;
+    private component.ScrollBar scrollBar1;
     // End of variables declaration//GEN-END:variables
 }
