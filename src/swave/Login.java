@@ -23,6 +23,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
+    public static MainFrame main;
     boolean viewPass = false;
     boolean forgot = false;
     
@@ -353,11 +355,14 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
-            MainFrame main = new MainFrame();
+            main = new MainFrame();
             main.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_btnLoginMouseClicked
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -392,6 +397,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.Button btnLogin;

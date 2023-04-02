@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import entity.Song;
+import swave.MainFrame;
 import swing.MainWindowItem;
 import swing.PlaylistPanel;
 import swing.SongList;
@@ -37,6 +38,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private CardLayout cardLPlaylistLayout;
+    public MainFrame main;
 
 //    private MouseEvent dayMouseEvent;
 //    private MouseEvent weekMouseEvent;
@@ -398,21 +400,21 @@ public class MainPanel extends javax.swing.JPanel {
 
     public void fillTopPlaylistDaily() {
         for (PlayList dailyPlayList : dailyPlayLists) {
-            pnlPlaylistDaily.addPlayList(dailyPlayList);
+            pnlPlaylistDaily.addPlayList(dailyPlayList, main);
         }
         revalidate();
     }
 
     public void fillTopPlaylistWeekly() {
         for (PlayList weeklyPlayList : weeklyPlayLists) {
-            pnlPlaylistWeekly.addPlayList(weeklyPlayList);
+            pnlPlaylistWeekly.addPlayList(weeklyPlayList, main);
         }
         revalidate();
     }
 
     public void fillTopPlaylistMonthly() {
         for (PlayList monthlyPlayList : monthlyPlayLists) {
-            pnlPlaylistMonthly.addPlayList(monthlyPlayList);
+            pnlPlaylistMonthly.addPlayList(monthlyPlayList, main);
         }
         revalidate();
     }

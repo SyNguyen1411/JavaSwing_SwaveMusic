@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import entity.Song;
+import swave.MainFrame;
 import swing.utilcomponent.ScrollBarCustom;
 
 /**
@@ -46,7 +47,6 @@ public class SongList extends javax.swing.JPanel {
         initComponents();
         repaint();
         jscSongList.getViewport().setBackground(new Color(255, 255, 255, 0));
-        jscSongList.setVerticalScrollBar(new ScrollBarCustom());
         new Thread(running).start();
         if (pnlSongList.getComponentCount() == 0) {
             pnlSongList.setPreferredSize(new Dimension(1073, 0));
@@ -147,6 +147,7 @@ public class SongList extends javax.swing.JPanel {
 
         jscSongList = new javax.swing.JScrollPane();
         pnlSongList = new javax.swing.JPanel();
+        scrollBar1 = new component.ScrollBar();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1273, 310));
@@ -156,6 +157,7 @@ public class SongList extends javax.swing.JPanel {
         jscSongList.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jscSongList.setHorizontalScrollBar(null);
         jscSongList.setPreferredSize(new java.awt.Dimension(1073, 100));
+        jscSongList.setVerticalScrollBar(scrollBar1);
         jscSongList.setViewportView(null);
 
         pnlSongList.setBackground(new java.awt.Color(255, 255, 255));
@@ -173,11 +175,14 @@ public class SongList extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jscSongList, javax.swing.GroupLayout.PREFERRED_SIZE, 1073, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jscSongList, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+            .addComponent(scrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -185,6 +190,7 @@ public class SongList extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jscSongList;
     private javax.swing.JPanel pnlSongList;
+    private component.ScrollBar scrollBar1;
     // End of variables declaration//GEN-END:variables
 
 }

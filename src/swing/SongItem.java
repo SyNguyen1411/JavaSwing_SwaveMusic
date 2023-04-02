@@ -171,6 +171,7 @@ public class SongItem extends javax.swing.JPanel {
                 this.setBackground(new Color(93, 20, 118));
             } else {
                 this.setBackground(new Color(255, 255, 255, 0));
+                lblIconLove.setVisible(false);
             }
 
             lblIconPlay.setVisible(!running);
@@ -178,7 +179,7 @@ public class SongItem extends javax.swing.JPanel {
             lblNamSong.setForeground(new Color(199, 199, 199));
             lblIconPlay.setForeground(new Color(199, 199, 199));
             lblTime.setForeground(new Color(199, 199, 199));
-            lblIconLove.setVisible(false);
+
         }
 
     }//GEN-LAST:event_formMouseExited

@@ -29,7 +29,8 @@ public class SearchPlaylist extends javax.swing.JPanel {
     }
 
     public void addPlayList(PlayList data) {
-        PlaylistItem item = new PlaylistItem(data);
+        PlaylistItem item = new PlaylistItem();
+        item.setData(data);
         pnlPlaylist.add(item);
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount() - 1) % 4 == 0)) {
             pnlPlaylist.setPreferredSize(new Dimension(1100, pnlPlaylist.getHeight() + 330));

@@ -4,6 +4,7 @@ package swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import swave.MainFrame;
 /**
  *
  * @author NGUYEN VAN SI
@@ -15,14 +16,16 @@ public class PlaylistPanel extends javax.swing.JPanel {
      */
     public PlaylistPanel() {
         initComponents();
+        pnlPlaylist.setBackground(new Color(255, 255, 255, 0));
         jscPlaylist.getViewport().setBackground(new Color(255, 255, 255, 0));
         
     }
 
-    public void addPlayList(entity.PlayList data) {
-        PlaylistItem item = new PlaylistItem(data);
+    public void addPlayList(entity.PlayList data,  MainFrame main) {
+        PlaylistItem item = new PlaylistItem();
+        item.loadData(data);
+        item.setMain(main);
         pnlPlaylist.add(item);
-        System.out.println(pnlPlaylist.getComponentCount());
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount()-1) % 4 == 0)) {
             pnlPlaylist.setPreferredSize(new Dimension(1220, pnlPlaylist.getHeight() + 330));
             validate();
@@ -66,7 +69,7 @@ public class PlaylistPanel extends javax.swing.JPanel {
         pnlPlaylist.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlPlaylist.setOpaque(false);
         pnlPlaylist.setPreferredSize(new java.awt.Dimension(1210, 330));
-        pnlPlaylist.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 30));
+        pnlPlaylist.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 30));
         jscPlaylist.setViewportView(pnlPlaylist);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

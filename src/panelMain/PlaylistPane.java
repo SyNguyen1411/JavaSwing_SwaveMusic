@@ -7,6 +7,7 @@ package panelMain;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import entity.PlayList;
+import swave.MainFrame;
 
 /**
  *
@@ -20,6 +21,8 @@ public class PlaylistPane extends javax.swing.JPanel {
     public static ArrayList<PlayList> list = new ArrayList<>();
     public static ArrayList<PlayList> listLove = new ArrayList<>();
     public CardLayout c;
+    public MainFrame main;
+    
 
     public PlaylistPane() {
         initComponents();
@@ -101,13 +104,13 @@ public class PlaylistPane extends javax.swing.JPanel {
 
     //Thêm PlaylistPanel và pnl Của Tôi
     public void addList(PlayList playlist) {
-        pnlMyPlaylist.addPlayList(playlist);
+        pnlMyPlaylist.addPlayList(playlist, main);
         revalidate();
     }
 
     //Thêm PlaylistPanel vào pnl Love
     public void addListLove(PlayList playlist) {
-        pnlPlaylistLove.addPlayList(playlist);
+        pnlPlaylistLove.addPlayList(playlist, main);
         revalidate();
     }
 

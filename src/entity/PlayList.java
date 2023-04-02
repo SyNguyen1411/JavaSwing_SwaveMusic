@@ -15,6 +15,14 @@ public class PlayList {
     private boolean status;
     private String icon;
 
+    public PlayList(int playlistID, String playlistName, int userID, boolean status, String icon) {
+        this.playlistID = playlistID;
+        this.playlistName = playlistName;
+        this.userID = userID;
+        this.status = status;
+        this.icon = icon;
+    }
+
     public int getUserID() {
         return userID;
     }
@@ -31,8 +39,6 @@ public class PlayList {
         this.status = status;
     }
 
-    
-    
     public int getPlaylistID() {
         return playlistID;
     }
@@ -56,18 +62,6 @@ public class PlayList {
     public void setIcon(String icon) {
         this.icon = icon;
     }
-
-    public PlayList() {
-    }
-
-    public PlayList(int playlistID, String playlistName, int userID, boolean status, String icon) {
-        this.playlistID = playlistID;
-        this.playlistName = playlistName;
-        this.userID = userID;
-        this.status = status;
-        this.icon = icon;
-    }
-    
 
     public Icon toIcon() {
         return new ImageIcon(getClass().getResource("/img/" + icon));

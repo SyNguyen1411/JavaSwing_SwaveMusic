@@ -20,6 +20,22 @@ public class Song {
     private boolean status;
     private int userID;
 
+    public Song() {
+    }
+
+    public Song(int songID, String nameSong, String musician, String singer, String category, String fileLyrics, String AVT, String fileSong, boolean status, int userID) {
+        this.songID = songID;
+        this.nameSong = nameSong;
+        this.musician = musician;
+        this.singer = singer;
+        this.category = category;
+        this.fileLyrics = fileLyrics;
+        this.AVT = AVT;
+        this.fileSong = fileSong;
+        this.status = status;
+        this.userID = userID;
+    }
+
     public int getSongID() {
         return songID;
     }
@@ -97,22 +113,6 @@ public class Song {
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public Song() {
-    }
-
-    public Song(int songID, String nameSong, String musician, String singer, String category, String fileLyrics, String AVT, String fileSong, boolean status, int userID) {
-        this.songID = songID;
-        this.nameSong = nameSong;
-        this.musician = musician;
-        this.singer = singer;
-        this.category = category;
-        this.fileLyrics = fileLyrics;
-        this.AVT = AVT;
-        this.fileSong = fileSong;
-        this.status = status;
         this.userID = userID;
     }
 
