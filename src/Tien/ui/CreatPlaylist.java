@@ -17,6 +17,7 @@ public class CreatPlaylist extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         this.setBackground(new Color(255, 255, 255, 0));
+        //test github;
     }
 
     /**
