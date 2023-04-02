@@ -23,6 +23,7 @@ public class Signup extends javax.swing.JFrame {
     public Signup() {
         initComponents();
         this.setLocationRelativeTo(null);
+        simpleTitleBar1.init(this);
     }
 
     /**
@@ -266,7 +267,7 @@ public class Signup extends javax.swing.JFrame {
 
         pnlSignup.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 700, -1, -1));
 
-        pnlBackgroud.add(pnlSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 490, 740));
+        pnlBackgroud.add(pnlSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 490, 740));
 
         lblBackgroud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Background-Sigup.png"))); // NOI18N
         pnlBackgroud.add(lblBackgroud, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, 810));
