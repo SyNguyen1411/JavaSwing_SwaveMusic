@@ -31,6 +31,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         txtUsername.setBackground(new Color(255, 255, 255, 0));
         txtPassword.setBackground(new Color(255, 255, 255, 0));
+        simpleTitleBar1.init(this);
     }
 
     /**
@@ -74,7 +75,7 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(new java.awt.Dimension(1530, 810));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(simpleTitleBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1530, -1));
+        getContentPane().add(simpleTitleBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, -1));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1532, 810));
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
