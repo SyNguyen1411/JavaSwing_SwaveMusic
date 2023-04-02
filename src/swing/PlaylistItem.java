@@ -6,7 +6,10 @@ import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import entity.PlayList;
+import java.awt.Color;
 import model.borderImage;
+import swave.Login;
+import swave.MainFrame;
 
 /**
  *
@@ -17,15 +20,19 @@ public class PlaylistItem extends javax.swing.JPanel {
     /**
      * Creates new form PlaylistItem
      */
-    PlayList data;
-    
-    public PlaylistItem(PlayList data) {
-        this.data = data;
+    private MainFrame main;
+    public PlayList data;
+
+    public PlaylistItem() {
         initComponents();
-        setOpaque(false);
-        lblAVT.setIcon(data.toIcon());
-        lblPlaylistName.setText(data.getPlaylistName());
-        lblPlaylistAuthor.setText("By " + data.getUserID());
+        
+    }
+
+    public void loadData(PlayList data) {
+        this.data = data;
+        lblAVT.setIcon(this.data.toIcon());
+        lblPlaylistName.setText(this.data.getPlaylistName());
+        lblPlaylistAuthor.setText("By " + this.data.getUserID());
     }
 
     /**
@@ -37,20 +44,27 @@ public class PlaylistItem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAVT = new model.borderImage();
         lblPlaylistName = new javax.swing.JLabel();
         lblPlaylistAuthor = new javax.swing.JLabel();
+        lblAVT = new model.borderImage();
 
-        setOpaque(false);
+        setBackground(new java.awt.Color(97, 97, 97));
         setPreferredSize(new java.awt.Dimension(256, 300));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblAVT.addMouseListener(new java.awt.event.MouseAdapter() {
+        addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAVTMouseClicked(evt);
+                formMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
             }
         });
-        add(lblAVT, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 11, 220, 220));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblPlaylistName.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblPlaylistName.setForeground(new java.awt.Color(253, 178, 255));
@@ -65,11 +79,26 @@ public class PlaylistItem extends javax.swing.JPanel {
         lblPlaylistAuthor.setText("By Author");
         lblPlaylistAuthor.setPreferredSize(new java.awt.Dimension(200, 29));
         add(lblPlaylistAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 180, -1));
+        add(lblAVT, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 11, 220, 220));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblAVTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAVTMouseClicked
-       
-    }//GEN-LAST:event_lblAVTMouseClicked
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        this.setBackground(new Color(69,33,70));
+    }//GEN-LAST:event_formMouseEntered
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+
+        main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
+        System.out.println("te");
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        this.setBackground(new Color(97, 97, 97));
+    }//GEN-LAST:event_formMouseExited
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+
+    }//GEN-LAST:event_formMousePressed
 
     public PlayList getData() {
         return data;
@@ -103,6 +132,15 @@ public class PlaylistItem extends javax.swing.JPanel {
         this.lblPlaylistName = lblPlaylistName;
     }
 
+    public MainFrame getMain() {
+        return main;
+    }
+
+    public void setMain(MainFrame main) {
+        this.main = main;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private model.borderImage lblAVT;

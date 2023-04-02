@@ -23,7 +23,8 @@ public class PlaylistSearch extends javax.swing.JPanel {
     }
 
     public void addPlayList(PlayList data) {
-        PlaylistItem item = new PlaylistItem(data);
+        PlaylistItem item = new PlaylistItem();
+        item.setData(data);
         pnlPlaylist.add(item);
         System.out.println(pnlPlaylist.getComponentCount());
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount() > 4))) {
