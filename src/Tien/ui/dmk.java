@@ -32,15 +32,15 @@ public class dmk extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        input1 = new Tien.ui.input();
+        txtPassOld = new model.input();
         lblOld = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        input2 = new Tien.ui.input();
+        txtPass = new javax.swing.JPasswordField();
         lblNew = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        input3 = new Tien.ui.input();
+        txtConfirm = new javax.swing.JPasswordField();
         lblCheck = new javax.swing.JLabel();
-        button1 = new Tien.ui.Button();
+        button2 = new component.Button();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
@@ -59,15 +59,7 @@ public class dmk extends javax.swing.JPanel {
         jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(403, 45));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        input1.setForeground(new java.awt.Color(199, 199, 199));
-        input1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        input1.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                input1CaretUpdate(evt);
-            }
-        });
-        jPanel2.add(input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 40));
+        jPanel2.add(txtPassOld, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
 
         lblOld.setBackground(new java.awt.Color(67, 67, 67));
         lblOld.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -82,14 +74,8 @@ public class dmk extends javax.swing.JPanel {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        input2.setForeground(new java.awt.Color(199, 199, 199));
-        input2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        input2.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                input2CaretUpdate(evt);
-            }
-        });
-        jPanel3.add(input2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 40));
+        txtPass.setText("jPasswordField1");
+        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
 
         lblNew.setBackground(new java.awt.Color(67, 67, 67));
         lblNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -104,14 +90,8 @@ public class dmk extends javax.swing.JPanel {
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        input3.setForeground(new java.awt.Color(199, 199, 199));
-        input3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        input3.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                input3CaretUpdate(evt);
-            }
-        });
-        jPanel4.add(input3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 40));
+        txtConfirm.setText("jPasswordField1");
+        jPanel4.add(txtConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
 
         lblCheck.setBackground(new java.awt.Color(67, 67, 67));
         lblCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -123,14 +103,11 @@ public class dmk extends javax.swing.JPanel {
 
         jPanel1.add(jPanel4);
 
-        button1.setText("Đổi mật khẩu");
-        button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(button1);
+        button2.setText("ĐỔI MẬT KHẨU");
+        button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        button2.setPreferredSize(new java.awt.Dimension(403, 45));
+        button2.setSizeSpeed(12.0F);
+        jPanel1.add(button2);
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
 
@@ -143,39 +120,13 @@ public class dmk extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnChangeActionPerformed
 
-    private void input1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_input1CaretUpdate
-        if (!input1.getText().equals("")) {
-            lblOld.setText("");
-        } else
-            lblOld.setText("   Mật khẩu cũ");
-    }//GEN-LAST:event_input1CaretUpdate
-
-    private void input2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_input2CaretUpdate
-        if (!input2.getText().equals("")) {
-            lblNew.setText("");
-        } else {
-            lblNew.setText("   Mật khẩu mới");
-        }
-    }//GEN-LAST:event_input2CaretUpdate
-
-    private void input3CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_input3CaretUpdate
-        if (!input3.getText().equals("")) {
-            lblCheck.setText("");
-        } else {
-            lblCheck.setText("   Nhập lại mật khẩu");
-        }
-    }//GEN-LAST:event_input3CaretUpdate
-
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         
     }//GEN-LAST:event_button1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Tien.ui.Button button1;
-    private Tien.ui.input input1;
-    private Tien.ui.input input2;
-    private Tien.ui.input input3;
+    private component.Button button2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -185,5 +136,8 @@ public class dmk extends javax.swing.JPanel {
     private javax.swing.JLabel lblCheck;
     private javax.swing.JLabel lblNew;
     private javax.swing.JLabel lblOld;
+    private javax.swing.JPasswordField txtConfirm;
+    private javax.swing.JPasswordField txtPass;
+    private model.input txtPassOld;
     // End of variables declaration//GEN-END:variables
 }

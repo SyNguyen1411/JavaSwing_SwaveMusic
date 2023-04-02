@@ -49,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
         c = (CardLayout) pnlChange.getLayout();
         pnlMainScreen.main = this;
         pnlMyPlaylist.main = this;
+        pnlSongOfPlaylistPane.main = this;
         init();
 
     }

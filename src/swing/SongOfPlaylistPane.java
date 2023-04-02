@@ -4,6 +4,7 @@
  */
 package swing;
 
+import Tien.ui.EditPlaylist;
 import component.Button;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
      */
     private ArrayList<Song> listSOngOfPlayList;
     private PlayList playlistFocus;
+    public MainFrame main;
 
     public SongOfPlaylistPane() {
         initComponents();
@@ -238,6 +240,11 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         pnlInforPlaylist.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/EditIcon.png"))); // NOI18N
+        lblEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditMouseClicked(evt);
+            }
+        });
         pnlInforPlaylist.add(lblEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
 
         lblTile.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
@@ -309,6 +316,10 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
 
         add(pnlSongOfPlaylist, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 1100, 310));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditMouseClicked
+        new EditPlaylist(main, true).setVisible(true);
+    }//GEN-LAST:event_lblEditMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
