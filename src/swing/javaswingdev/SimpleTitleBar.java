@@ -75,6 +75,7 @@ public class SimpleTitleBar extends javax.swing.JPanel {
         simpleButtonBar1 = new swing.javaswingdev.SimpleButtonBar();
 
         setBackground(new java.awt.Color(50, 50, 50));
+        setOpaque(false);
 
         panelMove.setOpaque(false);
 

@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        simpleTitleBar1 = new swing.javaswingdev.SimpleTitleBar();
         pnlMain = new javax.swing.JPanel();
         lblSwave = new javax.swing.JLabel();
         pnlLogin = new javax.swing.JPanel();
@@ -73,6 +74,7 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(new java.awt.Dimension(1530, 810));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(simpleTitleBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1530, -1));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1532, 810));
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -417,6 +419,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlPassword;
     private javax.swing.JPanel pnlUsername;
+    private swing.javaswingdev.SimpleTitleBar simpleTitleBar1;
     private javax.swing.JPasswordField txtPassword;
     private model.input txtUsername;
     // End of variables declaration//GEN-END:variables
