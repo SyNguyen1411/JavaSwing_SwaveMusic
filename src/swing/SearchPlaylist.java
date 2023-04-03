@@ -1,4 +1,3 @@
-
 package swing;
 
 import components.ScrollBar;
@@ -16,21 +15,18 @@ import entity.PlayList;
 public class SearchPlaylist extends javax.swing.JPanel {
 
     public static ArrayList<PlayList> list = new ArrayList<>();
-    
+
     /**
      * Creates new form PlayList
      */
     public SearchPlaylist() {
         initComponents();
         jscPlaylist.getViewport().setBackground(new Color(255, 255, 255, 0));
-        for (int i = 0; i < 10; i++) {
-            list.add(new PlayList(1, "abc", 2, true, "playlist.png"));
-        }
     }
 
     public void addPlayList(PlayList data) {
         PlaylistItem item = new PlaylistItem();
-        item.setData(data);
+        item.loadData(data);
         pnlPlaylist.add(item);
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount() - 1) % 4 == 0)) {
             pnlPlaylist.setPreferredSize(new Dimension(1100, pnlPlaylist.getHeight() + 330));
@@ -63,7 +59,7 @@ public class SearchPlaylist extends javax.swing.JPanel {
     public void setScrollBar1(ScrollBar scrollBar1) {
         this.scrollBar1 = scrollBar1;
     }
-    
+
     //Thêm PlayList và pnl Của Tôi
     public void addList(PlayList playlist) {
         this.addPlayList(playlist);

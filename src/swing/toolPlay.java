@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import entity.Song;
+import swave.MainFrame;
 
 /**
  *
@@ -20,8 +21,9 @@ public class toolPlay extends javax.swing.JPanel {
     boolean replay = false;
     boolean lyrics = false;
     boolean library = false;
-    
+
     private Song data;
+    public MainFrame main;
 
     public boolean isShuffle() {
         return shuffle;
@@ -190,7 +192,6 @@ public class toolPlay extends javax.swing.JPanel {
     public void setPnlItemPlay(JPanel pnlItemPlay) {
         this.pnlItemPlay = pnlItemPlay;
     }
-    
 
     public toolPlay() {
         initComponents();
@@ -360,8 +361,12 @@ public class toolPlay extends javax.swing.JPanel {
     private void lblLyricsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLyricsMouseClicked
         lyrics = !lyrics;
         setLyrics(lyrics);
+        if (lyrics) {
+            main.getPnlLyrics().show();
+        } else {
+            main.getPnlLyrics().hide();
+        }
     }//GEN-LAST:event_lblLyricsMouseClicked
-
 
     public void setRunning(boolean check) {
         if (check) {
@@ -394,7 +399,7 @@ public class toolPlay extends javax.swing.JPanel {
             lblLyrics.setIcon(new ImageIcon(getClass().getResource("/img/lyrics.png")));
         }
     }
-    
+
     public void fillData(Song data) {
         lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/" + data.getAVT())));
         lblNameSong.setText(data.getNameSong());
