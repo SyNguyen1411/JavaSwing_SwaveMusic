@@ -4,6 +4,8 @@
  */
 package swing.swavecomponent;
 
+import swave.MainFrame;
+
 /**
  *
  * @author Phan Qui Duc
@@ -13,6 +15,9 @@ public class UserTool extends javax.swing.JPanel {
     /**
      * Creates new form UserTool
      */
+    
+    public MainFrame main;
+    
     public UserTool () {
         initComponents();
         init();

@@ -97,6 +97,9 @@ public class SongList extends javax.swing.JPanel {
     }
 
     public void setRunningSong(Component item) {
+        if(((SongItem) item).isRunning()){
+            return;
+        }
         for (Component com : pnlSongList.getComponents()) {
             SongItem s = (SongItem) com;
             if (s.isRunning()) {

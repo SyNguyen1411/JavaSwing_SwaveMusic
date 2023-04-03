@@ -1,5 +1,6 @@
 package Vu.ui;
 
+import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 

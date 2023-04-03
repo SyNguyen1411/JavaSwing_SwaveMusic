@@ -49,10 +49,10 @@ public class AppItem extends javax.swing.JPanel {
         lblIcon = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
 
-        setMaximumSize(new java.awt.Dimension(249, 35));
-        setMinimumSize(new java.awt.Dimension(249, 35));
-        setPreferredSize(new java.awt.Dimension(249, 35));
-        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 20, 5));
+        setMaximumSize(new java.awt.Dimension(249, 45));
+        setMinimumSize(new java.awt.Dimension(249, 45));
+        setPreferredSize(new java.awt.Dimension(249, 45));
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 20, 10));
         add(lblIcon);
         add(lblName);
     }// </editor-fold>//GEN-END:initComponents
