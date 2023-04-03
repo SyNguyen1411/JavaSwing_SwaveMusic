@@ -11,13 +11,16 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class dmk extends javax.swing.JPanel {
+public class ChangePass extends javax.swing.JPanel {
 
     /**
      * Creates new form dmk
      */
-    public dmk() {
+    public ChangePass() {
         initComponents();
+        txtPass1.setBackground(new Color(255,255,255,0));
+        txtPass.setBackground(new Color(255,255,255,0));
+        
     }
 
     /**
@@ -34,12 +37,15 @@ public class dmk extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         txtPassOld = new model.input();
         lblOld = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         txtPass = new javax.swing.JPasswordField();
+        lblnew = new javax.swing.JLabel();
         lblNew = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        txtConfirm = new javax.swing.JPasswordField();
-        lblCheck = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        txtPass1 = new javax.swing.JPasswordField();
+        lblnew1 = new javax.swing.JLabel();
+        lblNew1 = new javax.swing.JLabel();
         button2 = new component.Button();
         jLabel1 = new javax.swing.JLabel();
 
@@ -59,49 +65,82 @@ public class dmk extends javax.swing.JPanel {
         jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(403, 45));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtPassOld.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtPassOldCaretUpdate(evt);
+            }
+        });
         jPanel2.add(txtPassOld, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
 
         lblOld.setBackground(new java.awt.Color(67, 67, 67));
         lblOld.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblOld.setForeground(new java.awt.Color(199, 199, 199));
         lblOld.setText("   Mật khẩu cũ");
-        lblOld.setOpaque(true);
         lblOld.setPreferredSize(new java.awt.Dimension(403, 45));
         jPanel2.add(lblOld, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/txtPassword (1).png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
 
         jPanel1.add(jPanel2);
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtPass.setText("jPasswordField1");
+        txtPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(199, 199, 199));
+        txtPass.setBorder(null);
+        txtPass.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtPassCaretUpdate(evt);
+            }
+        });
         jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
+
+        lblnew.setBackground(new java.awt.Color(67, 67, 67));
+        lblnew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblnew.setForeground(new java.awt.Color(199, 199, 199));
+        lblnew.setText("   Mật khẩu mới");
+        jPanel3.add(lblnew, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 40));
 
         lblNew.setBackground(new java.awt.Color(67, 67, 67));
         lblNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNew.setForeground(new java.awt.Color(199, 199, 199));
-        lblNew.setText("   Mật khẩu mới");
-        lblNew.setOpaque(true);
+        lblNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/txtPassword (1).png"))); // NOI18N
         lblNew.setPreferredSize(new java.awt.Dimension(403, 45));
         jPanel3.add(lblNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.add(jPanel3);
 
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtConfirm.setText("jPasswordField1");
-        jPanel4.add(txtConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
+        txtPass1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPass1.setForeground(new java.awt.Color(199, 199, 199));
+        txtPass1.setBorder(null);
+        txtPass1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtPass1CaretUpdate(evt);
+            }
+        });
+        jPanel5.add(txtPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
 
-        lblCheck.setBackground(new java.awt.Color(67, 67, 67));
-        lblCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblCheck.setForeground(new java.awt.Color(199, 199, 199));
-        lblCheck.setText("   Nhập lại mật khẩu");
-        lblCheck.setOpaque(true);
-        lblCheck.setPreferredSize(new java.awt.Dimension(403, 45));
-        jPanel4.add(lblCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        lblnew1.setBackground(new java.awt.Color(67, 67, 67));
+        lblnew1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblnew1.setForeground(new java.awt.Color(199, 199, 199));
+        lblnew1.setText("   Nhập lại mật khẩu mới");
+        jPanel5.add(lblnew1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 40));
 
-        jPanel1.add(jPanel4);
+        lblNew1.setBackground(new java.awt.Color(67, 67, 67));
+        lblNew1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNew1.setForeground(new java.awt.Color(199, 199, 199));
+        lblNew1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/txtPassword (1).png"))); // NOI18N
+        lblNew1.setPreferredSize(new java.awt.Dimension(403, 45));
+        jPanel5.add(lblNew1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel1.add(jPanel5);
 
         button2.setText("ĐỔI MẬT KHẨU");
         button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -124,20 +163,45 @@ public class dmk extends javax.swing.JPanel {
         
     }//GEN-LAST:event_button1ActionPerformed
 
+    private void txtPassCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPassCaretUpdate
+        if (!txtPass.getText().equals("")) {
+            lblnew.setText("");
+        } else
+            lblnew.setText("   Mật khẩu mới");
+    }//GEN-LAST:event_txtPassCaretUpdate
+
+    private void txtPassOldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPassOldCaretUpdate
+        if (!txtPassOld.getText().equals("")) {
+            lblOld.setText("");
+        } else
+            lblOld.setText("   Mật khẩu cũ");
+    }//GEN-LAST:event_txtPassOldCaretUpdate
+
+    private void txtPass1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPass1CaretUpdate
+        // TODO add your handling code here:
+        if (!txtPass1.getText().equals("")) {
+            lblnew1.setText("");
+        } else
+            lblnew1.setText("   Nhập lại mật khẩu mới");
+    }//GEN-LAST:event_txtPass1CaretUpdate
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.Button button2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel lblCheck;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblNew;
+    private javax.swing.JLabel lblNew1;
     private javax.swing.JLabel lblOld;
-    private javax.swing.JPasswordField txtConfirm;
+    private javax.swing.JLabel lblnew;
+    private javax.swing.JLabel lblnew1;
     private javax.swing.JPasswordField txtPass;
+    private javax.swing.JPasswordField txtPass1;
     private model.input txtPassOld;
     // End of variables declaration//GEN-END:variables
 }
