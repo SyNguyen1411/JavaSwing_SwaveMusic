@@ -185,7 +185,7 @@ public class inf extends javax.swing.JPanel {
         jTextField2.setBackground(new java.awt.Color(67, 67, 67));
         jTextField2.setBorder(null);
         jTextField2.setOpaque(true);
-        jPanel7.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 540, 30));
+        jPanel7.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 540, 30));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 104.png"))); // NOI18N
         jLabel10.setText("jLabel6");
