@@ -124,7 +124,7 @@ public class CreatPlaylist extends javax.swing.JDialog {
         lblCount.setText("0/100");
         lblCount.setToolTipText("0/100");
         lblCount.setPreferredSize(new java.awt.Dimension(54, 24));
-        getContentPane().add(lblCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+        getContentPane().add(lblCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 60, -1));
 
         lblBackgroud.setBackground(new java.awt.Color(255, 255, 255));
         lblBackgroud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 36.png"))); // NOI18N
