@@ -81,7 +81,7 @@ public class MenuBar extends javax.swing.JPanel {
         add(lblLogo);
 
         pnlMenu.setPreferredSize(new java.awt.Dimension(249, 228));
-        pnlMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
+        pnlMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 0));
         pnlMenu.add(pnlHome);
 
         pnlMyPlaylists.setName(""); // NOI18N

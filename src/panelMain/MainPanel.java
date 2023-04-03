@@ -4,6 +4,7 @@
  */
 package panelMain;
 
+import component.EventItem;
 import entity.PlayList;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -16,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import entity.Song;
+import java.awt.Component;
 import swave.MainFrame;
 import swing.MainWindowItem;
 import swing.PlaylistPanel;
@@ -40,42 +42,51 @@ public class MainPanel extends javax.swing.JPanel {
     private CardLayout cardLPlaylistLayout;
     public MainFrame main;
 
-//    private MouseEvent dayMouseEvent;
+    private EventItem songMouseEvent;
 //    private MouseEvent weekMouseEvent;
 //    private MouseEvent monthMouseEvent;
-    public CardLayout getCardLPlaylistLayout() {
+
+    public CardLayout getCardLPlaylistLayout () {
         return cardLPlaylistLayout;
     }
 
-    public void setCardLPlaylistLayout(CardLayout cardLPlaylistLayout) {
+    public void setCardLPlaylistLayout (CardLayout cardLPlaylistLayout) {
         this.cardLPlaylistLayout = cardLPlaylistLayout;
     }
 
-    public PlaylistPanel getPnlPlaylist() {
+    public PlaylistPanel getPnlPlaylist () {
         return pnlPlaylistDaily;
     }
 
-    public void setPnlPlaylist(PlaylistPanel pnlPlaylist) {
+    public void setPnlPlaylist (PlaylistPanel pnlPlaylist) {
         this.pnlPlaylistDaily = pnlPlaylist;
     }
 
-    public SongList getPnlTrendingSongList() {
+    public SongList getPnlTrendingSongList () {
         return pnlTrendingSongList;
     }
 
-    public void setPnlTrendingSongList(SongList pnlTrendingSongList) {
+    public void setPnlTrendingSongList (SongList pnlTrendingSongList) {
         this.pnlTrendingSongList = pnlTrendingSongList;
     }
 
-    public CardLayout getCardLayout() {
+    public CardLayout getCardLayout () {
         return cardLayout;
     }
 
-    public void setCardLayout(CardLayout cardLayout) {
+    public void setCardLayout (CardLayout cardLayout) {
         this.cardLayout = cardLayout;
     }
 
-    public MainPanel() {
+    public EventItem getSongMouseEvent () {
+        return songMouseEvent;
+    }
+
+    public void setSongMouseEvent (EventItem songMouseEvent) {
+        this.songMouseEvent = songMouseEvent;
+    }
+
+    public MainPanel () {
         initComponents();
         // Biến dùng tạm
         for (int i = 0; i < 100; i++) {
@@ -91,7 +102,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     }
 
-    private void init() {
+    private void init () {
         this.setOpaque(false);
         this.setBackground(new Color(0, 0, 0, 255));
         cardLayout.first(this);
@@ -102,7 +113,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     }
 
-    private void initPnlMainWindow() {
+    private void initPnlMainWindow () {
         pnlMainWindow.setOpaque(false);
         pnlMainWindow.setBackground(new Color(0, 0, 0, 255));
 
@@ -138,7 +149,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         lblMainWindowTopPlaylist.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked (MouseEvent e) {
                 cardLayout.show(pnlMainWindow.getParent(), "cardTopPlaylist");
                 fillTopPlaylistDaily();
                 cardLPlaylistLayout.show(pnlPlaylist, "cardDailyPlaylist");
@@ -146,14 +157,14 @@ public class MainPanel extends javax.swing.JPanel {
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
                 lblMainWindowTopPlaylist.setForeground(new Color(165, 43, 168));
 
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 lblMainWindowTopPlaylist.setForeground(Color.white);
             }
@@ -161,18 +172,18 @@ public class MainPanel extends javax.swing.JPanel {
 
         lblMainWindowTrending.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked (MouseEvent e) {
                 cardLayout.show(pnlMainWindow.getParent(), "cardTrending");
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
                 lblMainWindowTrending.setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 lblMainWindowTrending.setForeground(Color.white);
             }
@@ -181,7 +192,7 @@ public class MainPanel extends javax.swing.JPanel {
         repaint();
     }
 
-    public void addTrendingSong(Song song) {
+    public void addTrendingSong (Song song) {
         int positionDemo = pnlDemoTrending.getComponentCount();
 
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
@@ -204,22 +215,22 @@ public class MainPanel extends javax.swing.JPanel {
         revalidate();
     }
 
-    public void addSongToTrendingSong(Song song, GridBagConstraints gridBagConstraints) {
+    public void addSongToTrendingSong (Song song, GridBagConstraints gridBagConstraints) {
         MainWindowItem songItem = new MainWindowItem(song);
         songItem.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                //eventLblEditSong.clickEvent(listSongItemAddSongPanel, song);
+            public void mouseClicked (MouseEvent e) {
+                songMouseEvent.clickEvent(songItem, song);
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
                 songItem.getLblTitle().setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 songItem.getLblTitle().setForeground(Color.white);
             }
@@ -230,7 +241,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     }
 
-    public void addTopPlaylist(PlayList playlist) {
+    public void addTopPlaylist (PlayList playlist) {
         int position = pnlDemoTopPlaylist.getComponentCount();
 
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
@@ -251,23 +262,23 @@ public class MainPanel extends javax.swing.JPanel {
         revalidate();
     }
 
-    public void addPlaylistToTopPlaylist(PlayList playlist, GridBagConstraints gridBagConstraints) {
+    public void addPlaylistToTopPlaylist (PlayList playlist, GridBagConstraints gridBagConstraints) {
         MainWindowItem playlistItem = new MainWindowItem(playlist);
         playlistItem.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked (MouseEvent e) {
                 //eventLblEditSong.clickEvent(listSongItemAddSongPanel, song);
 
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
                 playlistItem.getLblTitle().setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 playlistItem.getLblTitle().setForeground(Color.white);
             }
@@ -276,7 +287,7 @@ public class MainPanel extends javax.swing.JPanel {
         pnlDemoTopPlaylist.add(playlistItem, gridBagConstraints);
     }
 
-    private void initPnlTrendingSong() {
+    private void initPnlTrendingSong () {
         pnlTrendingSong.setOpaque(false);
         pnlTrendingSong.setBackground(new Color(0, 0, 0, 255));
 
@@ -300,7 +311,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     }
 
-    private void initPnlTopPlaylist() {
+    private void initPnlTopPlaylist () {
         pnlTopPlaylist.setOpaque(false);
         pnlTopPlaylist.setBackground(new Color(0, 0, 0, 255));
 
@@ -324,7 +335,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         lblDay.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked (MouseEvent e) {
                 if (!lblDay.getForeground().equals(new Color(165, 43, 168))) {
                     lblDay.setForeground(new Color(165, 43, 168));
                     lblMonth.setForeground(Color.white);
@@ -336,12 +347,12 @@ public class MainPanel extends javax.swing.JPanel {
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
 
@@ -349,7 +360,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         lblWeek.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked (MouseEvent e) {
                 if (!lblWeek.getForeground().equals(new Color(165, 43, 168))) {
                     lblWeek.setForeground(new Color(165, 43, 168));
                     lblMonth.setForeground(Color.white);
@@ -361,12 +372,12 @@ public class MainPanel extends javax.swing.JPanel {
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
 
@@ -374,7 +385,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         lblMonth.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked (MouseEvent e) {
                 if (!lblMonth.getForeground().equals(new Color(165, 43, 168))) {
                     lblMonth.setForeground(new Color(165, 43, 168));
                     lblDay.setForeground(Color.white);
@@ -386,33 +397,33 @@ public class MainPanel extends javax.swing.JPanel {
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered (MouseEvent e) {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited (MouseEvent e) {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
 
         });
     }
 
-    public void fillTopPlaylistDaily() {
+    public void fillTopPlaylistDaily () {
         for (PlayList dailyPlayList : dailyPlayLists) {
             pnlPlaylistDaily.addPlayList(dailyPlayList, main);
         }
         revalidate();
     }
 
-    public void fillTopPlaylistWeekly() {
+    public void fillTopPlaylistWeekly () {
         for (PlayList weeklyPlayList : weeklyPlayLists) {
             pnlPlaylistWeekly.addPlayList(weeklyPlayList, main);
         }
         revalidate();
     }
 
-    public void fillTopPlaylistMonthly() {
+    public void fillTopPlaylistMonthly () {
         for (PlayList monthlyPlayList : monthlyPlayLists) {
             pnlPlaylistMonthly.addPlayList(monthlyPlayList, main);
         }

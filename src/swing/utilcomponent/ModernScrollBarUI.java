@@ -20,7 +20,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
  *
  * @author Phan Qui Duc
  */
-public class ModernScollBarUI extends BasicScrollBarUI {
+public class ModernScrollBarUI extends BasicScrollBarUI {
     
     private final int THUMB_SIZE = 150;
 

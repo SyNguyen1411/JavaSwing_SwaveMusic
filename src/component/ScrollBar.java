@@ -9,8 +9,9 @@ public class ScrollBar extends JScrollBar {
 
     public ScrollBar() {
         setUI(new ModernScrollBarUI());
-        setPreferredSize(new Dimension(5, 5));
-        setBackground(new Color(255, 255, 255));
+        setPreferredSize(new Dimension(8,8));
+        setForeground(new Color(48,144,216));
+        setBackground(new Color(0,0,0,255));
         setUnitIncrement(20);
     }
 }
