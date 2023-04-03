@@ -21,6 +21,7 @@ import panelMain.MainPanel;
 import panelMain.PlaylistPane;
 import panelMain.SearchPane;
 import panelMain.SongLovelistPane;
+import swing.CommentPane;
 import swing.SongItem;
 import swing.SongOfPlaylistPane;
 import swing.glasspanepopup.DefaultLayoutCallBack;
@@ -55,6 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlSongOfPlaylistPane.main = this;
         toolPlay1.main = this;
         pnlLyrics.setVisible(false);
+        pnlComment.setVisible(false);
         init();
     }
 
@@ -67,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlComment = new swing.CommentPane();
         jPanel1 = new javax.swing.JPanel();
         toolPlay1 = new swing.toolPlay();
         titleBar = new swing.javaswingdev.SimpleTitleBar();
@@ -88,6 +91,7 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(pnlComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 43, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1532, 150));
@@ -254,6 +258,12 @@ public class MainFrame extends javax.swing.JFrame {
             pnlMainScreen.addTopPlaylist(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
         }
 
+        //add comment:
+        pnlComment.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+        pnlComment.addComment("Trần Hoàng Danh", "Nghe đi nghe lại vẫn hay", 10, 1, "AVT.png");
+        pnlComment.addComment("Phan Qúy Đức", "Tuyệt cú mèo", 11, 1, "AVT.png");
+        pnlComment.addComment("Hồ Thị Mộng Tiên", "Ổn áp", 15, 1, "AVT.png");
+        pnlComment.addComment("Tôn Nhật Phi", "Triệu like", 111, 1, "AVT.png");
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
             @Override
@@ -359,7 +369,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         //Add lyrics:
-        
         pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
         pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
         pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
@@ -549,8 +558,6 @@ public class MainFrame extends javax.swing.JFrame {
     public void setPnlLyrics(lyricsPane pnlLyrics) {
         this.pnlLyrics = pnlLyrics;
     }
-    
-    
 
     public void setLblCreatePlaylist(JLabel lblCreatePlaylist) {
         this.lblCreatePlaylist = lblCreatePlaylist;
@@ -648,6 +655,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.toolPlay1 = toolPlay1;
     }
 
+    public CommentPane getPnlComment() {
+        return pnlComment;
+    }
+
+    public void setPnlComment(CommentPane pnlComment) {
+        this.pnlComment = pnlComment;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -655,6 +670,7 @@ public class MainFrame extends javax.swing.JFrame {
     private swing.swavecomponent.MenuBar menuBar;
     private panelMain.AddSongPanel pnlAddSong;
     private javax.swing.JPanel pnlChange;
+    private swing.CommentPane pnlComment;
     private javax.swing.JPanel pnlCreatePlaylist;
     private panelMain.SongLovelistPane pnlLikeSong;
     private swing.lyricsPane pnlLyrics;
