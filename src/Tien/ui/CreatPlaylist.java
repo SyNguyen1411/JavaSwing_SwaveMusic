@@ -34,15 +34,15 @@ public class CreatPlaylist extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtNamePlaylist = new model.input();
-        loadingPane1 = new panelMain.LoadingPane();
+        btnOK = new component.Button();
         lblPlayholder = new javax.swing.JLabel();
+        txtNamePlaylist = new model.input();
+        btnCancel = new component.Button();
         lblTitle = new javax.swing.JLabel();
         lblNote = new javax.swing.JLabel();
-        btnCancel = new component.Button();
-        lblCount = new javax.swing.JLabel();
-        btnOK = new component.Button();
         lblNamePlaylist = new javax.swing.JLabel();
+        lblCount = new javax.swing.JLabel();
+        lblBackgroud = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -60,6 +60,18 @@ public class CreatPlaylist extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnOK.setText("TẠO");
+        btnOK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOK.setPreferredSize(new java.awt.Dimension(104, 45));
+        btnOK.setRadious(new int[] {50, 50});
+        btnOK.setSizeSpeed(12.0F);
+        getContentPane().add(btnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 278, -1, -1));
+
+        lblPlayholder.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblPlayholder.setForeground(new java.awt.Color(199, 199, 199));
+        lblPlayholder.setText("Nhập tên Playlist");
+        getContentPane().add(lblPlayholder, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 470, 60));
+
         txtNamePlaylist.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         txtNamePlaylist.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -72,20 +84,6 @@ public class CreatPlaylist extends javax.swing.JDialog {
             }
         });
         getContentPane().add(txtNamePlaylist, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 490, 60));
-
-        lblPlayholder.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblPlayholder.setForeground(new java.awt.Color(199, 199, 199));
-        lblPlayholder.setText("Nhập tên Playlist");
-
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitle.setText("Tạo Playlist");
-        lblTitle.setPreferredSize(new java.awt.Dimension(165, 36));
-
-        lblNote.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblNote.setForeground(new java.awt.Color(255, 255, 255));
-        lblNote.setText("Tên playlist tối đa 100 kí tự");
-        lblNote.setPreferredSize(new java.awt.Dimension(252, 24));
 
         btnCancel.setForeground(new java.awt.Color(204, 0, 204));
         btnCancel.setText("HỦY");
@@ -100,73 +98,38 @@ public class CreatPlaylist extends javax.swing.JDialog {
                 btnCancelMouseClicked(evt);
             }
         });
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 278, -1, -1));
 
-        lblCount.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblCount.setForeground(new java.awt.Color(255, 255, 255));
-        lblCount.setText("0/100");
-        lblCount.setToolTipText("0/100");
-        lblCount.setPreferredSize(new java.awt.Dimension(54, 24));
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitle.setText("Tạo Playlist");
+        lblTitle.setPreferredSize(new java.awt.Dimension(165, 36));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, 40));
 
-        btnOK.setText("TẠO");
-        btnOK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnOK.setPreferredSize(new java.awt.Dimension(104, 45));
-        btnOK.setRadious(new int[] {50, 50});
-        btnOK.setSizeSpeed(12.0F);
+        lblNote.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblNote.setForeground(new java.awt.Color(255, 255, 255));
+        lblNote.setText("Tên playlist tối đa 100 kí tự");
+        lblNote.setPreferredSize(new java.awt.Dimension(252, 24));
+        getContentPane().add(lblNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
 
         lblNamePlaylist.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblNamePlaylist.setForeground(new java.awt.Color(255, 255, 255));
         lblNamePlaylist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 37.png"))); // NOI18N
         lblNamePlaylist.setText("    Nhập tên playlist");
         lblNamePlaylist.setPreferredSize(new java.awt.Dimension(514, 63));
+        getContentPane().add(lblNamePlaylist, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
-        javax.swing.GroupLayout loadingPane1Layout = new javax.swing.GroupLayout(loadingPane1);
-        loadingPane1.setLayout(loadingPane1Layout);
-        loadingPane1Layout.setHorizontalGroup(
-            loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPane1Layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
-                .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(lblNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblPlayholder, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblNamePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(132, 132, 132))
-        );
-        loadingPane1Layout.setVerticalGroup(
-            loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loadingPane1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(lblNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPlayholder, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNamePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
-        );
+        lblCount.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblCount.setForeground(new java.awt.Color(255, 255, 255));
+        lblCount.setText("0/100");
+        lblCount.setToolTipText("0/100");
+        lblCount.setPreferredSize(new java.awt.Dimension(54, 24));
+        getContentPane().add(lblCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
 
-        getContentPane().add(loadingPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 440));
+        lblBackgroud.setBackground(new java.awt.Color(255, 255, 255));
+        lblBackgroud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 36.png"))); // NOI18N
+        lblBackgroud.setOpaque(true);
+        getContentPane().add(lblBackgroud, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -255,12 +218,12 @@ public class CreatPlaylist extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblBackgroud;
     private javax.swing.JLabel lblCount;
     private javax.swing.JLabel lblNamePlaylist;
     private javax.swing.JLabel lblNote;
     private javax.swing.JLabel lblPlayholder;
     private javax.swing.JLabel lblTitle;
-    private panelMain.LoadingPane loadingPane1;
     private model.input txtNamePlaylist;
     // End of variables declaration//GEN-END:variables
 }

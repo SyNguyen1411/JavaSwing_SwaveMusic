@@ -89,6 +89,7 @@ public class PlaylistItem extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
 
         main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
+        System.out.println("te");
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited

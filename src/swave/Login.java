@@ -23,11 +23,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
     public static MainFrame main;
     boolean viewPass = false;
     boolean forgot = false;
-    private Login loginForm;
-
+    
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -358,21 +358,14 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
-            DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
-            loadPane.setVisible(true);
-            loginForm = this;
-            Thread loadThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    main = new MainFrame();
-                    main.setVisible(true);
-                    loginForm.dispose();
-                }
-            });
-            loadThread.start();
+            main = new MainFrame();
+            main.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_btnLoginMouseClicked
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -407,7 +400,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.Button btnLogin;

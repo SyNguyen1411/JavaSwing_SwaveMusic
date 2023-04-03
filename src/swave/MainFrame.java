@@ -1,6 +1,5 @@
 package swave;
 
-import Tien.ui.CreatPlaylist;
 import component.EventItem;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,7 +26,6 @@ import swing.glasspanepopup.DefaultLayoutCallBack;
 import swing.glasspanepopup.DefaultOption;
 import swing.glasspanepopup.GlassPanePopup;
 import swing.javaswingdev.SimpleTitleBar;
-import swing.lyricsPane;
 import swing.swavecomponent.MenuBar;
 import swing.swavecomponent.ToolBar;
 import swing.swavecomponent.UserTool;
@@ -45,7 +43,6 @@ public class MainFrame extends javax.swing.JFrame {
     private CardLayout c;
     private ArrayList<Song> songLoveList = new ArrayList<>();
     private String appItemName;
-    public Login loginForm;
 
     public MainFrame() {
         initComponents();
@@ -53,9 +50,8 @@ public class MainFrame extends javax.swing.JFrame {
         pnlMainScreen.main = this;
         pnlMyPlaylist.main = this;
         pnlSongOfPlaylistPane.main = this;
-        toolPlay1.main = this;
-        pnlLyrics.setVisible(false);
         init();
+
     }
 
     /**
@@ -72,7 +68,6 @@ public class MainFrame extends javax.swing.JFrame {
         titleBar = new swing.javaswingdev.SimpleTitleBar();
         menuBar = new swing.swavecomponent.MenuBar();
         pnlChange = new javax.swing.JPanel();
-        pnlLyrics = new swing.lyricsPane();
         pnlMainScreen = new panelMain.MainPanel();
         pnlCreatePlaylist = new javax.swing.JPanel();
         lblCreatePlaylist = new javax.swing.JLabel();
@@ -115,7 +110,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnlChange.setOpaque(false);
         pnlChange.setPreferredSize(new java.awt.Dimension(1283, 590));
         pnlChange.setLayout(new java.awt.CardLayout());
-        pnlChange.add(pnlLyrics, "cardLyrics");
         pnlChange.add(pnlMainScreen, "cardMain");
 
         lblCreatePlaylist.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -209,7 +203,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
         });
-        c.show(pnlChange, "cardMain");
+        c.first(pnlChange);
 
         //-----------------------------------
         //add my playlist:
@@ -278,7 +272,7 @@ public class MainFrame extends javax.swing.JFrame {
             public void clickEvent(Component com, PlayList playList) {
             }
         });
-
+        
         //add sự kiện cho nút play
         pnlMainScreen.getPnlTrendingSongList().setEventLblStart(new EventItem() {
             @Override
@@ -333,19 +327,24 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.setEventPnlPlaylistItem(new EventItem() {
             @Override
             public void clickEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
             public void EnterEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
             public void ExitEvent(Component com, Song song, MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
+
         });
 
         //add Song love for Pane:
@@ -357,25 +356,6 @@ public class MainFrame extends javax.swing.JFrame {
         for (Song data : songLoveList) {
             pnlMainScreen.getPnlTrendingSongList().addSong(data);
         }
-
-        //Add lyrics:
-        
-        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
-        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
-        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
-        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
-        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
-        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
-        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
-        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
-        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
-        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
-        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
-        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
-        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
-        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
-        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
-        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
 
         //Hiển thị icon tim theo bài hát yêu thích:
         pnlLikeSong.getPnlSonglist().setSongLove(songLoveList);
@@ -432,16 +412,13 @@ public class MainFrame extends javax.swing.JFrame {
                 menuBar.getPnlMenu().repaint();
                 menuBar.getPnlMenu().revalidate();
             }
+
         });
 
         menuBar.getPnlCreatePlaylist().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                undoChosen(appItemName);
-                menuBar.getPnlAddSong().setBackground(new Color(76, 76, 76));
-                appItemName = menuBar.getPnlCreatePlaylist().getName();
-                menuBar.getPnlMenu().repaint();
-                menuBar.getPnlMenu().revalidate();
+
             }
         });
 
@@ -462,7 +439,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void caretUpdate(CaretEvent e) {
                 if (!toolBar.getFindTextField().getText().equals("")) {
-
+                    c.show(pnlChange, "cardSearch");
                     for (int i = 1; i < 100; i++) {
                         pnlSearch.getPnlSearchPlaylist().addPlayList(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
                     }
@@ -475,10 +452,11 @@ public class MainFrame extends javax.swing.JFrame {
                         pnlSearch.getPnlSearchAll().addPlaylist(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
                         pnlSearch.getPnlSearchAll().addSong(new Song(i, "Thị mầu " + i, "Hòa minzy", "Hòa Minzy", "Vpop", "", "playlist.png", "", true, i));
                     }
-                    c.show(pnlChange, "cardSearch");
+
                     repaint();
                 }
             }
+
         });
 
     }
@@ -541,16 +519,6 @@ public class MainFrame extends javax.swing.JFrame {
     public JLabel getLblCreatePlaylist() {
         return lblCreatePlaylist;
     }
-
-    public lyricsPane getPnlLyrics() {
-        return pnlLyrics;
-    }
-
-    public void setPnlLyrics(lyricsPane pnlLyrics) {
-        this.pnlLyrics = pnlLyrics;
-    }
-    
-    
 
     public void setLblCreatePlaylist(JLabel lblCreatePlaylist) {
         this.lblCreatePlaylist = lblCreatePlaylist;
@@ -657,7 +625,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlChange;
     private javax.swing.JPanel pnlCreatePlaylist;
     private panelMain.SongLovelistPane pnlLikeSong;
-    private swing.lyricsPane pnlLyrics;
     private panelMain.MainPanel pnlMainScreen;
     private panelMain.PlaylistPane pnlMyPlaylist;
     private panelMain.SearchPane pnlSearch;

@@ -69,7 +69,7 @@ public class PlaylistPanel extends javax.swing.JPanel {
         pnlPlaylist.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlPlaylist.setOpaque(false);
         pnlPlaylist.setPreferredSize(new java.awt.Dimension(1210, 330));
-        pnlPlaylist.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 25, 30));
+        pnlPlaylist.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 30));
         jscPlaylist.setViewportView(pnlPlaylist);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -5,8 +5,6 @@
 package swave;
 
 import java.awt.Color;
-import javax.swing.JLabel;
-import panelMain.LoadingPane;
 
 /**
  *
@@ -35,40 +33,6 @@ public class DialogLoad extends javax.swing.JDialog {
             lblTextLoad.setText(this.textLoad + " ...");
         }
     }
-
-    public String getTextLoad() {
-        return textLoad;
-    }
-
-    public void setTextLoad(String textLoad) {
-        this.textLoad = textLoad;
-    }
-
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
-
-    public void setjLabel2(JLabel jLabel2) {
-        this.jLabel2 = jLabel2;
-    }
-
-    public JLabel getLblTextLoad() {
-        return lblTextLoad;
-    }
-
-    public void setLblTextLoad(JLabel lblTextLoad) {
-        this.lblTextLoad = lblTextLoad;
-    }
-
-    public LoadingPane getLoadingPane1() {
-        return loadingPane1;
-    }
-
-    public void setLoadingPane1(LoadingPane loadingPane1) {
-        this.loadingPane1 = loadingPane1;
-    }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

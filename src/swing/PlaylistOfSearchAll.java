@@ -19,7 +19,7 @@ import entity.PlayList;
 public class PlaylistOfSearchAll extends javax.swing.JPanel {
 
     public static ArrayList<PlayList> list = new ArrayList<>();
-
+    
     /**
      * Creates new form PlaylistOfSearchAll
      */
@@ -32,9 +32,9 @@ public class PlaylistOfSearchAll extends javax.swing.JPanel {
 
     public void addPlayList(PlayList data) {
         PlaylistItem item = new PlaylistItem();
-        item.loadData(data);
+        item.setData(data);
         pnlPlaylist.add(item);
-        if (pnlPlaylist.getComponentCount() == 5) {
+        if (pnlPlaylist.getComponentCount() == 5){
             pnlPlaylist.setPreferredSize(new Dimension(1320, 330));
         }
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount() - 1 > 4))) {
@@ -68,6 +68,8 @@ public class PlaylistOfSearchAll extends javax.swing.JPanel {
     public void setScrollBar1(ScrollBar scrollBar1) {
         this.scrollBar1 = scrollBar1;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
