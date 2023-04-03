@@ -11,9 +11,9 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class Button extends JButton {
+public class ButtonDelete extends JButton {
             
-            public Button() {
+            public ButtonDelete() {
                 setOpaque(false);
                 setContentAreaFilled(false);
                 setForeground(Color.WHITE);

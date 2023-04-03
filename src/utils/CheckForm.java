@@ -64,19 +64,6 @@ public class CheckForm {
         return true;
     }
 
-//    public static boolean checkDate (JDateChooser txt) {
-//        txt.setBackground(white);
-//        String id = txt.getDateFormatString();
-//        if (isValidDate(id)) {
-//            return true;
-//        }
-//        else {
-//            txt.setBackground(getHSBColor(299, 21, 96));
-//            MsgBox.alert(txt.getRootPane(), "Ngày không đúng định dạng dd/MM/yyyy");
-//            return false;
-//        }
-//    }
-
     public static boolean checkName (JTextField txt) {
         //txt.setBackground(white);
         String id = txt.getText();
@@ -117,4 +104,6 @@ public class CheckForm {
         }
     }
 
+    
+    
 }
