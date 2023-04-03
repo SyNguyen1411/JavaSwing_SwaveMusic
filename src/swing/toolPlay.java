@@ -21,6 +21,7 @@ public class toolPlay extends javax.swing.JPanel {
     boolean replay = false;
     boolean lyrics = false;
     boolean library = false;
+    boolean comment = false;
 
     private Song data;
     public MainFrame main;
@@ -248,8 +249,12 @@ public class toolPlay extends javax.swing.JPanel {
         lblLoveSong.setPreferredSize(new java.awt.Dimension(25, 25));
         add(lblLoveSong, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 64, -1, -1));
 
-        lblCmt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comment.png"))); // NOI18N
-        lblCmt.setPreferredSize(new java.awt.Dimension(25, 25));
+        lblCmt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CommentIcon.png"))); // NOI18N
+        lblCmt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCmtMouseClicked(evt);
+            }
+        });
         add(lblCmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 65, -1, -1));
 
         lblTimeStart.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -368,6 +373,18 @@ public class toolPlay extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lblLyricsMouseClicked
 
+    private void lblCmtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCmtMouseClicked
+        comment = !comment;
+        setComment(comment);
+        if (comment) {
+            main.getPnlComment().setVisible(true);
+
+        } else {
+            main.getPnlComment().setVisible(false);
+
+        }
+    }//GEN-LAST:event_lblCmtMouseClicked
+
     public void setRunning(boolean check) {
         if (check) {
             lblRun.setIcon(new ImageIcon(getClass().getResource("/img/stopSong.png")));
@@ -394,9 +411,17 @@ public class toolPlay extends javax.swing.JPanel {
 
     public void setLyrics(boolean check) {
         if (check) {
-            lblLyrics.setIcon(new ImageIcon(getClass().getResource("/img/lyrics_selected.png")));
+            lblLyrics.setIcon(new ImageIcon(getClass().getResource("/img/LyricsIcon_selected.png")));
         } else {
             lblLyrics.setIcon(new ImageIcon(getClass().getResource("/img/lyrics.png")));
+        }
+    }
+
+    public void setComment(boolean check) {
+        if (check) {
+            lblCmt.setIcon(new ImageIcon(getClass().getResource("/img/comment.png")));
+        } else {
+            lblCmt.setIcon(new ImageIcon(getClass().getResource("/img/CommentIcon.png")));
         }
     }
 

@@ -1,3 +1,6 @@
+
+import javax.swing.JScrollPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,22 +15,18 @@ public class test extends javax.swing.JFrame {
     /**
      * Creates new form test
      */
+
+    
     public test() {
         initComponents();
-
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
-//        lyricsPane2.addLyric("abc");
+        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+//        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+//        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+//        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
     }
 
     /**
@@ -39,7 +38,7 @@ public class test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lyricsPane2 = new swing.lyricsPane();
+        commentPane1 = new swing.CommentPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,15 +47,16 @@ public class test extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lyricsPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
+                .addComponent(commentPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lyricsPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(commentPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -98,6 +98,6 @@ public class test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.lyricsPane lyricsPane2;
+    private swing.CommentPane commentPane1;
     // End of variables declaration//GEN-END:variables
 }
