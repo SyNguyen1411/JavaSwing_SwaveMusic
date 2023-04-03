@@ -22,7 +22,7 @@ public class EditPlaylist extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        this.setBackground(new Color(255, 255, 255, 0));
+        this.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
