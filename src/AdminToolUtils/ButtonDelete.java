@@ -11,9 +11,9 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class ButtonPass extends JButton {
+public class ButtonDelete extends JButton {
             
-            public ButtonPass() {
+            public ButtonDelete() {
                 setOpaque(false);
                 setContentAreaFilled(false);
                 setForeground(Color.WHITE);
@@ -29,7 +29,7 @@ public class ButtonPass extends JButton {
                         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // For smooth line
                         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); // For smooth image
                         g2.setColor(getBackground());
-                        g2.fillRoundRect(0, 0, width-1, height-1, 10, 10);
+                        g2.fillRoundRect(0, 0, width-1, height-1, 40, 40);
 //                        g2.fill(new RoundRectangle2D.Double(0,0, width-1, height-1, 10,10));
                         g2.dispose();
                         super.paintComponent(g);
