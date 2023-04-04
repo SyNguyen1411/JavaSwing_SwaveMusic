@@ -45,8 +45,11 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private CardLayout c;
     private ArrayList<Song> songLoveList = new ArrayList<>();
+    private ArrayList<Song> songList = new ArrayList<>();
+    private ArrayList<PlayList> playlist = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
+    
 
     public MainFrame() {
         initComponents();
