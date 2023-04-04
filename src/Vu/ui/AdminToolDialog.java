@@ -5,6 +5,7 @@
 package Vu.ui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 
 /**
  *
@@ -16,11 +17,15 @@ public class AdminToolDialog extends javax.swing.JDialog {
      * Creates new form AdminToolDialog
      */
     private CardLayout c;
+
     public AdminToolDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         setResizable(false);
         c = (CardLayout) pnlChange.getLayout();
+        c.show(pnlChange, "cardUS");
+        lblAC.setForeground(Color.pink);
     }
 
     /**
@@ -32,6 +37,11 @@ public class AdminToolDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblClose = new javax.swing.JLabel();
+        lblTK = new javax.swing.JLabel();
+        lblComment = new javax.swing.JLabel();
+        lblSong = new javax.swing.JLabel();
+        lblAC = new javax.swing.JLabel();
         pnlChange = new javax.swing.JPanel();
         allCommentPane2 = new Vu.ui.AllCommentPane();
         censorSongPane2 = new Vu.ui.CensorSongPane();
@@ -43,39 +53,138 @@ public class AdminToolDialog extends javax.swing.JDialog {
         menuBar1 = new AdminToolUtils.MenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblClose.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblClose.setForeground(new java.awt.Color(255, 255, 255));
+        lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblClose.setText("THOÁT");
+        lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCloseMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 310, 50));
+
+        lblTK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTK.setForeground(new java.awt.Color(255, 255, 255));
+        lblTK.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTK.setText("THỐNG KÊ");
+        lblTK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTKMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 310, 50));
+
+        lblComment.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblComment.setForeground(new java.awt.Color(255, 255, 255));
+        lblComment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblComment.setText("KIỂM DUYỆT BÌNH LUẬN");
+        lblComment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCommentMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 310, 50));
+
+        lblSong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSong.setForeground(new java.awt.Color(255, 255, 255));
+        lblSong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSong.setText("KIỂM DUYỆT BÀI HÁT");
+        lblSong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSongMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSongMouseEntered(evt);
+            }
+        });
+        getContentPane().add(lblSong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 310, 50));
+
+        lblAC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAC.setForeground(new java.awt.Color(255, 255, 255));
+        lblAC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAC.setText("QUẢN LÍ TÀI KHOẢN");
+        lblAC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblACMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblACMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblACMouseExited(evt);
+            }
+        });
+        getContentPane().add(lblAC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 310, 50));
 
         pnlChange.setBackground(new java.awt.Color(36, 36, 36));
         pnlChange.setPreferredSize(new java.awt.Dimension(1213, 807));
         pnlChange.setLayout(new java.awt.CardLayout());
-        pnlChange.add(allCommentPane2, "card2");
-        pnlChange.add(censorSongPane2, "card3");
-        pnlChange.add(reportCommentPanel2, "card4");
-        pnlChange.add(statisticLikePanel2, "card5");
-        pnlChange.add(statisticViewPanel2, "card6");
+        pnlChange.add(allCommentPane2, "cardCM");
+        pnlChange.add(censorSongPane2, "cardS");
+        pnlChange.add(reportCommentPanel2, "cardrReportCM");
+        pnlChange.add(statisticLikePanel2, "cardTKLIKE");
+        pnlChange.add(statisticViewPanel2, "cardTKV");
         pnlChange.add(uncensorSongPane2, "card7");
-        pnlChange.add(userManagermentPanel1, "card8");
+        pnlChange.add(userManagermentPanel1, "cardUS");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(menuBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(pnlChange, javax.swing.GroupLayout.PREFERRED_SIZE, 1219, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlChange, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        getContentPane().add(pnlChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 0, 1219, -1));
+        getContentPane().add(menuBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblACMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblACMouseEntered
+
+    }//GEN-LAST:event_lblACMouseEntered
+
+    private void lblACMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblACMouseExited
+
+    }//GEN-LAST:event_lblACMouseExited
+
+    private void lblSongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSongMouseEntered
+
+    }//GEN-LAST:event_lblSongMouseEntered
+
+    private void lblACMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblACMouseClicked
+        lblAC.setForeground(Color.PINK);
+        lblSong.setForeground(Color.white);
+        lblComment.setForeground(Color.white);
+        lblTK.setForeground(Color.white);
+        c.show(pnlChange, "cardUS");
+
+    }//GEN-LAST:event_lblACMouseClicked
+
+    private void lblSongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSongMouseClicked
+        lblSong.setForeground(Color.PINK);
+        lblAC.setForeground(Color.white);
+        lblComment.setForeground(Color.white);
+        lblTK.setForeground(Color.white);
+        c.show(pnlChange, "cardS");
+    }//GEN-LAST:event_lblSongMouseClicked
+
+    private void lblCommentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCommentMouseClicked
+        lblComment.setForeground(Color.PINK);
+        lblAC.setForeground(Color.white);
+        lblSong.setForeground(Color.white);
+        lblTK.setForeground(Color.white);
+        c.show(pnlChange, "cardCM");
+    }//GEN-LAST:event_lblCommentMouseClicked
+
+    private void lblTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTKMouseClicked
+        lblTK.setForeground(Color.PINK);
+        lblAC.setForeground(Color.white);
+        lblSong.setForeground(Color.white);
+        lblComment.setForeground(Color.white);
+        c.show(pnlChange, "cardTKLIKE");
+    }//GEN-LAST:event_lblTKMouseClicked
+
+    private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lblCloseMouseClicked
 
     /**
      * @param args the command line arguments
@@ -122,6 +231,11 @@ public class AdminToolDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Vu.ui.AllCommentPane allCommentPane2;
     private Vu.ui.CensorSongPane censorSongPane2;
+    private javax.swing.JLabel lblAC;
+    private javax.swing.JLabel lblClose;
+    private javax.swing.JLabel lblComment;
+    private javax.swing.JLabel lblSong;
+    private javax.swing.JLabel lblTK;
     private AdminToolUtils.MenuBar menuBar1;
     private javax.swing.JPanel pnlChange;
     private Vu.ui.ReportCommentPanel reportCommentPanel2;

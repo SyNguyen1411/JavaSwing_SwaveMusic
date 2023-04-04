@@ -1,5 +1,7 @@
 package swave;
 
+import Tien.ui.ChangePassword;
+import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
 import entity.PlayList;
@@ -49,14 +51,14 @@ public class MainFrame extends javax.swing.JFrame {
     private ArrayList<PlayList> playlist = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
+    public MainFrame main;
 
     private UserTool userTool = new UserTool(this);
-
-
 
     public MainFrame() {
         initComponents();
         c = (CardLayout) pnlChange.getLayout();
+        this.main = this;
         pnlMainScreen.main = this;
         pnlMyPlaylist.main = this;
         pnlSongOfPlaylistPane.main = this;
@@ -500,6 +502,8 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
+                CreatPlaylist a = new CreatPlaylist(main, true);
+                a.setVisible(true);
                 menuBar.getPnlCreatePlaylist().setBackground(new Color(76, 76, 76));
                 appItemName = menuBar.getPnlCreatePlaylist().getName();
                 menuBar.getPnlMenu().repaint();
@@ -529,10 +533,10 @@ public class MainFrame extends javax.swing.JFrame {
                         pnlSearch.getPnlSearchPlaylist().addPlayList(item);
                     }
 
-                    for (Song item: songList) {
+                    for (Song item : songList) {
                         pnlSearch.getPnlSearchSong().addSong(item);
                         pnlSearch.getPnlSearchAll().addSong(item);
-                    }        
+                    }
                     c.show(pnlChange, "cardSearch");
                     repaint();
                 }
@@ -716,7 +720,8 @@ public class MainFrame extends javax.swing.JFrame {
         userTool.getPnlPersonalInfo().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ChangePassword mainIF = new ChangePassword(main, true);
+                mainIF.setVisible(true);
             }
 
             @Override
@@ -770,7 +775,9 @@ public class MainFrame extends javax.swing.JFrame {
         userTool.getPnlLogout().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                Login loginForm = new Login();
+                loginForm.setVisible(true);
+                main.setVisible(false);
             }
 
             @Override

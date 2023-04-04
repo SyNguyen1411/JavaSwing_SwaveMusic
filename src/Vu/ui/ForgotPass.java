@@ -54,6 +54,7 @@ public class ForgotPass extends java.awt.Dialog {
         buttonPass3 = new AdminToolUtils.ButtonPass();
         jLabel1 = new javax.swing.JLabel();
 
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -111,6 +112,11 @@ public class ForgotPass extends java.awt.Dialog {
         buttonPass3.setBackground(new java.awt.Color(34, 34, 34));
         buttonPass3.setText("Đăng nhập");
         buttonPass3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonPass3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonPass3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,6 +213,10 @@ public class ForgotPass extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void buttonPass3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPass3MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_buttonPass3MouseClicked
 
     /**
      * @param args the command line arguments
