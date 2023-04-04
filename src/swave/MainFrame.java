@@ -49,7 +49,6 @@ public class MainFrame extends javax.swing.JFrame {
     private ArrayList<PlayList> playlist = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
-    
 
     public MainFrame() {
         initComponents();
@@ -220,45 +219,91 @@ public class MainFrame extends javax.swing.JFrame {
 
         //-----------------------------------
         //add my playlist:
-        for (int i = 1; i < 100; i++) {
-            pnlMyPlaylist.addList(new PlayList(i, "LOFI " + i, i, true, "playlist.png"));
+        playlist.add(new PlayList(1, "LOFI 2021", 2023, true, "playlist/playlist1.jpg"));
+        playlist.add(new PlayList(2, "HOT TREND 2023", 2023, true, "playlist/playlist2.jpg"));
+        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 2023, true, "playlist/playlist3.jpg"));
+        playlist.add(new PlayList(4, "SAD SONGS", 2023, true, "playlist/playlist4.jpg"));
+        playlist.add(new PlayList(5, "CHILL SONGS", 2023, true, "playlist/playlist1.jpg"));
+        playlist.add(new PlayList(6, "NHẠC REMIX", 2023, true, "playlist/playlist6.jpg"));
+        playlist.add(new PlayList(7, "SONG BTS", 2023, true, "playlist/playlist10.jpg"));
+        playlist.add(new PlayList(8, "RAP SONGS", 2023, true, "playlist/playlist2.jpg"));
+        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 2023, true, "playlist/playlist4.jpg"));
+        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 2023, true, "playlist/playlist10.jpg"));
+        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 2023, true, "playlist/playlist2.jpg"));
+        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2023, true, "playlist/playlist12.jpg"));
+        playlist.add(new PlayList(13, "CHILL STUDENTS ", 2023, true, "playlist/playlist13.jpg"));
+        playlist.add(new PlayList(14, "SLEEP SONGS", 2023, true, "playlist/playlist14.jpg"));
+        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 2023, true, "playlist/playlist15.jpg"));
+        playlist.add(new PlayList(16, "HOT SONGS", 2023, true, "playlist/playlist16.jpg"));
+        playlist.add(new PlayList(17, "TIKTOK 2023", 2023, true, "playlist/playlist12.jpg"));
+        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 2023, true, "playlist/playlist3.jpg"));
+        playlist.add(new PlayList(19, "LOVE SONGS", 2023, true, "playlist/playlist19.jpg"));
+        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 2023, true, "playlist/playlist2.jpg"));
+
+        for (PlayList playList : playlist) {
+            pnlMyPlaylist.addList(playList);
+            pnlMyPlaylist.addListLove(playList);
         }
 
         //------------------------------------
-        //add my playlist love:
-        for (int i = 1; i < 100; i++) {
-            pnlMyPlaylist.addListLove(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
-        }
-
-        //------------------------------------
-        //add Song love for songLoveList:
-        for (int i = 1; i < 100; i++) {
-            songLoveList.add(new Song(i, "Thị mầu " + i, "Hòa minzy", "Hòa Minzy", "Vpop", "", "songIcon.png", "", true, i));
-        }
-
         //------------------------------------
         //add list playlist to pnl Menu
-        for (int i = 1; i < 100; i++) {
-            menuBar.addPlaylistList(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
+        for (PlayList item : playlist) {
+            menuBar.addPlaylistList(item);
         }
 
         //------------------------------------
         //add list song to pnl songList
-        for (int i = 0; i < 100; i++) {
-            pnlAddSong.fillPnlListSongDetails(new Song(i, "Midnight", "Taylor Swift", "Taylor Swift", "Pop", "lyrics.txt", "Midnights_-_Taylor_Swift.png", "song.mp3", true, i));
-            pnlSongOfPlaylistPane.addList(new Song(i, "Midnight", "Taylor Swift", "Taylor Swift", "Pop", "lyrics.txt", "Midnights_-_Taylor_Swift.png", "song.mp3", true, i));
-        }
-
         //------------------------------------
         //add song to panel main
-        for (int i = 0; i < 15; i++) {
-            pnlMainScreen.addTrendingSong(new Song(i, "Midnight", "Taylor Swift", "Taylor Swift", "Pop", "lyrics.txt", "Midnights_-_Taylor_Swift.png", "song.mp3", true, i));
+        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
+        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
+        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
+        songList.add(new Song(7, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
+        songList.add(new Song(8, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(9, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(10, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(11, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
+        songList.add(new Song(12, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
+        songList.add(new Song(13, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(14, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(15, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+
+        songList.add(new Song(16, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
+        songList.add(new Song(17, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
+        songList.add(new Song(18, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(19, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(20, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(21, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
+        songList.add(new Song(22, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
+        songList.add(new Song(23, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(24, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(25, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(26, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
+        songList.add(new Song(27, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
+        songList.add(new Song(28, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(29, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(30, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+
+        for (Song item : songList) {
+            pnlMainScreen.addTrendingSong(item);
+            pnlAddSong.fillPnlListSongDetails(item);
+            pnlSongOfPlaylistPane.addList(item);
+
+            //add Song love for songLoveList:
+            songLoveList.add(item);
+
         }
 
         //------------------------------------
         //add playlist to panel main
-        for (int i = 0; i < 15; i++) {
-            pnlMainScreen.addTopPlaylist(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
+        for (PlayList item : playlist) {
+            pnlMainScreen.addTopPlaylist(item);
+            pnlSearch.getPnlSearchAll().addPlaylist(item);
+            pnlSearch.getPnlSearchPlaylist().addList(item);
         }
 
         //add comment:
@@ -475,18 +520,14 @@ public class MainFrame extends javax.swing.JFrame {
             public void caretUpdate(CaretEvent e) {
                 if (!toolBar.getFindTextField().getText().equals("")) {
 
-                    for (int i = 1; i < 100; i++) {
-                        pnlSearch.getPnlSearchPlaylist().addPlayList(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
+                    for (PlayList item : playlist) {
+                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
                     }
 
-                    for (int i = 1; i < 100; i++) {
-                        pnlSearch.getPnlSearchSong().addSong(new Song(i, "Thị mầu " + i, "Hòa minzy", "Hòa Minzy", "Vpop", "", "songIcon.png", "", true, i));
-                    }
-
-                    for (int i = 1; i < 100; i++) {
-                        pnlSearch.getPnlSearchAll().addPlaylist(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
-                        pnlSearch.getPnlSearchAll().addSong(new Song(i, "Thị mầu " + i, "Hòa minzy", "Hòa Minzy", "Vpop", "", "playlist.png", "", true, i));
-                    }
+                    for (Song item: songList) {
+                        pnlSearch.getPnlSearchSong().addSong(item);
+                        pnlSearch.getPnlSearchAll().addSong(item);
+                    }        
                     c.show(pnlChange, "cardSearch");
                     repaint();
                 }
