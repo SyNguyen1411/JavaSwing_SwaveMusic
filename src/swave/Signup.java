@@ -20,7 +20,10 @@ public class Signup extends javax.swing.JFrame {
     /**
      * Creates new form
      */
-    public Signup() {
+    public Login mainLogin;
+    
+    public Signup(Login mainLogin) {
+        this.mainLogin = mainLogin;
         initComponents();
         this.setLocationRelativeTo(null);
         simpleTitleBar1.init(this);
@@ -114,6 +117,11 @@ public class Signup extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLogin.setPreferredSize(new java.awt.Dimension(317, 45));
         btnLogin.setSizeSpeed(8.0F);
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+        });
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -378,6 +386,11 @@ public class Signup extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lblAcesssMouseClicked
 
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        mainLogin.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLoginMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -408,7 +421,6 @@ public class Signup extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Signup().setVisible(true);
             }
         });
     }

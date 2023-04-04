@@ -4,6 +4,10 @@
  */
 package Tien.ui;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import swave.MainFrame;
+
 /**
  *
  * @author HP
@@ -13,9 +17,17 @@ public class ChangePassword extends javax.swing.JDialog {
     /**
      * Creates new form DoiMK
      */
+    public MainFrame main;
+    CardLayout c;
+
     public ChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.main = (MainFrame) parent;
         initComponents();
+        this.setLocationRelativeTo(null);
+        c = (CardLayout) pnlMain.getLayout();
+        c.show(pnlMain, "cardIf");
+        lblIf.setForeground(Color.pink);
     }
 
     /**
@@ -29,12 +41,13 @@ public class ChangePassword extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblIf = new javax.swing.JLabel();
+        lblEditIf = new javax.swing.JLabel();
+        lblChangePass = new javax.swing.JLabel();
+        lblBack = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
         dmk1 = new Tien.ui.ChangePass();
+        inf1 = new Tien.ui.inf();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -47,32 +60,52 @@ public class ChangePassword extends javax.swing.JDialog {
         jLabel1.setText("jLabel1");
         jLabel1.setPreferredSize(new java.awt.Dimension(143, 47));
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("HỒ SƠ");
-        jLabel2.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblIf.setBackground(new java.awt.Color(0, 0, 0));
+        lblIf.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblIf.setForeground(new java.awt.Color(255, 255, 255));
+        lblIf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIf.setText("HỒ SƠ");
+        lblIf.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblIf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIfMouseClicked(evt);
+            }
+        });
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("CHỈNH SỬA HỒ SƠ");
-        jLabel3.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblEditIf.setBackground(new java.awt.Color(0, 0, 0));
+        lblEditIf.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblEditIf.setForeground(new java.awt.Color(255, 255, 255));
+        lblEditIf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEditIf.setText("CHỈNH SỬA HỒ SƠ");
+        lblEditIf.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblEditIf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditIfMouseClicked(evt);
+            }
+        });
 
-        jLabel4.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("ĐỔI MẬT KHẨU");
-        jLabel4.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblChangePass.setBackground(new java.awt.Color(204, 204, 204));
+        lblChangePass.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblChangePass.setForeground(new java.awt.Color(255, 255, 255));
+        lblChangePass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblChangePass.setText("ĐỔI MẬT KHẨU");
+        lblChangePass.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblChangePass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblChangePassMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("TRỞ VỀ");
-        jLabel5.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblBack.setForeground(new java.awt.Color(255, 255, 255));
+        lblBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBack.setText("TRỞ VỀ");
+        lblBack.setPreferredSize(new java.awt.Dimension(180, 51));
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,14 +113,14 @@ public class ChangePassword extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEditIf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 91, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -96,39 +129,57 @@ public class ChangePassword extends javax.swing.JDialog {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblIf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblEditIf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(429, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, -1));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1224, 810));
+        pnlMain.setLayout(new java.awt.CardLayout());
 
         dmk1.setMinimumSize(new java.awt.Dimension(1224, 810));
+        pnlMain.add(dmk1, "cardChangePass");
 
-        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
-        pnlMain.setLayout(pnlMainLayout);
-        pnlMainLayout.setHorizontalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dmk1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlMainLayout.setVerticalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addComponent(dmk1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        inf1.setBackground(new java.awt.Color(0, 0, 0));
+        pnlMain.add(inf1, "cardIf");
 
         getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 0, 1220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChangePassMouseClicked
+        c.show(pnlMain, "cardChangePass");
+        lblChangePass.setForeground(Color.PINK);
+        lblIf.setForeground(Color.white);
+        lblEditIf.setForeground(Color.white);
+    }//GEN-LAST:event_lblChangePassMouseClicked
+
+    private void lblIfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIfMouseClicked
+        c.show(pnlMain, "cardIf");
+        lblIf.setForeground(Color.PINK);
+        lblChangePass.setForeground(Color.white);
+        lblEditIf.setForeground(Color.white);
+    }//GEN-LAST:event_lblIfMouseClicked
+
+    private void lblEditIfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditIfMouseClicked
+        c.show(pnlMain, "cardIf");
+        lblEditIf.setForeground(Color.PINK);
+        lblChangePass.setForeground(Color.white);
+        lblIf.setForeground(Color.white);
+    }//GEN-LAST:event_lblEditIfMouseClicked
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -181,12 +232,13 @@ public class ChangePassword extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Tien.ui.ChangePass dmk1;
+    private Tien.ui.inf inf1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBack;
+    private javax.swing.JLabel lblChangePass;
+    private javax.swing.JLabel lblEditIf;
+    private javax.swing.JLabel lblIf;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
 }
