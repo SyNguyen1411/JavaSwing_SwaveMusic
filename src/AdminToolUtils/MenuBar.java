@@ -22,89 +22,6 @@ public class MenuBar extends javax.swing.JPanel {
      */
     public MenuBar() {
         initComponents();
-        init();
-    }
-
-    public JLabel getLblLogo() {
-        return lblLogo;
-    }
-
-    public void setLblLogo(JLabel lblLogo) {
-        this.lblLogo = lblLogo;
-    }
-
-    public AppItem getPnlComment() {
-        return pnlComment;
-    }
-
-    public void setPnlComment(AppItem pnlComment) {
-        this.pnlComment = pnlComment;
-    }
-
-    public AppItem getPnlExit() {
-        return pnlExit;
-    }
-
-    public void setPnlExit(AppItem pnlExit) {
-        this.pnlExit = pnlExit;
-    }
-
-    public JPanel getPnlMenu() {
-        return pnlMenu;
-    }
-
-    public void setPnlMenu(JPanel pnlMenu) {
-        this.pnlMenu = pnlMenu;
-    }
-
-    public AppItem getPnlSong() {
-        return pnlSong;
-    }
-
-    public void setPnlSong(AppItem pnlSong) {
-        this.pnlSong = pnlSong;
-    }
-
-    public AppItem getPnlStatistic() {
-        return pnlStatistic;
-    }
-
-    public void setPnlStatistic(AppItem pnlStatistic) {
-        this.pnlStatistic = pnlStatistic;
-    }
-
-    public AppItem getPnlUser() {
-        return pnlUser;
-    }
-
-    public void setPnlUser(AppItem pnlUser) {
-        this.pnlUser = pnlUser;
-    }
-
-    private void init(){
-        setBackground(new Color(0, 0, 0, 255));
-        
-//        pnlUser.getLblName().setIcon(new ImageIcon(getClass().getResource("/AdminToolUtils/Quanlitaikhoan.png")));
-//        pnlSong.getLblName().setIcon(new ImageIcon(getClass().getResource("/AdminToolUtils/Kiemduyetbaihat.png")));
-//        pnlComment.getLblName().setIcon(new ImageIcon(getClass().getResource("/AdminToolUtils/kiemsoatbinhluan.png")));
-//        pnlStatistic.getLblName().setIcon(new ImageIcon(getClass().getResource("/AdminToolUtils/Thongke.png")));
-//        pnlExit.getLblName().setIcon(new ImageIcon(getClass().getResource("/AdminToolUtils/Thoat.png")));
-        
-        pnlUser.getLblName().setText("QUẢN LÝ TÀI KHOẢN");
-        pnlUser.getLblName().setForeground(Color.white);
-        pnlUser.getLblName().setFont(myFont1);
-        pnlSong.getLblName().setText("KIỂM DUYỆT BÀI HÁT");
-        pnlSong.getLblName().setForeground(Color.white);
-        pnlSong.getLblName().setFont(myFont1);
-        pnlComment.getLblName().setText("KIỂM SOÁT BÌNH LUẬN");
-        pnlComment.getLblName().setForeground(Color.white);
-        pnlComment.getLblName().setFont(myFont1);
-        pnlStatistic.getLblName().setText("THỐNG KÊ");
-        pnlStatistic.getLblName().setForeground(Color.white);
-        pnlStatistic.getLblName().setFont(myFont1);
-        pnlExit.getLblName().setText("THOÁT KHỎI CÔNG CỤ");
-        pnlExit.getLblName().setForeground(Color.white);
-        pnlExit.getLblName().setFont(myFont1);
     }
     
     /**
@@ -117,12 +34,6 @@ public class MenuBar extends javax.swing.JPanel {
     private void initComponents() {
 
         lblLogo = new javax.swing.JLabel();
-        pnlMenu = new javax.swing.JPanel();
-        pnlUser = new swing.swavecomponent.AppItem();
-        pnlSong = new swing.swavecomponent.AppItem();
-        pnlComment = new swing.swavecomponent.AppItem();
-        pnlStatistic = new swing.swavecomponent.AppItem();
-        pnlExit = new swing.swavecomponent.AppItem();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -130,19 +41,6 @@ public class MenuBar extends javax.swing.JPanel {
         lblLogo.setForeground(new java.awt.Color(249, 57, 234));
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AdminToolUtils/logo1.png"))); // NOI18N
         lblLogo.setText("SWAVE");
-
-        pnlMenu.setBackground(new java.awt.Color(0, 0, 0));
-        pnlMenu.setPreferredSize(new java.awt.Dimension(249, 228));
-        pnlMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
-        pnlMenu.add(pnlUser);
-
-        pnlSong.setName(""); // NOI18N
-        pnlMenu.add(pnlSong);
-        pnlMenu.add(pnlComment);
-        pnlMenu.add(pnlStatistic);
-        pnlMenu.add(pnlExit);
-
-        pnlMenu.setBackground(new Color(0,0,0,255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,11 +50,6 @@ public class MenuBar extends javax.swing.JPanel {
                 .addGap(85, 85, 85)
                 .addComponent(lblLogo)
                 .addContainerGap(104, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 300, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,22 +57,11 @@ public class MenuBar extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addComponent(lblLogo)
                 .addContainerGap(723, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(164, Short.MAX_VALUE)
-                    .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(356, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblLogo;
-    private swing.swavecomponent.AppItem pnlComment;
-    private swing.swavecomponent.AppItem pnlExit;
-    private javax.swing.JPanel pnlMenu;
-    private swing.swavecomponent.AppItem pnlSong;
-    private swing.swavecomponent.AppItem pnlStatistic;
-    private swing.swavecomponent.AppItem pnlUser;
     // End of variables declaration//GEN-END:variables
 }

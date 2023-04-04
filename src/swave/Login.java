@@ -1,5 +1,6 @@
 package swave;
 
+import Vu.ui.ForgotPass;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -165,6 +166,9 @@ public class Login extends javax.swing.JFrame {
         lblForgot.setText("Quên mật khẩu?");
         lblForgot.setPreferredSize(new java.awt.Dimension(87, 20));
         lblForgot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblForgotMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblForgotMouseEntered(evt);
             }
@@ -382,6 +386,11 @@ public class Login extends javax.swing.JFrame {
         new Signup(this).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnSigupMouseClicked
+
+    private void lblForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotMouseClicked
+        ForgotPass forgot = new ForgotPass(this, true);
+        forgot.setVisible(true);
+    }//GEN-LAST:event_lblForgotMouseClicked
 
     /**
      * @param args the command line arguments
