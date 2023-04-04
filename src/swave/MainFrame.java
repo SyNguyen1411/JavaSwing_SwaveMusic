@@ -1,19 +1,19 @@
 package swave;
 
-import Tien.ui.CreatPlaylist;
+import Vu.ui.AdminToolDialog;
 import component.EventItem;
+import entity.PlayList;
+import entity.Song;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import entity.PlayList;
-import entity.Song;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import net.miginfocom.layout.ComponentWrapper;
 import net.miginfocom.layout.LayoutCallback;
 import panelMain.AddSongPanel;
@@ -49,7 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
     private ArrayList<PlayList> playlist = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
-    
+    private UserTool userTool = new UserTool(this);
 
     public MainFrame() {
         initComponents();
@@ -189,10 +189,11 @@ public class MainFrame extends javax.swing.JFrame {
         titleBar.init(this);
         setResizable(false);
         GlassPanePopup.install(this);
+        eventUserTool();
         toolBar.getUserPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                GlassPanePopup.showPopup(new UserTool(), new DefaultOption() {
+                GlassPanePopup.showPopup(userTool, new DefaultOption() {
                     @Override
                     public float opacity() {
                         return 0;
@@ -450,7 +451,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
-                menuBar.getPnlAddSong().setBackground(new Color(76, 76, 76));
+                menuBar.getPnlCreatePlaylist().setBackground(new Color(76, 76, 76));
                 appItemName = menuBar.getPnlCreatePlaylist().getName();
                 menuBar.getPnlMenu().repaint();
                 menuBar.getPnlMenu().revalidate();
@@ -664,6 +665,80 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void setPnlComment(CommentPane pnlComment) {
         this.pnlComment = pnlComment;
+    }
+
+    private void eventUserTool() {
+        userTool.getPnlPersonalInfo().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                userTool.getPnlPersonalInfo().getLblPanelName().setForeground(new Color(165, 43, 168));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                userTool.getPnlPersonalInfo().getLblPanelName().setForeground(new Color(199, 199, 199));
+            }
+
+        });
+
+        userTool.getPnlAdminTool().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AdminToolDialog atd = new AdminToolDialog(userTool.getMf(), true);
+                atd.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                userTool.getPnlAdminTool().getLblPanelName().setForeground(new Color(165, 43, 168));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                userTool.getPnlAdminTool().getLblPanelName().setForeground(new Color(199, 199, 199));
+            }
+
+        });
+        userTool.getPnlIntroduction().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(165, 43, 168));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(199, 199, 199));
+            }
+
+        });
+
+        userTool.getPnlLogout().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                userTool.getPnlLogout().getLblPanelName().setForeground(new Color(165, 43, 168));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                userTool.getPnlLogout().getLblPanelName().setForeground(new Color(199, 199, 199));
+            }
+
+        });
     }
 
 

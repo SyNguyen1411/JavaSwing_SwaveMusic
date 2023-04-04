@@ -5,6 +5,7 @@
 package swing.swavecomponent;
 
 import component.EventItem;
+import entity.PlayList;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -16,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import entity.PlayList;
 import swing.utilcomponent.ScrollBarCustom;
 
 /**
@@ -81,7 +81,7 @@ public class MenuBar extends javax.swing.JPanel {
         add(lblLogo);
 
         pnlMenu.setPreferredSize(new java.awt.Dimension(249, 228));
-        pnlMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
+        pnlMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 0));
         pnlMenu.add(pnlHome);
 
         pnlMyPlaylists.setName(""); // NOI18N
