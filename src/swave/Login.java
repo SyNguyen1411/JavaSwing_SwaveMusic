@@ -262,6 +262,11 @@ public class Login extends javax.swing.JFrame {
         btnSigup.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSigup.setPreferredSize(new java.awt.Dimension(317, 45));
         btnSigup.setSizeSpeed(8.0F);
+        btnSigup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSigupMouseClicked(evt);
+            }
+        });
         btnSigup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSigupActionPerformed(evt);
@@ -372,6 +377,11 @@ public class Login extends javax.swing.JFrame {
             loadThread.start();
         }
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void btnSigupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSigupMouseClicked
+        new Signup(this).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSigupMouseClicked
 
     /**
      * @param args the command line arguments
