@@ -3,19 +3,22 @@ package swave;
 import Tien.ui.ChangePassword;
 import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
+import component.EventClick;
 import component.EventItem;
 import entity.PlayList;
+import entity.Search;
 import entity.Song;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
+import javax.swing.JPopupMenu;
 import net.miginfocom.layout.ComponentWrapper;
 import net.miginfocom.layout.LayoutCallback;
 import panelMain.AddSongPanel;
@@ -24,6 +27,7 @@ import panelMain.PlaylistPane;
 import panelMain.SearchPane;
 import panelMain.SongLovelistPane;
 import swing.CommentPane;
+import swing.PanelSearchSuggestion;
 import swing.SongItem;
 import swing.SongOfPlaylistPane;
 import swing.glasspanepopup.DefaultLayoutCallBack;
@@ -35,6 +39,7 @@ import swing.swavecomponent.MenuBar;
 import swing.swavecomponent.ToolBar;
 import swing.swavecomponent.UserTool;
 import swing.toolPlay;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -52,6 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
     private String appItemName;
     public Login loginForm;
     public MainFrame main;
+    private JPopupMenu menu;
+    private PanelSearchSuggestion search;
 
     private UserTool userTool = new UserTool(this);
 
@@ -65,6 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolPlay1.main = this;
         pnlLyrics.setVisible(false);
         pnlComment.setVisible(false);
+        initSearchSuggestion();
         init();
     }
 
@@ -524,25 +532,63 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        toolBar.getFindTextField().addCaretListener(new CaretListener() {
+        toolBar.getFindTextField().addMouseListener(new MouseAdapter() {
             @Override
-            public void caretUpdate(CaretEvent e) {
-                if (!toolBar.getFindTextField().getText().equals("")) {
-
-                    for (PlayList item : playlist) {
-                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
-                    }
-
-                    for (Song item : songList) {
-                        pnlSearch.getPnlSearchSong().addSong(item);
-                        pnlSearch.getPnlSearchAll().addSong(item);
-                    }
-                    c.show(pnlChange, "cardSearch");
-                    repaint();
+            public void mouseClicked(MouseEvent e) {
+                if (search.getItemSize() > 0) {
+                    menu.show(toolBar.getFindTextField(), 0, toolBar.getFindTextField().getHeight() + 5);
                 }
             }
         });
 
+        toolBar.getFindTextField().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String text = toolBar.getFindTextField().getText().trim().toLowerCase();
+                search.setData(search.dataSearch(text));
+                if (search.getItemSize() > 0) {
+                    menu.show(toolBar.getFindTextField(), 0, toolBar.getFindTextField().getHeight() + 5);
+                    menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 45) + 2);
+                } else {
+                    menu.setVisible(false);
+                }
+            }
+            
+            @Override
+            public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                c.show(pnlChange, "cardSearch");
+                for (PlayList item : playlist) {
+                    pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                }
+
+                for (Song item : songList) {
+                    pnlSearch.getPnlSearchSong().addSong(item);
+                    pnlSearch.getPnlSearchAll().addSong(item);
+                }
+                repaint();
+                menu.setVisible(false);
+            }
+        }
+        });
+
+        search.addEventClick(new EventClick() {
+            @Override
+            public void itemClick(Search data) {
+                menu.setVisible(false);
+                toolBar.getFindTextField().setText(data.getText());
+                c.show(pnlChange, "cardSearch");
+                for (PlayList item : playlist) {
+                    pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                }
+
+                for (Song item : songList) {
+                    pnlSearch.getPnlSearchSong().addSong(item);
+                    pnlSearch.getPnlSearchAll().addSong(item);
+                }
+                repaint();
+            }
+        });
     }
 
     private void undoChosen(String name) {
@@ -793,6 +839,21 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+    public void initSearchSuggestion() {
+        menu = new JPopupMenu();
+        search = new PanelSearchSuggestion();
+        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
+        menu.add(search);
+        menu.setFocusable(false);
+        search.addEventClick(new EventClick() {
+            @Override
+            public void itemClick(Search data) {
+                menu.setVisible(false);
+                toolBar.getFindTextField().setText(data.getText());
+
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

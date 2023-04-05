@@ -49,8 +49,6 @@ public class ToolBar extends javax.swing.JPanel {
     public void setAccessibleContext(AccessibleContext accessibleContext) {
         this.accessibleContext = accessibleContext;
     }
-    
-    
 
     public FindTextField getFindTextField () {
         return findTextField;
