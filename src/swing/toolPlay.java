@@ -50,21 +50,8 @@ public class toolPlay extends javax.swing.JPanel {
         this.data = data;
     }
 
-    public JSlider getjSlider1() {
-        return jSlider1;
-    }
 
-    public void setjSlider1(JSlider jSlider1) {
-        this.jSlider1 = jSlider1;
-    }
 
-    public JSlider getjSlider2() {
-        return jSlider2;
-    }
-
-    public void setjSlider2(JSlider jSlider2) {
-        this.jSlider2 = jSlider2;
-    }
 
     public JLabel getLblAVTSong() {
         return lblAVTSong;
@@ -213,7 +200,6 @@ public class toolPlay extends javax.swing.JPanel {
         lblLoveSong = new javax.swing.JLabel();
         lblCmt = new javax.swing.JLabel();
         lblTimeStart = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
         lblTimeStart1 = new javax.swing.JLabel();
         pnlItemPlay = new javax.swing.JPanel();
         lblRePlay = new javax.swing.JLabel();
@@ -224,7 +210,8 @@ public class toolPlay extends javax.swing.JPanel {
         lblLyrics = new javax.swing.JLabel();
         lblLibary = new javax.swing.JLabel();
         lblLibary1 = new javax.swing.JLabel();
-        jSlider2 = new javax.swing.JSlider();
+        slidebar1 = new component.Slidebar();
+        slidebar2 = new component.Slidebar();
 
         setBackground(new java.awt.Color(24, 24, 24));
         setPreferredSize(new java.awt.Dimension(1532, 150));
@@ -261,10 +248,6 @@ public class toolPlay extends javax.swing.JPanel {
         lblTimeStart.setForeground(new java.awt.Color(125, 125, 125));
         lblTimeStart.setText("03:10");
         add(lblTimeStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 90, 40, -1));
-
-        jSlider1.setBackground(new java.awt.Color(255, 255, 255));
-        jSlider1.setPreferredSize(new java.awt.Dimension(598, 5));
-        add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 94, 670, 10));
 
         lblTimeStart1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblTimeStart1.setForeground(new java.awt.Color(125, 125, 125));
@@ -341,7 +324,8 @@ public class toolPlay extends javax.swing.JPanel {
             }
         });
         add(lblLibary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1346, 64, -1, -1));
-        add(jSlider2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1406, 65, 90, -1));
+        add(slidebar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 95, 680, 10));
+        add(slidebar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 65, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRunMouseClicked
@@ -432,8 +416,6 @@ public class toolPlay extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JLabel lblAVTSong;
     private javax.swing.JLabel lblCmt;
     private javax.swing.JLabel lblLibary;
@@ -450,5 +432,7 @@ public class toolPlay extends javax.swing.JPanel {
     private javax.swing.JLabel lblTimeStart;
     private javax.swing.JLabel lblTimeStart1;
     private javax.swing.JPanel pnlItemPlay;
+    private component.Slidebar slidebar1;
+    private component.Slidebar slidebar2;
     // End of variables declaration//GEN-END:variables
 }
