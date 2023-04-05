@@ -89,7 +89,7 @@ public class FindTextField extends JTextField {
     public FindTextField () {
         setBackground(new Color(0, 0, 0, 1)); // Remove background
         setOpaque(false);
-        prefixIcon = new ImageIcon(getClass().getResource("/icons/search.png"));
+        prefixIcon = new ImageIcon(getClass().getResource("/icons/searchIcon.png"));
         suffixIcon = new ImageIcon(getClass().getResource("/icons/clear.png"));
         setCursor(new Cursor(Cursor.TEXT_CURSOR));
         initBorder();
