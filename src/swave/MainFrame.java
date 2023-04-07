@@ -72,8 +72,10 @@ public class MainFrame extends javax.swing.JFrame {
         toolPlay1.main = this;
         pnlLyrics.setVisible(false);
         pnlComment.setVisible(false);
+        toolPlay1.fillData(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         initSearchSuggestion();
         init();
+
     }
 
     /**
@@ -270,14 +272,14 @@ public class MainFrame extends javax.swing.JFrame {
         //add list song to pnl songList
         //------------------------------------
         //add song to panel main
-        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(7, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(8, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
+        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(7, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(8, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(9, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
         songList.add(new Song(10, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
         songList.add(new Song(11, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
@@ -335,6 +337,10 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblWave().setVisible(true);
                 pnlLikeSong.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
+                toolPlay1.fillData(song);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+//                toolPlay1.runningSong();
             }
 
             @Override
@@ -360,6 +366,11 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblWave().setVisible(true);
                 pnlMainScreen.getPnlTrendingSongList().setRunningSong(com);
                 songItem.selectRunning(true);
+                toolPlay1.setData(song);
+                toolPlay1.fillData(song);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                toolPlay1.runningSong();
             }
 
             @Override
@@ -385,6 +396,11 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblWave().setVisible(true);
                 pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
+                toolPlay1.setData(song);
+                toolPlay1.fillData(song);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                toolPlay1.runningSong();
             }
 
             @Override
@@ -552,23 +568,23 @@ public class MainFrame extends javax.swing.JFrame {
                     menu.setVisible(false);
                 }
             }
-            
+
             @Override
             public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                c.show(pnlChange, "cardSearch");
-                for (PlayList item : playlist) {
-                    pnlSearch.getPnlSearchPlaylist().addPlayList(item);
-                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    c.show(pnlChange, "cardSearch");
+                    for (PlayList item : playlist) {
+                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                    }
 
-                for (Song item : songList) {
-                    pnlSearch.getPnlSearchSong().addSong(item);
-                    pnlSearch.getPnlSearchAll().addSong(item);
+                    for (Song item : songList) {
+                        pnlSearch.getPnlSearchSong().addSong(item);
+                        pnlSearch.getPnlSearchAll().addSong(item);
+                    }
+                    repaint();
+                    menu.setVisible(false);
                 }
-                repaint();
-                menu.setVisible(false);
             }
-        }
         });
 
         search.addEventClick(new EventClick() {
