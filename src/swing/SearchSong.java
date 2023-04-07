@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import entity.Song;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -31,7 +34,7 @@ public class SearchSong extends javax.swing.JPanel {
         this.songList1 = songList1;
     }
 
-    public void addSong(Song data) {
+    public void addSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         songList1.addSong(data);
         revalidate();
     };

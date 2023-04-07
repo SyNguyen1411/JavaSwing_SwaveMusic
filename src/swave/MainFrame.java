@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
@@ -71,7 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private UserTool userTool = new UserTool(this);
 
-    public MainFrame() throws UnsupportedAudioFileException, IOException {
+    public MainFrame() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         initComponents();
         c = (CardLayout) pnlChange.getLayout();
         this.main = this;
@@ -208,12 +209,14 @@ public class MainFrame extends javax.swing.JFrame {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
-    private void init() throws UnsupportedAudioFileException, IOException {
+    private void init() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         this.getContentPane().setBackground(new Color(0, 0, 0, 255));
         titleBar.init(this);
         setResizable(false);
@@ -623,7 +626,15 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     for (Song item : songList) {
-                        pnlSearch.getPnlSearchSong().addSong(item);
+                        try {
+                            pnlSearch.getPnlSearchSong().addSong(item);
+                        } catch (UnsupportedAudioFileException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         pnlSearch.getPnlSearchAll().addSong(item);
                     }
                     repaint();
@@ -643,7 +654,15 @@ public class MainFrame extends javax.swing.JFrame {
                 }
 
                 for (Song item : songList) {
-                    pnlSearch.getPnlSearchSong().addSong(item);
+                    try {
+                        pnlSearch.getPnlSearchSong().addSong(item);
+                    } catch (UnsupportedAudioFileException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     pnlSearch.getPnlSearchAll().addSong(item);
                 }
                 repaint();
