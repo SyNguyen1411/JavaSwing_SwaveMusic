@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import entity.Song;
+import java.awt.Color;
+import java.awt.Component;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,28 +36,46 @@ public class toolPlay extends javax.swing.JPanel {
 
     private Song data;
     public MainFrame main;
-    File f;
-    FileInputStream fi;
-    BufferedInputStream bi;
-    Player player;
-    long totalTime;
-    int pause = 0;
-    Runnable play = new Runnable() {
+    private File f;
+    private FileInputStream fi;
+    private BufferedInputStream bi;
+    public Player player;
+    private long totalTime;
+    private long pause = -1;
+
+    private Runnable play = new Runnable() {
         @Override
         public void run() {
-            runningSong();
+            f = new File(getClass().getResource(data.getFileSong()).getFile());
+            try {
+                System.out.println("Đang chạy nhạc");
+                fi = new FileInputStream(f);
+                bi = new BufferedInputStream(fi);
+                player = new Player(bi);
+                totalTime = fi.available();
+
+                if (pause <= -1) {
+                    player.play();
+                } else {
+                    fi.skip(totalTime - pause);
+                    player.play();
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     };
 
-    Runnable resumeRun = new Runnable() {
+    private Runnable resumeRun = new Runnable() {
         @Override
         public void run() {
 
         }
     };
-
-    private Thread runningThread;
-    private Thread stopThread;
 
     public boolean isShuffle() {
         return shuffle;
@@ -80,8 +100,6 @@ public class toolPlay extends javax.swing.JPanel {
     public void setData(Song data) {
         this.data = data;
     }
-
-
 
     public JLabel getLblCmt() {
         return lblCmt;
@@ -205,6 +223,14 @@ public class toolPlay extends javax.swing.JPanel {
 
     public toolPlay() {
         initComponents();
+    }
+
+    public long getPause() {
+        return pause;
+    }
+
+    public void setPause(int pause) {
+        this.pause = pause;
     }
 
     /**
@@ -355,15 +381,19 @@ public class toolPlay extends javax.swing.JPanel {
         running = !running;
         setRunning(running);
         if (running) {
-            if (pause == 0) {
-                runningThread = new Thread(play);
-            } else {
-                runningThread = new Thread(resumeRun);
-            }
-            runningThread.start();
+            Thread runningSong = new Thread(play);
+            runningSong.start();
+            main.itemSong.setRunning(running);
+            main.itemSong.getLblWave().setVisible(running);
+            main.itemSong.getLblIconPlay().setVisible(!running);
+            main.itemSong.getLblStart().setVisible(!running);
+            main.itemSong.selectRunning(running);
         } else {
             try {
-                stopSong();
+                pauseSong();
+                main.itemSong.setRunning(running);
+                main.itemSong.getLblWave().setVisible(running);
+                main.itemSong.getLblStart().setVisible(!running);
             } catch (IOException ex) {
                 Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -407,6 +437,7 @@ public class toolPlay extends javax.swing.JPanel {
     }//GEN-LAST:event_lblCmtMouseClicked
 
     public void setRunning(boolean check) {
+        this.running = check;
         if (check) {
             lblRun.setIcon(new ImageIcon(getClass().getResource("/img/playing.png")));
 
@@ -452,31 +483,23 @@ public class toolPlay extends javax.swing.JPanel {
         lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/song/" + data.getAVT())));
         lblNameSong.setText(data.getNameSong());
         lblSinger.setText(data.getSinger());
+        lblTimeStart.setText("0" + data.minutetotalLength + ":" + "0" + data.secondTotalLength);
         revalidate();
     }
 
     public void runningSong() {
-        f = new File(getClass().getResource(data.getFileSong()).getFile());
-        try {
-            System.out.println("Đang chạy nhạc");
-            fi = new FileInputStream(f);
-            bi = new BufferedInputStream(fi);
-            player = new Player(bi);
-            totalTime = fi.available();
-            if (pause == 0) {
-                player.play();
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JavaLayerException ex) {
-            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Thread runningThread = new Thread(play);
+        runningThread.start();
+    }
+
+    public void pauseSong() throws IOException {
+        pause = fi.available();
+        player.close();
     }
 
     public void stopSong() throws IOException {
-        pause = fi.available();
+        totalTime = 0;
+        pause = -1;
         player.close();
     }
 

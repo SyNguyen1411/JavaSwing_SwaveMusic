@@ -17,7 +17,16 @@ import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import entity.Song;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Map;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import model.borderImage;
+import utils.TAudioFileFormat;
 
 /**
  *
@@ -30,6 +39,8 @@ public class SongItem extends javax.swing.JPanel {
      */
     public boolean running = false;
     public Song data;
+    public int minutetotalLength;
+    public int secondTotalLength;
 
     public SongItem() {
         initComponents();
@@ -39,12 +50,13 @@ public class SongItem extends javax.swing.JPanel {
         lblIconLove.setVisible(false);
     }
 
-    public void setDataSong(Song data) {
+    public void setDataSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         this.data = data;
         lblIconPlay.setText("" + data.getSongID());
         lblIconSong.setIcon(data.toIcon());
         lblNamSong.setText(data.getNameSong());
-        lblTime.setText("03:03");
+//        getTimeSong();
+        lblTime.setText("0" + minutetotalLength + ":" + "0" + secondTotalLength);
     }
 
     public void selectRunning(boolean running) {
@@ -179,7 +191,6 @@ public class SongItem extends javax.swing.JPanel {
             lblNamSong.setForeground(new Color(199, 199, 199));
             lblIconPlay.setForeground(new Color(199, 199, 199));
             lblTime.setForeground(new Color(199, 199, 199));
-
         }
 
     }//GEN-LAST:event_formMouseExited
@@ -305,6 +316,25 @@ public class SongItem extends javax.swing.JPanel {
     public void setPnlSongName(JPanel pnlSongName) {
         this.pnlSongName = pnlSongName;
     }
+
+    public void getTimeSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {
+        File f = new File( getClass().getResource(data.getFileSong()).getFile());
+        AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(f);
+        if (!(fileFormat instanceof TAudioFileFormat)) {
+            Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
+            String key = "duration";
+            Long microseconds = (Long) properties.get(key);
+            int mili = (int) (microseconds / 1000);
+            int sec = (mili / 1000) % 60;
+            int min = (mili / 1000) / 60;
+            minutetotalLength = min;
+            secondTotalLength = sec;
+        } else {
+            throw new UnsupportedAudioFileException();
+        }
+        System.out.println(data.getFileSong());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblIconLove;
