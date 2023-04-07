@@ -14,7 +14,10 @@ import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import entity.PlayList;
 import entity.Song;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import model.borderImage;
 import swave.MainFrame;
 import swing.SongList;
@@ -37,13 +40,13 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
     }
 
     //Thêm PlayList và pnl Của Tôi
-    public void addList(Song song) {
+    public void addList(Song song) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         pnlSonglist.addSong(song);
         revalidate();
     }
 
     //Thêm PlayList và pnl Của Tôi
-    public void fillData() {
+    public void fillData() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         lblAVT.setIcon(playlistFocus.toIcon());
         lblNamePlaylist.setText(playlistFocus.getPlaylistName());
 
