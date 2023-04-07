@@ -4,6 +4,8 @@
  */
 package Vu.ui;
 
+import swing.utilcomponent.ScrollBarCustom;
+
 /**
  *
  * @author Admin
@@ -15,6 +17,7 @@ public class ReportCommentPanel extends javax.swing.JPanel {
      */
     public ReportCommentPanel() {
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
     }
 
     /**
@@ -29,7 +32,8 @@ public class ReportCommentPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         findTextField1 = new AdminToolUtils.FindTextField();
-        comboBox2 = new AdminToolUtils.ComboBox();
+        comboBoxPanel1 = new AdminToolUtils.ComboBoxPanel();
+        cboComment = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         pnlTitle = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -68,9 +72,26 @@ public class ReportCommentPanel extends javax.swing.JPanel {
 
         findTextField1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
-        comboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        comboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bình luận bị báo cáo", "Tất cả bình luận" }));
-        comboBox2.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        cboComment.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        cboComment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bình luận bị báo cáo", "Tất cả bình luận" }));
+        cboComment.setBorder(null);
+
+        javax.swing.GroupLayout comboBoxPanel1Layout = new javax.swing.GroupLayout(comboBoxPanel1);
+        comboBoxPanel1.setLayout(comboBoxPanel1Layout);
+        comboBoxPanel1Layout.setHorizontalGroup(
+            comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comboBoxPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(cboComment, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        comboBoxPanel1Layout.setVerticalGroup(
+            comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comboBoxPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cboComment, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -80,16 +101,16 @@ public class ReportCommentPanel extends javax.swing.JPanel {
                 .addGap(75, 75, 75)
                 .addComponent(findTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(75, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(findTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
         );
 
@@ -439,7 +460,8 @@ public class ReportCommentPanel extends javax.swing.JPanel {
     private AdminToolUtils.ButtonDelete btnDelete4;
     private AdminToolUtils.ButtonDelete btnDelete5;
     private AdminToolUtils.ButtonDelete btnDelete6;
-    private AdminToolUtils.ComboBox comboBox2;
+    private javax.swing.JComboBox<String> cboComment;
+    private AdminToolUtils.ComboBoxPanel comboBoxPanel1;
     private AdminToolUtils.FindTextField findTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

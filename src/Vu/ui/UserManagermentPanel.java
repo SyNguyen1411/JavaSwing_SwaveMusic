@@ -4,6 +4,8 @@
  */
 package Vu.ui;
 
+import swing.utilcomponent.ScrollBarCustom;
+
 /**
  *
  * @author Admin
@@ -15,6 +17,7 @@ public class UserManagermentPanel extends javax.swing.JPanel {
      */
     public UserManagermentPanel() {
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
     }
 
     /**
@@ -43,32 +46,32 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         lblNumber1 = new javax.swing.JLabel();
         lblName1 = new javax.swing.JLabel();
         lblUser1 = new javax.swing.JLabel();
-        btnOption1 = new javax.swing.JButton();
         button1 = new AdminToolUtils.ButtonDelete();
+        btnDelete1 = new AdminToolUtils.ButtonDelete();
         jPanel7 = new javax.swing.JPanel();
         lblNumber2 = new javax.swing.JLabel();
         lblName2 = new javax.swing.JLabel();
         lblUser2 = new javax.swing.JLabel();
-        btnOption2 = new javax.swing.JButton();
         button2 = new AdminToolUtils.ButtonDelete();
+        btnDelete2 = new AdminToolUtils.ButtonDelete();
         jPanel15 = new javax.swing.JPanel();
         lblNumber10 = new javax.swing.JLabel();
         lblName10 = new javax.swing.JLabel();
         lblUser10 = new javax.swing.JLabel();
-        btnOption10 = new javax.swing.JButton();
         button3 = new AdminToolUtils.ButtonDelete();
+        btnDelete3 = new AdminToolUtils.ButtonDelete();
         jPanel13 = new javax.swing.JPanel();
         lblNumber8 = new javax.swing.JLabel();
         lblName8 = new javax.swing.JLabel();
         lblUser8 = new javax.swing.JLabel();
-        btnOption8 = new javax.swing.JButton();
         button4 = new AdminToolUtils.ButtonDelete();
+        btnDelete4 = new AdminToolUtils.ButtonDelete();
         jPanel16 = new javax.swing.JPanel();
         lblNumber11 = new javax.swing.JLabel();
         lblName11 = new javax.swing.JLabel();
         lblUser11 = new javax.swing.JLabel();
-        btnOption11 = new javax.swing.JButton();
         button5 = new AdminToolUtils.ButtonDelete();
+        btnDelete5 = new AdminToolUtils.ButtonDelete();
 
         jPanel1.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -83,7 +86,7 @@ public class UserManagermentPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(findTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(690, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +158,7 @@ public class UserManagermentPanel extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel5.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -175,15 +179,13 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         lblUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser1.setText("ducpq123");
 
-        btnOption1.setBackground(new java.awt.Color(36, 36, 36));
-        btnOption1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnOption1.setForeground(new java.awt.Color(255, 255, 255));
-        btnOption1.setText("Xóa");
-        btnOption1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 36, 36)));
-
         button1.setForeground(new java.awt.Color(0, 0, 0));
         button1.setText("Hiệu lực");
         button1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        btnDelete1.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete1.setText("Xóa");
+        btnDelete1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -199,8 +201,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                 .addGap(65, 65, 65)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,9 +212,9 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                     .addComponent(lblNumber1)
                     .addComponent(lblName1)
                     .addComponent(lblUser1)
-                    .addComponent(btnOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(36, 36, 36));
@@ -232,15 +234,13 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         lblUser2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser2.setText("ducpq123");
 
-        btnOption2.setBackground(new java.awt.Color(36, 36, 36));
-        btnOption2.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnOption2.setForeground(new java.awt.Color(255, 255, 255));
-        btnOption2.setText("Xóa");
-        btnOption2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 36, 36)));
-
         button2.setForeground(new java.awt.Color(0, 0, 0));
         button2.setText("Hiệu lực");
         button2.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        btnDelete2.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete2.setText("Xóa");
+        btnDelete2.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -256,8 +256,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                 .addGap(65, 65, 65)
                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(btnDelete2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,8 +267,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                     .addComponent(lblNumber2)
                     .addComponent(lblName2)
                     .addComponent(lblUser2)
-                    .addComponent(btnOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -289,15 +289,13 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         lblUser10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser10.setText("ducpq123");
 
-        btnOption10.setBackground(new java.awt.Color(36, 36, 36));
-        btnOption10.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnOption10.setForeground(new java.awt.Color(255, 255, 255));
-        btnOption10.setText("Xóa");
-        btnOption10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 36, 36)));
-
         button3.setForeground(new java.awt.Color(0, 0, 0));
         button3.setText("Hiệu lực");
         button3.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        btnDelete3.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete3.setText("Xóa");
+        btnDelete3.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -312,9 +310,9 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                 .addComponent(lblUser10, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addComponent(btnOption10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addComponent(btnDelete3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,8 +322,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                     .addComponent(lblNumber10)
                     .addComponent(lblName10)
                     .addComponent(lblUser10)
-                    .addComponent(btnOption10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -346,15 +344,13 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         lblUser8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser8.setText("ducpq123");
 
-        btnOption8.setBackground(new java.awt.Color(36, 36, 36));
-        btnOption8.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnOption8.setForeground(new java.awt.Color(255, 255, 255));
-        btnOption8.setText("Xóa");
-        btnOption8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 36, 36)));
-
         button4.setBackground(new java.awt.Color(199, 199, 199));
         button4.setText("Vô hiệu hóa");
         button4.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        btnDelete4.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete4.setText("Xóa");
+        btnDelete4.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -369,9 +365,9 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                 .addComponent(lblUser8, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addComponent(btnOption8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(btnDelete4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,8 +377,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                     .addComponent(lblNumber8)
                     .addComponent(lblName8)
                     .addComponent(lblUser8)
-                    .addComponent(btnOption8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -403,15 +399,13 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         lblUser11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser11.setText("ducpq123");
 
-        btnOption11.setBackground(new java.awt.Color(36, 36, 36));
-        btnOption11.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        btnOption11.setForeground(new java.awt.Color(255, 255, 255));
-        btnOption11.setText("Xóa");
-        btnOption11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 36, 36)));
-
         button5.setForeground(new java.awt.Color(0, 0, 0));
         button5.setText("Hiệu lực");
         button5.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        btnDelete5.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete5.setText("Xóa");
+        btnDelete5.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -427,8 +421,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                 .addGap(65, 65, 65)
                 .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOption11, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(btnDelete5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,8 +432,8 @@ public class UserManagermentPanel extends javax.swing.JPanel {
                     .addComponent(lblNumber11)
                     .addComponent(lblName11)
                     .addComponent(lblUser11)
-                    .addComponent(btnOption11, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -507,11 +501,13 @@ public class UserManagermentPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,11 +532,11 @@ public class UserManagermentPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnOption1;
-    private javax.swing.JButton btnOption10;
-    private javax.swing.JButton btnOption11;
-    private javax.swing.JButton btnOption2;
-    private javax.swing.JButton btnOption8;
+    private AdminToolUtils.ButtonDelete btnDelete1;
+    private AdminToolUtils.ButtonDelete btnDelete2;
+    private AdminToolUtils.ButtonDelete btnDelete3;
+    private AdminToolUtils.ButtonDelete btnDelete4;
+    private AdminToolUtils.ButtonDelete btnDelete5;
     private AdminToolUtils.ButtonDelete button1;
     private AdminToolUtils.ButtonDelete button2;
     private AdminToolUtils.ButtonDelete button3;

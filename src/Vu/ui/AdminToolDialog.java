@@ -43,13 +43,13 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblSong = new javax.swing.JLabel();
         lblAC = new javax.swing.JLabel();
         pnlChange = new javax.swing.JPanel();
-        allCommentPane2 = new Vu.ui.AllCommentPane();
-        censorSongPane2 = new Vu.ui.CensorSongPane();
-        reportCommentPanel2 = new Vu.ui.ReportCommentPanel();
-        statisticLikePanel2 = new Vu.ui.StatisticLikePanel();
-        statisticViewPanel2 = new Vu.ui.StatisticViewPanel();
-        uncensorSongPane2 = new Vu.ui.UncensorSongPane();
-        userManagermentPanel1 = new Vu.ui.UserManagermentPanel();
+        userManagermentPanel = new Vu.ui.UserManagermentPanel();
+        censorSongPane = new Vu.ui.CensorSongPane();
+        uncensorSongPane = new Vu.ui.UncensorSongPane();
+        reportCommentPanel = new Vu.ui.ReportCommentPanel();
+        allCommentPane = new Vu.ui.AllCommentPane();
+        statisticLikePanel = new Vu.ui.StatisticLikePanel();
+        statisticViewPanel = new Vu.ui.StatisticViewPanel();
         menuBar1 = new AdminToolUtils.MenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,7 +65,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
                 lblCloseMouseClicked(evt);
             }
         });
-        getContentPane().add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 310, 50));
+        getContentPane().add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 310, 50));
 
         lblTK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTK.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,7 +76,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
                 lblTKMouseClicked(evt);
             }
         });
-        getContentPane().add(lblTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 310, 50));
+        getContentPane().add(lblTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 310, 50));
 
         lblComment.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblComment.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,13 +123,13 @@ public class AdminToolDialog extends javax.swing.JDialog {
         pnlChange.setBackground(new java.awt.Color(36, 36, 36));
         pnlChange.setPreferredSize(new java.awt.Dimension(1213, 807));
         pnlChange.setLayout(new java.awt.CardLayout());
-        pnlChange.add(allCommentPane2, "cardCM");
-        pnlChange.add(censorSongPane2, "cardS");
-        pnlChange.add(reportCommentPanel2, "cardrReportCM");
-        pnlChange.add(statisticLikePanel2, "cardTKLIKE");
-        pnlChange.add(statisticViewPanel2, "cardTKV");
-        pnlChange.add(uncensorSongPane2, "card7");
-        pnlChange.add(userManagermentPanel1, "cardUS");
+        pnlChange.add(userManagermentPanel, "cardUS");
+        pnlChange.add(censorSongPane, "cardCS");
+        pnlChange.add(uncensorSongPane, "cardUCS");
+        pnlChange.add(reportCommentPanel, "cardRM");
+        pnlChange.add(allCommentPane, "cardAM");
+        pnlChange.add(statisticLikePanel, "cardSL");
+        pnlChange.add(statisticViewPanel, "cardSV");
 
         getContentPane().add(pnlChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 0, 1219, -1));
         getContentPane().add(menuBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -163,7 +163,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblAC.setForeground(Color.white);
         lblComment.setForeground(Color.white);
         lblTK.setForeground(Color.white);
-        c.show(pnlChange, "cardS");
+        c.show(pnlChange, "cardCS");
     }//GEN-LAST:event_lblSongMouseClicked
 
     private void lblCommentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCommentMouseClicked
@@ -171,7 +171,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblAC.setForeground(Color.white);
         lblSong.setForeground(Color.white);
         lblTK.setForeground(Color.white);
-        c.show(pnlChange, "cardCM");
+        c.show(pnlChange, "cardAM");
     }//GEN-LAST:event_lblCommentMouseClicked
 
     private void lblTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTKMouseClicked
@@ -179,7 +179,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblAC.setForeground(Color.white);
         lblSong.setForeground(Color.white);
         lblComment.setForeground(Color.white);
-        c.show(pnlChange, "cardTKLIKE");
+        c.show(pnlChange, "cardSL");
     }//GEN-LAST:event_lblTKMouseClicked
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
@@ -229,8 +229,8 @@ public class AdminToolDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Vu.ui.AllCommentPane allCommentPane2;
-    private Vu.ui.CensorSongPane censorSongPane2;
+    private Vu.ui.AllCommentPane allCommentPane;
+    private Vu.ui.CensorSongPane censorSongPane;
     private javax.swing.JLabel lblAC;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblComment;
@@ -238,10 +238,10 @@ public class AdminToolDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblTK;
     private AdminToolUtils.MenuBar menuBar1;
     private javax.swing.JPanel pnlChange;
-    private Vu.ui.ReportCommentPanel reportCommentPanel2;
-    private Vu.ui.StatisticLikePanel statisticLikePanel2;
-    private Vu.ui.StatisticViewPanel statisticViewPanel2;
-    private Vu.ui.UncensorSongPane uncensorSongPane2;
-    private Vu.ui.UserManagermentPanel userManagermentPanel1;
+    private Vu.ui.ReportCommentPanel reportCommentPanel;
+    private Vu.ui.StatisticLikePanel statisticLikePanel;
+    private Vu.ui.StatisticViewPanel statisticViewPanel;
+    private Vu.ui.UncensorSongPane uncensorSongPane;
+    private Vu.ui.UserManagermentPanel userManagermentPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,18 +4,26 @@
  */
 package Vu.ui;
 
+import swing.utilcomponent.ScrollBarCustom;
+
+
+
 /**
  *
  * @author Admin
  */
-public class AllCommentPane extends javax.swing.JPanel {
+public class AllCommentPane extends javax.swing.JPanel {          
 
     /**
      * Creates new form AllCommentPane
      */
     public AllCommentPane() {
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +37,8 @@ public class AllCommentPane extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         findTextField1 = new AdminToolUtils.FindTextField();
-        comboBox2 = new AdminToolUtils.ComboBox();
+        comboBoxPanel1 = new AdminToolUtils.ComboBoxPanel();
+        cboComment = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         pnlTitle = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -66,9 +75,26 @@ public class AllCommentPane extends javax.swing.JPanel {
         findTextField1.setText("Tìm kiếm");
         findTextField1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
-        comboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        comboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả bình luận", "Bình luận bị báo cáo" }));
-        comboBox2.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        cboComment.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        cboComment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả bình luận", "Bình luận bị báo cáo" }));
+        cboComment.setBorder(null);
+
+        javax.swing.GroupLayout comboBoxPanel1Layout = new javax.swing.GroupLayout(comboBoxPanel1);
+        comboBoxPanel1.setLayout(comboBoxPanel1Layout);
+        comboBoxPanel1Layout.setHorizontalGroup(
+            comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comboBoxPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(cboComment, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        comboBoxPanel1Layout.setVerticalGroup(
+            comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comboBoxPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cboComment, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -77,17 +103,17 @@ public class AllCommentPane extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(findTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
-                .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap(78, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(findTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
         );
 
@@ -137,6 +163,7 @@ public class AllCommentPane extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel5.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -342,7 +369,7 @@ public class AllCommentPane extends javax.swing.JPanel {
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(137, Short.MAX_VALUE))
+                        .addContainerGap(215, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,9 +401,9 @@ public class AllCommentPane extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1198, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
-                    .addComponent(pnlTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE))
+                    .addComponent(pnlTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1198, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -396,12 +423,9 @@ public class AllCommentPane extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,19 +442,13 @@ public class AllCommentPane extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1220, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 807, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -441,7 +459,8 @@ public class AllCommentPane extends javax.swing.JPanel {
     private AdminToolUtils.ButtonDelete btnDelete3;
     private AdminToolUtils.ButtonDelete btnDelete4;
     private AdminToolUtils.ButtonDelete btnDelete5;
-    private AdminToolUtils.ComboBox comboBox2;
+    private javax.swing.JComboBox<String> cboComment;
+    private AdminToolUtils.ComboBoxPanel comboBoxPanel1;
     private AdminToolUtils.FindTextField findTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
