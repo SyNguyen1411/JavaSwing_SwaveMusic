@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import entity.Song;
+import it.sauronsoftware.jave.Encoder;
+import it.sauronsoftware.jave.MultimediaInfo;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -55,8 +57,12 @@ public class SongItem extends javax.swing.JPanel {
         lblIconPlay.setText("" + data.getSongID());
         lblIconSong.setIcon(data.toIcon());
         lblNamSong.setText(data.getNameSong());
-//        getTimeSong();
-        lblTime.setText("0" + minutetotalLength + ":" + "0" + secondTotalLength);
+        getTimeSong();
+        if (secondTotalLength >= 10) {
+            lblTime.setText("0" + minutetotalLength + ":" + secondTotalLength);
+        } else {
+            lblTime.setText("0" + minutetotalLength + ":" + "0" + secondTotalLength);
+        }
     }
 
     public void selectRunning(boolean running) {
@@ -318,20 +324,20 @@ public class SongItem extends javax.swing.JPanel {
     }
 
     public void getTimeSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {
-        File f = new File( getClass().getResource(data.getFileSong()).getFile());
-        AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(f);
-        if (!(fileFormat instanceof TAudioFileFormat)) {
-            Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
-            String key = "duration";
-            Long microseconds = (Long) properties.get(key);
-            int mili = (int) (microseconds / 1000);
-            int sec = (mili / 1000) % 60;
-            int min = (mili / 1000) / 60;
-            minutetotalLength = min;
-            secondTotalLength = sec;
-        } else {
-            throw new UnsupportedAudioFileException();
+        File source = new File(getClass().getResource(data.getFileSong()).getFile());
+        Encoder encoder = new Encoder();
+        try {
+            MultimediaInfo mi = encoder.getInfo(source);
+            long ls = mi.getDuration()/1000;
+            long min = ls / 60;
+            long second = ls % 60;
+            System.out.println("duration(sec) = " + ls);
+            minutetotalLength = (int) min;
+            secondTotalLength = (int) second;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         System.out.println(data.getFileSong());
     }
 

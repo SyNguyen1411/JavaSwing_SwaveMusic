@@ -83,6 +83,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlLyrics.setVisible(false);
         pnlComment.setVisible(false);
         toolPlay1.fillData(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+
         initSearchSuggestion();
         init();
 
@@ -357,6 +358,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pnlLikeSong.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
                 toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -396,6 +398,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pnlMainScreen.getPnlTrendingSongList().setRunningSong(com);
                 songItem.selectRunning(true);
                 toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -437,6 +440,7 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.selectRunning(true);
 
                 toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -933,7 +937,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
