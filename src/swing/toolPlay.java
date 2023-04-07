@@ -5,6 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import entity.Song;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import swave.MainFrame;
 
 /**
@@ -25,6 +34,28 @@ public class toolPlay extends javax.swing.JPanel {
 
     private Song data;
     public MainFrame main;
+    File f;
+    FileInputStream fi;
+    BufferedInputStream bi;
+    Player player;
+    long totalTime;
+    int pause = 0;
+    Runnable play = new Runnable() {
+        @Override
+        public void run() {
+            runningSong();
+        }
+    };
+
+    Runnable resumeRun = new Runnable() {
+        @Override
+        public void run() {
+
+        }
+    };
+
+    private Thread runningThread;
+    private Thread stopThread;
 
     public boolean isShuffle() {
         return shuffle;
@@ -51,15 +82,6 @@ public class toolPlay extends javax.swing.JPanel {
     }
 
 
-
-
-    public JLabel getLblAVTSong() {
-        return lblAVTSong;
-    }
-
-    public void setLblAVTSong(JLabel lblAVTSong) {
-        this.lblAVTSong = lblAVTSong;
-    }
 
     public JLabel getLblCmt() {
         return lblCmt;
@@ -194,7 +216,6 @@ public class toolPlay extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAVTSong = new javax.swing.JLabel();
         lblNameSong = new javax.swing.JLabel();
         lblSinger = new javax.swing.JLabel();
         lblLoveSong = new javax.swing.JLabel();
@@ -212,13 +233,11 @@ public class toolPlay extends javax.swing.JPanel {
         lblLibary1 = new javax.swing.JLabel();
         slidebar1 = new component.Slidebar();
         slidebar2 = new component.Slidebar();
+        lblAVTSong = new components.borderImage();
 
         setBackground(new java.awt.Color(24, 24, 24));
         setPreferredSize(new java.awt.Dimension(1532, 150));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblAVTSong.setPreferredSize(new java.awt.Dimension(100, 100));
-        add(lblAVTSong, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 25, -1, -1));
 
         lblNameSong.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblNameSong.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,6 +273,7 @@ public class toolPlay extends javax.swing.JPanel {
         lblTimeStart1.setText("00:00");
         add(lblTimeStart1, new org.netbeans.lib.awtextra.AbsoluteConstraints(421, 92, 40, -1));
 
+        pnlItemPlay.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlItemPlay.setOpaque(false);
         pnlItemPlay.setPreferredSize(new java.awt.Dimension(368, 43));
         pnlItemPlay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -326,11 +346,28 @@ public class toolPlay extends javax.swing.JPanel {
         add(lblLibary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1346, 64, -1, -1));
         add(slidebar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 95, 680, 10));
         add(slidebar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 65, 90, -1));
+
+        lblAVTSong.setSizeImage(new int[] {100, 100});
+        add(lblAVTSong, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 25, 100, 100));
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRunMouseClicked
         running = !running;
         setRunning(running);
+        if (running) {
+            if (pause == 0) {
+                runningThread = new Thread(play);
+            } else {
+                runningThread = new Thread(resumeRun);
+            }
+            runningThread.start();
+        } else {
+            try {
+                stopSong();
+            } catch (IOException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_lblRunMouseClicked
 
     private void lblShuffelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShuffelMouseClicked
@@ -371,9 +408,10 @@ public class toolPlay extends javax.swing.JPanel {
 
     public void setRunning(boolean check) {
         if (check) {
-            lblRun.setIcon(new ImageIcon(getClass().getResource("/img/stopSong.png")));
-        } else {
             lblRun.setIcon(new ImageIcon(getClass().getResource("/img/playing.png")));
+
+        } else {
+            lblRun.setIcon(new ImageIcon(getClass().getResource("/img/stopSong.png")));
         }
     }
 
@@ -410,13 +448,45 @@ public class toolPlay extends javax.swing.JPanel {
     }
 
     public void fillData(Song data) {
-        lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/" + data.getAVT())));
+        this.data = data;
+        lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/song/" + data.getAVT())));
         lblNameSong.setText(data.getNameSong());
         lblSinger.setText(data.getSinger());
+        revalidate();
+    }
+
+    public void runningSong() {
+        f = new File(getClass().getResource(data.getFileSong()).getFile());
+        try {
+            System.out.println("Đang chạy nhạc");
+            fi = new FileInputStream(f);
+            bi = new BufferedInputStream(fi);
+            player = new Player(bi);
+            totalTime = fi.available();
+            if (pause == 0) {
+                player.play();
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JavaLayerException ex) {
+            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void stopSong() throws IOException {
+        pause = fi.available();
+        player.close();
+    }
+
+    public void resume() throws IOException, JavaLayerException {
+        fi.skip(totalTime - pause);
+        player.play();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblAVTSong;
+    private components.borderImage lblAVTSong;
     private javax.swing.JLabel lblCmt;
     private javax.swing.JLabel lblLibary;
     private javax.swing.JLabel lblLibary1;
