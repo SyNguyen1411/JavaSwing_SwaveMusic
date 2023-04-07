@@ -11,6 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import entity.Song;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import swave.MainFrame;
 import swing.utilcomponent.ScrollBarCustom;
 
@@ -53,7 +56,7 @@ public class SongList extends javax.swing.JPanel {
         }
     }
 
-    public void addSong(Song data) {
+    public void addSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         SongItem item = new SongItem();
         item.setDataSong(data);
 

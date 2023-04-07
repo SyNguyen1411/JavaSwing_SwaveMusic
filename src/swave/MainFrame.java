@@ -15,7 +15,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -40,6 +47,7 @@ import swing.swavecomponent.ToolBar;
 import swing.swavecomponent.UserTool;
 import swing.toolPlay;
 import javax.swing.BorderFactory;
+import utils.TAudioFileFormat;
 
 /**
  *
@@ -59,10 +67,11 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame main;
     private JPopupMenu menu;
     private PanelSearchSuggestion search;
+    public SongItem itemSong;
 
     private UserTool userTool = new UserTool(this);
 
-    public MainFrame() {
+    public MainFrame() throws UnsupportedAudioFileException, IOException {
         initComponents();
         c = (CardLayout) pnlChange.getLayout();
         this.main = this;
@@ -193,12 +202,18 @@ public class MainFrame extends javax.swing.JFrame {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                try {
+                    new MainFrame().setVisible(true);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
-    private void init() {
+    private void init() throws UnsupportedAudioFileException, IOException {
         this.getContentPane().setBackground(new Color(0, 0, 0, 255));
         titleBar.init(this);
         setResizable(false);
@@ -274,35 +289,35 @@ public class MainFrame extends javax.swing.JFrame {
         //add song to panel main
         songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
-        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Chay-Ngay-Di-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(7, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(8, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
-        songList.add(new Song(9, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(10, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(11, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(12, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(13, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(14, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(15, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(9, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(10, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(11, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(12, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(13, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(14, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(15, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
 
-        songList.add(new Song(16, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(17, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(18, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(19, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(20, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(21, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(22, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(23, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(24, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(25, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(26, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(27, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(28, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(29, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(30, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(16, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(17, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(18, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(19, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(20, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(21, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(22, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(23, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(24, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(25, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(26, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(27, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(28, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(29, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(30, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
 
         for (Song item : songList) {
             pnlMainScreen.addTrendingSong(item);
@@ -333,6 +348,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
+                itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlLikeSong.getPnlSonglist().setRunningSong(com);
@@ -340,7 +356,16 @@ public class MainFrame extends javax.swing.JFrame {
                 toolPlay1.fillData(song);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
-//                toolPlay1.runningSong();
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
+                toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -362,15 +387,24 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
+                itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlMainScreen.getPnlTrendingSongList().setRunningSong(com);
                 songItem.selectRunning(true);
-                toolPlay1.setData(song);
                 toolPlay1.fillData(song);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
                 toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -392,15 +426,26 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
+                itemSong = songItem;
+
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
-                toolPlay1.setData(song);
+
                 toolPlay1.fillData(song);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
                 toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -869,6 +914,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

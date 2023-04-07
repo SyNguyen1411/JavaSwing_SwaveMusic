@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -373,7 +374,13 @@ public class Login extends javax.swing.JFrame {
             Thread loadThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    main = new MainFrame();
+                    try {
+                        main = new MainFrame();
+                    } catch (UnsupportedAudioFileException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     main.setVisible(true);
                     loginForm.dispose();
                 }
