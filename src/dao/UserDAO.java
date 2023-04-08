@@ -5,10 +5,10 @@
 package dao;
 
 import entity.User;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
-import java.sql.ResultSet;
 
 /**
  *
@@ -55,8 +55,24 @@ public class UserDAO extends SwaveDAO<User, String> {
 
     @Override
     public List<User> selectSql(String Sql, Object... args) {
-        
-        return null;
+        List<User> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(Sql, args);
+            while (rs.next()) {
+                User entity = new User();
+                entity.setUserID(rs.getInt(1));
+                entity.setFullname(rs.getString(2));
+                entity.setBirthDate(rs.getDate(3));
+                entity.setGender(rs.getBoolean(4));
+                entity.setEmail(rs.getString(4));
+                entity.setAvt(rs.getString(4));
+                entity.setAccount(rs.getString(4));
+                list.add(entity);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return list;
         
     }
     
