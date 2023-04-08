@@ -4,6 +4,8 @@
  */
 package Tien.ui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -30,26 +32,26 @@ public class EditInf extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblEdit = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cboDay = new javax.swing.JComboBox<>();
+        cboMonth = new javax.swing.JComboBox<>();
+        cboYear = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rdoMale = new javax.swing.JRadioButton();
+        rdoFemale = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        txtMail = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
         jLabel4.setBackground(new java.awt.Color(55, 2, 53));
@@ -62,17 +64,22 @@ public class EditInf extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Name");
-        jLabel2.setPreferredSize(new java.awt.Dimension(136, 58));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
+        lblName.setText("Name");
+        lblName.setPreferredSize(new java.awt.Dimension(136, 58));
+        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 630, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-edit-48 3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnEdit.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 120, 190, -1));
+        lblEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnEdit.png"))); // NOI18N
+        lblEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 120, 190, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1283, 210));
 
@@ -104,13 +111,13 @@ public class EditInf extends javax.swing.JPanel {
         jPanel4.setPreferredSize(new java.awt.Dimension(673, 36));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(67, 67, 67));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("Name");
-        jTextField1.setBorder(null);
-        jTextField1.setOpaque(true);
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 2, 540, 30));
+        txtName.setBackground(new java.awt.Color(67, 67, 67));
+        txtName.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtName.setForeground(new java.awt.Color(255, 255, 255));
+        txtName.setText("Name");
+        txtName.setBorder(null);
+        txtName.setOpaque(true);
+        jPanel4.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 2, 540, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 101 (1).png"))); // NOI18N
         jLabel6.setText("jLabel6");
@@ -123,35 +130,35 @@ public class EditInf extends javax.swing.JPanel {
         jPanel5.setPreferredSize(new java.awt.Dimension(673, 36));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setBackground(new java.awt.Color(67, 67, 67));
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox1.setSelectedIndex(1);
-        jComboBox1.setBorder(null);
-        jComboBox1.setOpaque(true);
-        jPanel5.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 2, 130, 30));
+        cboDay.setBackground(new java.awt.Color(67, 67, 67));
+        cboDay.setEditable(true);
+        cboDay.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cboDay.setForeground(new java.awt.Color(255, 255, 255));
+        cboDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        cboDay.setSelectedIndex(1);
+        cboDay.setBorder(null);
+        cboDay.setOpaque(true);
+        jPanel5.add(cboDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 2, 130, 30));
 
-        jComboBox2.setBackground(new java.awt.Color(67, 67, 67));
-        jComboBox2.setEditable(true);
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jComboBox2.setSelectedIndex(1);
-        jComboBox2.setBorder(null);
-        jComboBox2.setOpaque(true);
-        jPanel5.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 2, 130, 30));
+        cboMonth.setBackground(new java.awt.Color(67, 67, 67));
+        cboMonth.setEditable(true);
+        cboMonth.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cboMonth.setForeground(new java.awt.Color(255, 255, 255));
+        cboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        cboMonth.setSelectedIndex(1);
+        cboMonth.setBorder(null);
+        cboMonth.setOpaque(true);
+        jPanel5.add(cboMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 2, 130, 30));
 
-        jComboBox3.setBackground(new java.awt.Color(67, 67, 67));
-        jComboBox3.setEditable(true);
-        jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", " " }));
-        jComboBox3.setSelectedIndex(1);
-        jComboBox3.setBorder(null);
-        jComboBox3.setOpaque(true);
-        jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 2, 200, 30));
+        cboYear.setBackground(new java.awt.Color(67, 67, 67));
+        cboYear.setEditable(true);
+        cboYear.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cboYear.setForeground(new java.awt.Color(255, 255, 255));
+        cboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", " " }));
+        cboYear.setSelectedIndex(1);
+        cboYear.setBorder(null);
+        cboYear.setOpaque(true);
+        jPanel5.add(cboYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 2, 200, 30));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 102.png"))); // NOI18N
         jLabel8.setText("jLabel6");
@@ -164,22 +171,22 @@ public class EditInf extends javax.swing.JPanel {
         jPanel6.setPreferredSize(new java.awt.Dimension(673, 36));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Nam");
-        jRadioButton1.setOpaque(true);
-        jPanel6.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, 40));
+        rdoMale.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rdoMale);
+        rdoMale.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        rdoMale.setForeground(new java.awt.Color(255, 255, 255));
+        rdoMale.setSelected(true);
+        rdoMale.setText("Nam");
+        rdoMale.setOpaque(true);
+        jPanel6.add(rdoMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, 40));
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 0, 0));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("Nữ");
-        jRadioButton2.setOpaque(true);
-        jPanel6.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 80, 40));
+        rdoFemale.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rdoFemale);
+        rdoFemale.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        rdoFemale.setForeground(new java.awt.Color(255, 255, 255));
+        rdoFemale.setText("Nữ");
+        rdoFemale.setOpaque(true);
+        jPanel6.add(rdoFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 80, 40));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 103 (1).png"))); // NOI18N
         jLabel9.setText("jLabel6");
@@ -192,13 +199,13 @@ public class EditInf extends javax.swing.JPanel {
         jPanel7.setPreferredSize(new java.awt.Dimension(673, 36));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField2.setBackground(new java.awt.Color(67, 67, 67));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("name1@bt.vn");
-        jTextField2.setBorder(null);
-        jTextField2.setOpaque(true);
-        jPanel7.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 540, 30));
+        txtMail.setBackground(new java.awt.Color(67, 67, 67));
+        txtMail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtMail.setForeground(new java.awt.Color(255, 255, 255));
+        txtMail.setText("name1@bt.vn");
+        txtMail.setBorder(null);
+        txtMail.setOpaque(true);
+        jPanel7.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 540, 30));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 104.png"))); // NOI18N
         jLabel10.setText("jLabel6");
@@ -210,18 +217,34 @@ public class EditInf extends javax.swing.JPanel {
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 1283, 345));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditMouseClicked
+        // TODO add your handling code here:
+        if (txtName.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập tên!");
+            txtName.requestFocus();
+        }else if (cboDay.getSelectedIndex()==0||cboMonth.getSelectedIndex()==0||cboYear.getSelectedIndex()==0) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn ngày/tháng/năm sinh!");
+        }else if (!rdoMale.isSelected()&&!rdoFemale.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn giới tính!");
+        }else if (txtMail.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập email!");
+            txtMail.requestFocus();
+        }else{
+            lblName.setText(txtName.getText());
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thông tin thành công");
+        }
+    }//GEN-LAST:event_lblEditMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> cboDay;
+    private javax.swing.JComboBox<String> cboMonth;
+    private javax.swing.JComboBox<String> cboYear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -233,9 +256,11 @@ public class EditInf extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblEdit;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JRadioButton rdoFemale;
+    private javax.swing.JRadioButton rdoMale;
+    private javax.swing.JTextField txtMail;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

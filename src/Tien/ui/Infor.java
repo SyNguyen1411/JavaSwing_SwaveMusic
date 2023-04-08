@@ -8,12 +8,12 @@ package Tien.ui;
  *
  * @author HP
  */
-public class inf extends javax.swing.JPanel {
+public class Infor extends javax.swing.JPanel {
 
     /**
      * Creates new form inf
      */
-    public inf() {
+    public Infor() {
         initComponents();
     }
 
@@ -66,13 +66,13 @@ public class inf extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name");
         jLabel2.setPreferredSize(new java.awt.Dimension(136, 58));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 650, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-edit-48 3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnEdit.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 120, 190, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 120, 190, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1283, 210));
 
@@ -104,7 +104,11 @@ public class inf extends javax.swing.JPanel {
         jPanel4.setPreferredSize(new java.awt.Dimension(673, 36));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(67, 67, 67));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField1.setText("Name");
         jTextField1.setBorder(null);
         jTextField1.setOpaque(true);
         jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 2, 540, 30));
@@ -123,7 +127,8 @@ public class inf extends javax.swing.JPanel {
         jComboBox1.setBackground(new java.awt.Color(67, 67, 67));
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jComboBox1.setSelectedIndex(1);
         jComboBox1.setBorder(null);
         jComboBox1.setOpaque(true);
         jPanel5.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 2, 130, 30));
@@ -131,7 +136,8 @@ public class inf extends javax.swing.JPanel {
         jComboBox2.setBackground(new java.awt.Color(67, 67, 67));
         jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jComboBox2.setSelectedIndex(1);
         jComboBox2.setBorder(null);
         jComboBox2.setOpaque(true);
         jPanel5.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 2, 130, 30));
@@ -139,7 +145,8 @@ public class inf extends javax.swing.JPanel {
         jComboBox3.setBackground(new java.awt.Color(67, 67, 67));
         jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", " " }));
+        jComboBox3.setSelectedIndex(1);
         jComboBox3.setBorder(null);
         jComboBox3.setOpaque(true);
         jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 2, 200, 30));
@@ -159,7 +166,9 @@ public class inf extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Nam");
+        jRadioButton1.setEnabled(false);
         jRadioButton1.setOpaque(true);
         jPanel6.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, 40));
 
@@ -168,6 +177,7 @@ public class inf extends javax.swing.JPanel {
         jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Nữ");
+        jRadioButton2.setEnabled(false);
         jRadioButton2.setOpaque(true);
         jPanel6.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 80, 40));
 
@@ -182,7 +192,11 @@ public class inf extends javax.swing.JPanel {
         jPanel7.setPreferredSize(new java.awt.Dimension(673, 36));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(67, 67, 67));
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField2.setText("name1@bt.vn");
         jTextField2.setBorder(null);
         jTextField2.setOpaque(true);
         jPanel7.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 540, 30));
