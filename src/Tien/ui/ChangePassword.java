@@ -46,7 +46,7 @@ public class ChangePassword extends javax.swing.JDialog {
         lblChangePass = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
-        inf1 = new Tien.ui.Inf();
+        inf1 = new Tien.ui.Infor();
         editInf1 = new Tien.ui.EditInf();
         dmk1 = new Tien.ui.ChangePass();
 
@@ -237,7 +237,7 @@ public class ChangePassword extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Tien.ui.ChangePass dmk1;
     private Tien.ui.EditInf editInf1;
-    private Tien.ui.Inf inf1;
+    private Tien.ui.Infor inf1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBack;
