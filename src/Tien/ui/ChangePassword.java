@@ -46,8 +46,9 @@ public class ChangePassword extends javax.swing.JDialog {
         lblChangePass = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
+        inf1 = new Tien.ui.Inf();
+        editInf1 = new Tien.ui.EditInf();
         dmk1 = new Tien.ui.ChangePass();
-        inf1 = new Tien.ui.inf();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -144,11 +145,14 @@ public class ChangePassword extends javax.swing.JDialog {
         pnlMain.setPreferredSize(new java.awt.Dimension(1224, 810));
         pnlMain.setLayout(new java.awt.CardLayout());
 
+        inf1.setBackground(new java.awt.Color(0, 0, 0));
+        pnlMain.add(inf1, "cardInf");
+
+        editInf1.setBackground(new java.awt.Color(0, 0, 0));
+        pnlMain.add(editInf1, "cardEditInf");
+
         dmk1.setMinimumSize(new java.awt.Dimension(1224, 810));
         pnlMain.add(dmk1, "cardChangePass");
-
-        inf1.setBackground(new java.awt.Color(0, 0, 0));
-        pnlMain.add(inf1, "cardIf");
 
         getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 0, 1220, -1));
 
@@ -163,14 +167,14 @@ public class ChangePassword extends javax.swing.JDialog {
     }//GEN-LAST:event_lblChangePassMouseClicked
 
     private void lblIfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIfMouseClicked
-        c.show(pnlMain, "cardIf");
+        c.show(pnlMain, "cardInf");
         lblIf.setForeground(Color.PINK);
         lblChangePass.setForeground(Color.white);
         lblEditIf.setForeground(Color.white);
     }//GEN-LAST:event_lblIfMouseClicked
 
     private void lblEditIfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditIfMouseClicked
-        c.show(pnlMain, "cardIf");
+        c.show(pnlMain, "cardEditInf");
         lblEditIf.setForeground(Color.PINK);
         lblChangePass.setForeground(Color.white);
         lblIf.setForeground(Color.white);
@@ -232,7 +236,8 @@ public class ChangePassword extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Tien.ui.ChangePass dmk1;
-    private Tien.ui.inf inf1;
+    private Tien.ui.EditInf editInf1;
+    private Tien.ui.Inf inf1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBack;

@@ -8,16 +8,16 @@ package entity;
  *
  * @author Phan Qui Duc
  */
-public class CommentReaction {
+public class CommentInteraction {
     private int commentID;
     private int userID;
     private boolean liked;
     private boolean reported;
 
-    public CommentReaction () {
+    public CommentInteraction () {
     }
 
-    public CommentReaction (int commentID, int userID, boolean liked, boolean reported) {
+    public CommentInteraction (int commentID, int userID, boolean liked, boolean reported) {
         this.commentID = commentID;
         this.userID = userID;
         this.liked = liked;

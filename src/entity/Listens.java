@@ -10,16 +10,16 @@ import java.util.Date;
  *
  * @author HP
  */
-public class ListensSong {
+public class Listens {
     private int position;
     private int songID;
     private int userID;
     private Date ListenDate;
 
-    public ListensSong() {
+    public Listens() {
     }
 
-    public ListensSong(int position, int songID, int userID, Date ListenDate) {
+    public Listens(int position, int songID, int userID, Date ListenDate) {
         this.position = position;
         this.songID = songID;
         this.userID = userID;

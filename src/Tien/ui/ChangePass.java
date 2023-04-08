@@ -4,6 +4,7 @@
  */
 package Tien.ui;
 
+import dao.AccountDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -13,14 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class ChangePass extends javax.swing.JPanel {
 
+    AccountDAO dao;
+
     /**
      * Creates new form dmk
      */
     public ChangePass() {
         initComponents();
-        txtPass1.setBackground(new Color(255,255,255,0));
-        txtPass.setBackground(new Color(255,255,255,0));
-        
+        txtPass1.setBackground(new Color(255, 255, 255, 0));
+        txtPass.setBackground(new Color(255, 255, 255, 0));
+        dao = new AccountDAO();
     }
 
     /**
@@ -146,6 +149,11 @@ public class ChangePass extends javax.swing.JPanel {
         button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button2.setPreferredSize(new java.awt.Dimension(403, 45));
         button2.setSizeSpeed(12.0F);
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(button2);
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
@@ -160,7 +168,7 @@ public class ChangePass extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChangeActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        
+
     }//GEN-LAST:event_button1ActionPerformed
 
     private void txtPassCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPassCaretUpdate
@@ -184,6 +192,27 @@ public class ChangePass extends javax.swing.JPanel {
         } else
             lblnew1.setText("   Nhập lại mật khẩu mới");
     }//GEN-LAST:event_txtPass1CaretUpdate
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+        if (!txtPassOld.getText().equals("nhom2") || txtPassOld.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu cũ sai!");
+            txtPassOld.requestFocus();
+        } else if (txtPassOld.getText().equals("nhom2")) {
+            if (txtPass.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Nhập mật khẩu mới đi");
+                txtPass.requestFocus();
+            } else if (!txtPass1.getText().equals(txtPass.getText()) || txtPass1.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không khớp");
+                txtPass1.requestFocus();
+            } else {
+                String mk = txtPass.getText();
+                String ten = "nhom2";
+                dao.updatePassword(ten, mk);
+                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+            }
+        }
+    }//GEN-LAST:event_button2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
