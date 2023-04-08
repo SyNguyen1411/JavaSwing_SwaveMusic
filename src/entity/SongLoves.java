@@ -2,34 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entity;
-
-import java.util.Date;
+package entity;import java.util.Date;
 
 /**
  *
  * @author HP
  */
-public class LovesPlaylist {
-    private int playlistID;
+public class SongLoves {
+    private int songID;
     private int userID;
     private Date lovesDate;
 
-    public LovesPlaylist() {
+    public SongLoves() {
     }
 
-    public LovesPlaylist(int playlistID, int userID, Date lovesDate) {
-        this.playlistID = playlistID;
+    public SongLoves(int songID, int userID, Date lovesDate) {
+        this.songID = songID;
         this.userID = userID;
         this.lovesDate = lovesDate;
     }
 
-    public int getPlaylistID() {
-        return playlistID;
+    public int getSongID() {
+        return songID;
     }
 
-    public void setPlaylistID(int playlistID) {
-        this.playlistID = playlistID;
+    public void setSongID(int songID) {
+        this.songID = songID;
     }
 
     public int getUserID() {
@@ -40,17 +38,17 @@ public class LovesPlaylist {
         this.userID = userID;
     }
 
-    public Date getLovesDate() {
+    public Date getlovesDate() {
         return lovesDate;
     }
 
-    public void setLovesDate(Date lovesDate) {
+    public void setlovesDate(Date lovesDate) {
         this.lovesDate = lovesDate;
     }
 
     @Override
     public String toString() {
-        return "LovesPlaylist{" + "playlistID=" + playlistID + ", userID=" + userID + ", lovesDate=" + lovesDate + '}';
+        return "LovesSong{" + "songID=" + songID + ", userID=" + userID + ", lovesDate=" + lovesDate + '}';
     }
     
 }
