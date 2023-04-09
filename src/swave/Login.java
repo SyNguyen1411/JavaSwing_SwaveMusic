@@ -1,11 +1,14 @@
 package swave;
 
 import Vu.ui.ForgotPass;
+import dao.AccountDAO;
+import entity.Account;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,9 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import utils.Auth;
+import utils.MsgBox;
 
 /**
  *
@@ -107,6 +113,11 @@ public class Login extends javax.swing.JFrame {
                 txtUsernameCaretUpdate(evt);
             }
         });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
         pnlUsername.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 260, 45));
 
         lblPlaceholder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -137,6 +148,11 @@ public class Login extends javax.swing.JFrame {
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
         pnlPassword.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 240, -1));
@@ -213,6 +229,11 @@ public class Login extends javax.swing.JFrame {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLoginKeyPressed(evt);
             }
         });
         pnlLogin.add(btnLogin);
@@ -393,14 +414,32 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void btnSigupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSigupMouseClicked
-        new Signup(this).setVisible(true);
-        this.setVisible(false);
+          new Signup(this).setVisible(true);
+          this.setVisible(false);
     }//GEN-LAST:event_btnSigupMouseClicked
 
     private void lblForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotMouseClicked
-        ForgotPass forgot = new ForgotPass(this, true);
-        forgot.setVisible(true);
+          ForgotPass forgot = new ForgotPass(this, true);
+          forgot.setVisible(true);
     }//GEN-LAST:event_lblForgotMouseClicked
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   login();
+          }
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   login();
+          }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   login();
+          }
+    }//GEN-LAST:event_btnLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -466,4 +505,43 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private model.input txtUsername;
     // End of variables declaration//GEN-END:variables
+    
+          AccountDAO dao = new AccountDAO();
+
+         private void login() {
+                    String username = txtUsername.getText();
+                    String pass = new String(txtPassword.getPassword());
+                    Account acc = dao.selectById(username);
+                    if (acc == null) {
+                             MsgBox.alert(this, "Tên tài khoản không đúng");
+                   } else {
+                            if (acc.isStatus()) {
+                                       if (acc.getPassword().equals(pass)) {
+                                                MsgBox.alert(this, "Đăng nhập thành công");
+                                                boolean index = acc.isRole();
+                                                Auth.user = acc;
+                                                loadDialog(index);
+                                       } else {
+                                                MsgBox.alert(this, "Mật khẩu không đúng");
+                                       }
+                            } else {
+                                MsgBox.alert(this, "Tài khoản của bạn đã bị khóa");
+                            }
+                   }
+         }
+         
+         private void loadDialog(boolean index) {
+                   DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
+                   loadPane.setVisible(true);
+                   loginForm = this;
+                   Thread loadThread = new Thread(new Runnable() {
+                             @Override
+                             public void run() {
+                                      main = new MainFrame();
+                                      main.setVisible(true);
+                                      loginForm.dispose();
+                             }
+                    });
+                    loadThread.start();     
+          }
 }

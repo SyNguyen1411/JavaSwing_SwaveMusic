@@ -1,8 +1,25 @@
 package Vu.ui;
 
+import dao.AccountDAO;
+import dao.UserDAO;
+import entity.Account;
+import entity.User;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import utils.Auth;
+import utils.MsgBox;
+import utils.CheckForm;
 
 /**
  *
@@ -10,16 +27,16 @@ import javax.swing.ImageIcon;
  */
 public class ForgotPass extends java.awt.Dialog {
            
-    /**
-     * Creates new form ForgotPass
-     */
+    public ForgotPass mainForgotpass;
+    
     public ForgotPass(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         init();
         txtTextPane.setBackground(new Color(0,0,0,0));
-        btnAbout.setBackground(new Color(0,0,0,0));
+        lblEnterAbout.setBackground(new Color(0,0,0,0));
+//        simpleTitleBar1.init(this);
     }
     
     private void init(){
@@ -45,14 +62,15 @@ public class ForgotPass extends java.awt.Dialog {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         lblAbout = new javax.swing.JLabel();
-        btnAbout = new javax.swing.JButton();
-        textField1 = new AdminToolUtils.TextField();
-        textField2 = new AdminToolUtils.TextField();
-        textField3 = new AdminToolUtils.TextField();
-        buttonPass1 = new AdminToolUtils.ButtonPass();
-        buttonPass2 = new AdminToolUtils.ButtonPass();
-        buttonPass3 = new AdminToolUtils.ButtonPass();
+        txtUsername = new AdminToolUtils.TextField();
+        txtCode = new AdminToolUtils.TextField();
+        txtNewPass = new AdminToolUtils.TextField();
+        btnChangePass = new AdminToolUtils.ButtonPass();
+        btnCode = new AdminToolUtils.ButtonPass();
+        btnLogIn = new AdminToolUtils.ButtonPass();
+        lblEnterAbout = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        simpleTitleBar1 = new swing.javaswingdev.SimpleTitleBar();
 
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -90,33 +108,77 @@ public class ForgotPass extends java.awt.Dialog {
         lblAbout.setForeground(new java.awt.Color(82, 82, 82));
         lblAbout.setText("Điều khoản sử dụng?");
 
-        btnAbout.setBackground(new java.awt.Color(0, 0, 0));
-        btnAbout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAbout.setForeground(new java.awt.Color(255, 255, 255));
-        btnAbout.setText("Truy cập");
-        btnAbout.setBorder(null);
-        btnAbout.setOpaque(true);
-
-        textField2.setPlaceHolder("Mã xác nhận");
-
-        textField3.setPlaceHolder("Nhập mật khẩu mới");
-
-        buttonPass1.setForeground(new java.awt.Color(0, 0, 0));
-        buttonPass1.setText("Đặt lại mật khẩu");
-        buttonPass1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        buttonPass2.setBackground(new java.awt.Color(109, 0, 136));
-        buttonPass2.setText("Gửi mã");
-        buttonPass2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        buttonPass3.setBackground(new java.awt.Color(34, 34, 34));
-        buttonPass3.setText("Đăng nhập");
-        buttonPass3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        buttonPass3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonPass3MouseClicked(evt);
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
             }
         });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
+
+        txtCode.setPlaceHolder("Mã xác nhận");
+        txtCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodeActionPerformed(evt);
+            }
+        });
+        txtCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodeKeyPressed(evt);
+            }
+        });
+
+        txtNewPass.setPlaceHolder("Nhập mật khẩu mới");
+        txtNewPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewPassActionPerformed(evt);
+            }
+        });
+        txtNewPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNewPassKeyPressed(evt);
+            }
+        });
+
+        btnChangePass.setForeground(new java.awt.Color(0, 0, 0));
+        btnChangePass.setText("Đặt lại mật khẩu");
+        btnChangePass.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnChangePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePassActionPerformed(evt);
+            }
+        });
+
+        btnCode.setBackground(new java.awt.Color(109, 0, 136));
+        btnCode.setText("Gửi mã");
+        btnCode.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodeActionPerformed(evt);
+            }
+        });
+
+        btnLogIn.setBackground(new java.awt.Color(34, 34, 34));
+        btnLogIn.setText("Đăng nhập");
+        btnLogIn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogInMouseClicked(evt);
+            }
+        });
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
+
+        lblEnterAbout.setBackground(new java.awt.Color(0, 0, 0));
+        lblEnterAbout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblEnterAbout.setForeground(new java.awt.Color(255, 255, 255));
+        lblEnterAbout.setText("Truy cập");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -129,18 +191,18 @@ public class ForgotPass extends java.awt.Dialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
                                 .addComponent(lblAbout)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAbout))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblEnterAbout))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnCode, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNewPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jSeparator2)
                                 .addGap(18, 18, 18)
@@ -151,9 +213,9 @@ public class ForgotPass extends java.awt.Dialog {
                                 .addComponent(lblTitle)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane2)
-                            .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonPass1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonPass3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -164,33 +226,34 @@ public class ForgotPass extends java.awt.Dialog {
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCode, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(buttonPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblAnother)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(buttonPass3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAbout)
-                    .addComponent(btnAbout))
+                    .addComponent(lblEnterAbout))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(598, 146, -1, -1));
 
         jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 820));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, 820));
+        jPanel1.add(simpleTitleBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -214,9 +277,62 @@ public class ForgotPass extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void buttonPass3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPass3MouseClicked
+    private void btnLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogInMouseClicked
         this.dispose();
-    }//GEN-LAST:event_buttonPass3MouseClicked
+    }//GEN-LAST:event_btnLogInMouseClicked
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+         
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodeActionPerformed
+
+    private void txtNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewPassActionPerformed
+
+    private void btnCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodeActionPerformed
+          getCode();
+    }//GEN-LAST:event_btnCodeActionPerformed
+
+    private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
+          if(CheckForm.checkNullText(txtUsername)
+                    && CheckForm.checkNullText(txtCode)
+                    && CheckForm.checkNullText(txtNewPass)){
+                    if(CheckForm.checkEmail(txtUsername)){
+                             if(txtCode.equals(getNumberCode()) ){
+                                      changepass();
+                                      MsgBox.alert(this, "Đặt lại mật khẩu thành công !");
+                             }else{
+                                      MsgBox.alert(this, "Mã xác nhận không đúng. Vui lòng nhập lại");
+                             }
+                    }
+          }
+    }//GEN-LAST:event_btnChangePassActionPerformed
+
+    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogInActionPerformed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+           if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   txtCode.requestFocus();
+          }
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyPressed
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   txtNewPass.requestFocus();
+          }
+    }//GEN-LAST:event_txtCodeKeyPressed
+
+    private void txtNewPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewPassKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   txtUsername.requestFocus();
+          }
+    }//GEN-LAST:event_txtNewPassKeyPressed
 
     /**
      * @param args the command line arguments
@@ -237,10 +353,9 @@ public class ForgotPass extends java.awt.Dialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAbout;
-    private AdminToolUtils.ButtonPass buttonPass1;
-    private AdminToolUtils.ButtonPass buttonPass2;
-    private AdminToolUtils.ButtonPass buttonPass3;
+    private AdminToolUtils.ButtonPass btnChangePass;
+    private AdminToolUtils.ButtonPass btnCode;
+    private AdminToolUtils.ButtonPass btnLogIn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -249,10 +364,83 @@ public class ForgotPass extends java.awt.Dialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblAbout;
     private javax.swing.JLabel lblAnother;
+    private javax.swing.JLabel lblEnterAbout;
     private javax.swing.JLabel lblTitle;
-    private AdminToolUtils.TextField textField1;
-    private AdminToolUtils.TextField textField2;
-    private AdminToolUtils.TextField textField3;
+    private swing.javaswingdev.SimpleTitleBar simpleTitleBar1;
+    private AdminToolUtils.TextField txtCode;
+    private AdminToolUtils.TextField txtNewPass;
     private javax.swing.JTextPane txtTextPane;
+    private AdminToolUtils.TextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+          AccountDAO aDao = new AccountDAO();
+          UserDAO uDao = new UserDAO();
+          
+          private String getEmailOfAccount(String key) {
+                    String email = "";
+                    User entity = uDao.selectById(key);
+                    email = entity.getEmail();        
+                    return email;
+          }
+          
+          private void updateAccount(User entity) {
+                   uDao.update(entity);
+          }
+          
+          private int getNumberCode() {
+                    return (int) (Math.random() * (999999 - 100000 + 1) + 100000);
+          }
+    
+          private void getCode() {
+                    String email = txtUsername.getText().trim();
+                    final String from = "vunhps25582@fpt.edu.vn";
+                    final String passMail = "ysfkqicvkfjxokdy";
+                    Account acc = aDao.selectById(email);
+
+                   if (acc == null) {
+                             MsgBox.alert(this, "Tài khoản email không đúng");
+                   } else {
+                             String mailOfAcc = getEmailOfAccount(email);
+                             if (mailOfAcc.equals(email)) {
+                                       Properties p = new Properties();
+                                       p.put("mail.smtp.auth", "true");
+                                       p.put("mail.smtp.starttls.enable", "true");
+                                       p.put("mail.smtp.host", "smtp.gmail.com");
+                                       p.put("mail.smtp.port", 587);
+
+                                       Session session = Session.getInstance(p,
+                                                 new javax.mail.Authenticator() {
+                                                          @Override
+                                                          protected PasswordAuthentication getPasswordAuthentication() {
+                                                          return new PasswordAuthentication(from, passMail);
+                                                          }
+                                                });
+                                       try {
+                                                int code = getNumberCode();
+                                                Message message = new MimeMessage(session);
+                                                message.setFrom(new InternetAddress(from));
+                                                message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+                                                message.setSubject("Đặt lại mật khẩu tài khoản SWAVE");
+                                                
+                                                message.setText("Xin chào,\n"
+                                                          + "Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu SWAVE của bạn. Xin dùng mã này để đặt lại mật khẩu cho tài khoản SWAVE\n"
+                                                          + "Đây là mã của bạn:\n"
+                                                          + code
+                                                          + "\n Bạn nên thay đổi lại mật khẩu cho mình để bảo đảm an toàn cho tài khoản.\n"
+                                                          + "Xin cảm ơn");
+                                                Transport.send(message);
+                                                MsgBox.alert(this, "Chúng tôi đã gửi mã đến email của bạn");
+                                       } catch (MessagingException e) {
+                                                 throw new RuntimeException(e);
+                                       }
+                             }
+                    }
+          }
+          
+          private void changepass(){
+                    String newpass = txtNewPass.getText();                    
+                    Auth.user.setPassword(newpass);
+                    aDao.update(Auth.user);       
+          }
 }

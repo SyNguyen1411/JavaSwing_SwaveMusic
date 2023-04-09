@@ -4,6 +4,8 @@
  */
 package Vu.ui;
 
+import swing.utilcomponent.ScrollBarCustom;
+
 /**
  *
  * @author Admin
@@ -15,6 +17,7 @@ public class CensorSongPane extends javax.swing.JPanel {
      */
     public CensorSongPane() {
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
     }
 
     /**
@@ -29,7 +32,8 @@ public class CensorSongPane extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         findTextField2 = new AdminToolUtils.FindTextField();
-        cboSong = new AdminToolUtils.ComboBox();
+        comboBoxPanel1 = new AdminToolUtils.ComboBoxPanel();
+        cboSong = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         pnlTitle = new javax.swing.JPanel();
         lblNumber = new javax.swing.JLabel();
@@ -86,9 +90,26 @@ public class CensorSongPane extends javax.swing.JPanel {
 
         findTextField2.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
 
-        cboSong.setForeground(new java.awt.Color(0, 0, 0));
-        cboSong.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả bài hát", "Bài hát chưa kiểm duyệt" }));
         cboSong.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        cboSong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả bài hát", "Bài hát chưa kiểm duyệt" }));
+        cboSong.setBorder(null);
+
+        javax.swing.GroupLayout comboBoxPanel1Layout = new javax.swing.GroupLayout(comboBoxPanel1);
+        comboBoxPanel1.setLayout(comboBoxPanel1Layout);
+        comboBoxPanel1Layout.setHorizontalGroup(
+            comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comboBoxPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(cboSong, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        comboBoxPanel1Layout.setVerticalGroup(
+            comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comboBoxPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cboSong, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,17 +118,17 @@ public class CensorSongPane extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(findTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                .addComponent(cboSong, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(77, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(findTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboSong, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
 
@@ -646,7 +667,8 @@ public class CensorSongPane extends javax.swing.JPanel {
     private AdminToolUtils.ButtonDelete btnDelete4;
     private AdminToolUtils.ButtonDelete btnDelete5;
     private AdminToolUtils.ButtonDelete btnDelete7;
-    private AdminToolUtils.ComboBox cboSong;
+    private javax.swing.JComboBox<String> cboSong;
+    private AdminToolUtils.ComboBoxPanel comboBoxPanel1;
     private AdminToolUtils.FindTextField findTextField2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
