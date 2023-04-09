@@ -339,6 +339,7 @@ public class SongItem extends javax.swing.JPanel {
         }
 
         System.out.println(data.getFileSong());
+        System.out.println(source.getPath());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
