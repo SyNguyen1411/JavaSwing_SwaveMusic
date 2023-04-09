@@ -3,6 +3,7 @@ package component;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import entity.PlayList;
+import entity.Search;
 import entity.Song;
 
 /**
@@ -19,5 +20,6 @@ public interface EventItem {
     
     public void ExitEvent(Component com, Song song, MouseEvent e);
 
+    public void itemClick(Search data);
     
 }

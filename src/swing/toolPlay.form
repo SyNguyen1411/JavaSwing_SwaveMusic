@@ -266,7 +266,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblLibary">
+    <Component class="javax.swing.JLabel" name="lblVolunm">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/soundLow.png"/>
@@ -277,7 +277,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1384" y="65" width="-1" height="-1"/>
+          <AbsoluteConstraints x="1384" y="65" width="30" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -299,7 +299,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="component.Slidebar" name="slidebar1">
+    <Component class="component.Slidebar" name="slMusic">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="slMusicStateChanged"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="slMusicMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="slMusicMouseReleased"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="465" y="95" width="680" height="10"/>
@@ -307,9 +312,15 @@
       </Constraints>
     </Component>
     <Component class="component.Slidebar" name="slidebar2">
+      <Properties>
+        <Property name="value" type="int" value="50"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="slidebar2StateChanged"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1410" y="65" width="90" height="-1"/>
+          <AbsoluteConstraints x="1420" y="65" width="90" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
