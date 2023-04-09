@@ -1,10 +1,18 @@
 package swing;
 
+import dao.CommentDAO;
+import dao.CommentInteractionDAO;
+import dao.UserDAO;
+import entity.Comment;
+import entity.CommentInteraction;
+import entity.User;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import swave.MainFrame;
 
@@ -17,13 +25,30 @@ public class CommentPane extends javax.swing.JPanel {
     /**
      * Creates new form lyricsPane
      */
+    CommentDAO cDao = new CommentDAO();
+    CommentInteractionDAO ciDao = new CommentInteractionDAO();
+    UserDAO uDao = new UserDAO();
+    List<Comment> cList = new ArrayList<>();
+    List<CommentInteraction> ciByCmtIDList = new ArrayList<>();
+
     public CommentPane() {
         initComponents();
         jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 0));
     }
 
-    public void addComment(String nameUser, String Content, int like, int dislike, String AVT) {
-        CommentItem item = new CommentItem(nameUser, Content, like, dislike, AVT);
+    public void addComment(Comment data) {
+        User uEntity = uDao.selectByIDUser(data.getUserID());
+        ciByCmtIDList = ciDao.selectByCMId(data.getCommentID());
+        int like = 0;
+        int dislike = 0;
+        for (CommentInteraction commentInteraction : ciByCmtIDList) {
+            if (commentInteraction.isLiked()) {
+                like++;
+            } else {
+                dislike++;
+            }
+        }
+        CommentItem item = new CommentItem(uEntity.getFullname(), data.getContent(), like, dislike, uEntity.getAvt());
         item.js = jScrollPane1;
         pnlComments.add(item);
         if (pnlComments.getComponentCount() > 4) {
@@ -141,7 +166,7 @@ public class CommentPane extends javax.swing.JPanel {
 
     private void btnSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSendMouseClicked
         String content = txtComment.getText();
-        addComment("Nguyễn Văn Sĩ", content, 0, 0, "AVT.png");
+//        addComment(new Comment(, PROPERTIES, content, commentDate, HEIGHT, ERROR)"Nguyễn Văn Sĩ", content, 0, 0, "AVT.png");
     }//GEN-LAST:event_btnSendMouseClicked
 
     private void txtCommentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCommentCaretUpdate
@@ -151,6 +176,14 @@ public class CommentPane extends javax.swing.JPanel {
             lblPlaceholder.setText("Nhập bình luận");
         }
     }//GEN-LAST:event_txtCommentCaretUpdate
+
+    public void loadDataComment() {
+        cList = cDao.selectAll();
+        pnlComments.removeAll();
+        for (Comment comment : cList) {
+            addComment(comment);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
