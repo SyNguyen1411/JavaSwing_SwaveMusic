@@ -1,5 +1,7 @@
 
-import javax.swing.JScrollPane;
+import dao.AccountDAO;
+import entity.Account;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,7 +18,8 @@ public class test extends javax.swing.JFrame {
      * Creates new form test
      */
 
-    
+    List<Account> acc;
+    AccountDAO accountDAO = new AccountDAO();
     public test() {
         initComponents();
         commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
@@ -24,9 +27,8 @@ public class test extends javax.swing.JFrame {
         commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
         commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
         commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
-//        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
-//        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
-//        commentPane1.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+        acc =  accountDAO.selectAll();
+        System.out.println(acc.toString());
     }
 
     /**

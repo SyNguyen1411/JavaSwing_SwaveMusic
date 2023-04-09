@@ -17,12 +17,10 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -46,8 +44,6 @@ import swing.swavecomponent.MenuBar;
 import swing.swavecomponent.ToolBar;
 import swing.swavecomponent.UserTool;
 import swing.toolPlay;
-import javax.swing.BorderFactory;
-import utils.TAudioFileFormat;
 
 /**
  *
@@ -413,9 +409,13 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlMainScreen.getPnlTrendingSongList().setRunningSong(com);
-                songItem.selectRunning(true);
+                songItem.selectRunning(true);               
                 toolPlay1.fillData(song);
                 toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -459,9 +459,12 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblWave().setVisible(true);
                 pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
-
                 toolPlay1.fillData(song);
                 toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -514,6 +517,60 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void itemClick(Search data) {
+            }
+        });
+
+        // Add sự kiện khi chọn bài hát trong bài hát trending
+        pnlMainScreen.setEventItem(new EventItem() {
+            @Override
+            public void clickEvent(Component com, Song song) {
+                pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardTrending");
+                SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(song.getSongID() - 1);
+                itemSong = songItem;
+                songItem.getLblStart().setVisible(false);
+                songItem.getLblIconPlay().setVisible(false);
+                songItem.getLblWave().setVisible(true);
+                pnlMainScreen.getPnlTrendingSongList().setRunningSong(songItem);
+                songItem.selectRunning(true);
+
+                toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
+                toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
+            }
+
+            @Override
+            public void clickEvent(Component com, PlayList playList) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void itemClick(Search data) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
 
