@@ -1,34 +1,16 @@
 package swing;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.HeadlessException;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.event.EventListenerList;
-import javax.swing.plaf.ComponentUI;
 import entity.Song;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.MultimediaInfo;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Map;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import model.borderImage;
-import utils.TAudioFileFormat;
 
 /**
  *
@@ -328,7 +310,7 @@ public class SongItem extends javax.swing.JPanel {
         Encoder encoder = new Encoder();
         try {
             MultimediaInfo mi = encoder.getInfo(source);
-            long ls = mi.getDuration()/1000;
+            long ls = mi.getDuration() / 1000;
             long min = ls / 60;
             long second = ls % 60;
             System.out.println("duration(sec) = " + ls);
@@ -337,8 +319,7 @@ public class SongItem extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(data.getFileSong());
+//        System.out.println(data.getFileSong());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

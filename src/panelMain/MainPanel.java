@@ -4,7 +4,9 @@
  */
 package panelMain;
 
+import component.EventItem;
 import entity.PlayList;
+import entity.Song;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,7 +17,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import entity.Song;
 import swave.MainFrame;
 import swing.MainWindowItem;
 import swing.PlaylistPanel;
@@ -39,7 +40,18 @@ public class MainPanel extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private CardLayout cardLPlaylistLayout;
     public MainFrame main;
+    private EventItem eventItem;
 
+    public EventItem getEventItem() {
+        return eventItem;
+    }
+
+    public void setEventItem(EventItem eventItem) {
+        this.eventItem = eventItem;
+    }
+
+    
+    
 //    private MouseEvent dayMouseEvent;
 //    private MouseEvent weekMouseEvent;
 //    private MouseEvent monthMouseEvent;
@@ -74,6 +86,8 @@ public class MainPanel extends javax.swing.JPanel {
     public void setCardLayout(CardLayout cardLayout) {
         this.cardLayout = cardLayout;
     }
+    
+    
 
     public MainPanel() {
         initComponents();
@@ -209,7 +223,7 @@ public class MainPanel extends javax.swing.JPanel {
         songItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //eventLblEditSong.clickEvent(listSongItemAddSongPanel, song);
+                eventItem.clickEvent(pnlDemoTrending, song);
             }
 
             @Override
@@ -257,7 +271,7 @@ public class MainPanel extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //eventLblEditSong.clickEvent(listSongItemAddSongPanel, song);
-
+                
             }
 
             @Override
