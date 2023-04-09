@@ -471,9 +471,11 @@ public class toolPlay extends javax.swing.JPanel {
     }//GEN-LAST:event_lblLyricsMouseClicked
 
     private void lblCmtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCmtMouseClicked
+
         comment = !comment;
         setComment(comment);
         if (comment) {
+            main.getPnlComment().loadDataComment();
             main.getPnlComment().setVisible(true);
 
         } else {

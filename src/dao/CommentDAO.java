@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
 import entity.Comment;
@@ -14,38 +11,38 @@ import utils.JdbcHelper;
  *
  * @author Phan Qui Duc
  */
-public class CommentDAO extends SwaveDAO<Comment, Integer>{
+public class CommentDAO extends SwaveDAO<Comment, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO BINHLUAN(STT, NoiDung, MaBH, MaND) VALUES (?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO BINHLUAN(NoiDung, MaBH, MaND) VALUES (?,?,?)";
     final String UPDATE_SQL = "UPDATE BINHLUAN SET NoiDung = ? WHERE MaBL = ?";
     final String DELETE_SQL = "DELETE FROM BINHLUAN WHERE MaBL = ?";
     final String SELECTALL_SQL = "SELECT * FROM BINHLUAN";
+    final String SELECTALLBYBH_SQL = "SELECT * FROM BINHLUAN WHERE MaBH = ?";
     final String SELECTBYID_SQL = "SELECT * FROM BINHLUAN WHERE MaBL = ?";
-    
-    
+
     @Override
-    public void insert (Comment entity) {
-        JdbcHelper.update(INSERT_SQL, entity.getPosition(), entity.getContent(),
+    public void insert(Comment entity) {
+        JdbcHelper.update(INSERT_SQL, entity.getContent(),
                 entity.getSongID(), entity.getUserID());
     }
 
     @Override
-    public void update (Comment entity) {
+    public void update(Comment entity) {
         JdbcHelper.update(UPDATE_SQL, entity.getContent(), entity.getCommentID());
     }
 
     @Override
-    public void delete (Integer key) {
+    public void delete(Integer key) {
         JdbcHelper.update(DELETE_SQL, key);
     }
 
     @Override
-    public List<Comment> selectAll () {
-       return selectSql(SELECTALL_SQL);
+    public List<Comment> selectAll() {
+        return selectSql(SELECTALL_SQL);
     }
 
     @Override
-    public Comment selectById (Integer key) {
+    public Comment selectById(Integer key) {
         List<Comment> list = selectSql(SELECTBYID_SQL, key);
         if (list.isEmpty()) {
             return null;
@@ -54,7 +51,7 @@ public class CommentDAO extends SwaveDAO<Comment, Integer>{
     }
 
     @Override
-    public List<Comment> selectSql (String Sql, Object... args) {
+    public List<Comment> selectSql(String Sql, Object... args) {
         List<Comment> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.query(Sql, args);
@@ -68,11 +65,15 @@ public class CommentDAO extends SwaveDAO<Comment, Integer>{
                 entity.setUserID(rs.getInt(6));
                 list.add(entity);
             }
-            
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return list;
     }
-    
+
+    public List<Comment> selectAllBySong(int songID) {
+        return selectSql(SELECTALLBYBH_SQL, songID);
+    }
+
 }
