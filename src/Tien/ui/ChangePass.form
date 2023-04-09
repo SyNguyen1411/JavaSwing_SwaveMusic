@@ -274,6 +274,9 @@
             </Property>
             <Property name="sizeSpeed" type="float" value="12.0"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button2ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

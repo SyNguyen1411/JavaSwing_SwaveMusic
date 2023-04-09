@@ -14,6 +14,7 @@ public class AccountDAO extends SwaveDAO<Account, String> {
 
     final String INSERT_SQL = "INSERT INTO TAIKHOAN(TenTK, MatKhau, VaiTro, TrangThai) VALUES (?,?,?,?)";
     final String UPDATE_SQL = "UPDATE TAIKHOAN SET MatKhau = ?, TrangThai = ? WHERE TenTK = ?";
+    final String UPDATE_PASS_SQL = "UPDATE TAIKHOAN SET MatKhau = ? WHERE TenTK = ?";
     final String DELETE_SQL = "DELETE FROM TAIKHOAN WHERE TenTK = ?";
     final String SELECTALL_SQL = "SELECT * FROM TAIKHOAN";
     final String SELECTBYID_SQL = "SELECT * FROM TAIKHOAN WHERE TenTK = ?";
@@ -65,6 +66,10 @@ public class AccountDAO extends SwaveDAO<Account, String> {
             throw new RuntimeException(e);
         }
         return list;
+    }
+
+    public void updatePassword(String userId, String password) {
+        JdbcHelper.update(UPDATE_PASS_SQL, password, userId);
     }
 
 }

@@ -36,6 +36,7 @@ public class borderImage extends JComponent {
 
     public void setIcon(Icon icon) {
         this.icon = icon;
+        repaint();
     }
 
     public Image toImage(Icon icon) {

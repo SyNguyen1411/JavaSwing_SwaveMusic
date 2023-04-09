@@ -1,18 +1,19 @@
 package swing;
 
 import component.EventItem;
+import entity.Song;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import entity.Song;
-import swave.MainFrame;
-import swing.utilcomponent.ScrollBarCustom;
 
 /**
  *
@@ -26,6 +27,7 @@ public class SongList extends javax.swing.JPanel {
     private EventItem event;
     private EventItem eventLblStart;
     private ArrayList<Song> songLoveList;
+    private SongItem runningSong; 
 
     public ArrayList<Song> getSongLoveList() {
         return songLoveList;
@@ -42,6 +44,8 @@ public class SongList extends javax.swing.JPanel {
     public void setEventLblStart(EventItem eventPlay) {
         this.eventLblStart = eventPlay;
     }
+    
+    
 
     public SongList() {
         initComponents();
@@ -53,7 +57,7 @@ public class SongList extends javax.swing.JPanel {
         }
     }
 
-    public void addSong(Song data) {
+    public void addSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         SongItem item = new SongItem();
         item.setDataSong(data);
 
@@ -97,6 +101,9 @@ public class SongList extends javax.swing.JPanel {
     }
 
     public void setRunningSong(Component item) {
+        if(((SongItem)item).equals(runningSong)){
+            return;
+        }
         for (Component com : pnlSongList.getComponents()) {
             SongItem s = (SongItem) com;
             if (s.isRunning()) {
@@ -106,8 +113,9 @@ public class SongList extends javax.swing.JPanel {
                 s.setBackground(new Color(255, 255, 255, 0));
             }
         }
-
+        
         ((SongItem) item).setRunning(true);
+        runningSong = ((SongItem) item);
     }
 
     public JScrollPane getJscSongList() {

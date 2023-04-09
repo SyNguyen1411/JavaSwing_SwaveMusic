@@ -5,17 +5,25 @@ import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
 import entity.PlayList;
+import entity.Search;
 import entity.Song;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
+import javax.swing.JPopupMenu;
 import net.miginfocom.layout.ComponentWrapper;
 import net.miginfocom.layout.LayoutCallback;
 import panelMain.AddSongPanel;
@@ -24,6 +32,7 @@ import panelMain.PlaylistPane;
 import panelMain.SearchPane;
 import panelMain.SongLovelistPane;
 import swing.CommentPane;
+import swing.PanelSearchSuggestion;
 import swing.SongItem;
 import swing.SongOfPlaylistPane;
 import swing.glasspanepopup.DefaultLayoutCallBack;
@@ -52,10 +61,13 @@ public class MainFrame extends javax.swing.JFrame {
     private String appItemName;
     public Login loginForm;
     public MainFrame main;
+    private JPopupMenu menu;
+    private PanelSearchSuggestion search;
+    public SongItem itemSong;
 
     private UserTool userTool = new UserTool(this);
 
-    public MainFrame() {
+    public MainFrame() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         initComponents();
         c = (CardLayout) pnlChange.getLayout();
         this.main = this;
@@ -65,7 +77,11 @@ public class MainFrame extends javax.swing.JFrame {
         toolPlay1.main = this;
         pnlLyrics.setVisible(false);
         pnlComment.setVisible(false);
+        toolPlay1.fillData(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+
+        initSearchSuggestion();
         init();
+
     }
 
     /**
@@ -99,7 +115,13 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(pnlComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 43, -1, -1));
+
+        pnlComment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCommentMouseClicked(evt);
+            }
+        });
+        getContentPane().add(pnlComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1532, 150));
@@ -108,10 +130,9 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(toolPlay1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,6 +168,10 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlCommentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCommentMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlCommentMouseClicked
 
     /**
      * @param args the command line arguments
@@ -184,12 +209,20 @@ public class MainFrame extends javax.swing.JFrame {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                try {
+                    new MainFrame().setVisible(true);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
-    private void init() {
+    private void init() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         this.getContentPane().setBackground(new Color(0, 0, 0, 255));
         titleBar.init(this);
         setResizable(false);
@@ -263,37 +296,37 @@ public class MainFrame extends javax.swing.JFrame {
         //add list song to pnl songList
         //------------------------------------
         //add song to panel main
-        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(7, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(8, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(9, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(10, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(11, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(12, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(13, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(14, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(15, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Khuon-Mat-Dang-Thuong-Team-Son-Tung-M-TP-Slim-V-DJ-Trang-Moon-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Chay-Ngay-Di-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(7, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(8, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(9, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(10, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(11, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(12, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(13, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(14, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(15, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
 
-        songList.add(new Song(16, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(17, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(18, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(19, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(20, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(21, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(22, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(23, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(24, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(25, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(26, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "song.mp3", true, 1));
-        songList.add(new Song(27, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "song.mp3", true, 1));
-        songList.add(new Song(28, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "song.mp3", true, 1));
-        songList.add(new Song(29, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "song.mp3", true, 1));
-        songList.add(new Song(30, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "song.mp3", true, 1));
+        songList.add(new Song(16, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(17, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(18, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(19, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(20, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(21, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(22, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(23, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(24, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(25, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(26, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(27, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(28, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(29, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(30, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
 
         for (Song item : songList) {
             pnlMainScreen.addTrendingSong(item);
@@ -324,10 +357,29 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
+                itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlLikeSong.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
+                toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
+                toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -341,6 +393,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
             }
         });
 
@@ -349,10 +405,29 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
+                itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlMainScreen.getPnlTrendingSongList().setRunningSong(com);
-                songItem.selectRunning(true);
+                songItem.selectRunning(true);               
+                toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
+                toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -366,6 +441,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
             }
         });
 
@@ -374,10 +453,30 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
+                itemSong = songItem;
+
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
+                toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
+                toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -391,6 +490,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
             }
         });
 
@@ -410,6 +513,64 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void ExitEvent(Component com, Song song, MouseEvent e) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
+            }
+        });
+
+        // Add sự kiện khi chọn bài hát trong bài hát trending
+        pnlMainScreen.setEventItem(new EventItem() {
+            @Override
+            public void clickEvent(Component com, Song song) {
+                pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardTrending");
+                SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(song.getSongID() - 1);
+                itemSong = songItem;
+                songItem.getLblStart().setVisible(false);
+                songItem.getLblIconPlay().setVisible(false);
+                songItem.getLblWave().setVisible(true);
+                pnlMainScreen.getPnlTrendingSongList().setRunningSong(songItem);
+                songItem.selectRunning(true);
+
+                toolPlay1.fillData(song);
+                toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
+                toolPlay1.revalidate();
+                System.out.println("fill successfully");
+                if (toolPlay1.player != null) {
+                    try {
+                        toolPlay1.stopSong();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                toolPlay1.setPause(-1);
+                toolPlay1.runningSong();
+                toolPlay1.setRunning(true);
+            }
+
+            @Override
+            public void clickEvent(Component com, PlayList playList) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void itemClick(Search data) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
 
@@ -524,25 +685,95 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        toolBar.getFindTextField().addCaretListener(new CaretListener() {
+        toolBar.getFindTextField().addMouseListener(new MouseAdapter() {
             @Override
-            public void caretUpdate(CaretEvent e) {
-                if (!toolBar.getFindTextField().getText().equals("")) {
+            public void mouseClicked(MouseEvent e) {
+                if (search.getItemSize() > 0) {
+                    menu.show(toolBar.getFindTextField(), 0, toolBar.getFindTextField().getHeight() + 5);
+                }
+            }
+        });
 
+        toolBar.getFindTextField().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String text = toolBar.getFindTextField().getText().trim().toLowerCase();
+                search.setData(search.dataSearch(text));
+                if (search.getItemSize() > 0) {
+                    menu.show(toolBar.getFindTextField(), 0, toolBar.getFindTextField().getHeight() + 5);
+                    menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 45) + 2);
+                } else {
+                    menu.setVisible(false);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    c.show(pnlChange, "cardSearch");
                     for (PlayList item : playlist) {
                         pnlSearch.getPnlSearchPlaylist().addPlayList(item);
                     }
 
                     for (Song item : songList) {
-                        pnlSearch.getPnlSearchSong().addSong(item);
+                        try {
+                            pnlSearch.getPnlSearchSong().addSong(item);
+                        } catch (UnsupportedAudioFileException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         pnlSearch.getPnlSearchAll().addSong(item);
                     }
-                    c.show(pnlChange, "cardSearch");
                     repaint();
+                    menu.setVisible(false);
                 }
             }
         });
 
+        search.addEventClick(new EventItem() {
+            @Override
+            public void itemClick(Search data) {
+                menu.setVisible(false);
+                toolBar.getFindTextField().setText(data.getText());
+                c.show(pnlChange, "cardSearch");
+                for (PlayList item : playlist) {
+                    pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                }
+
+                for (Song item : songList) {
+                    try {
+                        pnlSearch.getPnlSearchSong().addSong(item);
+                    } catch (UnsupportedAudioFileException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    pnlSearch.getPnlSearchAll().addSong(item);
+                }
+                repaint();
+            }
+
+            @Override
+            public void clickEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
+            }
+        });
     }
 
     private void undoChosen(String name) {
@@ -790,6 +1021,38 @@ public class MainFrame extends javax.swing.JFrame {
                 userTool.getPnlLogout().getLblPanelName().setForeground(new Color(199, 199, 199));
             }
 
+        });
+    }
+
+    public void initSearchSuggestion() {
+        menu = new JPopupMenu();
+        search = new PanelSearchSuggestion();
+        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
+        menu.add(search);
+        menu.setFocusable(false);
+        search.addEventClick(new EventItem() {
+            @Override
+            public void itemClick(Search data) {
+                menu.setVisible(false);
+                toolBar.getFindTextField().setText(data.getText());
+
+            }
+
+            @Override
+            public void clickEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
+            }
         });
     }
 

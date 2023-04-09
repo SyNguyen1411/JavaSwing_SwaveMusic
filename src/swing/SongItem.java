@@ -1,22 +1,15 @@
 package swing;
 
+import entity.Song;
+import it.sauronsoftware.jave.Encoder;
+import it.sauronsoftware.jave.MultimediaInfo;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.HeadlessException;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.EventListenerList;
-import javax.swing.plaf.ComponentUI;
-import entity.Song;
 import model.borderImage;
 
 /**
@@ -30,6 +23,8 @@ public class SongItem extends javax.swing.JPanel {
      */
     public boolean running = false;
     public Song data;
+    public int minutetotalLength;
+    public int secondTotalLength;
 
     public SongItem() {
         initComponents();
@@ -39,12 +34,17 @@ public class SongItem extends javax.swing.JPanel {
         lblIconLove.setVisible(false);
     }
 
-    public void setDataSong(Song data) {
+    public void setDataSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         this.data = data;
         lblIconPlay.setText("" + data.getSongID());
         lblIconSong.setIcon(data.toIcon());
         lblNamSong.setText(data.getNameSong());
-        lblTime.setText("03:03");
+        getTimeSong();
+        if (secondTotalLength >= 10) {
+            lblTime.setText("0" + minutetotalLength + ":" + secondTotalLength);
+        } else {
+            lblTime.setText("0" + minutetotalLength + ":" + "0" + secondTotalLength);
+        }
     }
 
     public void selectRunning(boolean running) {
@@ -179,7 +179,6 @@ public class SongItem extends javax.swing.JPanel {
             lblNamSong.setForeground(new Color(199, 199, 199));
             lblIconPlay.setForeground(new Color(199, 199, 199));
             lblTime.setForeground(new Color(199, 199, 199));
-
         }
 
     }//GEN-LAST:event_formMouseExited
@@ -305,6 +304,26 @@ public class SongItem extends javax.swing.JPanel {
     public void setPnlSongName(JPanel pnlSongName) {
         this.pnlSongName = pnlSongName;
     }
+
+    public void getTimeSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {
+        File source = new File(getClass().getResource(data.getFileSong()).getFile());
+        Encoder encoder = new Encoder();
+        try {
+            MultimediaInfo mi = encoder.getInfo(source);
+            long ls = mi.getDuration() / 1000;
+            long min = ls / 60;
+            long second = ls % 60;
+            System.out.println("duration(sec) = " + ls);
+            minutetotalLength = (int) min;
+            secondTotalLength = (int) second;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(data.getFileSong());
+        System.out.println(source.getPath());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblIconLove;

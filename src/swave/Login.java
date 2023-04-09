@@ -12,9 +12,11 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -387,21 +389,28 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameCaretUpdate
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-//        if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
-//            DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
-//            loadPane.setVisible(true);
-//            loginForm = this;
-//            Thread loadThread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    main = new MainFrame();
-//                    main.setVisible(true);
-//                    loginForm.dispose();
-//                }
-//            });
-//            loadThread.start();
-//        }
-        login();
+        if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
+            DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
+            loadPane.setVisible(true);
+            loginForm = this;
+            Thread loadThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        main = new MainFrame();
+                    } catch (UnsupportedAudioFileException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    main.setVisible(true);
+                    loginForm.dispose();
+                }
+            });
+            loadThread.start();
+        }
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void btnSigupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSigupMouseClicked
