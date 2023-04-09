@@ -14,14 +14,15 @@ import utils.JdbcHelper;
  *
  * @author Phan Qui Duc
  */
-public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentInteraction>{
+public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentInteraction> {
 
     final String INSERT_SQL = "INSERT INTO TUONGTACBINHLUAN(MaBL, MaND, TrangThai, BaoCao) VALUES (?,?,?,?)";
     final String UPDATE_SQL = "UPDATE TUONGTACBINHLUAN SET TrangThai = ?, BaoCao = ? WHERE MaBL = ? AND MaND = ?";
     final String DELETE_SQL = "DELETE FROM TUONGTACBINHLUAN WHERE MaBL = ? AND MaND = ?";
     final String SELECTALL_SQL = "SELECT * FROM TUONGTACBINHLUAN";
     final String SELECTBYID_SQL = "SELECT * FROM TUONGTACBINHLUAN WHERE MaBL = ? AND MaND = ?";
-    
+    final String SELECTBYCMID_SQL = "SELECT * FROM TUONGTACBINHLUAN WHERE MaBL = ?";
+
     @Override
     public void insert(CommentInteraction entity) {
         JdbcHelper.update(INSERT_SQL, entity.getCommentID(), entity.getUserID(),
@@ -66,11 +67,18 @@ public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentI
                 entity.setReported(rs.getBoolean(4));
                 list.add(entity);
             }
-            
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return list;
     }
-    
+
+    public List<CommentInteraction> selectByCMId(int key) {
+        List<CommentInteraction> list = selectSql(SELECTBYCMID_SQL, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
 }

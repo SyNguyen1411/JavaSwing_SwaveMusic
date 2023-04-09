@@ -21,15 +21,16 @@ public class UserDAO extends SwaveDAO<User, String> {
     final String DELETE_SQL = "DELETE FROM NGUOIDUNG WHERE TenTK = ?";
     final String SELECTALL_SQL = "SELECT * FROM NGUOIDUNG";
     final String SELECTBYID_SQL = "SELECT * FROM NGUOIDUNG WHERE TenTK = ?";
-    
+    final String SELECTBYIDUSER_SQL = "SELECT * FROM NGUOIDUNG WHERE MaND = ?";
+
     @Override
-    public void insert (User entity) {
+    public void insert(User entity) {
         JdbcHelper.update(INSERT_SQL, entity.getFullname(), entity.getBirthDate(),
                 entity.isGender(), entity.getEmail(), entity.getAvt(), entity.getAccount());
     }
 
     @Override
-    public void update (User entity) {
+    public void update(User entity) {
         JdbcHelper.update(UPDATE_SQL, entity.getFullname(), entity.getBirthDate(),
                 entity.isGender(), entity.getEmail(), entity.getAvt(), entity.getAccount());
     }
@@ -40,12 +41,12 @@ public class UserDAO extends SwaveDAO<User, String> {
     }
 
     @Override
-    public List<User> selectAll () {
+    public List<User> selectAll() {
         return selectSql(SELECTALL_SQL);
     }
 
     @Override
-    public User selectById (String key) {
+    public User selectById(String key) {
         List<User> list = selectSql(SELECTBYID_SQL, key);
         if (list.isEmpty()) {
             return null;
@@ -73,7 +74,14 @@ public class UserDAO extends SwaveDAO<User, String> {
             throw new RuntimeException(e);
         }
         return list;
-        
     }
-    
+
+    public User selectByIDUser(int key) {
+        List<User> list = selectSql(SELECTBYIDUSER_SQL, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
 }

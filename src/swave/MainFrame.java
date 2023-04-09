@@ -347,11 +347,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         //add comment:
-        pnlComment.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
-        pnlComment.addComment("Trần Hoàng Danh", "Nghe đi nghe lại vẫn hay", 10, 1, "AVT.png");
-        pnlComment.addComment("Phan Qúy Đức", "Tuyệt cú mèo", 11, 1, "AVT.png");
-        pnlComment.addComment("Hồ Thị Mộng Tiên", "Ổn áp", 15, 1, "AVT.png");
-        pnlComment.addComment("Tôn Nhật Phi", "Triệu like", 111, 1, "AVT.png");
+//        pnlComment.addComment("Nguyễn Văn Sĩ", "Hay quá", 10, 1, "AVT.png");
+//        pnlComment.addComment("Trần Hoàng Danh", "Nghe đi nghe lại vẫn hay", 10, 1, "AVT.png");
+//        pnlComment.addComment("Phan Qúy Đức", "Tuyệt cú mèo", 11, 1, "AVT.png");
+//        pnlComment.addComment("Hồ Thị Mộng Tiên", "Ổn áp", 15, 1, "AVT.png");
+//        pnlComment.addComment("Tôn Nhật Phi", "Triệu like", 111, 1, "AVT.png");
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
             @Override
