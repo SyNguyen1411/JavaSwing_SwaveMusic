@@ -2,7 +2,9 @@ package swave;
 
 import Vu.ui.ForgotPass;
 import dao.AccountDAO;
+import dao.UserDAO;
 import entity.Account;
+import entity.User;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -36,6 +38,9 @@ public class Login extends javax.swing.JFrame {
     boolean viewPass = false;
     boolean forgot = false;
     private Login loginForm;
+    public static Account acc;
+    public static User user;
+    private UserDAO uDao = new UserDAO();
 
     public Login() {
         initComponents();
@@ -389,57 +394,105 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameCaretUpdate
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
-            DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
-            loadPane.setVisible(true);
-            loginForm = this;
-            Thread loadThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        main = new MainFrame();
-                    } catch (UnsupportedAudioFileException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (URISyntaxException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    main.setVisible(true);
-                    loginForm.dispose();
-                }
-            });
-            loadThread.start();
-        }
+//        if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
+//            DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
+//            loadPane.setVisible(true);
+//            loginForm = this;
+//            Thread loadThread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        main = new MainFrame();
+//                    } catch (UnsupportedAudioFileException ex) {
+//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (URISyntaxException ex) {
+//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    main.setVisible(true);
+//                    loginForm.dispose();
+//                }
+//            });
+//            loadThread.start();
+//        }
+        login();
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void btnSigupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSigupMouseClicked
-          new Signup(this).setVisible(true);
-          this.setVisible(false);
+        new Signup(this).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnSigupMouseClicked
 
     private void lblForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotMouseClicked
-          ForgotPass forgot = new ForgotPass(this, true);
-          forgot.setVisible(true);
+        ForgotPass forgot = new ForgotPass(this, true);
+        forgot.setVisible(true);
     }//GEN-LAST:event_lblForgotMouseClicked
 
     private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
-          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                   login();
-          }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
     }//GEN-LAST:event_txtUsernameKeyPressed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                   login();
-          }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
-          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                   login();
-          }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
     }//GEN-LAST:event_btnLoginKeyPressed
+
+    AccountDAO dao = new AccountDAO();
+
+    private void login() {
+        String username = txtUsername.getText();
+        String pass = new String(txtPassword.getPassword());
+        acc = dao.selectById(username);
+        if (acc == null) {
+            MsgBox.alert(this, "Tên tài khoản không đúng");
+        } else {
+            if (acc.isStatus()) {
+                if (acc.getPassword().equals(pass)) {
+                    user = uDao.selectById(username);
+                    boolean index = acc.isRole();
+                    Auth.user = acc;
+                    loadDialog(index);
+                } else {
+                    MsgBox.alert(this, "Mật khẩu không đúng");
+                }
+            } else {
+                MsgBox.alert(this, "Tài khoản của bạn đã bị khóa");
+            }
+        }
+    }
+
+    private void loadDialog(boolean index) {
+        DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
+        loadPane.setVisible(true);
+        loginForm = this;
+        Thread loadThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    main = new MainFrame();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                main.setVisible(true);
+                loginForm.dispose();
+            }
+        });
+        loadThread.start();
+    }
 
     /**
      * @param args the command line arguments
@@ -505,43 +558,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private model.input txtUsername;
     // End of variables declaration//GEN-END:variables
-    
-          AccountDAO dao = new AccountDAO();
 
-         private void login() {
-                    String username = txtUsername.getText();
-                    String pass = new String(txtPassword.getPassword());
-                    Account acc = dao.selectById(username);
-                    if (acc == null) {
-                             MsgBox.alert(this, "Tên tài khoản không đúng");
-                   } else {
-                            if (acc.isStatus()) {
-                                       if (acc.getPassword().equals(pass)) {
-                                                MsgBox.alert(this, "Đăng nhập thành công");
-                                                boolean index = acc.isRole();
-                                                Auth.user = acc;
-                                                loadDialog(index);
-                                       } else {
-                                                MsgBox.alert(this, "Mật khẩu không đúng");
-                                       }
-                            } else {
-                                MsgBox.alert(this, "Tài khoản của bạn đã bị khóa");
-                            }
-                   }
-         }
-         
-         private void loadDialog(boolean index) {
-                   DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
-                   loadPane.setVisible(true);
-                   loginForm = this;
-                   Thread loadThread = new Thread(new Runnable() {
-                             @Override
-                             public void run() {
-                                      main = new MainFrame();
-                                      main.setVisible(true);
-                                      loginForm.dispose();
-                             }
-                    });
-                    loadThread.start();     
-          }
 }

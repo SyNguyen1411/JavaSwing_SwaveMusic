@@ -1,7 +1,11 @@
 package swing;
 
+import dao.CommentInteractionDAO;
+import entity.Comment;
+import entity.CommentInteraction;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import swave.Login;
 
 /**
  *
@@ -21,6 +25,9 @@ public class CommentItem extends javax.swing.JPanel {
     private boolean dislikeCheck = false;
     public JScrollPane js;
     int[] a = {100, 100};
+    public Comment data;
+    CommentInteractionDAO ciDao = new CommentInteractionDAO();
+    CommentInteraction item;
 
     public CommentItem(String nameUser, String Content, int like, int dislike, String AVT) {
         this.nameUser = nameUser;
@@ -34,9 +41,9 @@ public class CommentItem extends javax.swing.JPanel {
         lblCountLike.setText(like + "");
         lblCountDislike.setText(dislike + "");
         lblTime.setText("4 giờ trước");
-
+        System.out.println(AVT);
         lblAVT.setBorder(a);
-        lblAVT.setIcon(new ImageIcon(getClass().getResource("/img/" + AVT)));
+        lblAVT.setIcon(new ImageIcon(getClass().getResource(AVT)));
     }
 
     /**
@@ -111,13 +118,14 @@ public class CommentItem extends javax.swing.JPanel {
 
     private void lblLikeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLikeMouseClicked
         likeCheck = !likeCheck;
+        CommentInteraction item = ciDao.selectByUser(Login.user.getUserID(), data.getCommentID());
         if (likeCheck == true && dislikeCheck == true) {
             dislikeCheck = !dislikeCheck;
 
             if (dislikeCheck) {
                 lblDislike.setIcon(new ImageIcon(getClass().getResource("/img/DislikeIcon_Selected.png")));
-            int likeCount = Integer.parseInt(lblCountDislike.getText());
-            lblCountDislike.setText((likeCount + 1) + "");
+                int likeCount = Integer.parseInt(lblCountDislike.getText());
+                lblCountDislike.setText((likeCount + 1) + "");
             } else {
                 lblDislike.setIcon(new ImageIcon(getClass().getResource("/img/DislikeIcon.png")));
                 int likeCount = Integer.parseInt(lblCountDislike.getText());
@@ -130,28 +138,39 @@ public class CommentItem extends javax.swing.JPanel {
             lblLike.setIcon(new ImageIcon(getClass().getResource("/img/LikeIcon_Selected.png")));
             int likeCount = Integer.parseInt(lblCountLike.getText()) + 1;
             lblCountLike.setText((likeCount) + "");
+            if (item == null) {
+                ciDao.insert(new CommentInteraction(data.getCommentID(), Login.user.getUserID(), true, false));
+            } else {
+                item.setLiked(true);
+                ciDao.update(item);
+            }
         } else {
             lblLike.setIcon(new ImageIcon(getClass().getResource("/img/LikeIcon.png")));
             int likeCount = Integer.parseInt(lblCountLike.getText()) - 1;
             lblCountLike.setText((likeCount) + "");
+            if (item != null) {
+                ciDao.deleteByUser(Login.user.getUserID(), data.getCommentID());
+            }
 
-        }
-        js.repaint();
     }//GEN-LAST:event_lblLikeMouseClicked
+        js.repaint();
+        js.invalidate();
+    }
 
     private void lblDislikeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDislikeMouseClicked
+        CommentInteraction item = ciDao.selectByUser(Login.user.getUserID(), data.getCommentID());
         dislikeCheck = !dislikeCheck;
         if (likeCheck == true && dislikeCheck == true) {
             likeCheck = !likeCheck;
 
             if (likeCheck) {
                 lblLike.setIcon(new ImageIcon(getClass().getResource("/img/LikeIcon_Selected.png")));
-            int likeCount = Integer.parseInt(lblCountLike.getText()) + 1;
-            lblCountLike.setText((likeCount) + "");
+                int likeCount = Integer.parseInt(lblCountLike.getText()) + 1;
+                lblCountLike.setText((likeCount) + "");
             } else {
                 lblLike.setIcon(new ImageIcon(getClass().getResource("/img/LikeIcon.png")));
-            int likeCount = Integer.parseInt(lblCountLike.getText()) - 1;
-            lblCountLike.setText((likeCount) + "");
+                int likeCount = Integer.parseInt(lblCountLike.getText()) - 1;
+                lblCountLike.setText((likeCount) + "");
             }
 
         }
@@ -159,14 +178,38 @@ public class CommentItem extends javax.swing.JPanel {
             lblDislike.setIcon(new ImageIcon(getClass().getResource("/img/DislikeIcon_Selected.png")));
             int likeCount = Integer.parseInt(lblCountDislike.getText());
             lblCountDislike.setText((likeCount + 1) + "");
+            if (item == null) {
+                ciDao.insert(new CommentInteraction(data.getCommentID(), Login.user.getUserID(), false, false));
+            } else {
+                item.setLiked(false);
+                ciDao.update(item);
+            }
         } else {
             lblDislike.setIcon(new ImageIcon(getClass().getResource("/img/DislikeIcon.png")));
             int likeCount = Integer.parseInt(lblCountDislike.getText());
             lblCountDislike.setText((likeCount - 1) + "");
+            if (item != null) {
+                ciDao.deleteByUser(Login.user.getUserID(), data.getCommentID());
+            }
         }
         js.repaint();
+        js.invalidate();
     }//GEN-LAST:event_lblDislikeMouseClicked
 
+    public void loadDataCommentIn() {
+        CommentInteraction item = ciDao.selectByUser(Login.user.getUserID(), data.getCommentID());
+        if (item != null) {
+            likeCheck = item.isLiked();
+            dislikeCheck = !item.isLiked();
+            if (item.isLiked()) {
+                lblDislike.setIcon(new ImageIcon(getClass().getResource("/img/DislikeIcon.png")));
+                lblLike.setIcon(new ImageIcon(getClass().getResource("/img/LikeIcon_Selected.png")));
+            } else {
+                lblLike.setIcon(new ImageIcon(getClass().getResource("/img/LikeIcon.png")));
+                lblDislike.setIcon(new ImageIcon(getClass().getResource("/img/DislikeIcon_Selected.png")));
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private model.borderImage lblAVT;

@@ -65,9 +65,9 @@ public class UserDAO extends SwaveDAO<User, String> {
                 entity.setFullname(rs.getString(2));
                 entity.setBirthDate(rs.getDate(3));
                 entity.setGender(rs.getBoolean(4));
-                entity.setEmail(rs.getString(4));
-                entity.setAvt(rs.getString(4));
-                entity.setAccount(rs.getString(4));
+                entity.setEmail(rs.getString(5));
+                entity.setAvt(rs.getString(6));
+                entity.setAccount(rs.getString(7));
                 list.add(entity);
             }
         } catch (Exception e) {

@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
+import swave.Login;
 import swave.MainFrame;
 
 /**
@@ -30,6 +31,7 @@ public class CommentPane extends javax.swing.JPanel {
     UserDAO uDao = new UserDAO();
     List<Comment> cList = new ArrayList<>();
     List<CommentInteraction> ciByCmtIDList = new ArrayList<>();
+    public MainFrame main;
 
     public CommentPane() {
         initComponents();
@@ -39,18 +41,25 @@ public class CommentPane extends javax.swing.JPanel {
     public void addComment(Comment data) {
         User uEntity = uDao.selectByIDUser(data.getUserID());
         ciByCmtIDList = ciDao.selectByCMId(data.getCommentID());
+
         int like = 0;
         int dislike = 0;
-        for (CommentInteraction commentInteraction : ciByCmtIDList) {
-            if (commentInteraction.isLiked()) {
-                like++;
-            } else {
-                dislike++;
+        if (ciByCmtIDList != null) {
+            for (CommentInteraction commentInteraction : ciByCmtIDList) {
+                if (commentInteraction.isLiked()) {
+                    like++;
+                } else {
+                    dislike++;
+                }
             }
         }
+        System.out.println(uEntity.getAvt());
         CommentItem item = new CommentItem(uEntity.getFullname(), data.getContent(), like, dislike, uEntity.getAvt());
         item.js = jScrollPane1;
+        item.data = data;
+        item.loadDataCommentIn();
         pnlComments.add(item);
+
         if (pnlComments.getComponentCount() > 4) {
             pnlComments.setPreferredSize(new Dimension(620, pnlComments.getHeight() + 113));
         }
@@ -166,7 +175,13 @@ public class CommentPane extends javax.swing.JPanel {
 
     private void btnSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSendMouseClicked
         String content = txtComment.getText();
-//        addComment(new Comment(, PROPERTIES, content, commentDate, HEIGHT, ERROR)"Nguyễn Văn Sĩ", content, 0, 0, "AVT.png");
+        Comment item = new Comment();
+        item.setContent(content);
+        item.setUserID(Login.user.getUserID());
+        item.setSongID(main.getToolPlay1().getData().getSongID());
+        cDao.insert(item);
+        txtComment.setText("");
+        loadDataComment();
     }//GEN-LAST:event_btnSendMouseClicked
 
     private void txtCommentCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCommentCaretUpdate
@@ -178,11 +193,17 @@ public class CommentPane extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCommentCaretUpdate
 
     public void loadDataComment() {
-        cList = cDao.selectAll();
+        cList = cDao.selectAllBySong(main.getToolPlay1().getData().getSongID());
         pnlComments.removeAll();
-        for (Comment comment : cList) {
-            addComment(comment);
+        pnlComments.setPreferredSize(new Dimension(620, 544));
+        if (cList != null) {
+            for (Comment comment : cList) {
+                addComment(comment);
+            }
+            lblCountComment.setText(cList.size() + " bình luận");
         }
+
+        repaint();
     }
 
 

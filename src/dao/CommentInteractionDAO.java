@@ -81,4 +81,16 @@ public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentI
         }
         return list;
     }
+
+    public void deleteByUser(int userId, int commentID) {
+        JdbcHelper.update(DELETE_SQL, commentID, userId);
+    }
+
+    public CommentInteraction selectByUser(int userId, int commentID) {
+        List<CommentInteraction> list = selectSql(SELECTBYID_SQL, commentID, userId);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }
