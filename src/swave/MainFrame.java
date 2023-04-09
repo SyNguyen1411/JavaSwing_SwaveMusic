@@ -3,7 +3,6 @@ package swave;
 import Tien.ui.ChangePassword;
 import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
-import component.EventClick;
 import component.EventItem;
 import entity.PlayList;
 import entity.Search;
@@ -116,7 +115,13 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(pnlComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 43, -1, -1));
+
+        pnlComment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCommentMouseClicked(evt);
+            }
+        });
+        getContentPane().add(pnlComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1532, 150));
@@ -163,6 +168,10 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlCommentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCommentMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlCommentMouseClicked
 
     /**
      * @param args the command line arguments
@@ -287,7 +296,7 @@ public class MainFrame extends javax.swing.JFrame {
         //add list song to pnl songList
         //------------------------------------
         //add song to panel main
-        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
+        songList.add(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Khuon-Mat-Dang-Thuong-Team-Son-Tung-M-TP-Slim-V-DJ-Trang-Moon-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "/mp3/Chay-Ngay-Di-Son-Tung-M-TP.mp3", true, 1));
         songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
@@ -355,6 +364,10 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.selectRunning(true);
                 toolPlay1.fillData(song);
                 toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -380,6 +393,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
             }
         });
 
@@ -392,9 +409,13 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
                 pnlMainScreen.getPnlTrendingSongList().setRunningSong(com);
-                songItem.selectRunning(true);
+                songItem.selectRunning(true);               
                 toolPlay1.fillData(song);
                 toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -420,6 +441,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
             }
         });
 
@@ -434,9 +459,12 @@ public class MainFrame extends javax.swing.JFrame {
                 songItem.getLblWave().setVisible(true);
                 pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
-
                 toolPlay1.fillData(song);
                 toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -462,6 +490,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void itemClick(Search data) {
             }
         });
 
@@ -482,16 +514,19 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
+
+            @Override
+            public void itemClick(Search data) {
+            }
         });
-        
+
         // Add sự kiện khi chọn bài hát trong bài hát trending
         pnlMainScreen.setEventItem(new EventItem() {
             @Override
             public void clickEvent(Component com, Song song) {
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardTrending");
-                SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(song.getSongID()-1);
+                SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(song.getSongID() - 1);
                 itemSong = songItem;
-
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblIconPlay().setVisible(false);
                 songItem.getLblWave().setVisible(true);
@@ -500,6 +535,10 @@ public class MainFrame extends javax.swing.JFrame {
 
                 toolPlay1.fillData(song);
                 toolPlay1.getLblTimeStart().setText(songItem.getLblTime().getText());
+                toolPlay1.songItem = songItem;
+                toolPlay1.getSlMusic().setMinimum(0);
+                toolPlay1.getSlMusic().setValue(0);
+                toolPlay1.getSlMusic().setMaximum(songItem.minutetotalLength * 60 + songItem.secondTotalLength);
                 toolPlay1.revalidate();
                 System.out.println("fill successfully");
                 if (toolPlay1.player != null) {
@@ -511,7 +550,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 toolPlay1.setPause(-1);
                 toolPlay1.runningSong();
-                toolPlay1.setRunning(true); 
+                toolPlay1.setRunning(true);
             }
 
             @Override
@@ -526,6 +565,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             @Override
             public void ExitEvent(Component com, Song song, MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void itemClick(Search data) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
@@ -640,9 +684,6 @@ public class MainFrame extends javax.swing.JFrame {
                 menuBar.getPnlMenu().revalidate();
             }
         });
-        
-        
-        
 
         toolBar.getFindTextField().addMouseListener(new MouseAdapter() {
             @Override
@@ -692,7 +733,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        search.addEventClick(new EventClick() {
+        search.addEventClick(new EventItem() {
             @Override
             public void itemClick(Search data) {
                 menu.setVisible(false);
@@ -715,6 +756,22 @@ public class MainFrame extends javax.swing.JFrame {
                     pnlSearch.getPnlSearchAll().addSong(item);
                 }
                 repaint();
+            }
+
+            @Override
+            public void clickEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
         });
     }
@@ -741,8 +798,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         }
     }
-    
-    
 
     public CardLayout getC() {
         return c;
@@ -975,12 +1030,28 @@ public class MainFrame extends javax.swing.JFrame {
         menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
         menu.add(search);
         menu.setFocusable(false);
-        search.addEventClick(new EventClick() {
+        search.addEventClick(new EventItem() {
             @Override
             public void itemClick(Search data) {
                 menu.setVisible(false);
                 toolBar.getFindTextField().setText(data.getText());
 
+            }
+
+            @Override
+            public void clickEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void clickEvent(Component com, PlayList playList) {
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
         });
     }

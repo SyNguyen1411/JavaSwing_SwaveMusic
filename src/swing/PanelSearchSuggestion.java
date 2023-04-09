@@ -5,7 +5,7 @@
  */
 package swing;
 
-import component.EventClick;
+import component.EventItem;
 import entity.Search;
 import java.awt.Color;
 import java.awt.Insets;
@@ -24,9 +24,9 @@ import net.miginfocom.swing.MigLayout;
  */
 public class PanelSearchSuggestion extends javax.swing.JPanel {
 
-    private EventClick event;
+    private EventItem event;
 
-    public void addEventClick(EventClick event) {
+    public void addEventClick(EventItem event) {
         this.event = event;
     }
 

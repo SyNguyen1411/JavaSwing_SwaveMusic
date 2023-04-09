@@ -1,5 +1,6 @@
 package swing;
 
+import component.Slidebar;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -7,6 +8,8 @@ import javax.swing.JSlider;
 import entity.Song;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +17,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.Port;
+//import javax.sound.sampled.LineUnavailableException;
+//import javax.sound.sampled.Mixer;
+//import javax.sound.sampled.Port;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import swave.MainFrame;
@@ -35,6 +51,7 @@ public class toolPlay extends javax.swing.JPanel {
     boolean comment = false;
 
     private Song data;
+    public SongItem songItem;
     public MainFrame main;
     private File f;
     private FileInputStream fi;
@@ -42,6 +59,9 @@ public class toolPlay extends javax.swing.JPanel {
     public Player player;
     private long totalTime;
     private long pause = -1;
+    private long totalByte;
+    Timer timeSongRunning;
+    long time;
 
     private Runnable play = new Runnable() {
         @Override
@@ -76,6 +96,8 @@ public class toolPlay extends javax.swing.JPanel {
 
         }
     };
+    private int loading;
+    private long timePause;
 
     public boolean isShuffle() {
         return shuffle;
@@ -110,11 +132,11 @@ public class toolPlay extends javax.swing.JPanel {
     }
 
     public JLabel getLblLibary() {
-        return lblLibary;
+        return lblVolunm;
     }
 
     public void setLblLibary(JLabel lblLibary) {
-        this.lblLibary = lblLibary;
+        this.lblVolunm = lblLibary;
     }
 
     public JLabel getLblLibary1() {
@@ -223,6 +245,7 @@ public class toolPlay extends javax.swing.JPanel {
 
     public toolPlay() {
         initComponents();
+        setVolunm(slidebar2.getValue());
     }
 
     public long getPause() {
@@ -255,9 +278,9 @@ public class toolPlay extends javax.swing.JPanel {
         lblPrev = new javax.swing.JLabel();
         lblShuffel = new javax.swing.JLabel();
         lblLyrics = new javax.swing.JLabel();
-        lblLibary = new javax.swing.JLabel();
+        lblVolunm = new javax.swing.JLabel();
         lblLibary1 = new javax.swing.JLabel();
-        slidebar1 = new component.Slidebar();
+        slMusic = new component.Slidebar();
         slidebar2 = new component.Slidebar();
         lblAVTSong = new components.borderImage();
 
@@ -358,9 +381,9 @@ public class toolPlay extends javax.swing.JPanel {
         });
         add(lblLyrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 64, -1, -1));
 
-        lblLibary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/soundLow.png"))); // NOI18N
-        lblLibary.setPreferredSize(new java.awt.Dimension(20, 20));
-        add(lblLibary, new org.netbeans.lib.awtextra.AbsoluteConstraints(1384, 65, -1, -1));
+        lblVolunm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/soundLow.png"))); // NOI18N
+        lblVolunm.setPreferredSize(new java.awt.Dimension(20, 20));
+        add(lblVolunm, new org.netbeans.lib.awtextra.AbsoluteConstraints(1384, 65, 30, -1));
 
         lblLibary1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/liblary.png"))); // NOI18N
         lblLibary1.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -370,8 +393,29 @@ public class toolPlay extends javax.swing.JPanel {
             }
         });
         add(lblLibary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1346, 64, -1, -1));
-        add(slidebar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 95, 680, 10));
-        add(slidebar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 65, 90, -1));
+
+        slMusic.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slMusicStateChanged(evt);
+            }
+        });
+        slMusic.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                slMusicMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                slMusicMouseReleased(evt);
+            }
+        });
+        add(slMusic, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 95, 680, 10));
+
+        slidebar2.setValue(50);
+        slidebar2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slidebar2StateChanged(evt);
+            }
+        });
+        add(slidebar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 65, 90, -1));
 
         lblAVTSong.setSizeImage(new int[] {100, 100});
         add(lblAVTSong, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 25, 100, 100));
@@ -395,6 +439,8 @@ public class toolPlay extends javax.swing.JPanel {
                 main.itemSong.getLblWave().setVisible(running);
                 main.itemSong.getLblStart().setVisible(!running);
             } catch (IOException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
                 Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -436,11 +482,71 @@ public class toolPlay extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lblCmtMouseClicked
 
+    private void slMusicStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slMusicStateChanged
+        System.out.println(slMusic.getValue());
+        loading = slMusic.getValue();
+    }//GEN-LAST:event_slMusicStateChanged
+
+    private void slMusicMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slMusicMousePressed
+
+    }//GEN-LAST:event_slMusicMousePressed
+
+    private void slMusicMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slMusicMouseReleased
+
+        slMusic.setValue(loading);
+        timePause = loading * time;
+        System.out.println(timePause);
+        try {
+            fi.skip(timePause);
+            pause = fi.available();
+            player.close();
+            Thread runningThread = new Thread(play);
+            runningThread.start();
+        } catch (IOException ex) {
+            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_slMusicMouseReleased
+
+    private void slidebar2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slidebar2StateChanged
+        setGain(slidebar2.getValue());
+        System.out.println(slidebar2.getValue());
+        setVolunm(slidebar2.getValue());
+    }//GEN-LAST:event_slidebar2StateChanged
+
+    public void setGain(float ctrl) {
+        try {
+            Mixer.Info[] infos = AudioSystem.getMixerInfo();
+            for (Mixer.Info info : infos) {
+                Mixer mixer = AudioSystem.getMixer(info);
+                if (mixer.isLineSupported(Port.Info.SPEAKER)) {
+                    Port port = (Port) mixer.getLine(Port.Info.SPEAKER);
+                    port.open();
+                    if (port.isControlSupported(FloatControl.Type.VOLUME)) {
+                        FloatControl volume = (FloatControl) port.getControl(FloatControl.Type.VOLUME);
+                        volume.setValue(ctrl / 100);
+                    }
+//                    port.close();
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro\n" + e);
+        }
+    }
+
+    public void setVolunm(int a) {
+        if (a == 0) {
+            lblVolunm.setIcon(new ImageIcon(getClass().getResource("/img/mute.png")));
+        } else if (a > 0 && a <= 50) {
+            lblVolunm.setIcon(new ImageIcon(getClass().getResource("/img/soundLow.png")));
+        } else if (a > 50) {
+            lblVolunm.setIcon(new ImageIcon(getClass().getResource("/img/volunmMax.png")));
+        }
+    }
+
     public void setRunning(boolean check) {
         this.running = check;
         if (check) {
             lblRun.setIcon(new ImageIcon(getClass().getResource("/img/playing.png")));
-
         } else {
             lblRun.setIcon(new ImageIcon(getClass().getResource("/img/stopSong.png")));
         }
@@ -478,6 +584,14 @@ public class toolPlay extends javax.swing.JPanel {
         }
     }
 
+    public Slidebar getSlMusic() {
+        return slMusic;
+    }
+
+    public void setSlMusic(Slidebar slMusic) {
+        this.slMusic = slMusic;
+    }
+
     public void fillData(Song data) {
         this.data = data;
         lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/song/" + data.getAVT())));
@@ -489,10 +603,41 @@ public class toolPlay extends javax.swing.JPanel {
 
     public void runningSong() {
         Thread runningThread = new Thread(play);
+        timeSongRunning = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    setRunningTime();
+                } catch (IOException ex) {
+                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         runningThread.start();
+        timeSongRunning.start();
     }
 
-    public void pauseSong() throws IOException {
+    public void setRunningTime() throws IOException, InterruptedException {
+        System.out.println(totalTime / (songItem.minutetotalLength * 60 + songItem.secondTotalLength));
+        time = totalTime / (songItem.minutetotalLength * 60 + songItem.secondTotalLength);
+        try {
+            pause = fi.available() / time;
+            slMusic.setValue((int) (slMusic.getMaximum() - (int) pause));
+            int minute = (slMusic.getMaximum() - (int) pause) / 60;
+            int sec = (slMusic.getMaximum() - (int) pause) % 60;
+            if (sec >= 10) {
+                lblTimeStart1.setText("0" + minute + ":" + sec);
+            } else {
+                lblTimeStart1.setText("0" + minute + ":" + "0" + sec);
+            }
+        } catch (IOException ex) {
+            System.out.println("Kết thúc bài hát");
+        }
+    }
+
+    public void pauseSong() throws IOException, InterruptedException {
         pause = fi.available();
         player.close();
     }
@@ -508,10 +653,10 @@ public class toolPlay extends javax.swing.JPanel {
         player.play();
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private components.borderImage lblAVTSong;
     private javax.swing.JLabel lblCmt;
-    private javax.swing.JLabel lblLibary;
     private javax.swing.JLabel lblLibary1;
     private javax.swing.JLabel lblLoveSong;
     private javax.swing.JLabel lblLyrics;
@@ -524,8 +669,9 @@ public class toolPlay extends javax.swing.JPanel {
     private javax.swing.JLabel lblSinger;
     private javax.swing.JLabel lblTimeStart;
     private javax.swing.JLabel lblTimeStart1;
+    private javax.swing.JLabel lblVolunm;
     private javax.swing.JPanel pnlItemPlay;
-    private component.Slidebar slidebar1;
+    private component.Slidebar slMusic;
     private component.Slidebar slidebar2;
     // End of variables declaration//GEN-END:variables
 }

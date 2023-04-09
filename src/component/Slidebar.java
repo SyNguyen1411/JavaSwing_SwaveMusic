@@ -42,6 +42,7 @@ public class Slidebar extends JSlider {
             }
 
         });
+        this.setValue(0);
 
     }
 
