@@ -48,7 +48,7 @@ public class toolPlay extends javax.swing.JPanel {
     boolean replay = false;
     boolean lyrics = false;
     boolean library = false;
-    boolean comment = false;
+    public boolean comment = false;
 
     private Song data;
     public SongItem songItem;

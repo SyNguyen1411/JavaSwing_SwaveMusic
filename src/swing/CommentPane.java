@@ -9,6 +9,7 @@ import entity.User;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class CommentPane extends javax.swing.JPanel {
     List<Comment> cList = new ArrayList<>();
     List<CommentInteraction> ciByCmtIDList = new ArrayList<>();
     public MainFrame main;
+    public CommentPane that = this;
 
     public CommentPane() {
         initComponents();
@@ -56,6 +58,7 @@ public class CommentPane extends javax.swing.JPanel {
         System.out.println(uEntity.getAvt());
         CommentItem item = new CommentItem(uEntity.getFullname(), data.getContent(), like, dislike, uEntity.getAvt());
         item.js = jScrollPane1;
+        item.getChildrenComment1().pane = this;
         item.data = data;
         item.loadDataCommentIn();
         pnlComments.add(item);
@@ -168,6 +171,16 @@ public class CommentPane extends javax.swing.JPanel {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         this.setVisible(false);
+        main.getToolPlay1().comment = !main.getToolPlay1().comment;
+        main.getToolPlay1().setComment(main.getToolPlay1().comment);
+        if (main.getToolPlay1().comment) {
+            main.getPnlComment().loadDataComment();
+            main.getPnlComment().setVisible(true);
+
+        } else {
+            main.getPnlComment().setVisible(false);
+
+        }
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
