@@ -7,6 +7,7 @@ package Tien.ui;
 import dao.AccountDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import utils.Auth;
 
 /**
  *
@@ -195,10 +196,10 @@ public class ChangePass extends javax.swing.JPanel {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
-        if (!txtPassOld.getText().equals("nhom2") || txtPassOld.getText().equals("")) {
+        if (!Auth.user.getPassword().equals(txtPassOld.getText()) || txtPassOld.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mật khẩu cũ sai!");
             txtPassOld.requestFocus();
-        } else if (txtPassOld.getText().equals("nhom2")) {
+        } else if (Auth.user.getPassword().equals(txtPassOld.getText())) {
             if (txtPass.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Nhập mật khẩu mới đi");
                 txtPass.requestFocus();
@@ -207,7 +208,7 @@ public class ChangePass extends javax.swing.JPanel {
                 txtPass1.requestFocus();
             } else {
                 String mk = txtPass.getText();
-                String ten = "nhom2";
+                String ten = Auth.user.getUserID();
                 dao.updatePassword(ten, mk);
                 JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
             }

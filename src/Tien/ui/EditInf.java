@@ -4,19 +4,39 @@
  */
 package Tien.ui;
 
+import dao.UserDAO;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import static swave.Login.user;
+import utils.Auth;
 
 /**
  *
  * @author HP
  */
 public class EditInf extends javax.swing.JPanel {
-
-    /**
-     * Creates new form inf
-     */
+    
+    private UserDAO uDao = new UserDAO();
+    
     public EditInf() {
         initComponents();
+        pnlEditAvt.setVisible(false);
+        setInf();
+    }
+    
+    public void setInf() {
+        user = uDao.selectById(Auth.user.getUserID());
+        lblName.setText(user.getFullname());
+        txtName.setText(lblName.getText());
+        cboDay.setSelectedItem(user.getBirthDate().getDay());
+        cboMonth.setSelectedItem(user.getBirthDate().getMonth());
+        cboYear.setSelectedItem(user.getBirthDate().getYear());
+        if (user.isGender()) {
+            rdoMale.setSelected(true);
+        } else {
+            rdoFemale.setSelected(true);
+        }
+        txtMail.setText(user.getEmail());
     }
 
     /**
@@ -30,10 +50,14 @@ public class EditInf extends javax.swing.JPanel {
 
         jLabel4 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        pnlEditAvt = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        lblChooseAvatar = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblAvt = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblEditAvt = new javax.swing.JLabel();
         lblEdit = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -53,16 +77,51 @@ public class EditInf extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         txtMail = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
 
         jLabel4.setBackground(new java.awt.Color(55, 2, 53));
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlEditAvt.setBackground(new java.awt.Color(0, 0, 0));
+        pnlEditAvt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlEditAvtMouseExited(evt);
+            }
+        });
+        pnlEditAvt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 33.png"))); // NOI18N
+        jLabel11.setText("Chụp ảnh");
+        jLabel11.setPreferredSize(new java.awt.Dimension(136, 24));
+        pnlEditAvt.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 140, 30));
+
+        lblChooseAvatar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblChooseAvatar.setForeground(new java.awt.Color(255, 255, 255));
+        lblChooseAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 32.png"))); // NOI18N
+        lblChooseAvatar.setText("Chọn file ảnh");
+        lblChooseAvatar.setPreferredSize(new java.awt.Dimension(136, 24));
+        lblChooseAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblChooseAvatarMouseClicked(evt);
+            }
+        });
+        pnlEditAvt.add(lblChooseAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, 30));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 35 (1).png"))); // NOI18N
+        pnlEditAvt.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 90));
+
+        add(pnlEditAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 200, 90));
+
         jPanel1.setBackground(new java.awt.Color(55, 2, 53));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
+        lblAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
+        jPanel1.add(lblAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
 
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
@@ -70,8 +129,13 @@ public class EditInf extends javax.swing.JPanel {
         lblName.setPreferredSize(new java.awt.Dimension(136, 58));
         jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 630, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-edit-48 3.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
+        lblEditAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-edit-48 3.png"))); // NOI18N
+        lblEditAvt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditAvtMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblEditAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
         lblEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnEdit.png"))); // NOI18N
         lblEdit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -215,6 +279,19 @@ public class EditInf extends javax.swing.JPanel {
         jPanel2.add(jPanel7);
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 1283, 345));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditMouseClicked
@@ -222,18 +299,45 @@ public class EditInf extends javax.swing.JPanel {
         if (txtName.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Chưa nhập tên!");
             txtName.requestFocus();
-        }else if (cboDay.getSelectedIndex()==0||cboMonth.getSelectedIndex()==0||cboYear.getSelectedIndex()==0) {
+        } else if (cboDay.getSelectedIndex() == 0 || cboMonth.getSelectedIndex() == 0 || cboYear.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Chưa chọn ngày/tháng/năm sinh!");
-        }else if (!rdoMale.isSelected()&&!rdoFemale.isSelected()) {
+        } else if (!rdoMale.isSelected() && !rdoFemale.isSelected()) {
             JOptionPane.showMessageDialog(this, "Chưa chọn giới tính!");
-        }else if (txtMail.getText().equals("")) {
+        } else if (txtMail.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Chưa nhập email!");
             txtMail.requestFocus();
-        }else{
-            lblName.setText(txtName.getText());
+        } else {
+            user.setFullname(txtName.getText());
+//            uDao.update(user);
+            lblName.setText(user.getFullname());
             JOptionPane.showMessageDialog(this, "Chỉnh sửa thông tin thành công");
         }
     }//GEN-LAST:event_lblEditMouseClicked
+
+    private void lblEditAvtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditAvtMouseClicked
+        pnlEditAvt.setVisible(true);
+    }//GEN-LAST:event_lblEditAvtMouseClicked
+
+    private void lblChooseAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChooseAvatarMouseClicked
+        pnlEditAvt.setVisible(false);
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(null);
+    }//GEN-LAST:event_lblChooseAvatarMouseClicked
+
+    private void pnlEditAvtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlEditAvtMouseExited
+        double x = evt.getXOnScreen();
+        double y = evt.getYOnScreen();
+        double minXLocation = pnlEditAvt.getLocation().getX() + 320;
+        double maxXLocation = pnlEditAvt.getLocation().getX() + pnlEditAvt.getWidth() + 320;
+        double minYLocation = pnlEditAvt.getLocation().getY();
+        double maxYLocation = pnlEditAvt.getLocation().getY() + pnlEditAvt.getHeight();
+        System.out.println(x + " - " + y);
+        System.out.println(minXLocation + " _ " + maxXLocation);
+        if (!(x > minXLocation && x < maxXLocation)
+                || !(y > minYLocation && y < maxYLocation)) {
+            pnlEditAvt.setVisible(false);
+        }
+    }//GEN-LAST:event_pnlEditAvtMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,10 +345,10 @@ public class EditInf extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboDay;
     private javax.swing.JComboBox<String> cboMonth;
     private javax.swing.JComboBox<String> cboYear;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -256,8 +360,13 @@ public class EditInf extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel lblAvt;
+    private javax.swing.JLabel lblChooseAvatar;
     private javax.swing.JLabel lblEdit;
+    private javax.swing.JLabel lblEditAvt;
     private javax.swing.JLabel lblName;
+    private javax.swing.JPanel pnlEditAvt;
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTextField txtMail;
