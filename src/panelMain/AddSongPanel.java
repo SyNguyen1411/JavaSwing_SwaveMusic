@@ -1,16 +1,28 @@
 package panelMain;
 
 import component.EventItem;
+import dao.AccountDAO;
+import dao.SongDAO;
+import entity.Song;
+import entity.User;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
-import entity.Song;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import swing.utilcomponent.ScrollBarCustom;
+import utils.MsgBox;
 
 /**
  *
@@ -21,11 +33,17 @@ public class AddSongPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddSong
      */
-    
     private EventItem eventLblEditSong;
     private EventItem eventLblDeleteSong;
     private EventItem eventBtnAdd;
     private EventItem eventBtnDelete;
+    private SongDAO sdao = new SongDAO();
+    private AccountDAO adao = new AccountDAO();
+    private User user;
+    private String songName = "";
+    private String songSinger = "";
+    private ArrayList<Song> songList = new ArrayList<>();
+    private Song editSong;
 
     public EventItem getEventBtnAdd() {
         return eventBtnAdd;
@@ -58,10 +76,23 @@ public class AddSongPanel extends javax.swing.JPanel {
     public void setEventLblDeleteSong(EventItem eventLblDeleteSong) {
         this.eventLblDeleteSong = eventLblDeleteSong;
     }
-    
+
     public AddSongPanel() {
+        try {
+            this.editSong = new Song();
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         init();
+        //account = adao.selectById(Auth.user.getUserID());
+        user = new User();
+        user.setUserID(1);
+        clearForm(1);
+        clearForm(2);
+        fillTable();
     }
 
     /**
@@ -112,7 +143,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         lblPlaceHolderAddGerne = new javax.swing.JLabel();
         lblBorder4 = new javax.swing.JLabel();
         pnlAddInfo = new javax.swing.JPanel();
-        lblAddPicDemo = new javax.swing.JLabel();
+        lblAddPicDemo = new model.borderImage();
         lblAddDemoSong = new javax.swing.JLabel();
         btnAddSong = new swing.utilcomponent.Button();
         pnlSubEditSong = new javax.swing.JPanel();
@@ -146,7 +177,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         lblPlaceHolderEditGerne = new javax.swing.JLabel();
         lblBorder8 = new javax.swing.JLabel();
         pnlEditInfo = new javax.swing.JPanel();
-        lblEditPicDemo = new javax.swing.JLabel();
+        lblEditPicDemo = new model.borderImage();
         lblEditDemoSong = new javax.swing.JLabel();
         btnEditSong = new swing.utilcomponent.Button();
         pnlSubListSong = new javax.swing.JPanel();
@@ -486,13 +517,22 @@ public class AddSongPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         pnlAddInfo.setLayout(flowLayout1);
 
-        lblAddPicDemo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddPicDemo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/song/Midnights_-_Taylor_Swift.png"))); // NOI18N
-        lblAddPicDemo.setToolTipText("");
         lblAddPicDemo.setMaximumSize(new java.awt.Dimension(150, 150));
         lblAddPicDemo.setMinimumSize(new java.awt.Dimension(150, 150));
-        lblAddPicDemo.setName(""); // NOI18N
         lblAddPicDemo.setPreferredSize(new java.awt.Dimension(150, 150));
+        lblAddPicDemo.setSizeImage(new int[] {150, 150});
+
+        javax.swing.GroupLayout lblAddPicDemoLayout = new javax.swing.GroupLayout(lblAddPicDemo);
+        lblAddPicDemo.setLayout(lblAddPicDemoLayout);
+        lblAddPicDemoLayout.setHorizontalGroup(
+            lblAddPicDemoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        lblAddPicDemoLayout.setVerticalGroup(
+            lblAddPicDemoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         pnlAddInfo.add(lblAddPicDemo);
 
         lblAddDemoSong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -824,13 +864,22 @@ public class AddSongPanel extends javax.swing.JPanel {
         flowLayout2.setAlignOnBaseline(true);
         pnlEditInfo.setLayout(flowLayout2);
 
-        lblEditPicDemo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEditPicDemo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/song/Midnights_-_Taylor_Swift.png"))); // NOI18N
-        lblEditPicDemo.setToolTipText("");
         lblEditPicDemo.setMaximumSize(new java.awt.Dimension(150, 150));
         lblEditPicDemo.setMinimumSize(new java.awt.Dimension(150, 150));
-        lblEditPicDemo.setName(""); // NOI18N
         lblEditPicDemo.setPreferredSize(new java.awt.Dimension(150, 150));
+        lblEditPicDemo.setSizeImage(new int[] {150, 150});
+
+        javax.swing.GroupLayout lblEditPicDemoLayout = new javax.swing.GroupLayout(lblEditPicDemo);
+        lblEditPicDemo.setLayout(lblEditPicDemoLayout);
+        lblEditPicDemoLayout.setHorizontalGroup(
+            lblEditPicDemoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        lblEditPicDemoLayout.setVerticalGroup(
+            lblEditPicDemoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         pnlEditInfo.add(lblEditPicDemo);
 
         lblEditDemoSong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -903,7 +952,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         pnlListSongInfo.setPreferredSize(new java.awt.Dimension(1073, 59));
         pnlListSongInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblPosition.setText("STT");
+        lblPosition.setText("ID");
         lblPosition.setMaximumSize(new java.awt.Dimension(97, 51));
         lblPosition.setMinimumSize(new java.awt.Dimension(97, 51));
         lblPosition.setName(""); // NOI18N
@@ -977,6 +1026,11 @@ public class AddSongPanel extends javax.swing.JPanel {
 
     private void txtEditGenreCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEditGenreCaretUpdate
         // TODO add your handling code here:
+        if (!txtEditGenre.getText().equals("")) {
+            lblPlaceHolderEditGerne.setText("");
+        } else {
+            lblPlaceHolderEditGerne.setText("Thể loại bài hát");
+        }
     }//GEN-LAST:event_txtEditGenreCaretUpdate
 
     private void txtEditSingerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditSingerActionPerformed
@@ -985,14 +1039,29 @@ public class AddSongPanel extends javax.swing.JPanel {
 
     private void txtEditSingerCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEditSingerCaretUpdate
         // TODO add your handling code here:
+        if (!txtEditSinger.getText().equals("")) {
+            lblPlaceHolderEditSinger.setText("");
+            songSinger = txtEditSinger.getText();
+            setTextLblEditDemoSong();
+        } else {
+            lblPlaceHolderEditSinger.setText("Ca sĩ");
+            songSinger = "";
+            setTextLblEditDemoSong();
+        }
     }//GEN-LAST:event_txtEditSingerCaretUpdate
 
     private void txtEditWriterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditWriterActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_txtEditWriterActionPerformed
 
     private void txtEditWriterCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEditWriterCaretUpdate
         // TODO add your handling code here:
+        if (!txtEditWriter.getText().equals("")) {
+            lblPlaceHolderEditWriter.setText("");
+        } else {
+            lblPlaceHolderEditWriter.setText("Nhạc sĩ");
+        }
     }//GEN-LAST:event_txtEditWriterCaretUpdate
 
     private void txtEditSongNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditSongNameActionPerformed
@@ -1001,6 +1070,15 @@ public class AddSongPanel extends javax.swing.JPanel {
 
     private void txtEditSongNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEditSongNameCaretUpdate
         // TODO add your handling code here:
+        if (!txtEditSongName.getText().equals("")) {
+            lblPlaceHolderEditSongName.setText("");
+            songName = txtEditSongName.getText();
+            setTextLblEditDemoSong();
+        } else {
+            lblPlaceHolderEditSongName.setText("Tên bài hát");
+            songName ="";
+            setTextLblEditDemoSong();
+        }
     }//GEN-LAST:event_txtEditSongNameCaretUpdate
 
     private void txtAddGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddGenreActionPerformed
@@ -1024,8 +1102,12 @@ public class AddSongPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!txtAddSinger.getText().equals("")) {
             lblPlaceHolderAddSinger.setText("");
+            songSinger = txtAddSinger.getText();
+            setTextLblAddDemoSong();
         } else {
             lblPlaceHolderAddSinger.setText("Ca sĩ");
+            songSinger = "";
+            setTextLblAddDemoSong();
         }
     }//GEN-LAST:event_txtAddSingerCaretUpdate
 
@@ -1050,42 +1132,132 @@ public class AddSongPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!txtAddSongName.getText().equals("")) {
             lblPlaceHolderAddSongName.setText("");
+            songName = txtAddSongName.getText();
+            setTextLblAddDemoSong();
         } else {
+            songName = "";
             lblPlaceHolderAddSongName.setText("Tên bài hát");
+            setTextLblAddDemoSong();
         }
     }//GEN-LAST:event_txtAddSongNameCaretUpdate
 
     private void btnAddLyricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLyricsActionPerformed
         // TODO add your handling code here:
-        
+        JFileChooser fileChooser = new JFileChooser("src/lyrics");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("text file", "txt", "doc", "docx");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                String URL = (String) fileChooser.getSelectedFile().getName();
+                btnAddLyrics.setText(URL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnAddLyricsActionPerformed
 
     private void btnAddPicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPicActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("src/img/song");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("image file", "jpg", "png", "jpeg");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                Song song = new Song();
+                song.setAVT((String) fileChooser.getSelectedFile().getName());
+                btnAddPic.setText(song.getAVT());
+                lblAddPicDemo.setIcon(song.toIcon());
+                repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnAddPicActionPerformed
 
     private void btnAddMP3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMP3ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("src/mp3");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("music file", "mp3");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                String URL = (String) fileChooser.getSelectedFile().getName();
+                btnAddMP3.setText(URL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnAddMP3ActionPerformed
 
     private void btnAddSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSongActionPerformed
         // TODO add your handling code here:
+        addSong();
     }//GEN-LAST:event_btnAddSongActionPerformed
 
     private void btnEditLyricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditLyricsActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("src/lyrics");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("text file", "txt");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                String URL = (String) fileChooser.getSelectedFile().getName();
+                btnEditLyrics.setText(URL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnEditLyricsActionPerformed
 
     private void btnEditPicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPicActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("src/img/song");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("image file", "jpg", "png", "jpeg");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                Song song = new Song();
+                song.setAVT((String) fileChooser.getSelectedFile().getName());
+                btnEditPic.setText(song.getAVT());
+                lblEditPicDemo.setIcon(song.toIcon());
+                repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnEditPicActionPerformed
 
     private void btnEditMP3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditMP3ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("src/mp3");
+
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("music file", "mp3");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                String URL = (String) fileChooser.getSelectedFile().getName();
+                btnEditMP3.setText(URL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnEditMP3ActionPerformed
 
     private void btnEditSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSongActionPerformed
         // TODO add your handling code here:
+        updateSong();
     }//GEN-LAST:event_btnEditSongActionPerformed
 
     private void init() {
@@ -1137,6 +1309,7 @@ public class AddSongPanel extends javax.swing.JPanel {
                 lrpnlAddSong.getComponent(0).setVisible(false);
                 lrpnlAddSong.setPosition(lrpnlAddSong.getComponent(0), 1);
                 lrpnlAddSong.setPosition(pnlSubAddSong, 0);
+                clearForm(1);
                 pnlSubAddSong.setVisible(true);
             }
 
@@ -1161,6 +1334,7 @@ public class AddSongPanel extends javax.swing.JPanel {
                 lrpnlAddSong.getComponent(0).setVisible(false);
                 lrpnlAddSong.setPosition(lrpnlAddSong.getComponent(0), 1);
                 lrpnlAddSong.setPosition(pnlSubEditSong, 0);
+                clearForm(2);
                 pnlSubEditSong.setVisible(true);
             }
 
@@ -1199,8 +1373,6 @@ public class AddSongPanel extends javax.swing.JPanel {
             }
 
         });
-        
-       
 
     }
 
@@ -1433,7 +1605,6 @@ public class AddSongPanel extends javax.swing.JPanel {
         listSongItemAddSongPanel.getLblEdit().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //eventLblEditSong.clickEvent(listSongItemAddSongPanel, song);
                 lblEditSongMenuItem.setForeground(new Color(165, 43, 168));
                 lblAddSongMenuItem.setForeground(new Color(198, 198, 198));
                 lblListSongMenuItem.setForeground(new Color(198, 198, 198));
@@ -1441,7 +1612,8 @@ public class AddSongPanel extends javax.swing.JPanel {
                 lrpnlAddSong.setPosition(lrpnlAddSong.getComponent(0), 1);
                 lrpnlAddSong.setPosition(pnlSubEditSong, 0);
                 pnlSubEditSong.setVisible(true);
-                editSong(song);
+                editSong = song;
+                setEditForm(song);
             }
 
             @Override
@@ -1480,13 +1652,267 @@ public class AddSongPanel extends javax.swing.JPanel {
         pnlListSongDetails.add(listSongItemAddSongPanel, gridBagConstraints);
     }
 
-    public void editSong(Song song) {
+    public void clearForm(int check) {
+        Song newSong;
+        try {
+            newSong = new Song();
+            switch (check) {
+                case 1:
+                    setAddForm(newSong);
+                    break;
+                case 2:
+                    setEditForm(newSong);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
+
+    public void setAddForm(Song song) {
+        txtAddSongName.setText(song.getNameSong());
+        songName = song.getNameSong();
+        txtAddGenre.setText(song.getCategory());
+        txtAddSinger.setText(song.getSinger());
+        songSinger = song.getSinger();
+        txtAddWriter.setText(song.getMusician());
+        if (song.getFileSong().isEmpty()) {
+            btnAddMP3.setText("Chưa có file được chọn");
+        } else {
+            btnAddMP3.setText(song.getFileSong());
+        }
+        if (song.getFileLyrics().isEmpty()) {
+            btnAddLyrics.setText("Chưa có file được chọn");
+        } else {
+            btnAddLyrics.setText(song.getFileLyrics());
+        }
+        if (song.getAVT().isEmpty()) {
+            btnAddPic.setText("Chưa có file được chọn");
+        } else {
+            btnAddPic.setText(song.getAVT());
+        }
+        lblAddPicDemo.setIcon(song.toIcon());
+        setTextLblAddDemoSong();
+    }
+
+    public void setEditForm(Song song) {
+        txtEditSongName.setText(song.getNameSong());
+        songName = song.getNameSong();
+        txtEditGenre.setText(song.getCategory());
+        txtEditSinger.setText(song.getSinger());
+        songSinger = song.getSinger();
+        txtEditWriter.setText(song.getMusician());
+        if (song.getFileSong().isEmpty()) {
+            btnEditMP3.setText("Chưa có file được chọn");
+        } else {
+            btnEditMP3.setText(song.getFileSong());
+        }
+        if (song.getFileLyrics().isEmpty()) {
+            btnEditLyrics.setText("Chưa có file được chọn");
+        } else {
+            btnEditLyrics.setText(song.getFileLyrics());
+        }
+        if (song.getAVT().isEmpty()) {
+            btnEditPic.setText("Chưa có file được chọn");
+        } else {
+            btnEditPic.setText(song.getAVT());
+        }
+        lblEditPicDemo.setIcon(song.toIcon());
+        setTextLblEditDemoSong();
+    }
+
+    public void setTextLblEditDemoSong() {
+        if (songName.isBlank() && songSinger.isBlank()) {
+            lblEditDemoSong.setText(songName);
+        } else if (songName.isBlank() && !songSinger.isBlank()) {
+            lblEditDemoSong.setText(songSinger);
+        } else if (!songName.isBlank() && songSinger.isBlank()) {
+            lblEditDemoSong.setText(songName);
+        } else if (!songName.isBlank() && !songSinger.isBlank()) {
+            lblEditDemoSong.setText(songName + " - " + songSinger);
+        }
+    }
+
+    public void setTextLblAddDemoSong() {
+        if (songName.isBlank() && songSinger.isBlank()) {
+            lblAddDemoSong.setText(songName);
+        } else if (songName.isBlank() && !songSinger.isBlank()) {
+            lblAddDemoSong.setText(songSinger);
+        } else if (!songName.isBlank() && songSinger.isBlank()) {
+            lblAddDemoSong.setText(songName);
+        } else if (!songName.isBlank() && !songSinger.isBlank()) {
+            lblAddDemoSong.setText(songName + " - " + songSinger);
+        }
+    }
+
+    public Song getAddForm() {
+        Song newSong;
+        try {
+            newSong = new Song();
+            newSong.setNameSong(txtAddSongName.getText());
+            newSong.setCategory(txtAddGenre.getText());
+            newSong.setSinger(txtAddSinger.getText());
+            newSong.setMusician(txtAddWriter.getText());
+            newSong.setFileSong(btnAddMP3.getText());
+            newSong.setFileLyrics(btnAddLyrics.getText());
+            newSong.setAVT(btnAddPic.getText());
+            newSong.setUserID(user.getUserID());
+            return newSong;
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Song getEditForm() {
+        Song newSong = editSong;
+        newSong.setNameSong(txtEditSongName.getText());
+        newSong.setCategory(txtEditGenre.getText());
+        newSong.setSinger(txtEditSinger.getText());
+        newSong.setMusician(txtEditWriter.getText());
+        newSong.setFileSong(btnEditMP3.getText());
+        newSong.setFileLyrics(btnEditLyrics.getText());
+        newSong.setAVT(btnEditPic.getText());
+        return newSong;
+
+    }
+
+    public void addSong() {
+        Song song = getAddForm();
+        song.toString();
+        if (isValidated(1)) {
+            try {
+                sdao.insert(song);
+                this.fillTable();
+                this.clearForm(1);
+                MsgBox.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Thêm mới thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateSong() {
+        Song song = getEditForm();
+        if (isValidated(2)) {
+            try {
+                sdao.update(song);
+                this.fillTable();
+                this.clearForm(2);
+                MsgBox.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Cập nhật thất bại!");
+                e.printStackTrace();
+            }
+        }
     }
 
     public void deleteSong(Song song) {
+        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa bài hát này? Có rất là nhiều người đang thưởng thức bài hát của bạn")) {
+            try {
+                sdao.delete(song.getSongID());
+                this.fillTable();
+                MsgBox.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                MsgBox.alert(this, "Xóa thất bại!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillTable() {
+        pnlListSongDetails.removeAll();
+        try {
+            songList = (ArrayList<Song>) sdao.selectAllSongByUserID(user.getUserID());
+            for (Song song : songList) {
+                song.toString();
+                fillPnlListSongDetails(song);
+            }
+            repaint();
+            revalidate();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
 
     }
+
+    private boolean isValidated(int action) {
+
+        switch (action) {
+            case 1:
+                if (btnAddMP3.getText().equalsIgnoreCase("Chưa có file được chọn")) {
+                    MsgBox.alert(this, "Bạn chưa thêm file nhạc!");
+                    return false;
+                }
+                if (btnAddLyrics.getText().equalsIgnoreCase("Chưa có file được chọn")) {
+                    MsgBox.alert(this, "Bạn chưa thêm file lời bài hát!");
+                    return false;
+                }
+                if (btnAddPic.getText().equalsIgnoreCase("Chưa có file được chọn")) {
+                    MsgBox.alert(this, "Bạn chưa thêm file hình!");
+                    return false;
+                }
+                if (txtAddSinger.getText().isBlank()) {
+                    MsgBox.alert(this, "Ca sĩ không được để trống");
+                    return false;
+                }
+                if (txtAddSongName.getText().isBlank()) {
+                    MsgBox.alert(this, "Tên bài hát không được để trống");
+                    return false;
+                }
+                if (txtAddWriter.getText().isBlank()) {
+                    MsgBox.alert(this, "Nhạc sĩ không được để trống");
+                    return false;
+                }
+                if (txtAddGenre.getText().isBlank()) {
+                    MsgBox.alert(this, "Thể loại bài hát không được để trống");
+                    return false;
+                }
+                return true;
+            case 2:
+                if (btnEditMP3.getText().equalsIgnoreCase("Chưa có file được chọn")) {
+                    MsgBox.alert(this, "Bạn chưa thêm file nhạc!");
+                    return false;
+                }
+                if (btnEditLyrics.getText().equalsIgnoreCase("Chưa có file được chọn")) {
+                    MsgBox.alert(this, "Bạn chưa thêm file lời bài hát!");
+                    return false;
+                }
+                if (btnEditPic.getText().equalsIgnoreCase("Chưa có file được chọn")) {
+                    MsgBox.alert(this, "Bạn chưa thêm file hình!");
+                    return false;
+                }
+                if (txtEditSinger.getText().isBlank()) {
+                    MsgBox.alert(this, "Ca sĩ không được để trống");
+                    return false;
+                }
+                if (txtEditSongName.getText().isBlank()) {
+                    MsgBox.alert(this, "Tên bài hát không được để trống");
+                    return false;
+                }
+                if (txtEditWriter.getText().isBlank()) {
+                    MsgBox.alert(this, "Nhạc sĩ không được để trống");
+                    return false;
+                }
+                if (txtEditGenre.getText().isBlank()) {
+                    MsgBox.alert(this, "Thể loại bài hát không được để trống");
+                    return false;
+                }
+                return true;
+            default:
+                throw new AssertionError();
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.utilcomponent.Button btnAddLyrics;
@@ -1506,7 +1932,7 @@ public class AddSongPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblAddMP3;
     private javax.swing.JLabel lblAddNameSong;
     private javax.swing.JLabel lblAddPic;
-    private javax.swing.JLabel lblAddPicDemo;
+    private model.borderImage lblAddPicDemo;
     private javax.swing.JLabel lblAddSinger;
     private javax.swing.JLabel lblAddSongMenuItem;
     private javax.swing.JLabel lblAddWriter;
@@ -1525,7 +1951,7 @@ public class AddSongPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblEditMP3;
     private javax.swing.JLabel lblEditNameSong;
     private javax.swing.JLabel lblEditPic;
-    private javax.swing.JLabel lblEditPicDemo;
+    private model.borderImage lblEditPicDemo;
     private javax.swing.JLabel lblEditSinger;
     private javax.swing.JLabel lblEditSongMenuItem;
     private javax.swing.JLabel lblEditWriter;
