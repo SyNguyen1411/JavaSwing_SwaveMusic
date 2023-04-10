@@ -1,14 +1,9 @@
 package entity;
 
 import java.io.IOException;
-import java.util.Map;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import swing.SongItem;
-import utils.TAudioFileFormat;
 
 /**
  *
@@ -29,9 +24,10 @@ public class Song {
     public int minutetotalLength;
     public int secondTotalLength;
 
-    public Song() {
+    public Song() throws UnsupportedAudioFileException, IOException {
+        this(0, "", "", "", "", "", "", "", true, 0);
     }
-
+    
     public Song(int songID, String nameSong, String musician, String singer, String category, String fileLyrics, String AVT, String fileSong, boolean status, int userID) throws UnsupportedAudioFileException, IOException {
         this.songID = songID;
         this.nameSong = nameSong;

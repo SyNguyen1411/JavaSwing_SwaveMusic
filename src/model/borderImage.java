@@ -1,22 +1,14 @@
 package model;
 
 import java.awt.AlphaComposite;
-import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import swing.PlaylistItem;
 
 /**
  *
@@ -38,7 +30,8 @@ public class borderImage extends JComponent {
     }
 
     public Image toImage(Icon icon) {
-        return ((ImageIcon) icon).getImage();
+        Image image = ((ImageIcon) icon).getImage();
+        return image;
     }
 
     public String getImage() {

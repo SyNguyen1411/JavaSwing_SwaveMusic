@@ -331,7 +331,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         for (Song item : songList) {
             pnlMainScreen.addTrendingSong(item);
-            pnlAddSong.fillPnlListSongDetails(item);
+            //pnlAddSong.fillPnlListSongDetails(item);
             pnlSongOfPlaylistPane.addList(item);
 
             //add Song love for songLoveList:
@@ -1056,6 +1056,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

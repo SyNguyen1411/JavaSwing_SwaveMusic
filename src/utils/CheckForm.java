@@ -1,8 +1,5 @@
 package utils;
 
-import static java.awt.Color.getHSBColor;
-import static java.awt.Color.pink;
-import static java.awt.Color.white;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -19,7 +16,6 @@ public class CheckForm {
             return true;
         }
         else {
-            //txt.setBackground(getHSBColor(255, 153, 204));
             MsgBox.alert(txt.getRootPane(), txt.getText() + " phải từ 4 đến 6 kí tự\nchữ hoa và số.");
             return false;
         }
@@ -111,7 +107,6 @@ public class CheckForm {
             return true;
         }
         else {
-            //txt.setBackground(getHSBColor(299, 21, 96));
             MsgBox.alert(txt.getRootPane(), "Không được để trống thông tin");
             return false;
         }

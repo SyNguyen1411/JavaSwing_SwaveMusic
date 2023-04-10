@@ -4,13 +4,13 @@
  */
 package panelMain;
 
-import model.borderImage;
+import entity.Song;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import entity.Song;
+import model.borderImage;
 
 /**
  *
@@ -32,6 +32,7 @@ public class ListSongItemAddSongPanel extends javax.swing.JPanel {
         this.song = song;
         initComponents();
         init();
+        lblPosition.setText(String.valueOf(song.getSongID()));
         lblPic.setIcon(song.toIcon());
         lblSongName.setText(song.getNameSong());
         lblWriter.setText( song.getMusician());
@@ -190,7 +191,7 @@ public class ListSongItemAddSongPanel extends javax.swing.JPanel {
         pnlSongInfo.setMaximumSize(new java.awt.Dimension(315, 50));
         pnlSongInfo.setMinimumSize(new java.awt.Dimension(315, 50));
         pnlSongInfo.setPreferredSize(new java.awt.Dimension(315, 50));
-        pnlSongInfo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+        pnlSongInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblPic.setMaximumSize(new java.awt.Dimension(50, 50));
         lblPic.setMinimumSize(new java.awt.Dimension(50, 50));
@@ -207,10 +208,12 @@ public class ListSongItemAddSongPanel extends javax.swing.JPanel {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        pnlSongInfo.add(lblPic);
+        pnlSongInfo.add(lblPic, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         lblSongName.setText("Midnight");
-        pnlSongInfo.add(lblSongName);
+        lblSongName.setMaximumSize(new java.awt.Dimension(300, 100));
+        lblSongName.setName(""); // NOI18N
+        pnlSongInfo.add(lblSongName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 17, -1, -1));
 
         add(pnlSongInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
