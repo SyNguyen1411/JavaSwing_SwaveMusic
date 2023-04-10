@@ -5,6 +5,8 @@
 package panelMain;
 
 import component.EventItem;
+import dao.PlaylistDAO;
+import dao.StatisticDAO;
 import entity.PlayList;
 import entity.Song;
 import java.awt.CardLayout;
@@ -16,6 +18,7 @@ import java.awt.GridBagConstraints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import swave.MainFrame;
 import swing.MainWindowItem;
@@ -41,6 +44,11 @@ public class MainPanel extends javax.swing.JPanel {
     private CardLayout cardLPlaylistLayout;
     public MainFrame main;
     private EventItem eventItem;
+    private EventItem eventItemPlaylist;
+    private StatisticDAO sdao = new StatisticDAO();
+    private List<Object[]> listPlaylistTrending;
+    private ArrayList<PlayList> listPlayLists;
+    private PlaylistDAO pdao = new PlaylistDAO();
 
     public EventItem getEventItem() {
         return eventItem;
@@ -87,8 +95,6 @@ public class MainPanel extends javax.swing.JPanel {
         this.cardLayout = cardLayout;
     }
     
-    
-
     public MainPanel() {
         initComponents();
         // Biến dùng tạm
@@ -270,8 +276,7 @@ public class MainPanel extends javax.swing.JPanel {
         playlistItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //eventLblEditSong.clickEvent(listSongItemAddSongPanel, song);
-                
+                eventItemPlaylist.clickEvent(pnlDemoTopPlaylist, playlist);
             }
 
             @Override
@@ -433,6 +438,18 @@ public class MainPanel extends javax.swing.JPanel {
         revalidate();
     }
 
+    public void fillTopPlaylist(){
+        pnlDemoTopPlaylist.removeAll();
+        listPlaylistTrending = sdao.getTopPlaylist(7);
+        for (Object[] objects : listPlaylistTrending) {
+            listPlayLists.add(pdao.selectById((Integer) objects[0]));
+            
+        }
+        for (PlayList pl : listPlayLists) {
+            addTopPlaylist(pl);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
