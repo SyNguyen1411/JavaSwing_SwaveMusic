@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,6 +27,7 @@ public class SongItem extends javax.swing.JPanel {
     public Song data;
     public int minutetotalLength;
     public int secondTotalLength;
+    public List<Song> listSong = new ArrayList<>();
 
     public SongItem() {
         initComponents();
@@ -306,7 +309,7 @@ public class SongItem extends javax.swing.JPanel {
     }
 
     public void getTimeSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {
-        File source = new File(getClass().getResource(data.getFileSong()).getFile());
+        File source = new File(getClass().getResource("/mp3/" + data.getFileSong()).getFile());
         Encoder encoder = new Encoder();
         try {
             MultimediaInfo mi = encoder.getInfo(source);
@@ -319,9 +322,6 @@ public class SongItem extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(data.getFileSong());
-        System.out.println(source.getPath());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

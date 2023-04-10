@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -27,7 +28,7 @@ public class SongList extends javax.swing.JPanel {
     private EventItem event;
     private EventItem eventLblStart;
     private ArrayList<Song> songLoveList;
-    private SongItem runningSong; 
+    private SongItem runningSong;
 
     public ArrayList<Song> getSongLoveList() {
         return songLoveList;
@@ -44,8 +45,6 @@ public class SongList extends javax.swing.JPanel {
     public void setEventLblStart(EventItem eventPlay) {
         this.eventLblStart = eventPlay;
     }
-    
-    
 
     public SongList() {
         initComponents();
@@ -57,17 +56,38 @@ public class SongList extends javax.swing.JPanel {
         }
     }
 
-    public void addSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
+    public void addSong(Song data, List<Song> list) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         SongItem item = new SongItem();
         item.setDataSong(data);
-
+        item.listSong = list;
         item.getLblStart().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 eventLblStart.clickEvent(item, data);
             }
         });
-        
+
+        pnlSongList.add(item);
+        System.out.println(pnlSongList.getComponentCount());
+        if (pnlSongList.getComponentCount() > 3) {
+            pnlSongList.setPreferredSize(new Dimension(1073, pnlSongList.getHeight() + 70));
+        }
+
+        validate();
+        pnlSongList.repaint();
+        pnlSongList.revalidate();
+    }
+
+    public void addSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
+        SongItem item = new SongItem();
+        item.setDataSong(data);
+        item.getLblStart().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                eventLblStart.clickEvent(item, data);
+            }
+        });
+
         pnlSongList.add(item);
         System.out.println(pnlSongList.getComponentCount());
         if (pnlSongList.getComponentCount() > 3) {
@@ -82,6 +102,7 @@ public class SongList extends javax.swing.JPanel {
     public void setSongLove(ArrayList<Song> songLoveList) {
         for (Component com : pnlSongList.getComponents()) {
             SongItem item = (SongItem) com;
+            item.listSong = songLoveList;
             if (songLoveList.size() == 0) {
                 item.getLblIconLove().setIcon(new ImageIcon(getClass().getResource("/img/timIcon.png")));
             }
@@ -95,13 +116,12 @@ public class SongList extends javax.swing.JPanel {
                 }
             }
         }
-
         repaint();
 
     }
 
     public void setRunningSong(Component item) {
-        if(((SongItem)item).equals(runningSong)){
+        if (((SongItem) item).equals(runningSong)) {
             return;
         }
         for (Component com : pnlSongList.getComponents()) {
@@ -113,7 +133,7 @@ public class SongList extends javax.swing.JPanel {
                 s.setBackground(new Color(255, 255, 255, 0));
             }
         }
-        
+
         ((SongItem) item).setRunning(true);
         runningSong = ((SongItem) item);
     }

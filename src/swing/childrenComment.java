@@ -6,6 +6,7 @@ package swing;
 
 import Tien.ui.EditPlaylist;
 import dao.CommentDAO;
+import dao.CommentInteractionDAO;
 import dao.ReportCommentDAO;
 import entity.Comment;
 import entity.ReportComment;
@@ -31,6 +32,7 @@ public class childrenComment extends javax.swing.JPanel {
     private boolean report = false;
     public CommentPane pane;
     private ReportCommentDAO rpDao = new ReportCommentDAO();
+    private CommentInteractionDAO ciDao = new CommentInteractionDAO();
 
     public childrenComment() {
         initComponents();

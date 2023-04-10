@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.attribute.standard.Media;
@@ -62,11 +65,12 @@ public class toolPlay extends javax.swing.JPanel {
     private long totalByte;
     Timer timeSongRunning;
     long time;
+    public List<Song> listSong = new ArrayList<>();
 
     private Runnable play = new Runnable() {
         @Override
         public void run() {
-            f = new File(getClass().getResource(data.getFileSong()).getFile());
+            f = new File(getClass().getResource("/mp3/" + data.getFileSong()).getFile());
             try {
                 System.out.println("Đang chạy nhạc");
                 fi = new FileInputStream(f);
@@ -98,6 +102,7 @@ public class toolPlay extends javax.swing.JPanel {
     };
     private int loading;
     private long timePause;
+    private int index;
 
     public boolean isShuffle() {
         return shuffle;
@@ -341,6 +346,11 @@ public class toolPlay extends javax.swing.JPanel {
         lblNext.setText("pre");
         lblNext.setMinimumSize(new java.awt.Dimension(19, 43));
         lblNext.setPreferredSize(new java.awt.Dimension(19, 43));
+        lblNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNextMouseClicked(evt);
+            }
+        });
         pnlItemPlay.add(lblNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 4, 30, 40));
 
         lblRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/StopSong.png"))); // NOI18N
@@ -357,6 +367,11 @@ public class toolPlay extends javax.swing.JPanel {
         lblPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Prev.png"))); // NOI18N
         lblPrev.setText("pre");
         lblPrev.setPreferredSize(new java.awt.Dimension(19, 43));
+        lblPrev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPrevMouseClicked(evt);
+            }
+        });
         pnlItemPlay.add(lblPrev, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 0, 30, 40));
 
         lblShuffel.setForeground(new java.awt.Color(255, 255, 255));
@@ -515,6 +530,77 @@ public class toolPlay extends javax.swing.JPanel {
         setVolunm(slidebar2.getValue());
     }//GEN-LAST:event_slidebar2StateChanged
 
+    private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
+        index = listSong.indexOf(data);
+        main.itemSong.selectRunning(false);
+
+        if (listSong != null) {
+            index = index + 1;
+            if (index == listSong.size() - 1) {
+                index = 0;
+            }
+
+            data = listSong.get(index);
+            SongItem item = new SongItem();
+            item.setData(data);
+            try {
+                stopSong();
+                item.getTimeSong();
+                data.minutetotalLength = item.minutetotalLength;
+                data.secondTotalLength = item.secondTotalLength;
+                fillData(data);
+
+                runningSong();
+                main.itemSong.setRunning(false);
+                main.itemSong.getLblWave().setVisible(false);
+                main.itemSong.getLblIconPlay().setVisible(!false);
+                main.itemSong.getLblStart().setVisible(!false);
+                main.itemSong.selectRunning(false);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lblNextMouseClicked
+
+    private void lblPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrevMouseClicked
+        index = listSong.indexOf(data);
+        main.itemSong.selectRunning(false);
+        if (listSong != null) {
+            index = index - 1;
+            if (index == 0) {
+                index = listSong.size() - 1;
+            }
+            data = listSong.get(index);
+            SongItem item = new SongItem();
+            item.setData(data);
+            try {
+                stopSong();
+                item.getTimeSong();
+                data.minutetotalLength = item.minutetotalLength;
+                data.secondTotalLength = item.secondTotalLength;
+                fillData(data);
+
+                runningSong();
+                main.itemSong.setRunning(false);
+                main.itemSong.getLblWave().setVisible(false);
+                main.itemSong.getLblIconPlay().setVisible(!false);
+                main.itemSong.getLblStart().setVisible(!false);
+                main.itemSong.selectRunning(false);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_lblPrevMouseClicked
+
     public void setGain(float ctrl) {
         try {
             Mixer.Info[] infos = AudioSystem.getMixerInfo();
@@ -599,7 +685,11 @@ public class toolPlay extends javax.swing.JPanel {
         lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/song/" + data.getAVT())));
         lblNameSong.setText(data.getNameSong());
         lblSinger.setText(data.getSinger());
-        lblTimeStart.setText("0" + data.minutetotalLength + ":" + "0" + data.secondTotalLength);
+        if (data.secondTotalLength >= 10) {
+            lblTimeStart.setText("0" + data.minutetotalLength + ":" + data.secondTotalLength);
+        } else {
+            lblTimeStart.setText("0" + data.minutetotalLength + ":" + "0" + data.secondTotalLength);
+        }
         revalidate();
     }
 
@@ -622,7 +712,6 @@ public class toolPlay extends javax.swing.JPanel {
     }
 
     public void setRunningTime() throws IOException, InterruptedException {
-        System.out.println(totalTime / (songItem.minutetotalLength * 60 + songItem.secondTotalLength));
         time = totalTime / (songItem.minutetotalLength * 60 + songItem.secondTotalLength);
         try {
             pause = fi.available() / time;
