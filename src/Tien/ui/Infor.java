@@ -5,8 +5,13 @@
 package Tien.ui;
 
 import dao.UserDAO;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import static swave.Login.user;
 import utils.Auth;
+import utils.XDate;
+import utils.XImage;
 
 /**
  *
@@ -25,15 +30,27 @@ public class Infor extends javax.swing.JPanel {
         user = uDao.selectById(Auth.user.getUserID());
         lblName.setText(user.getFullname());
         txtName.setText(lblName.getText());
-        cboDay.setSelectedItem(user.getBirthDate().getDay());
-        cboMonth.setSelectedItem(user.getBirthDate().getMonth());
-        cboYear.setSelectedItem(user.getBirthDate().getYear());
+        String date = XDate.toString(user.getBirthDate(), "dd-MM-yyyy");   
+        String[] day = date.split("-");
+        cboDay.setSelectedItem(day[0]);
+        cboMonth.setSelectedItem(day[1]);
+        cboYear.setSelectedItem(day[2]);
         if (user.isGender()) {
             rdoMale.setSelected(true);
         } else {
             rdoFemale.setSelected(true);
         }
         txtEmail.setText(user.getEmail());
+//        URL url = XImage.class.getResource("/img.avt/"+user.getAvt());
+//        ImageIcon imageIcon = new ImageIcon(url);
+//        Image image = imageIcon.getImage(); // transform it 
+//        Image newimg = image.getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+//        imageIcon = new ImageIcon(newimg);  // transform it back
+//        lblAvt.setIcon(new ImageIcon(getClass().getResource("/img/avt/"+user.getAvt())));
+//        ImageIcon img = new ImageIcon("src//img//avt//" + user.getAvt());
+//        Image im = img.getImage();
+//        ImageIcon icon = new ImageIcon(im.getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), im.SCALE_SMOOTH));
+//        lblAvt.setIcon(icon);
     }
 
     /**
@@ -48,7 +65,7 @@ public class Infor extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblAvt = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -76,8 +93,8 @@ public class Infor extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(55, 2, 53));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
+        lblAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
+        jPanel1.add(lblAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
 
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,8 +173,7 @@ public class Infor extends javax.swing.JPanel {
         cboYear.setBackground(new java.awt.Color(67, 67, 67));
         cboYear.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboYear.setForeground(new java.awt.Color(255, 255, 255));
-        cboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", " " }));
-        cboYear.setSelectedIndex(1);
+        cboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990" }));
         cboYear.setBorder(null);
         cboYear.setOpaque(true);
         jPanel5.add(cboYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 2, 200, 30));
@@ -228,7 +244,6 @@ public class Infor extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboDay;
     private javax.swing.JComboBox<String> cboMonth;
     private javax.swing.JComboBox<String> cboYear;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -242,6 +257,7 @@ public class Infor extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel lblAvt;
     private javax.swing.JLabel lblName;
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;

@@ -5,10 +5,13 @@
 package Tien.ui;
 
 import dao.UserDAO;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static swave.Login.user;
 import utils.Auth;
+import utils.XDate;
 
 /**
  *
@@ -28,15 +31,21 @@ public class EditInf extends javax.swing.JPanel {
         user = uDao.selectById(Auth.user.getUserID());
         lblName.setText(user.getFullname());
         txtName.setText(lblName.getText());
-        cboDay.setSelectedItem(user.getBirthDate().getDay());
-        cboMonth.setSelectedItem(user.getBirthDate().getMonth());
-        cboYear.setSelectedItem(user.getBirthDate().getYear());
+        String date = XDate.toString(user.getBirthDate(), "dd-MM-yyyy");   
+        String[] day = date.split("-");
+        cboDay.setSelectedItem(day[0]);
+        cboMonth.setSelectedItem(day[1]);
+        cboYear.setSelectedItem(day[2]);
         if (user.isGender()) {
             rdoMale.setSelected(true);
         } else {
             rdoFemale.setSelected(true);
         }
         txtMail.setText(user.getEmail());
+//        ImageIcon img = new ImageIcon("src//img//avt//"+user.getUserID()+".png");
+//        Image im=img.getImage();
+//        ImageIcon icon = new ImageIcon(im.getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), im.SCALE_SMOOTH));
+//        lblAvt.setIcon(icon);
     }
 
     /**
