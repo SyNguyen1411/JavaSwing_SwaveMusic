@@ -4,6 +4,7 @@ import dao.CommentInteractionDAO;
 import entity.Comment;
 import entity.CommentInteraction;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import swave.Login;
 
@@ -28,6 +29,7 @@ public class CommentItem extends javax.swing.JPanel {
     public Comment data;
     CommentInteractionDAO ciDao = new CommentInteractionDAO();
     CommentInteraction item;
+    boolean open = false;
 
     public CommentItem(String nameUser, String Content, int like, int dislike, String AVT) {
         this.nameUser = nameUser;
@@ -44,6 +46,8 @@ public class CommentItem extends javax.swing.JPanel {
         System.out.println(AVT);
         lblAVT.setBorder(a);
         lblAVT.setIcon(new ImageIcon(getClass().getResource(AVT)));
+        childrenComment1.setVisible(false);
+
     }
 
     /**
@@ -55,6 +59,7 @@ public class CommentItem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        childrenComment1 = new swing.childrenComment();
         lblAVT = new model.borderImage();
         lblNameUser = new javax.swing.JLabel();
         lblContent = new javax.swing.JLabel();
@@ -63,10 +68,13 @@ public class CommentItem extends javax.swing.JPanel {
         lblDislike = new javax.swing.JLabel();
         lblCountLike = new javax.swing.JLabel();
         lblLike = new javax.swing.JLabel();
+        lblExpend = new javax.swing.JLabel();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(620, 113));
+        setRequestFocusEnabled(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(childrenComment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
 
         lblAVT.setImage("");
         lblAVT.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -81,7 +89,7 @@ public class CommentItem extends javax.swing.JPanel {
         lblContent.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblContent.setForeground(new java.awt.Color(255, 255, 255));
         lblContent.setPreferredSize(new java.awt.Dimension(494, 19));
-        add(lblContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        add(lblContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 430, 30));
 
         lblTime.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblTime.setForeground(new java.awt.Color(125, 108, 108));
@@ -114,6 +122,14 @@ public class CommentItem extends javax.swing.JPanel {
             }
         });
         add(lblLike, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+
+        lblExpend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editCmt.png"))); // NOI18N
+        lblExpend.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblExpendMouseClicked(evt);
+            }
+        });
+        add(lblExpend, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblLikeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLikeMouseClicked
@@ -196,8 +212,25 @@ public class CommentItem extends javax.swing.JPanel {
         js.invalidate();
     }//GEN-LAST:event_lblDislikeMouseClicked
 
+    private void lblExpendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExpendMouseClicked
+        setOpen();
+        childrenComment1.checkRole();
+        childrenComment1.pane.repaint();
+//        repaint();
+    }//GEN-LAST:event_lblExpendMouseClicked
+
+    public void setOpen() {
+        open = !open;
+        if (open) {
+            childrenComment1.setVisible(open);
+        } else {
+            childrenComment1.setVisible(open);
+        }
+    }
+
     public void loadDataCommentIn() {
         CommentInteraction item = ciDao.selectByUser(Login.user.getUserID(), data.getCommentID());
+        childrenComment1.comment = data;
         if (item != null) {
             likeCheck = item.isLiked();
             dislikeCheck = !item.isLiked();
@@ -211,12 +244,27 @@ public class CommentItem extends javax.swing.JPanel {
         }
     }
 
+    public JLabel getLblExpend() {
+        return lblExpend;
+    }
+
+    public childrenComment getChildrenComment1() {
+        return childrenComment1;
+    }
+
+    public void setChildrenComment1(childrenComment childrenComment1) {
+        this.childrenComment1 = childrenComment1;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private swing.childrenComment childrenComment1;
     private model.borderImage lblAVT;
     private javax.swing.JLabel lblContent;
     private javax.swing.JLabel lblCountDislike;
     private javax.swing.JLabel lblCountLike;
     private javax.swing.JLabel lblDislike;
+    private javax.swing.JLabel lblExpend;
     private javax.swing.JLabel lblLike;
     private javax.swing.JLabel lblNameUser;
     private javax.swing.JLabel lblTime;

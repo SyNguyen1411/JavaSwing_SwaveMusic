@@ -4,10 +4,12 @@
  */
 package Tien.ui;
 
+import component.Button;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import model.input;
 
 /**
  *
@@ -262,6 +264,16 @@ public class EditPlaylist extends javax.swing.JDialog {
             }
         });
     }
+
+    public Button getBtnOK() {
+        return btnOK;
+    }
+
+    public input getTxtNamePlaylist() {
+        return txtNamePlaylist;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.Button btnCancel;
