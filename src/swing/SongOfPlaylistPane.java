@@ -17,6 +17,7 @@ import entity.Song;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import model.borderImage;
 import swave.MainFrame;
@@ -31,7 +32,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
     /**
      * Creates new form SongOfPlaylistPane
      */
-    private ArrayList<Song> listSOngOfPlayList;
+    public List<Song> listSOngOfPlayList = new ArrayList<>();
     private PlayList playlistFocus;
     public MainFrame main;
 
@@ -41,7 +42,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
 
     //Thêm PlayList và pnl Của Tôi
     public void addList(Song song) throws UnsupportedAudioFileException, IOException, URISyntaxException {
-        pnlSonglist.addSong(song);
+        pnlSonglist.addSong(song, listSOngOfPlayList);
         revalidate();
     }
 
@@ -51,7 +52,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         lblNamePlaylist.setText(playlistFocus.getPlaylistName());
 
         for (Song song : listSOngOfPlayList) {
-            pnlSonglist.addSong(song);
+            pnlSonglist.addSong(song, listSOngOfPlayList);
         }
         revalidate();
     }
@@ -184,7 +185,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         this.pnlTitleTable = pnlTitleTable;
     }
 
-    public ArrayList<Song> getListSOngOfPlayList() {
+    public List<Song> getListSOngOfPlayList() {
         return listSOngOfPlayList;
     }
 
@@ -199,8 +200,6 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
     public void setPlaylistFocus(PlayList playlistFocus) {
         this.playlistFocus = playlistFocus;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

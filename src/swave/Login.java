@@ -318,7 +318,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPasswordCaretUpdate
-        if (!txtPassword.getText().equals("")) {
+    if (!txtPassword.getText().equals("")) {
             lblPlaceholderPass.setText("");
         } else {
             lblPlaceholderPass.setText("Mật khẩu");
