@@ -201,16 +201,16 @@ public class ChangePass extends javax.swing.JPanel {
             txtPassOld.requestFocus();
         } else if (Auth.user.getPassword().equals(txtPassOld.getText())) {
             if (txtPass.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Nhập mật khẩu mới đi");
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu mới!");
                 txtPass.requestFocus();
             } else if (!txtPass1.getText().equals(txtPass.getText()) || txtPass1.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không khớp");
+                JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không khớp!");
                 txtPass1.requestFocus();
             } else {
                 String mk = txtPass.getText();
                 String ten = Auth.user.getUserID();
                 dao.updatePassword(ten, mk);
-                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");
             }
         }
     }//GEN-LAST:event_button2ActionPerformed
