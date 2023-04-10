@@ -16,8 +16,8 @@ import utils.JdbcHelper;
  */
 public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentInteraction> {
 
-    final String INSERT_SQL = "INSERT INTO TUONGTACBINHLUAN(MaBL, MaND, TrangThai, BaoCao) VALUES (?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE TUONGTACBINHLUAN SET TrangThai = ?, BaoCao = ? WHERE MaBL = ? AND MaND = ?";
+    final String INSERT_SQL = "INSERT INTO TUONGTACBINHLUAN(MaBL, MaND, TrangThai) VALUES (?,?,?)";
+    final String UPDATE_SQL = "UPDATE TUONGTACBINHLUAN SET TrangThai = ? WHERE MaBL = ? AND MaND = ?";
     final String DELETE_SQL = "DELETE FROM TUONGTACBINHLUAN WHERE MaBL = ? AND MaND = ?";
     final String SELECTALL_SQL = "SELECT * FROM TUONGTACBINHLUAN";
     final String SELECTBYID_SQL = "SELECT * FROM TUONGTACBINHLUAN WHERE MaBL = ? AND MaND = ?";
@@ -26,12 +26,12 @@ public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentI
     @Override
     public void insert(CommentInteraction entity) {
         JdbcHelper.update(INSERT_SQL, entity.getCommentID(), entity.getUserID(),
-                entity.isLiked(), entity.isReported());
+                entity.isLiked());
     }
 
     @Override
     public void update(CommentInteraction entity) {
-        JdbcHelper.update(UPDATE_SQL, entity.isLiked(), entity.isReported(),
+        JdbcHelper.update(UPDATE_SQL, entity.isLiked(),
                 entity.getCommentID(), entity.getUserID());
     }
 
@@ -64,7 +64,6 @@ public class CommentInteractionDAO extends SwaveDAO<CommentInteraction, CommentI
                 entity.setCommentID(rs.getInt(1));
                 entity.setUserID(rs.getInt(2));
                 entity.setLiked(rs.getBoolean(3));
-                entity.setReported(rs.getBoolean(4));
                 list.add(entity);
             }
 
