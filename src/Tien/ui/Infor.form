@@ -45,7 +45,7 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lblAvt">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/Frame 100.png"/>
@@ -313,7 +313,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="27">
+                  <StringArray count="35">
                     <StringItem index="0" value="N&#x103;m"/>
                     <StringItem index="1" value="2023"/>
                     <StringItem index="2" value="2022"/>
@@ -340,10 +340,17 @@
                     <StringItem index="23" value="2001"/>
                     <StringItem index="24" value="2000"/>
                     <StringItem index="25" value="1999"/>
-                    <StringItem index="26" value=" "/>
+                    <StringItem index="26" value="1998"/>
+                    <StringItem index="27" value="1997"/>
+                    <StringItem index="28" value="1996"/>
+                    <StringItem index="29" value="1995"/>
+                    <StringItem index="30" value="1994"/>
+                    <StringItem index="31" value="1993"/>
+                    <StringItem index="32" value="1992"/>
+                    <StringItem index="33" value="1991"/>
+                    <StringItem index="34" value="1990"/>
                   </StringArray>
                 </Property>
-                <Property name="selectedIndex" type="int" value="1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
