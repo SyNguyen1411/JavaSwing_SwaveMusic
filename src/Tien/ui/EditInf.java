@@ -356,11 +356,12 @@ public class EditInf extends javax.swing.JPanel {
                 user.setGender(true);
             }
             String date = cboYear.getSelectedItem().toString() + "-" + cboMonth.getSelectedItem().toString() + "-" + cboDay.getSelectedItem().toString();
-            user.setBirthDate(XDate.toDate(date, "yyyy-mm-dd"));
+            user.setBirthDate(XDate.toDate(date, "yyyy-MM-dd"));
             user.setAccount(Auth.user.getUserID());
             user.setAvt(user.getAccount() + ".png");
             uDao.update(user);
             lblName.setText(user.getFullname());
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thông tin thành công");
             File file = new File("src/img/avt", user.getAvt());
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
@@ -371,8 +372,7 @@ public class EditInf extends javax.swing.JPanel {
                 Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ex) {
                 Logger.getLogger(EditInf.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thông tin thành công");
+            }                        
         }
     }//GEN-LAST:event_lblEditMouseClicked
 
