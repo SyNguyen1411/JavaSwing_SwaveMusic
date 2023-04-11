@@ -156,16 +156,16 @@ GO
 
 ------------------------------------------
 -- Tao nguoi dung
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Phan Quí Đức', '2000-06-28', 1, 'ducpqps25526@fpt.edu.vn', '/img/AVT.png', 'phanquiduc')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Trần Hoàng Danh', '2003-11-04', 1, 'danhthps25468@fpt.edu.vn', '/img/AVT.png', 'tranhoangdanh')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Nguyễn Huy Vũ', '2003-11-13', 1, 'vunhps25582@fpt.edu.vn', '/img/AVT.png', 'nguyenhuyvu')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Hồ Thị Mộng Tiên', '2003-09-01', 0, 'tienhtmps20000@fpt.edu.vn', '/img/AVT.png', 'hothimongtien')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Tôn Nhật Phi', '2003-08-17', 1, 'phitnps25453@fpt.edu.vn', '/img/AVT.png', 'tonnhatphi')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Nguyễn Văn Sĩ', '1993-11-14', 1, 'sinvps25579@fpt.edu.vn', '/img/AVT.png', 'nguyenvansi')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Một', '2000-04-24', 0, 'nguoidung100@gmail.com', '/img/AVT.png', 'user1')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Hai', '2001-07-11', 0, 'nguoidung200@gmail.com', '/img/AVT.png', 'user2')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Ba', '2002-03-08', 1, 'nguoidung300@gmail.com', '/img/AVT.png', 'user3')
-INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Tu', '2002-10-08', 1, 'nguoidung400@gmail.com', '/img/AVT.png', 'user4')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Phan Quí Đức', '2000-06-28', 1, 'ducpqps25526@fpt.edu.vn', 'phanquiduc.png', 'phanquiduc')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Trần Hoàng Danh', '2003-11-04', 1, 'danhthps25468@fpt.edu.vn', 'tranhoangdanh.png', 'tranhoangdanh')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Nguyễn Huy Vũ', '2003-11-13', 1, 'vunhps25582@fpt.edu.vn', 'nguyenhuyvu.png', 'nguyenhuyvu')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Hồ Thị Mộng Tiên', '2003-09-01', 0, 'tienhtmps20000@fpt.edu.vn', 'hothimongtien.png', 'hothimongtien')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Tôn Nhật Phi', '2003-08-17', 1, 'phitnps25453@fpt.edu.vn', 'tonnhatphi.png', 'tonnhatphi')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Nguyễn Văn Sĩ', '1993-11-14', 1, 'sinvps25579@fpt.edu.vn', 'nguyenvansi.png', 'nguyenvansi')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Một', '2000-04-24', 0, 'nguoidung100@gmail.com', 'nguyenvansi.png', 'user1')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Hai', '2001-07-11', 0, 'nguoidung200@gmail.com', 'nguyenvansi.png', 'user2')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Ba', '2002-03-08', 1, 'nguoidung300@gmail.com', 'nguyenvansi.png', 'user3')
+INSERT INTO NGUOIDUNG (HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (N'Người Dùng Tu', '2002-10-08', 1, 'nguoidung400@gmail.com', 'nguyenvansi.png', 'user4')
 GO
 --SELECT * FROM NGUOIDUNG
 GO
