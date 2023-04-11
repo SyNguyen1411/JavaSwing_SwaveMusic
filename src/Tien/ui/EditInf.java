@@ -5,7 +5,22 @@
 package Tien.ui;
 
 import dao.UserDAO;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -18,34 +33,50 @@ import utils.XDate;
  * @author HP
  */
 public class EditInf extends javax.swing.JPanel {
-    
+
     private UserDAO uDao = new UserDAO();
-    
+    File fAvt;
+
     public EditInf() {
         initComponents();
         pnlEditAvt.setVisible(false);
-        setInf();
-    }
-    
-    public void setInf() {
-        user = uDao.selectById(Auth.user.getUserID());
-        lblName.setText(user.getFullname());
-        txtName.setText(lblName.getText());
-        String date = XDate.toString(user.getBirthDate(), "dd-MM-yyyy");   
-        String[] day = date.split("-");
-        cboDay.setSelectedItem(day[0]);
-        cboMonth.setSelectedItem(day[1]);
-        cboYear.setSelectedItem(day[2]);
-        if (user.isGender()) {
-            rdoMale.setSelected(true);
-        } else {
-            rdoFemale.setSelected(true);
+        if (Auth.user != null) {
+            setInf();
         }
-        txtMail.setText(user.getEmail());
-//        ImageIcon img = new ImageIcon("src//img//avt//"+user.getUserID()+".png");
-//        Image im=img.getImage();
-//        ImageIcon icon = new ImageIcon(im.getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), im.SCALE_SMOOTH));
-//        lblAvt.setIcon(icon);
+    }
+
+    public void setInf() {
+        try {
+            user = uDao.selectById(Auth.user.getUserID());
+            lblName.setText(user.getFullname());
+            txtName.setText(lblName.getText());
+            String date = XDate.toString(user.getBirthDate(), "dd-MM-yyyy");
+            String[] day = date.split("-");
+            cboDay.setSelectedItem(day[0]);
+            cboMonth.setSelectedItem(day[1]);
+            cboYear.setSelectedItem(day[2]);
+            if (user.isGender()) {
+                rdoMale.setSelected(true);
+            } else {
+                rdoFemale.setSelected(true);
+            }
+            txtMail.setText(user.getEmail());
+            if (user.getAvt() != null) {
+                File path = new File("src/img/avt", user.getAvt());
+                BufferedImage img = ImageIO.read(path);
+                Area clip = new Area(new Rectangle(0, 0, img.getWidth(), img.getHeight()));
+                Area oval = new Area(new Ellipse2D.Double(0, 0, img.getWidth() - 1, img.getHeight() - 1));
+                clip.subtract(oval);
+                Graphics g2d = img.createGraphics();
+                g2d.setClip(clip);
+                g2d.setColor(new Color(55, 2, 53));
+                g2d.fillRect(0, 0, img.getWidth(), img.getHeight());
+                ImageIcon im = new ImageIcon(img.getScaledInstance(131, 125, Image.SCALE_DEFAULT));
+                lblAvt.setIcon(im);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(EditInf.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,9 +95,9 @@ public class EditInf extends javax.swing.JPanel {
         lblChooseAvatar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        lblEditAvt = new javax.swing.JLabel();
         lblAvt = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
-        lblEditAvt = new javax.swing.JLabel();
         lblEdit = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -129,15 +160,6 @@ public class EditInf extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(55, 2, 53));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
-        jPanel1.add(lblAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
-
-        lblName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        lblName.setForeground(new java.awt.Color(255, 255, 255));
-        lblName.setText("Name");
-        lblName.setPreferredSize(new java.awt.Dimension(136, 58));
-        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 630, -1));
-
         lblEditAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-edit-48 3.png"))); // NOI18N
         lblEditAvt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,6 +167,16 @@ public class EditInf extends javax.swing.JPanel {
             }
         });
         jPanel1.add(lblEditAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
+
+        lblAvt.setBackground(new java.awt.Color(55, 2, 53));
+        lblAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
+        jPanel1.add(lblAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, 131, 125));
+
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
+        lblName.setText("Name");
+        lblName.setPreferredSize(new java.awt.Dimension(136, 58));
+        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 630, -1));
 
         lblEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnEdit.png"))); // NOI18N
         lblEdit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,8 +349,29 @@ public class EditInf extends javax.swing.JPanel {
             txtMail.requestFocus();
         } else {
             user.setFullname(txtName.getText());
-//            uDao.update(user);
+            user.setEmail(txtMail.getText());
+            if (rdoFemale.isSelected()) {
+                user.setGender(false);
+            } else {
+                user.setGender(true);
+            }
+            String date = cboYear.getSelectedItem().toString() + "-" + cboMonth.getSelectedItem().toString() + "-" + cboDay.getSelectedItem().toString();
+            user.setBirthDate(XDate.toDate(date, "yyyy-mm-dd"));
+            user.setAccount(Auth.user.getUserID());
+            user.setAvt(user.getAccount() + ".png");
+            uDao.update(user);
             lblName.setText(user.getFullname());
+            File file = new File("src/img/avt", user.getAvt());
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            Path from = Paths.get(fAvt.getAbsolutePath());
+            Path to = Paths.get(file.getAbsolutePath());
+            try {
+                Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ex) {
+                Logger.getLogger(EditInf.class.getName()).log(Level.SEVERE, null, ex);
+            }            
             JOptionPane.showMessageDialog(this, "Chỉnh sửa thông tin thành công");
         }
     }//GEN-LAST:event_lblEditMouseClicked
@@ -330,7 +383,23 @@ public class EditInf extends javax.swing.JPanel {
     private void lblChooseAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChooseAvatarMouseClicked
         pnlEditAvt.setVisible(false);
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(null);
+        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            try {
+                fAvt = fileChooser.getSelectedFile();
+                BufferedImage img = ImageIO.read(fAvt);
+                Area clip = new Area(new Rectangle(0, 0, img.getWidth(), img.getHeight()));
+                Area oval = new Area(new Ellipse2D.Double(0, 0, img.getWidth() - 1, img.getHeight() - 1));
+                clip.subtract(oval);
+                Graphics g2d = img.createGraphics();
+                g2d.setClip(clip);
+                g2d.setColor(new Color(55, 2, 53));
+                g2d.fillRect(0, 0, img.getWidth(), img.getHeight());
+                ImageIcon im = new ImageIcon(img.getScaledInstance(131, 125, Image.SCALE_DEFAULT));
+                lblAvt.setIcon(im);
+            } catch (IOException ex) {
+                Logger.getLogger(EditInf.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_lblChooseAvatarMouseClicked
 
     private void pnlEditAvtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlEditAvtMouseExited
