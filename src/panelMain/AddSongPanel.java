@@ -1249,7 +1249,7 @@ public class AddSongPanel extends javax.swing.JPanel {
             try {         
                 File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
                 String fileName = (String) fileChooser.getSelectedFile().getName();
-                File dest = new File("../Swave/src/imd/song/" + fileName);
+                File dest = new File("../Swave/src/img/song/" + fileName);
                 File destAbsolutePath = new File(dest.getCanonicalPath());
                 XFile.copyFileUsingStream(source, destAbsolutePath);
                 Song song = new Song();
@@ -1275,7 +1275,7 @@ public class AddSongPanel extends javax.swing.JPanel {
             try {
                 File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
                 String fileName = (String) fileChooser.getSelectedFile().getName();
-                File dest = new File("../Swave/src/lyrics/" + fileName);
+                File dest = new File("../Swave/src/mp3/" + fileName);
                 File destAbsolutePath = new File(dest.getCanonicalPath());
                 System.out.println(source.toString());
                 System.out.println(destAbsolutePath.toString());

@@ -296,18 +296,18 @@ public class MainFrame extends javax.swing.JFrame {
         //add list song to pnl songList
         //------------------------------------
         //add song to panel main
-        songList.add(new Song(1, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "lyrics.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
-        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
-        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
-        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Con-mua-ngang-qua.jpg", "conMuaNgangQua.mp3", true, 1));
-        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
-        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
-        songList.add(new Song(7, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "lyrics.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
-        songList.add(new Song(8, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
-        songList.add(new Song(9, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
-        songList.add(new Song(10, "Khi Người Mình Yêu Khóc", "Taylor Swift", "Phan Mạnh Quỳnh", "Pop", "lyrics.txt", "khiNguoiMinhYeuKhoc.jpg", "khiNguoiMinhYeuKhoc.mp3", true, 1));
-        songList.add(new Song(11, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
-        songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
+        songList.add(new Song(1, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "anGiDay.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
+        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "chamHet.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
+        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "chayNgayDi.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
+        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Con-mua-ngang-qua.jpg", "conMuaNgangQua.mp3", true, 1));
+        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
+        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
+        songList.add(new Song(7, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "anGiDay.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
+        songList.add(new Song(8, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
+        songList.add(new Song(9, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
+        songList.add(new Song(10, "Khi Người Mình Yêu Khóc", "Taylor Swift", "Phan Mạnh Quỳnh", "Pop", "anGiDay.txt", "khiNguoiMinhYeuKhoc.jpg", "khiNguoiMinhYeuKhoc.mp3", true, 1));
+        songList.add(new Song(11, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
+        songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
 
         //add list bài hát vào panel:
         pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
@@ -567,23 +567,23 @@ public class MainFrame extends javax.swing.JFrame {
             pnlMainScreen.getPnlTrendingSongList().addSong(data, songList);
         }
 
-        //Add lyrics:
-        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
-        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
-        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
-        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
-        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
-        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
-        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
-        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
-        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
-        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
-        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
-        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
-        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
-        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
-        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
-        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
+//        //Add lyrics:
+//        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
+//        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
+//        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
+//        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
+//        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
+//        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
+//        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
+//        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
+//        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
+//        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
+//        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
+//        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
+//        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
+//        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
+//        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
+//        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
 
         //Hiển thị icon tim theo bài hát yêu thích:
         pnlLikeSong.getPnlSonglist().setSongLove(songLoveList);
