@@ -23,6 +23,10 @@ public class PlayList {
         this.icon = icon;
     }
 
+    public PlayList() {
+    }
+
+    
     public int getUserID() {
         return userID;
     }

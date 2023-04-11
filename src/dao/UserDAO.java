@@ -22,6 +22,7 @@ public class UserDAO extends SwaveDAO<User, String> {
     final String SELECTALL_SQL = "SELECT * FROM NGUOIDUNG";
     final String SELECTBYID_SQL = "SELECT * FROM NGUOIDUNG WHERE TenTK = ?";
     final String SELECTBYIDUSER_SQL = "SELECT * FROM NGUOIDUNG WHERE MaND = ?";
+    final String SELECTBYEMAIL_SQL = "SELECT * FROM NGUOIDUNG WHERE Email = ?";
 
     @Override
     public void insert(User entity) {
@@ -84,4 +85,11 @@ public class UserDAO extends SwaveDAO<User, String> {
         return list.get(0);
     }
 
+    public User selectByEmail(String key) {
+        List<User> list = selectSql(SELECTBYEMAIL_SQL, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

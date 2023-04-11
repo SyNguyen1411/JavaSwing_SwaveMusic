@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import utils.Auth;
 import utils.MsgBox;
 import utils.CheckForm;
+import utils.Verify;
 
 /**
  *
@@ -73,6 +74,7 @@ public class ForgotPass extends java.awt.Dialog {
         simpleTitleBar1 = new swing.javaswingdev.SimpleTitleBar();
 
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1530, 810));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -80,6 +82,7 @@ public class ForgotPass extends java.awt.Dialog {
         });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1530, 810));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -302,7 +305,7 @@ public class ForgotPass extends java.awt.Dialog {
                     && CheckForm.checkNullText(txtCode)
                     && CheckForm.checkNullText(txtNewPass)){
                     if(CheckForm.checkEmail(txtUsername)){
-                             if(txtCode.equals(getNumberCode()) ){
+                             if(txtCode.getText().equals(String.valueOf(randomcode))){
                                       changepass();
                                       MsgBox.alert(this, "Đặt lại mật khẩu thành công !");
                              }else{
@@ -375,16 +378,24 @@ public class ForgotPass extends java.awt.Dialog {
 
           AccountDAO aDao = new AccountDAO();
           UserDAO uDao = new UserDAO();
+          int randomcode ;
           
-          private String getEmailOfAccount(String key) {
-                    String email = "";
-                    User entity = uDao.selectById(key);
-                    email = entity.getEmail();        
-                    return email;
+//          private String getEmailOfAccount(String key) {
+//                    String email = "";
+//                    User entity = uDao.selectById(key);
+//                    email = entity.getEmail();        
+//                    return email;
+//          }
+          
+          private String getUsername(String key) {
+                    String username = "";
+                    User entity = uDao.selectByEmail(key);
+                    username = entity.getAccount();        
+                    return username;
           }
           
-          private void updateAccount(User entity) {
-                   uDao.update(entity);
+          private void updateAccount(Account entity) {
+                   aDao.update(entity);
           }
           
           private int getNumberCode() {
@@ -392,16 +403,16 @@ public class ForgotPass extends java.awt.Dialog {
           }
     
           private void getCode() {
-                    String email = txtUsername.getText().trim();
+                    String email = txtUsername.getText();
                     final String from = "vunhps25582@fpt.edu.vn";
                     final String passMail = "ysfkqicvkfjxokdy";
-                    Account acc = aDao.selectById(email);
+//                    User user = uDao.selectById(email);
 
-                   if (acc == null) {
-                             MsgBox.alert(this, "Tài khoản email không đúng");
-                   } else {
-                             String mailOfAcc = getEmailOfAccount(email);
-                             if (mailOfAcc.equals(email)) {
+//                   if (acc == null) {
+//                             MsgBox.alert(this, "Tài khoản email không đúng");
+//                   } else {
+//                             String mailOfAcc = getEmailOfAccount(email);
+//                             if (mailOfAcc.equals(email)) {
                                        Properties p = new Properties();
                                        p.put("mail.smtp.auth", "true");
                                        p.put("mail.smtp.starttls.enable", "true");
@@ -416,7 +427,7 @@ public class ForgotPass extends java.awt.Dialog {
                                                           }
                                                 });
                                        try {
-                                                int code = getNumberCode();
+                                                randomcode = getNumberCode();
                                                 Message message = new MimeMessage(session);
                                                 message.setFrom(new InternetAddress(from));
                                                 message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
@@ -426,8 +437,8 @@ public class ForgotPass extends java.awt.Dialog {
                                                 message.setText("Xin chào,\n"
                                                           + "Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu SWAVE của bạn. Xin dùng mã này để đặt lại mật khẩu cho tài khoản SWAVE\n"
                                                           + "Đây là mã của bạn:\n"
-                                                          + code
-                                                          + "\n Bạn nên thay đổi lại mật khẩu cho mình để bảo đảm an toàn cho tài khoản.\n"
+                                                          + randomcode
+                                                          + "\nBạn nên thay đổi lại mật khẩu cho mình để bảo đảm an toàn cho tài khoản.\n"
                                                           + "Xin cảm ơn");
                                                 Transport.send(message);
                                                 MsgBox.alert(this, "Chúng tôi đã gửi mã đến email của bạn");
@@ -435,12 +446,20 @@ public class ForgotPass extends java.awt.Dialog {
                                                  throw new RuntimeException(e);
                                        }
                              }
-                    }
-          }
+//                    }
+//          }
           
           private void changepass(){
-                    String newpass = txtNewPass.getText();                    
-                    Auth.user.setPassword(newpass);
-                    aDao.update(Auth.user);       
-          }
+                     String newpass = txtNewPass.getText();
+                     String email = txtUsername.getText();
+                     String username = getUsername(email);
+                     User user = uDao.selectById(username);
+                     if(user == null){
+                                MsgBox.alert(this, "Tài khoản không tồn tại"); 
+                     } else {
+                                Account acc = aDao.selectById(username);
+                                acc.setPassword(newpass);
+                                updateAccount(acc);
+                     }
+           }
 }
