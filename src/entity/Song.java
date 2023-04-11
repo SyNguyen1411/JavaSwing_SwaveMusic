@@ -133,7 +133,7 @@ public class Song {
     }
 
     public Icon toIcon() {
-        return new ImageIcon(getClass().getResource("/img/song/" + AVT));
+        return new ImageIcon("../Swave/src/img/song/" + AVT);
     }
 
     @Override

@@ -8,6 +8,7 @@ import javax.swing.JSlider;
 import entity.Song;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.attribute.standard.Media;
@@ -66,6 +68,7 @@ public class toolPlay extends javax.swing.JPanel {
     Timer timeSongRunning;
     long time;
     public List<Song> listSong = new ArrayList<>();
+    public List<String> listLyrics = new ArrayList<>();
 
     private Runnable play = new Runnable() {
         @Override
@@ -478,11 +481,7 @@ public class toolPlay extends javax.swing.JPanel {
     private void lblLyricsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLyricsMouseClicked
         lyrics = !lyrics;
         setLyrics(lyrics);
-        if (lyrics) {
-            main.getPnlLyrics().show();
-        } else {
-            main.getPnlLyrics().hide();
-        }
+        loadLyricsFillData();
     }//GEN-LAST:event_lblLyricsMouseClicked
 
     private void lblCmtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCmtMouseClicked
@@ -553,6 +552,7 @@ public class toolPlay extends javax.swing.JPanel {
                 main.itemSong.getLblIconPlay().setVisible(!false);
                 main.itemSong.getLblStart().setVisible(!false);
                 main.itemSong.selectRunning(false);
+                loadLyricsFillData();
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -587,6 +587,7 @@ public class toolPlay extends javax.swing.JPanel {
                 main.itemSong.getLblIconPlay().setVisible(!false);
                 main.itemSong.getLblStart().setVisible(!false);
                 main.itemSong.selectRunning(false);
+                loadLyricsFillData();
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -707,6 +708,8 @@ public class toolPlay extends javax.swing.JPanel {
                             Thread runningThreadRelay = new Thread(play);
                             runningThreadRelay.start();
                             System.out.println("lặp lại");
+                            fillData(data);
+                            loadLyricsFillData();
                         } else if (shuffle) {
                             int max = listSong.size() - 1;
                             int min = 0;
@@ -716,6 +719,8 @@ public class toolPlay extends javax.swing.JPanel {
                             Thread runningThreadShuffer = new Thread(play);
                             runningThreadShuffer.start();
                             System.out.println("phát ngẫu nhiên " + shufferIndex);
+                            fillData(data);
+                            loadLyricsFillData();
                         } else {
                             setRunning(false);
                             main.itemSong.setRunning(false);
@@ -765,7 +770,35 @@ public class toolPlay extends javax.swing.JPanel {
         player.play();
     }
 
+    public void loadLyric() {
 
+        String url = "../Swave/src/lyrics/" + data.getFileLyrics();
+        // Đọc dữ liệu từ File với Scanner
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(url);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Scanner scanner = new Scanner(fileInputStream);
+        listLyrics.clear();
+        try {
+            while (scanner.hasNextLine()) {
+                String text = scanner.nextLine();
+                listLyrics.add(text);
+                System.out.println(text);
+            }
+        } finally {
+            try {
+                scanner.close();
+                fileInputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(toolPlay.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private components.borderImage lblAVTSong;
     private javax.swing.JLabel lblCmt;
@@ -786,4 +819,23 @@ public class toolPlay extends javax.swing.JPanel {
     private component.Slidebar slMusic;
     private component.Slidebar slidebar2;
     // End of variables declaration//GEN-END:variables
+
+    private void loadLyricsFillData() {
+        if (lyrics) {
+
+            main.getPnlLyrics().getPnlLyrics().removeAll();
+            main.getPnlLyrics().getPnlLyrics().setPreferredSize(new Dimension(1283, 560));
+
+            main.getPnlLyrics().show();
+            loadLyric();
+            System.out.println(listLyrics.toString());
+            for (String listLyric : listLyrics) {
+                main.getPnlLyrics().addLyric(listLyric);
+            }
+        } else {
+            main.getPnlLyrics().hide();
+        }
+
+        main.getPnlLyrics().repaint();
+    }
 }
