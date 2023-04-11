@@ -1405,7 +1405,8 @@ public class AddSongPanel extends javax.swing.JPanel {
             }
 
         });
-
+        
+        
     }
 
     private void addSongInit() {

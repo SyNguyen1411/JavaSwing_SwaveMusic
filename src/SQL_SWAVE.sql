@@ -273,6 +273,7 @@ INSERT INTO BAIHAT (TenBH, NhacSi, CaSi, TheLoai, LoiBH, HinhAnh, FileBH, TrangT
 INSERT INTO BAIHAT (TenBH, NhacSi, CaSi, TheLoai, LoiBH, HinhAnh, FileBH, TrangThai, MaND) VALUES (N'Where i go', N'NxWorrries', N'NxWorrries', N'Jazz', 'whereIGo.txt', 'whereIGo.jpg', 'whereIGo.mp3', 1, 10)
 INSERT INTO BAIHAT (TenBH, NhacSi, CaSi, TheLoai, LoiBH, HinhAnh, FileBH, TrangThai, MaND) VALUES (N'White Rice Déjà Vuu', N'Musig Soulchild', N'Hit-boy', N'Blues', 'whiteRiceDejaVuu.txt', 'whiteRiceDejaVuu.jpg', 'whiteRiceDejaVuu.mp3', 1, 10)
 GO
+INSERT INTO BAIHAT (TenBH, NhacSi, CaSi, TheLoai, LoiBH, HinhAnh, FileBH, TrangThai, MaND) VALUES (N'Lạc trôi', N'Sơn Tùng MTP', N'Sơn Tùng MTP', N'Dance Việt', 'lacTroi.txt', 'lacTroi.jpg', 'lacTroi.mp3', 0, 1)
 --SELECT * FROM BAIHAT
 GO
 
@@ -1096,3 +1097,5 @@ INSERT INTO BAOCAOBINHLUAN (MaBL, MaND) VALUES (20, 10)
 GO
 --SELECT * FROM BAOCAOBINHLUAN
 GO
+
+select * from BAIHAT

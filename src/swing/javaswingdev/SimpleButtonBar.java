@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 public class SimpleButtonBar extends javax.swing.JPanel {
@@ -13,6 +14,8 @@ public class SimpleButtonBar extends javax.swing.JPanel {
         setOpaque(false);
         cmdClose.setIcon(iconClose.toIcon());
         cmdResize.setIcon(iconRestore.toIcon());
+        cmdResize.setVisible(false);
+        cmdResize.setEnabled(false);
         cmdMinimize.setIcon(iconMinimize.toIcon());
         cmdMinimize.setFont(cmdMinimize.getFont().deriveFont(0, 3));
     }
@@ -48,6 +51,35 @@ public class SimpleButtonBar extends javax.swing.JPanel {
                 } else {
                     fram.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 }
+            }
+        });
+    }public void initEvent(JDialog dialog) {
+        dialog.addWindowStateListener(new WindowStateListener() {
+            @Override
+            public void windowStateChanged(WindowEvent we) {
+                if (we.getNewState() == JFrame.MAXIMIZED_BOTH) {
+                    cmdResize.setIcon(iconMax.toIcon());
+                } else if (we.getNewState() == JFrame.NORMAL) {
+                    cmdResize.setIcon(iconRestore.toIcon());
+                }
+            }
+        });
+        cmdClose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(0);
+            }
+        });
+        cmdMinimize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+            }
+        });
+        cmdResize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
             }
         });
     }
