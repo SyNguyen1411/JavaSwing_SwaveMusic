@@ -486,13 +486,11 @@ public class toolPlay extends javax.swing.JPanel {
     }//GEN-LAST:event_lblLyricsMouseClicked
 
     private void lblCmtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCmtMouseClicked
-
         comment = !comment;
         setComment(comment);
         if (comment) {
             main.getPnlComment().loadDataComment();
             main.getPnlComment().setVisible(true);
-
         } else {
             main.getPnlComment().setVisible(false);
 
@@ -509,7 +507,6 @@ public class toolPlay extends javax.swing.JPanel {
     }//GEN-LAST:event_slMusicMousePressed
 
     private void slMusicMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slMusicMouseReleased
-
         slMusic.setValue(loading);
         timePause = loading * time;
         System.out.println(timePause);
@@ -643,6 +640,8 @@ public class toolPlay extends javax.swing.JPanel {
     public void setShuffel(boolean check) {
         if (check) {
             lblShuffel.setIcon(new ImageIcon(getClass().getResource("/img/shuffel_selected.png")));
+            setReplay(!check);
+            replay = false;
         } else {
             lblShuffel.setIcon(new ImageIcon(getClass().getResource("/img/replay.png")));
         }
@@ -651,6 +650,8 @@ public class toolPlay extends javax.swing.JPanel {
     public void setReplay(boolean check) {
         if (check) {
             lblRePlay.setIcon(new ImageIcon(getClass().getResource("/img/replay_selected.png")));
+            setShuffel(!check);
+            shuffle = false;
         } else {
             lblRePlay.setIcon(new ImageIcon(getClass().getResource("/img/autoPlay.png")));
         }
@@ -700,6 +701,26 @@ public class toolPlay extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     setRunningTime();
+                    if (player.isComplete()) {
+                        if (replay) {
+                            pause = -1;
+                            Thread runningThreadRelay = new Thread(play);
+                            runningThreadRelay.start();
+                            System.out.println("lặp lại");
+                        } else if (shuffle) {
+                            int max = listSong.size() - 1;
+                            int min = 0;
+                            pause = -1;
+                            int shufferIndex = (int) (Math.random() * (max - min + 1) + min);
+                            data = listSong.get(shufferIndex);
+                            Thread runningThreadShuffer = new Thread(play);
+                            runningThreadShuffer.start();
+                            System.out.println("phát ngẫu nhiên " + shufferIndex);
+                        } else {
+                            setRunning(false);
+                            main.itemSong.setRunning(false);
+                        }
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InterruptedException ex) {

@@ -45,7 +45,7 @@ public class CommentItem extends javax.swing.JPanel {
         lblTime.setText("4 giờ trước");
         System.out.println(AVT);
         lblAVT.setBorder(a);
-        lblAVT.setIcon(new ImageIcon(getClass().getResource(AVT)));
+        lblAVT.setIcon(new ImageIcon(getClass().getResource("/img/avt/" + AVT)));
         childrenComment1.setVisible(false);
 
     }
