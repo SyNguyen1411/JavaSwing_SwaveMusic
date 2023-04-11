@@ -209,6 +209,12 @@ public class SongItem extends javax.swing.JPanel {
 
     public void setRunning(boolean running) {
         this.running = running;
+        lblIconPlay.setVisible(!running);
+        lblStart.setVisible(false);
+        lblWave.setVisible(running);
+        lblNamSong.setForeground(new Color(199, 199, 199));
+        lblIconPlay.setForeground(new Color(199, 199, 199));
+        lblTime.setForeground(new Color(199, 199, 199));
         repaint();
     }
 
