@@ -1,7 +1,10 @@
 
 package Tien.ui;
 
+import dao.PlaylistDAO;
+import entity.PlayList;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -34,15 +37,13 @@ public class CreatPlaylist extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtNamePlaylist = new model.input();
         loadingPane1 = new panelMain.LoadingPane();
-        lblPlayholder = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         lblNote = new javax.swing.JLabel();
         btnCancel = new component.Button();
         lblCount = new javax.swing.JLabel();
         btnOK = new component.Button();
-        lblNamePlaylist = new javax.swing.JLabel();
+        txtNamePlaylist = new AdminToolUtils.TextFieldPlaylist();
 
         jLabel1.setText("jLabel1");
 
@@ -59,23 +60,6 @@ public class CreatPlaylist extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtNamePlaylist.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        txtNamePlaylist.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtNamePlaylistCaretUpdate(evt);
-            }
-        });
-        txtNamePlaylist.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamePlaylistActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtNamePlaylist, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 490, 60));
-
-        lblPlayholder.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblPlayholder.setForeground(new java.awt.Color(199, 199, 199));
-        lblPlayholder.setText("Nhập tên Playlist");
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,6 +84,11 @@ public class CreatPlaylist extends javax.swing.JDialog {
                 btnCancelMouseClicked(evt);
             }
         });
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         lblCount.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblCount.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,39 +101,38 @@ public class CreatPlaylist extends javax.swing.JDialog {
         btnOK.setPreferredSize(new java.awt.Dimension(104, 45));
         btnOK.setRadious(new int[] {50, 50});
         btnOK.setSizeSpeed(12.0F);
+        btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOKMouseClicked(evt);
+            }
+        });
 
-        lblNamePlaylist.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblNamePlaylist.setForeground(new java.awt.Color(255, 255, 255));
-        lblNamePlaylist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 37.png"))); // NOI18N
-        lblNamePlaylist.setText("    Nhập tên playlist");
-        lblNamePlaylist.setPreferredSize(new java.awt.Dimension(514, 63));
+        txtNamePlaylist.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        txtNamePlaylist.setPlaceHolder("    Nhập tên playlist");
 
         javax.swing.GroupLayout loadingPane1Layout = new javax.swing.GroupLayout(loadingPane1);
         loadingPane1.setLayout(loadingPane1Layout);
         loadingPane1Layout.setHorizontalGroup(
             loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPane1Layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+            .addGroup(loadingPane1Layout.createSequentialGroup()
                 .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
+                        .addGap(274, 274, 274)
                         .addComponent(lblNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblPlayholder, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblNamePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(256, 256, 256)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(loadingPane1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(132, 132, 132))
+                        .addGap(314, 314, 314)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loadingPane1Layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNamePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         loadingPane1Layout.setVerticalGroup(
             loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,17 +141,14 @@ public class CreatPlaylist extends javax.swing.JDialog {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lblNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPlayholder, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNamePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(42, 42, 42)
+                .addComponent(txtNamePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addGroup(loadingPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(loadingPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 440));
@@ -179,24 +164,17 @@ public class CreatPlaylist extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_button2ActionPerformed
 
-    private void txtNamePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamePlaylistActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamePlaylistActionPerformed
-
-    private void txtNamePlaylistCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtNamePlaylistCaretUpdate
-        String text = txtNamePlaylist.getText();
-        lblCount.setText(text.length() + "/100");
-        
-        if (!txtNamePlaylist.getText().equals("")) {
-            lblPlayholder.setText("");
-        } else {
-            lblPlayholder.setText("Nhập tên Playlist");
-        }
-    }//GEN-LAST:event_txtNamePlaylistCaretUpdate
-
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         this.dispose();
     }//GEN-LAST:event_btnCancelMouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -256,11 +234,24 @@ public class CreatPlaylist extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblCount;
-    private javax.swing.JLabel lblNamePlaylist;
     private javax.swing.JLabel lblNote;
-    private javax.swing.JLabel lblPlayholder;
     private javax.swing.JLabel lblTitle;
     private panelMain.LoadingPane loadingPane1;
-    private model.input txtNamePlaylist;
+    private AdminToolUtils.TextFieldPlaylist txtNamePlaylist;
     // End of variables declaration//GEN-END:variables
+    
+    PlaylistDAO plDao = new PlaylistDAO();
+    
+    private PlayList getData(){
+            PlayList pl = new PlayList();
+            pl.setIcon("/AdminToolUtils/playlist.jpg");
+//            pl.set
+            return pl;
+    }   
+    
+    private void insert(){
+           
+    }
+
+
 }
