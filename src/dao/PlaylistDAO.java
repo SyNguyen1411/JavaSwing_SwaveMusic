@@ -21,6 +21,7 @@ public class PlaylistDAO extends SwaveDAO<PlayList, Integer> {
     final String DELETE_SQL = "DELETE FROM PLAYLIST WHERE MaPlayList = ?";
     final String SELECTALL_SQL = "SELECT * FROM PLAYLIST";
     final String SELECTBYID_SQL = "SELECT * FROM PLAYLIST WHERE MaPlayList = ?";
+    
 
     @Override
     public void insert(PlayList entity) {

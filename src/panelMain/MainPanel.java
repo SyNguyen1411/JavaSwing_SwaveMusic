@@ -51,6 +51,14 @@ public class MainPanel extends javax.swing.JPanel {
     private ArrayList<PlayList> listPlayLists = new ArrayList<>();
     private PlaylistDAO pdao = new PlaylistDAO();
     private SongDAO songDAO = new SongDAO();
+
+    public EventItem getEventItemPlaylist() {
+        return eventItemPlaylist;
+    }
+
+    public void setEventItemPlaylist(EventItem eventItemPlaylist) {
+        this.eventItemPlaylist = eventItemPlaylist;
+    }
     
 
     public EventItem getEventItem() {
@@ -275,6 +283,7 @@ public class MainPanel extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 eventItemPlaylist.clickEvent(pnlDemoTopPlaylist, playlist);
+                main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
             }
 
             @Override

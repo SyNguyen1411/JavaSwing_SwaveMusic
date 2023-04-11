@@ -4,9 +4,13 @@ import Tien.ui.ChangePassword;
 import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
+import dao.PlaylistDAO;
+import dao.SongDAO;
+import dao.SongOfPlaylistDAO;
 import entity.PlayList;
 import entity.Search;
 import entity.Song;
+import entity.SongOfPlaylist;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -57,13 +61,18 @@ public class MainFrame extends javax.swing.JFrame {
     private CardLayout c;
     private ArrayList<Song> songLoveList = new ArrayList<>();
     private ArrayList<Song> songList = new ArrayList<>();
+    private ArrayList<Song> songOfPlaylists = new ArrayList<>();
     private ArrayList<PlayList> playlist = new ArrayList<>();
+    private ArrayList<SongOfPlaylist> songOfPlaylistsID = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
     public MainFrame main;
     private JPopupMenu menu;
     private PanelSearchSuggestion search;
     public SongItem itemSong;
+    private PlaylistDAO playlistDAO = new PlaylistDAO();
+    private SongDAO songDAO = new SongDAO();
+    private SongOfPlaylistDAO songOfPlaylistDAO = new SongOfPlaylistDAO();
 
     private UserTool userTool = new UserTool(this);
 
@@ -310,16 +319,20 @@ public class MainFrame extends javax.swing.JFrame {
         songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
 
         //add list bài hát vào panel:
-        pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
+        //pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
         for (Song item : songList) {
             pnlMainScreen.addTrendingSong(item);
-            pnlSongOfPlaylistPane.addList(item);
+            //pnlSongOfPlaylistPane.addList(item);
 
             //add Song love for songLoveList:
             songLoveList.add(item);
 
         }
-
+        
+        
+        // Đổ bài hát từ playlist trending lên bài hát
+        
+        
         //------------------------------------
         //add playlist to panel main
         pnlMainScreen.fillTopPlaylist();
@@ -559,6 +572,50 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        // Add sự kiện khi chọn bài hát trong bài hát trending
+        // Chưa làm xong
+        pnlMainScreen.setEventItemPlaylist(new EventItem() {
+            @Override
+            public void clickEvent(Component com, PlayList playist) {
+                songOfPlaylistsID = (ArrayList<SongOfPlaylist>) songOfPlaylistDAO.selectSongOfPlaylists(playist.getPlaylistID());
+                for (SongOfPlaylist sop : songOfPlaylistsID) {
+                    songOfPlaylists.add(songDAO.selectById(sop.getSongID()));
+                }
+                System.out.println(songOfPlaylists);
+                pnlSongOfPlaylistPane.listSOngOfPlayList = songOfPlaylists;
+                pnlSongOfPlaylistPane.setPlaylistFocus(playist);
+                try {
+                    pnlSongOfPlaylistPane.fillData();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void itemClick(Search data) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void clickEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
+        
         //add Song love for Pane:
         for (Song data : songLoveList) {
             pnlLikeSong.getPnlSonglist().addSong(data, songLoveList);
@@ -1041,6 +1098,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     
+
     
 
 
