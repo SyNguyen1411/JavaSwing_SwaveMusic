@@ -68,6 +68,13 @@ public class PlayList {
     }
 
     public Icon toIcon() {
-        return new ImageIcon(getClass().getResource("/img/" + icon));
+        return new ImageIcon(getClass().getResource("/img/playlist/" + icon));
     }
+
+    @Override
+    public String toString() {
+        return "PlayList{" + "playlistID=" + playlistID + ", playlistName=" + playlistName + ", userID=" + userID + ", status=" + status + ", icon=" + icon + '}';
+    }
+    
+    
 }

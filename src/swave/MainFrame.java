@@ -259,26 +259,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         //-----------------------------------
         //add my playlist:
-        playlist.add(new PlayList(1, "LOFI 2021", 2023, true, "playlist/playlist1.jpg"));
-        playlist.add(new PlayList(2, "HOT TREND 2023", 2023, true, "playlist/playlist2.jpg"));
-        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 2023, true, "playlist/playlist3.jpg"));
-        playlist.add(new PlayList(4, "SAD SONGS", 2023, true, "playlist/playlist4.jpg"));
-        playlist.add(new PlayList(5, "CHILL SONGS", 2023, true, "playlist/playlist1.jpg"));
-        playlist.add(new PlayList(6, "NHẠC REMIX", 2023, true, "playlist/playlist6.jpg"));
-        playlist.add(new PlayList(7, "SONG BTS", 2023, true, "playlist/playlist10.jpg"));
-        playlist.add(new PlayList(8, "RAP SONGS", 2023, true, "playlist/playlist2.jpg"));
-        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 2023, true, "playlist/playlist4.jpg"));
-        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 2023, true, "playlist/playlist10.jpg"));
-        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 2023, true, "playlist/playlist2.jpg"));
-        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2023, true, "playlist/playlist12.jpg"));
-        playlist.add(new PlayList(13, "CHILL STUDENTS ", 2023, true, "playlist/playlist13.jpg"));
-        playlist.add(new PlayList(14, "SLEEP SONGS", 2023, true, "playlist/playlist14.jpg"));
-        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 2023, true, "playlist/playlist15.jpg"));
-        playlist.add(new PlayList(16, "HOT SONGS", 2023, true, "playlist/playlist16.jpg"));
-        playlist.add(new PlayList(17, "TIKTOK 2023", 2023, true, "playlist/playlist12.jpg"));
-        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 2023, true, "playlist/playlist3.jpg"));
-        playlist.add(new PlayList(19, "LOVE SONGS", 2023, true, "playlist/playlist19.jpg"));
-        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 2023, true, "playlist/playlist2.jpg"));
+        playlist.add(new PlayList(1, "LOFI 2021", 2023, true, "playlist1.jpg"));
+        playlist.add(new PlayList(2, "HOT TREND 2023", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 2023, true, "playlist3.jpg"));
+        playlist.add(new PlayList(4, "SAD SONGS", 2023, true, "playlist4.jpg"));
+        playlist.add(new PlayList(5, "CHILL SONGS", 2023, true, "playlist1.jpg"));
+        playlist.add(new PlayList(6, "NHẠC REMIX", 2023, true, "playlist6.jpg"));
+        playlist.add(new PlayList(7, "SONG BTS", 2023, true, "playlist10.jpg"));
+        playlist.add(new PlayList(8, "RAP SONGS", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 2023, true, "playlist4.jpg"));
+        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 2023, true, "playlist10.jpg"));
+        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2023, true, "playlist12.jpg"));
+        playlist.add(new PlayList(13, "CHILL STUDENTS ", 2023, true, "playlist13.jpg"));
+        playlist.add(new PlayList(14, "SLEEP SONGS", 2023, true, "playlist14.jpg"));
+        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 2023, true, "playlist15.jpg"));
+        playlist.add(new PlayList(16, "HOT SONGS", 2023, true, "playlist16.jpg"));
+        playlist.add(new PlayList(17, "TIKTOK 2023", 2023, true, "playlist12.jpg"));
+        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 2023, true, "playlist3.jpg"));
+        playlist.add(new PlayList(19, "LOVE SONGS", 2023, true, "playlist19.jpg"));
+        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 2023, true, "playlist2.jpg"));
 
         for (PlayList playList : playlist) {
             pnlMyPlaylist.addList(playList);
@@ -313,7 +313,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
         for (Song item : songList) {
             pnlMainScreen.addTrendingSong(item);
-            //pnlAddSong.fillPnlListSongDetails(item);
             pnlSongOfPlaylistPane.addList(item);
 
             //add Song love for songLoveList:
@@ -323,11 +322,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         //------------------------------------
         //add playlist to panel main
+        pnlMainScreen.fillTopPlaylist();
+        
         for (PlayList item : playlist) {
-            pnlMainScreen.addTopPlaylist(item);
             pnlSearch.getPnlSearchAll().addPlaylist(item);
             pnlSearch.getPnlSearchPlaylist().addList(item);
         }
+        
+        
 
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
