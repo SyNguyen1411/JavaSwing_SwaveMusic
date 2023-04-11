@@ -1,10 +1,8 @@
 package panelMain;
 
 import component.EventItem;
-import dao.AccountDAO;
 import dao.SongDAO;
 import entity.Song;
-import entity.User;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -13,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,8 +20,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import swave.Login;
 import swing.utilcomponent.ScrollBarCustom;
 import utils.MsgBox;
+import utils.XFile;
 
 /**
  *
@@ -38,8 +39,6 @@ public class AddSongPanel extends javax.swing.JPanel {
     private EventItem eventBtnAdd;
     private EventItem eventBtnDelete;
     private SongDAO sdao = new SongDAO();
-    private AccountDAO adao = new AccountDAO();
-    private User user;
     private String songName = "";
     private String songSinger = "";
     private ArrayList<Song> songList = new ArrayList<>();
@@ -88,8 +87,6 @@ public class AddSongPanel extends javax.swing.JPanel {
         initComponents();
         init();
         //account = adao.selectById(Auth.user.getUserID());
-        user = new User();
-        user.setUserID(1);
         clearForm(1);
         clearForm(2);
         fillTable();
@@ -1076,7 +1073,7 @@ public class AddSongPanel extends javax.swing.JPanel {
             setTextLblEditDemoSong();
         } else {
             lblPlaceHolderEditSongName.setText("Tên bài hát");
-            songName ="";
+            songName = "";
             setTextLblEditDemoSong();
         }
     }//GEN-LAST:event_txtEditSongNameCaretUpdate
@@ -1144,14 +1141,21 @@ public class AddSongPanel extends javax.swing.JPanel {
     private void btnAddLyricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLyricsActionPerformed
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser("src/lyrics");
+
         fileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter extFilter = new FileNameExtensionFilter("text file", "txt", "doc", "docx");
         fileChooser.addChoosableFileFilter(extFilter);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
-                String URL = (String) fileChooser.getSelectedFile().getName();
-                btnAddLyrics.setText(URL);
+                File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String fileName = (String) fileChooser.getSelectedFile().getName();
+                File dest = new File("../Swave/src/lyrics/" + fileName);
+                File destAbsolutePath = new File(dest.getCanonicalPath());
+                System.out.println(source.toString());
+                System.out.println(destAbsolutePath.toString());
+                XFile.copyFileUsingStream(source, destAbsolutePath);
+                btnAddLyrics.setText(fileName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1162,13 +1166,18 @@ public class AddSongPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser("src/img/song");
         fileChooser.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("image file", "jpg", "png", "jpeg");
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("image file", "jpg", "jpeg");
         fileChooser.addChoosableFileFilter(extFilter);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
                 Song song = new Song();
-                song.setAVT((String) fileChooser.getSelectedFile().getName());
+                File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String fileName = (String) fileChooser.getSelectedFile().getName();
+                File dest = new File("../Swave/src/img/song/" + fileName);
+                File destAbsolutePath = new File(dest.getCanonicalPath());
+                XFile.copyFileUsingStream(source, destAbsolutePath);
+                song.setAVT( fileChooser.getSelectedFile().getName());
                 btnAddPic.setText(song.getAVT());
                 lblAddPicDemo.setIcon(song.toIcon());
                 repaint();
@@ -1187,8 +1196,14 @@ public class AddSongPanel extends javax.swing.JPanel {
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
-                String URL = (String) fileChooser.getSelectedFile().getName();
-                btnAddMP3.setText(URL);
+                File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String fileName = (String) fileChooser.getSelectedFile().getName();
+                File dest = new File("../Swave/src/mp3/" + fileName);
+                File destAbsolutePath = new File(dest.getCanonicalPath());
+                System.out.println(source.toString());
+                System.out.println(destAbsolutePath.toString());
+                XFile.copyFileUsingStream(source, destAbsolutePath);
+                btnAddMP3.setText(fileName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1209,8 +1224,14 @@ public class AddSongPanel extends javax.swing.JPanel {
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
-                String URL = (String) fileChooser.getSelectedFile().getName();
-                btnEditLyrics.setText(URL);
+                File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String fileName = (String) fileChooser.getSelectedFile().getName();
+                File dest = new File("../Swave/src/lyrics/" + fileName);
+                File destAbsolutePath = new File(dest.getCanonicalPath());
+                System.out.println(source.toString());
+                System.out.println(destAbsolutePath.toString());
+                XFile.copyFileUsingStream(source, destAbsolutePath);
+                btnEditLyrics.setText(fileName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1225,7 +1246,12 @@ public class AddSongPanel extends javax.swing.JPanel {
         fileChooser.addChoosableFileFilter(extFilter);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
-            try {
+            try {         
+                File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String fileName = (String) fileChooser.getSelectedFile().getName();
+                File dest = new File("../Swave/src/imd/song/" + fileName);
+                File destAbsolutePath = new File(dest.getCanonicalPath());
+                XFile.copyFileUsingStream(source, destAbsolutePath);
                 Song song = new Song();
                 song.setAVT((String) fileChooser.getSelectedFile().getName());
                 btnEditPic.setText(song.getAVT());
@@ -1247,8 +1273,14 @@ public class AddSongPanel extends javax.swing.JPanel {
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
-                String URL = (String) fileChooser.getSelectedFile().getName();
-                btnEditMP3.setText(URL);
+                File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                String fileName = (String) fileChooser.getSelectedFile().getName();
+                File dest = new File("../Swave/src/lyrics/" + fileName);
+                File destAbsolutePath = new File(dest.getCanonicalPath());
+                System.out.println(source.toString());
+                System.out.println(destAbsolutePath.toString());
+                XFile.copyFileUsingStream(source, destAbsolutePath);
+                btnEditMP3.setText(fileName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1761,7 +1793,9 @@ public class AddSongPanel extends javax.swing.JPanel {
             newSong.setFileSong(btnAddMP3.getText());
             newSong.setFileLyrics(btnAddLyrics.getText());
             newSong.setAVT(btnAddPic.getText());
-            newSong.setUserID(user.getUserID());
+            newSong.setStatus(!Login.acc.isRole());
+            newSong.setUserID(Login.user.getUserID());
+            System.out.println(newSong.toString());
             return newSong;
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -1786,7 +1820,6 @@ public class AddSongPanel extends javax.swing.JPanel {
 
     public void addSong() {
         Song song = getAddForm();
-        song.toString();
         if (isValidated(1)) {
             try {
                 sdao.insert(song);
@@ -1831,7 +1864,7 @@ public class AddSongPanel extends javax.swing.JPanel {
     public void fillTable() {
         pnlListSongDetails.removeAll();
         try {
-            songList = (ArrayList<Song>) sdao.selectAllSongByUserID(user.getUserID());
+            songList = (ArrayList<Song>) sdao.selectAllSongByUserID(Login.user.getUserID());
             for (Song song : songList) {
                 song.toString();
                 fillPnlListSongDetails(song);

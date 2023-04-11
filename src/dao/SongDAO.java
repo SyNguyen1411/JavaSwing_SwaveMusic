@@ -16,7 +16,7 @@ import utils.JdbcHelper;
  */
 public class SongDAO extends SwaveDAO<Song,Integer> {
     
-    final String INSERT_SQL = "INSERT INTO BAIHAT(TenBH, NhacSi, CaSi, TheLoai, LoiBH, HinhAnh, FileBH, MaND) VALUES (?,?,?,?,?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO BAIHAT(TenBH, NhacSi, CaSi, TheLoai, LoiBH, HinhAnh, FileBH, TrangThai, MaND) VALUES (?,?,?,?,?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE BAIHAT SET TenBH = ?, NhacSi = ?, CaSi = ?, TheLoai = ?, LoiBH = ?, HinhAnh = ?, FileBH = ? WHERE MaBH = ?";
     final String DELETE_SQL = "DELETE FROM BAIHAT WHERE MaBH = ?";
     final String SELECTALL_SQL = "SELECT * FROM BAIHAT";
@@ -27,7 +27,7 @@ public class SongDAO extends SwaveDAO<Song,Integer> {
     public void insert(Song entity) {
         JdbcHelper.update(INSERT_SQL, entity.getNameSong(), entity.getMusician(),
                 entity.getSinger(), entity.getCategory(), entity.getFileLyrics(),
-                entity.getAVT(), entity.getFileSong(), entity.getUserID());
+                entity.getAVT(), entity.getFileSong(), entity.isStatus(), entity.getUserID());
     }
 
     @Override
@@ -72,7 +72,8 @@ public class SongDAO extends SwaveDAO<Song,Integer> {
                 entity.setAVT(rs.getString(7));
                 entity.setFileSong(rs.getString(8));
                 entity.setStatus(rs.getBoolean(9));
-                entity.setUserID(rs.getInt(10));
+                entity.setDateUpdate(rs.getDate(10));
+                entity.setUserID(rs.getInt(11));
                 list.add(entity);
             }
             

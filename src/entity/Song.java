@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.IOException;
+import java.util.Date;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -20,6 +21,7 @@ public class Song {
     private String AVT;
     private String fileSong;
     private boolean status;
+    private Date dateUpdate;
     private int userID;
     public int minutetotalLength;
     public int secondTotalLength;
@@ -40,6 +42,14 @@ public class Song {
         this.status = status;
         this.userID = userID;
 
+    }
+
+    public Date getDateUpdate() {
+        return dateUpdate;
+    }
+
+    public void setDateUpdate(Date dateUpdate) {
+        this.dateUpdate = dateUpdate;
     }
 
     public int getSongID() {
@@ -124,6 +134,11 @@ public class Song {
 
     public Icon toIcon() {
         return new ImageIcon(getClass().getResource("/img/song/" + AVT));
+    }
+
+    @Override
+    public String toString() {
+        return "Song{" + "songID=" + songID + ", nameSong=" + nameSong + ", musician=" + musician + ", singer=" + singer + ", category=" + category + ", fileLyrics=" + fileLyrics + ", AVT=" + AVT + ", fileSong=" + fileSong + ", status=" + status + ", dateUpdate=" + dateUpdate + ", userID=" + userID + ", minutetotalLength=" + minutetotalLength + ", secondTotalLength=" + secondTotalLength + '}';
     }
 
 

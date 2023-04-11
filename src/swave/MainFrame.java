@@ -79,7 +79,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnlLyrics.setVisible(false);
         pnlComment.setVisible(false);
         toolPlay1.fillData(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
-
         initSearchSuggestion();
         init();
 
