@@ -14,11 +14,11 @@ public class SimpleTitleBar extends javax.swing.JPanel {
     private int x;
     private int y;
 
-    public SimpleTitleBar () {
+    public SimpleTitleBar() {
         initComponents();
     }
 
-    public void init (JFrame fram) {
+    public void init(JFrame fram) {
         resize = new ComponentResizer();
         resize.setSnapSize(new Dimension(10, 10));
         resize.setMinimumSize(new Dimension(300, 200));
@@ -30,10 +30,10 @@ public class SimpleTitleBar extends javax.swing.JPanel {
         //jLabel1.setIcon(XImage.getAppIcon());
     }
 
-    private void initMoving (JFrame fram) {
+    private void initMoving(JFrame fram) {
         panelMove.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed (MouseEvent me) {
+            public void mousePressed(MouseEvent me) {
                 if (fram.getExtendedState() != JFrame.MAXIMIZED_BOTH && SwingUtilities.isLeftMouseButton(me)) {
                     x = me.getX() + 3;
                     y = me.getY() + 3;
@@ -41,12 +41,11 @@ public class SimpleTitleBar extends javax.swing.JPanel {
             }
 
             @Override
-            public void mouseClicked (MouseEvent me) {
+            public void mouseClicked(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me) && me.getClickCount() == 2) {
                     if (fram.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
                         fram.setExtendedState(JFrame.NORMAL);
-                    }
-                    else {
+                    } else {
                         fram.setExtendedState(JFrame.MAXIMIZED_BOTH);
                     }
                 }
@@ -55,7 +54,7 @@ public class SimpleTitleBar extends javax.swing.JPanel {
         });
         panelMove.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged (MouseEvent me) {
+            public void mouseDragged(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
                     if (fram.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
                         fram.setExtendedState(JFrame.NORMAL);
@@ -65,6 +64,7 @@ public class SimpleTitleBar extends javax.swing.JPanel {
             }
         });
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

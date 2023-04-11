@@ -153,13 +153,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Vu.ui.CensorSongPane" name="censorSongPane">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="cardCS"/>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Component class="Vu.ui.UncensorSongPane" name="uncensorSongPane">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">

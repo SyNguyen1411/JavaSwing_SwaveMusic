@@ -4,7 +4,6 @@ import dao.AccountDAO;
 import dao.UserDAO;
 import entity.Account;
 import entity.User;
-import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Properties;
@@ -16,11 +15,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import utils.Auth;
-import utils.MsgBox;
 import utils.CheckForm;
-import utils.Verify;
+import utils.MsgBox;
 
 /**
  *

@@ -28,6 +28,10 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblAC.setForeground(Color.pink);
     }
 
+    private void init(){
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +48,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblAC = new javax.swing.JLabel();
         pnlChange = new javax.swing.JPanel();
         userManagermentPanel = new Vu.ui.UserManagermentPanel();
-        censorSongPane = new Vu.ui.CensorSongPane();
         uncensorSongPane = new Vu.ui.UncensorSongPane();
         reportCommentPanel = new Vu.ui.ReportCommentPanel();
         allCommentPane = new Vu.ui.AllCommentPane();
@@ -124,7 +127,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
         pnlChange.setPreferredSize(new java.awt.Dimension(1213, 807));
         pnlChange.setLayout(new java.awt.CardLayout());
         pnlChange.add(userManagermentPanel, "cardUS");
-        pnlChange.add(censorSongPane, "cardCS");
         pnlChange.add(uncensorSongPane, "cardUCS");
         pnlChange.add(reportCommentPanel, "cardRM");
         pnlChange.add(allCommentPane, "cardAM");
@@ -163,7 +165,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblAC.setForeground(Color.white);
         lblComment.setForeground(Color.white);
         lblTK.setForeground(Color.white);
-        c.show(pnlChange, "cardCS");
+        c.show(pnlChange, "cardUCS");
     }//GEN-LAST:event_lblSongMouseClicked
 
     private void lblCommentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCommentMouseClicked
@@ -230,7 +232,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Vu.ui.AllCommentPane allCommentPane;
-    private Vu.ui.CensorSongPane censorSongPane;
     private javax.swing.JLabel lblAC;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblComment;
