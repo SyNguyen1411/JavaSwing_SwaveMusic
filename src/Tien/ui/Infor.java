@@ -5,8 +5,19 @@
 package Tien.ui;
 
 import dao.UserDAO;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import static swave.Login.user;
 import utils.Auth;
@@ -23,34 +34,44 @@ public class Infor extends javax.swing.JPanel {
 
     public Infor() {
         initComponents();
-        setInf();
+        if (Auth.user != null) {
+            setInf();
+        }
     }
 
     public void setInf() {
-        user = uDao.selectById(Auth.user.getUserID());
-        lblName.setText(user.getFullname());
-        txtName.setText(lblName.getText());
-        String date = XDate.toString(user.getBirthDate(), "dd-MM-yyyy");   
-        String[] day = date.split("-");
-        cboDay.setSelectedItem(day[0]);
-        cboMonth.setSelectedItem(day[1]);
-        cboYear.setSelectedItem(day[2]);
-        if (user.isGender()) {
-            rdoMale.setSelected(true);
-        } else {
-            rdoFemale.setSelected(true);
+        try {
+            user = uDao.selectById(Auth.user.getUserID());
+            lblName.setText(user.getFullname());
+            txtName.setText(lblName.getText());
+            String date = XDate.toString(user.getBirthDate(), "dd-MM-yyyy");
+            String[] day = date.split("-");
+            cboDay.setSelectedItem(day[0]);
+            cboMonth.setSelectedItem(day[1]);
+            cboYear.setSelectedItem(day[2]);
+            if (user.isGender()) {
+                rdoMale.setSelected(true);
+            } else {
+                rdoFemale.setSelected(true);
+            }
+            txtEmail.setText(user.getEmail());
+            if (user.getAvt() != null) {
+                File path = new File("src/img/avt", user.getAvt());
+                BufferedImage img = ImageIO.read(path);
+                Area clip = new Area(new Rectangle(0, 0, img.getWidth(), img.getHeight()));
+                Area oval = new Area(new Ellipse2D.Double(0, 0, img.getWidth() - 1, img.getHeight() - 1));
+                clip.subtract(oval);
+                Graphics g2d = img.createGraphics();
+                g2d.setClip(clip);
+                g2d.setColor(new Color(55, 2, 53));
+                g2d.fillRect(0, 0, img.getWidth(), img.getHeight());
+                ImageIcon im = new ImageIcon(img.getScaledInstance(131, 125, Image.SCALE_DEFAULT));
+                lblAvt.setIcon(im);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Infor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        txtEmail.setText(user.getEmail());
-//        URL url = XImage.class.getResource("/img.avt/"+user.getAvt());
-//        ImageIcon imageIcon = new ImageIcon(url);
-//        Image image = imageIcon.getImage(); // transform it 
-//        Image newimg = image.getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-//        imageIcon = new ImageIcon(newimg);  // transform it back
-//        lblAvt.setIcon(new ImageIcon(getClass().getResource("/img/avt/"+user.getAvt())));
-//        ImageIcon img = new ImageIcon("src//img//avt//" + user.getAvt());
-//        Image im = img.getImage();
-//        ImageIcon icon = new ImageIcon(im.getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), im.SCALE_SMOOTH));
-//        lblAvt.setIcon(icon);
+
     }
 
     /**
@@ -93,8 +114,10 @@ public class Infor extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(55, 2, 53));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblAvt.setBackground(new java.awt.Color(55, 2, 53));
         lblAvt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Frame 100.png"))); // NOI18N
-        jPanel1.add(lblAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, -1, -1));
+        jPanel1.add(lblAvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 37, 131, 125));
+        lblAvt.getAccessibleContext().setAccessibleName("");
 
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
