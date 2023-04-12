@@ -4,10 +4,12 @@ import Tien.ui.ChangePassword;
 import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
+import dao.LoveSongDAO;
 import dao.PlaylistDAO;
 import dao.SongDAO;
 import dao.SongOfPlaylistDAO;
 import dao.StatisticDAO;
+import entity.LoveSong;
 import entity.PlayList;
 import entity.Search;
 import entity.Song;
@@ -77,10 +79,11 @@ public class MainFrame extends javax.swing.JFrame {
     private SongDAO songDAO = new SongDAO();
     private SongOfPlaylistDAO songOfPlaylistDAO = new SongOfPlaylistDAO();
     private StatisticDAO sdao = new StatisticDAO();
+    private LoveSongDAO lsDao = new LoveSongDAO();
 
     private UserTool userTool = new UserTool(this);
 
-    public MainFrame () throws UnsupportedAudioFileException, IOException, URISyntaxException {
+    public MainFrame() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         initComponents();
         c = (CardLayout) pnlChange.getLayout();
         this.main = this;
@@ -95,7 +98,6 @@ public class MainFrame extends javax.swing.JFrame {
         toolPlay1.fillData(new Song(1, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "lyrics.txt", "Nang_Am_Xa_Dan.jpg", "/mp3/Nang-Am-Xa-Dan-Son-Tung-M-TP.mp3", true, 1));
         initSearchSuggestion();
         init();
-
     }
 
     /**
@@ -190,7 +192,7 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
          */
@@ -222,7 +224,7 @@ public class MainFrame extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run () {
+            public void run() {
                 try {
                     new MainFrame().setVisible(true);
                 } catch (UnsupportedAudioFileException ex) {
@@ -236,7 +238,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
-    private void init () throws UnsupportedAudioFileException, IOException, URISyntaxException {
+    private void init() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         this.getContentPane().setBackground(new Color(0, 0, 0, 255));
         titleBar.init(this);
         setResizable(false);
@@ -244,22 +246,21 @@ public class MainFrame extends javax.swing.JFrame {
         eventUserTool();
         toolBar.getUserPanel().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 GlassPanePopup.showPopup(userTool, new DefaultOption() {
                     @Override
-                    public float opacity () {
+                    public float opacity() {
                         return 0;
                     }
 
                     @Override
-                    public LayoutCallback getLayoutCallBack (Component parent) {
+                    public LayoutCallback getLayoutCallBack(Component parent) {
                         return new DefaultLayoutCallBack(parent.getParent()) {
                             @Override
-                            public void correctBounds (ComponentWrapper cw) {
+                            public void correctBounds(ComponentWrapper cw) {
                                 if (parent.isVisible()) {
                                     cw.setBounds(this.getParent().getWidth() - toolBar.getUserPanel().getWidth(), this.getParent().getHeight() - 555 - 150, cw.getWidth(), cw.getHeight());
-                                }
-                                else {
+                                } else {
                                     super.correctBounds(cw);
                                 }
                             }
@@ -327,17 +328,19 @@ public class MainFrame extends javax.swing.JFrame {
         songList.add(new Song(10, "Khi Người Mình Yêu Khóc", "Taylor Swift", "Phan Mạnh Quỳnh", "Pop", "anGiDay.txt", "khiNguoiMinhYeuKhoc.jpg", "khiNguoiMinhYeuKhoc.mp3", true, 1));
         songList.add(new Song(11, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
         songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
-
-        //add list bài hát vào panel:
-        //pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
-        for (Song item : songList) {
-            //pnlMainScreen.addTrendingSong(item);
-            //pnlSongOfPlaylistPane.addList(item);
-
-            //add Song love for songLoveList:
+        //ADD SONG LOVE:
+        List<LoveSong> lsList = lsDao.selectAllByUID(Login.user.getUserID());
+        for (LoveSong loveSong : lsList) {
+            Song item = songDAO.selectById(loveSong.getSongID());
             songLoveList.add(item);
-
         }
+
+        //add Song love for Pane:
+        for (Song data : songLoveList) {
+            pnlLikeSong.getPnlSonglist().addSong(data, songLoveList);
+        }
+
+        pnlLikeSong.getPnlSonglist().setSongLove(songLoveList);
 
         // Đổ bài hát từ playlist trending lên bài hát
         //------------------------------------
@@ -355,7 +358,7 @@ public class MainFrame extends javax.swing.JFrame {
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
                 itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
@@ -385,27 +388,27 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
 
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
             }
 
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
             }
         });
 
         //add sự kiện cho nút play
         pnlMainScreen.getPnlTrendingSongList().setEventLblStart(new EventItem() {
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
                 itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
@@ -435,32 +438,32 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
 
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
             }
 
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
             }
         });
 
         //add sự kiện cho nút play
         pnlSongOfPlaylistPane.getPnlSonglist().setEventLblStart(new EventItem() {
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
                 SongItem songItem = (SongItem) com;
                 itemSong = songItem;
                 songItem.getLblStart().setVisible(false);
                 songItem.getLblWave().setVisible(true);
-                 pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
+                pnlSongOfPlaylistPane.getPnlSonglist().setRunningSong(com);
                 songItem.selectRunning(true);
 
                 toolPlay1.listSong = itemSong.listSong;
@@ -485,50 +488,50 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
 
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
             }
 
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
             }
         });
 
         //add sự kiện cho playlist item tại thanh menu bar
         menuBar.setEventPnlPlaylistItem(new EventItem() {
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
 
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
             }
         });
 
         // Add sự kiện khi chọn bài hát trong bài hát trending
         pnlMainScreen.setEventItem(new EventItem() {
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardTrending");
                 SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(song.getSongID() - 1);
                 itemSong = songItem;
@@ -562,22 +565,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
@@ -586,7 +589,7 @@ public class MainFrame extends javax.swing.JFrame {
         // Chưa làm xong
         pnlMainScreen.setEventItemPlaylist(new EventItem() {
             @Override
-            public void clickEvent (Component com, PlayList playist) {
+            public void clickEvent(Component com, PlayList playist) {
                 songOfPlaylistsID = (ArrayList<SongOfPlaylist>) songOfPlaylistDAO.selectSongOfPlaylists(playist.getPlaylistID());
                 for (SongOfPlaylist sop : songOfPlaylistsID) {
                     songOfPlaylists.add(songDAO.selectById(sop.getSongID()));
@@ -609,55 +612,31 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
-
-        //add Song love for Pane:
-        for (Song data : songLoveList) {
-            pnlLikeSong.getPnlSonglist().addSong(data, songLoveList);
-        }
-
-//        //Add lyrics:
-//        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
-//        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
-//        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
-//        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
-//        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
-//        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
-//        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
-//        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
-//        pnlLyrics.addLyric("Mùa thu mang giấc mơ quay về");
-//        pnlLyrics.addLyric("Vẫn nguyên vẹn như hôm nào");
-//        pnlLyrics.addLyric("Lá bay theo gió xôn xao chốn xưa anh chờ");
-//        pnlLyrics.addLyric("Đoạn đường ngày nào hai ta từng đón đưa");
-//        pnlLyrics.addLyric("Còn vấn vương không phai mờ");
-//        pnlLyrics.addLyric("Dấu yêu theo trong vần thơ.");
-//        pnlLyrics.addLyric("Chúng ta... là áng mây trên trời vội vàng ngang qua");
-//        pnlLyrics.addLyric("Chúng ta... chẳng thể nâng niu những câu thề");
+        
         //Hiển thị icon tim theo bài hát yêu thích:
-        pnlLikeSong.getPnlSonglist().setSongLove(songLoveList);
-
         //------------------------------------
         menuBar.getLblLogo().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardMain");
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardMain");
@@ -671,7 +650,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.getPnlMyPlaylists().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardPlaylist");
                 menuBar.getPnlMyPlaylists().setBackground(new Color(76, 76, 76));
@@ -684,7 +663,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.getPnlLikedSong().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardLove");
                 menuBar.getPnlLikedSong().setBackground(new Color(76, 76, 76));
@@ -697,7 +676,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.getPnlAddSong().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardAddSong");
                 menuBar.getPnlAddSong().setBackground(new Color(76, 76, 76));
@@ -709,7 +688,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.getPnlCreatePlaylist().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
                 CreatPlaylist a = new CreatPlaylist(main, true);
                 a.setVisible(true);
@@ -722,7 +701,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.getPnlHome().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardMain");
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardMain");
@@ -735,7 +714,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         toolBar.getFindTextField().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 if (search.getItemSize() > 0) {
                     menu.show(toolBar.getFindTextField(), 0, toolBar.getFindTextField().getHeight() + 5);
                 }
@@ -744,20 +723,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         toolBar.getFindTextField().addKeyListener(new KeyAdapter() {
             @Override
-            public void keyReleased (KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 String text = toolBar.getFindTextField().getText().trim().toLowerCase();
                 search.setData(search.dataSearch(text));
                 if (search.getItemSize() > 0) {
                     menu.show(toolBar.getFindTextField(), 0, toolBar.getFindTextField().getHeight() + 5);
                     menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 45) + 2);
-                }
-                else {
+                } else {
                     menu.setVisible(false);
                 }
             }
 
             @Override
-            public void keyPressed (KeyEvent e) {
+            public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     c.show(pnlChange, "cardSearch");
                     for (PlayList item : playlist) {
@@ -784,7 +762,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         search.addEventClick(new EventItem() {
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
                 menu.setVisible(false);
                 toolBar.getFindTextField().setText(data.getText());
                 c.show(pnlChange, "cardSearch");
@@ -808,24 +786,24 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
         });
     }
 
-    private void undoChosen (String name) {
+    private void undoChosen(String name) {
         if (menuBar.getPnlAddSong().getName().equals(name)) {
             menuBar.getPnlAddSong().setBackground(new Color(0, 0, 0, 1));
 
@@ -848,169 +826,169 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    public CardLayout getC () {
+    public CardLayout getC() {
         return c;
     }
 
-    public void setC (CardLayout c) {
+    public void setC(CardLayout c) {
         this.c = c;
     }
 
-    public ArrayList<Song> getSongLoveList () {
+    public ArrayList<Song> getSongLoveList() {
         return songLoveList;
     }
 
-    public void setSongLoveList (ArrayList<Song> songLoveList) {
+    public void setSongLoveList(ArrayList<Song> songLoveList) {
         this.songLoveList = songLoveList;
     }
 
-    public String getAppItemName () {
+    public String getAppItemName() {
         return appItemName;
     }
 
-    public void setAppItemName (String appItemName) {
+    public void setAppItemName(String appItemName) {
         this.appItemName = appItemName;
     }
 
-    public JPanel getjPanel1 () {
+    public JPanel getjPanel1() {
         return jPanel1;
     }
 
-    public void setjPanel1 (JPanel jPanel1) {
+    public void setjPanel1(JPanel jPanel1) {
         this.jPanel1 = jPanel1;
     }
 
-    public JLabel getLblCreatePlaylist () {
+    public JLabel getLblCreatePlaylist() {
         return lblCreatePlaylist;
     }
 
-    public lyricsPane getPnlLyrics () {
+    public lyricsPane getPnlLyrics() {
         return pnlLyrics;
     }
 
-    public void setPnlLyrics (lyricsPane pnlLyrics) {
+    public void setPnlLyrics(lyricsPane pnlLyrics) {
         this.pnlLyrics = pnlLyrics;
     }
 
-    public void setLblCreatePlaylist (JLabel lblCreatePlaylist) {
+    public void setLblCreatePlaylist(JLabel lblCreatePlaylist) {
         this.lblCreatePlaylist = lblCreatePlaylist;
     }
 
-    public void setMenuBar (MenuBar menuBar) {
+    public void setMenuBar(MenuBar menuBar) {
         this.menuBar = menuBar;
     }
 
-    public AddSongPanel getPnlAddSong () {
+    public AddSongPanel getPnlAddSong() {
         return pnlAddSong;
     }
 
-    public void setPnlAddSong (AddSongPanel pnlAddSong) {
+    public void setPnlAddSong(AddSongPanel pnlAddSong) {
         this.pnlAddSong = pnlAddSong;
     }
 
-    public JPanel getPnlChange () {
+    public JPanel getPnlChange() {
         return pnlChange;
     }
 
-    public void setPnlChange (JPanel pnlChange) {
+    public void setPnlChange(JPanel pnlChange) {
         this.pnlChange = pnlChange;
     }
 
-    public JPanel getPnlCreatePlaylist () {
+    public JPanel getPnlCreatePlaylist() {
         return pnlCreatePlaylist;
     }
 
-    public void setPnlCreatePlaylist (JPanel pnlCreatePlaylist) {
+    public void setPnlCreatePlaylist(JPanel pnlCreatePlaylist) {
         this.pnlCreatePlaylist = pnlCreatePlaylist;
     }
 
-    public SongLovelistPane getPnlLikeSong () {
+    public SongLovelistPane getPnlLikeSong() {
         return pnlLikeSong;
     }
 
-    public void setPnlLikeSong (SongLovelistPane pnlLikeSong) {
+    public void setPnlLikeSong(SongLovelistPane pnlLikeSong) {
         this.pnlLikeSong = pnlLikeSong;
     }
 
-    public MainPanel getPnlMainScreen () {
+    public MainPanel getPnlMainScreen() {
         return pnlMainScreen;
     }
 
-    public void setPnlMainScreen (MainPanel pnlMainScreen) {
+    public void setPnlMainScreen(MainPanel pnlMainScreen) {
         this.pnlMainScreen = pnlMainScreen;
     }
 
-    public PlaylistPane getPnlMyPlaylist () {
+    public PlaylistPane getPnlMyPlaylist() {
         return pnlMyPlaylist;
     }
 
-    public void setPnlMyPlaylist (PlaylistPane pnlMyPlaylist) {
+    public void setPnlMyPlaylist(PlaylistPane pnlMyPlaylist) {
         this.pnlMyPlaylist = pnlMyPlaylist;
     }
 
-    public SearchPane getPnlSearch () {
+    public SearchPane getPnlSearch() {
         return pnlSearch;
     }
 
-    public void setPnlSearch (SearchPane pnlSearch) {
+    public void setPnlSearch(SearchPane pnlSearch) {
         this.pnlSearch = pnlSearch;
     }
 
-    public SongOfPlaylistPane getPnlSongOfPlaylistPane () {
+    public SongOfPlaylistPane getPnlSongOfPlaylistPane() {
         return pnlSongOfPlaylistPane;
     }
 
-    public void setPnlSongOfPlaylistPane (SongOfPlaylistPane pnlSongOfPlaylistPane) {
+    public void setPnlSongOfPlaylistPane(SongOfPlaylistPane pnlSongOfPlaylistPane) {
         this.pnlSongOfPlaylistPane = pnlSongOfPlaylistPane;
     }
 
-    public SimpleTitleBar getTitleBar () {
+    public SimpleTitleBar getTitleBar() {
         return titleBar;
     }
 
-    public void setTitleBar (SimpleTitleBar titleBar) {
+    public void setTitleBar(SimpleTitleBar titleBar) {
         this.titleBar = titleBar;
     }
 
-    public ToolBar getToolBar () {
+    public ToolBar getToolBar() {
         return toolBar;
     }
 
-    public void setToolBar (ToolBar toolBar) {
+    public void setToolBar(ToolBar toolBar) {
         this.toolBar = toolBar;
     }
 
-    public toolPlay getToolPlay1 () {
+    public toolPlay getToolPlay1() {
         return toolPlay1;
     }
 
-    public void setToolPlay1 (toolPlay toolPlay1) {
+    public void setToolPlay1(toolPlay toolPlay1) {
         this.toolPlay1 = toolPlay1;
     }
 
-    public CommentPane getPnlComment () {
+    public CommentPane getPnlComment() {
         return pnlComment;
     }
 
-    public void setPnlComment (CommentPane pnlComment) {
+    public void setPnlComment(CommentPane pnlComment) {
         this.pnlComment = pnlComment;
     }
 
-    private void eventUserTool () {
+    private void eventUserTool() {
         userTool.getPnlPersonalInfo().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 ChangePassword mainIF = new ChangePassword(main, true);
                 mainIF.setVisible(true);
             }
 
             @Override
-            public void mouseEntered (MouseEvent e) {
+            public void mouseEntered(MouseEvent e) {
                 userTool.getPnlPersonalInfo().getLblPanelName().setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited (MouseEvent e) {
+            public void mouseExited(MouseEvent e) {
                 userTool.getPnlPersonalInfo().getLblPanelName().setForeground(new Color(199, 199, 199));
             }
 
@@ -1018,35 +996,35 @@ public class MainFrame extends javax.swing.JFrame {
 
         userTool.getPnlAdminTool().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 AdminToolDialog atd = new AdminToolDialog(userTool.getMf(), true);
                 atd.setVisible(true);
             }
 
             @Override
-            public void mouseEntered (MouseEvent e) {
+            public void mouseEntered(MouseEvent e) {
                 userTool.getPnlAdminTool().getLblPanelName().setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited (MouseEvent e) {
+            public void mouseExited(MouseEvent e) {
                 userTool.getPnlAdminTool().getLblPanelName().setForeground(new Color(199, 199, 199));
             }
 
         });
         userTool.getPnlIntroduction().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseEntered (MouseEvent e) {
+            public void mouseEntered(MouseEvent e) {
                 userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited (MouseEvent e) {
+            public void mouseExited(MouseEvent e) {
                 userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(199, 199, 199));
             }
 
@@ -1054,26 +1032,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         userTool.getPnlLogout().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 Login loginForm = new Login();
                 loginForm.setVisible(true);
                 main.setVisible(false);
             }
 
             @Override
-            public void mouseEntered (MouseEvent e) {
+            public void mouseEntered(MouseEvent e) {
                 userTool.getPnlLogout().getLblPanelName().setForeground(new Color(165, 43, 168));
             }
 
             @Override
-            public void mouseExited (MouseEvent e) {
+            public void mouseExited(MouseEvent e) {
                 userTool.getPnlLogout().getLblPanelName().setForeground(new Color(199, 199, 199));
             }
 
         });
     }
 
-    public void initSearchSuggestion () {
+    public void initSearchSuggestion() {
         menu = new JPopupMenu();
         search = new PanelSearchSuggestion();
         menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
@@ -1081,31 +1059,31 @@ public class MainFrame extends javax.swing.JFrame {
         menu.setFocusable(false);
         search.addEventClick(new EventItem() {
             @Override
-            public void itemClick (Search data) {
+            public void itemClick(Search data) {
                 menu.setVisible(false);
                 toolBar.getFindTextField().setText(data.getText());
 
             }
 
             @Override
-            public void clickEvent (Component com, Song song) {
+            public void clickEvent(Component com, Song song) {
             }
 
             @Override
-            public void clickEvent (Component com, PlayList playList) {
+            public void clickEvent(Component com, PlayList playList) {
             }
 
             @Override
-            public void EnterEvent (Component com, Song song) {
+            public void EnterEvent(Component com, Song song) {
             }
 
             @Override
-            public void ExitEvent (Component com, Song song, MouseEvent e) {
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
             }
         });
     }
 
-    public void fillTrendingSong () throws UnsupportedAudioFileException, IOException, URISyntaxException {
+    public void fillTrendingSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {
         listTrending.clear();
         listSongTrending.clear();
         listTrending = sdao.getTrending();

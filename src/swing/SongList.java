@@ -58,8 +58,9 @@ public class SongList extends javax.swing.JPanel {
 
     public void addSong(Song data, List<Song> list) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         SongItem item = new SongItem();
-        item.setDataSong(data);
+
         item.listSong = list;
+        item.setDataSong(data);
         item.getLblStart().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -163,8 +164,6 @@ public class SongList extends javax.swing.JPanel {
 
         }
     };
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
