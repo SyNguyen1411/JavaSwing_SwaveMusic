@@ -181,13 +181,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Vu.ui.StatisticViewPanel" name="statisticViewPanel">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="cardSV"/>
-            </Constraint>
-          </Constraints>
-        </Component>
       </SubComponents>
     </Container>
     <Component class="AdminToolUtils.MenuBar" name="menuBar1">

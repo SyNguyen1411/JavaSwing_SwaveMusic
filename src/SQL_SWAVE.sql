@@ -1106,11 +1106,10 @@ if OBJECT_ID('proc_thongKeLuotNghe') is not null
 go
 
 create proc proc_thongKeLuotNghe
-	@MaBH INT
 as
 begin
-	select BAIHAT.MaBH, BAIHAT.TenBH, COUNT(LUOTNGHE.MaBH) as 'TongNghe' from LUOTNGHE join BAIHAT on LUOTNGHE.MaBH = BAIHAT.MaBH
-	group by BAIHAT.MaBH, BAIHAT.TenBH
+	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTNGHE.MaBH) as 'TongNghe' from LUOTNGHE join BAIHAT on LUOTNGHE.MaBH = BAIHAT.MaBH
+	group by BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh
 end
 go
 
@@ -1122,11 +1121,12 @@ go
 create proc proc_thongKeLuotThich
 as
 begin
-	select BAIHAT.MaBH, BAIHAT.TenBH, COUNT(LUOTYEUTHICH.MaBH) as 'TongLike' from LUOTYEUTHICH join BAIHAT on LUOTYEUTHICH.MaBH = BAIHAT.MaBH
-	group by BAIHAT.MaBH, BAIHAT.TenBH
+	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTYEUTHICH.MaBH) as 'TongLike' from LUOTYEUTHICH join BAIHAT on LUOTYEUTHICH.MaBH = BAIHAT.MaBH
+	group by BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh
 end
 go
 
+exec proc_thongKeLuotNghe 
 -------------------------
 --if OBJECT_ID('proc_xepHangTrending') is not null
 --	drop proc proc_xepHangTrending

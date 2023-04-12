@@ -60,7 +60,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
         reportCommentPanel = new Vu.ui.ReportCommentPanel();
         allCommentPane = new Vu.ui.AllCommentPane();
         statisticLikePanel = new Vu.ui.StatisticLikePanel();
-        statisticViewPanel = new Vu.ui.StatisticViewPanel();
         menuBar1 = new AdminToolUtils.MenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -139,7 +138,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
         pnlChange.add(reportCommentPanel, "cardRM");
         pnlChange.add(allCommentPane, "cardAM");
         pnlChange.add(statisticLikePanel, "cardSL");
-        pnlChange.add(statisticViewPanel, "cardSV");
 
         getContentPane().add(pnlChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 0, 1219, -1));
         getContentPane().add(menuBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -264,7 +262,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlChange;
     private Vu.ui.ReportCommentPanel reportCommentPanel;
     private Vu.ui.StatisticLikePanel statisticLikePanel;
-    private Vu.ui.StatisticViewPanel statisticViewPanel;
     private Vu.ui.UncensorSongPane uncensorSongPane;
     private Vu.ui.UserManagermentPanel userManagermentPanel;
     // End of variables declaration//GEN-END:variables

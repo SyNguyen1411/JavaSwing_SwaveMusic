@@ -631,7 +631,7 @@ public class MainFrame extends javax.swing.JFrame {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
-        
+
         //Hiển thị icon tim theo bài hát yêu thích:
         //------------------------------------
         menuBar.getLblLogo().addMouseListener(new MouseAdapter() {
@@ -1092,6 +1092,8 @@ public class MainFrame extends javax.swing.JFrame {
             listSongTrending.add(s);
         }
         pnlMainScreen.fillTrendingSong((ArrayList<Song>) listSongTrending);
+//        pnlMainScreen.getPnlDemoTrending().removeAll();
+//        pnlMainScreen.fillTrendingSong((ArrayList<Song>) listSongTrending);
         //add Song trending
         for (Song data : listSongTrending) {
             pnlMainScreen.getPnlTrendingSongList().addSong(data, listSongTrending);
