@@ -10,6 +10,13 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import utils.Auth;
+import utils.MsgBox;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 /**
  *
@@ -27,8 +34,10 @@ public class Signup extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         simpleTitleBar1.init(this);
+        
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -295,27 +304,41 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFullnameCaretUpdate
 
     private void btnSignupggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupggActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnSignupggActionPerformed
 
     private void btnSignupSWAVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupSWAVEActionPerformed
         
         String account = txtUsername.getText();
         String password = txtPassword.getText();
+        String checkpass = txtCheckPass.getText();
+        String fullName = txtFullname.getText();
+        String email = txtEmail.getText();
+        if (account.isEmpty() || password.isEmpty() || checkpass.isEmpty() || fullName.isEmpty() || email.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!");
+        } else if (!password.equals(checkpass)) {
+        JOptionPane.showMessageDialog(this, "Mật khẩu không khớp!");
+        } else {
+        JOptionPane.showMessageDialog(this, "Đăng ký thành công!");
+        this.mainLogin = mainLogin;
+        initComponents(); 
+        this.setVisible(true); 
+        dispose(); 
         
-        if (!txtCheckPass.getText().equals(password)) {
-           JOptionPane.showMessageDialog(this, "Mật khẩu và xác nhận mật khẩu không giống nhau");
-        }else{
-            JOptionPane.showMessageDialog(this, "Tạo thành công");
-            Auth.user = new Account(account, password, true, true );
-        }
+}
         
         
         
     }//GEN-LAST:event_btnSignupSWAVEActionPerformed
 
     private void txtFullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFullnameActionPerformed
-        
+        String fullName = txtFullname.getText();
+        // validate name
+        if (!fullName.matches("[a-zA-Z]+")) {
+            // name is invalid
+            JOptionPane.showMessageDialog(null, "Invalid name. Please enter letters only.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtFullname.equestFocus();
+        }
     }//GEN-LAST:event_txtFullnameActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -331,7 +354,15 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCheckPassCaretUpdate
 
     private void txtCheckPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCheckPassActionPerformed
-        // TODO add your handling code here:
+  
+        String checkpass= txtCheckPass.getText();
+        String password = txtPassword.getText();
+        if (!password.equals(checkpass)) {
+            JOptionPane.showMessageDialog(null, "Mật khẩu chính xác.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Mật khẩu không chính xác.");
+               }
+            
     }//GEN-LAST:event_txtCheckPassActionPerformed
 
     private void txtUsernameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtUsernameCaretUpdate
@@ -343,7 +374,10 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameCaretUpdate
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
+        String username = txtUsername.getText();
+        if (username.length() < 6) {
+            JOptionPane.showMessageDialog(null, "Tên tài khoản phải có ít nhất 6 ký tự");
+        }
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void txtEmailCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEmailCaretUpdate
@@ -355,7 +389,21 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailCaretUpdate
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
+        String email = txtEmail.getText();
+        if (!email.matches("\\\\b[\\\\w.%-]+@[-.\\\\w]+\\\\.[A-Za-z]{2,4}\\\\b")) {
+        JOptionPane.showMessageDialog(null, "Email không hợp lệ");
+        }
+        /*// call API to check email
+        boolean emailExists = checkEmailExists(email);
+
+        // handle result from API
+        if (emailExists) {
+            JOptionPane.showMessageDialog(null, "Email already exists. Please enter a different email.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtEmail.requestFocus();
+        } else {
+            // email does not exist, do something
+        }
+    }*/
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void lblAcesssMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAcesssMouseEntered
@@ -367,7 +415,10 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAcesssMouseExited
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
+        String password = txtPassword.getText();
+        if (password.length() < 6) {
+            JOptionPane.showMessageDialog(null, "password  phải có ít nhất 6 ký tự");
+        }
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void txtPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtPasswordCaretUpdate
