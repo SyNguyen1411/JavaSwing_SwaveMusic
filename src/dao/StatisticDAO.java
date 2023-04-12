@@ -35,13 +35,13 @@ public class StatisticDAO {
     
     public List<Object[]> getAllSongByLoves(){
         String sql = "{CALL  proc_thongKeLuotThich()}";
-        String[] cols = {"MaBH", "TenBH", "TongLike"};
+        String[] cols = {"MaBH", "TenBH","HinhAnh", "TongLike"};
         return getListofArray(sql, cols);
     }    
     
     public List<Object[]> getAllSongByListens(){
         String sql = "{CALL  proc_thongKeLuotNghe()}";
-        String[] cols = {"MaBH", "TenBH", "TongNghe"};
+        String[] cols = {"MaBH", "TenBH","HinhAnh", "TongNghe"};
         return getListofArray(sql, cols);
     }    
     

@@ -35,7 +35,7 @@ public class UncensorSongPane extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         fillTableNotAllowedSong();
         jPanel4.setOpaque(false);
-        pnlListSong.setBackground(new Color(0, 0, 0, 255));
+        jPanel4.setBackground(new Color(0, 0, 0, 255));
         pnlListSong.setOpaque(true);
         pnlListSong.setBackground(new Color(0, 0, 0, 255));
         jScrollPane1.setOpaque(false);

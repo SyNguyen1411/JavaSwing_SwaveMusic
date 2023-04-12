@@ -6,7 +6,6 @@ package panelMain;
 
 import component.EventItem;
 import dao.PlaylistDAO;
-import dao.SongDAO;
 import dao.StatisticDAO;
 import entity.PlayList;
 import entity.Song;
@@ -21,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import swave.MainFrame;
 import swing.MainWindowItem;
 import swing.PlaylistPanel;
@@ -77,6 +77,22 @@ public class MainPanel extends javax.swing.JPanel {
 //    private MouseEvent monthMouseEvent;
     public CardLayout getCardLPlaylistLayout() {
         return cardLPlaylistLayout;
+    }
+
+    public JPanel getPnlDemoTopPlaylist() {
+        return pnlDemoTopPlaylist;
+    }
+
+    public void setPnlDemoTopPlaylist(JPanel pnlDemoTopPlaylist) {
+        this.pnlDemoTopPlaylist = pnlDemoTopPlaylist;
+    }
+
+    public JPanel getPnlDemoTrending() {
+        return pnlDemoTrending;
+    }
+
+    public void setPnlDemoTrending(JPanel pnlDemoTrending) {
+        this.pnlDemoTrending = pnlDemoTrending;
     }
 
     public void setCardLPlaylistLayout(CardLayout cardLPlaylistLayout) {

@@ -4,7 +4,6 @@ import Tien.ui.ChangePassword;
 import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
-import dao.PlaylistDAO;
 import dao.SongDAO;
 import dao.SongOfPlaylistDAO;
 import dao.StatisticDAO;
@@ -1113,8 +1112,10 @@ public class MainFrame extends javax.swing.JFrame {
             Song s = songDAO.selectById((Integer) objects[0]);
             listSongTrending.add(s);
         }
+        pnlMainScreen.getPnlDemoTrending().removeAll();
         pnlMainScreen.fillTrendingSong((ArrayList<Song>) listSongTrending);
         //add Song trending
+        pnlMainScreen.getPnlTrendingSongList().getPnlSongList().removeAll();
         for (Song data : listSongTrending) {
             pnlMainScreen.getPnlTrendingSongList().addSong(data, listSongTrending);
         }

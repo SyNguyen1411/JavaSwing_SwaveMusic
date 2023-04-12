@@ -6,22 +6,13 @@ import dao.UserDAO;
 import entity.Account;
 import entity.User;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import utils.Auth;
 import utils.MsgBox;
 
@@ -87,9 +78,11 @@ public class Login extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1530, 810));
+        setMaximumSize(new java.awt.Dimension(1530, 805));
+        setMinimumSize(new java.awt.Dimension(1530, 805));
         setUndecorated(true);
-        setSize(new java.awt.Dimension(1530, 810));
+        setPreferredSize(new java.awt.Dimension(1530, 805));
+        setSize(new java.awt.Dimension(1530, 805));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(simpleTitleBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, -1));
 
@@ -309,8 +302,10 @@ public class Login extends javax.swing.JFrame {
         pnlMain.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(991, 149, 500, 580));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginBackground.png"))); // NOI18N
+        lblBackground.setMaximumSize(new java.awt.Dimension(1532, 810));
+        lblBackground.setMinimumSize(new java.awt.Dimension(1532, 810));
         lblBackground.setPreferredSize(new java.awt.Dimension(1532, 810));
-        pnlMain.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        pnlMain.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, -1));
 
         getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -473,6 +468,7 @@ public class Login extends javax.swing.JFrame {
 
     private void loadDialog(boolean index) {
         DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
+        this.setEnabled(false);
         loadPane.setVisible(true);
         loginForm = this;
         Thread loadThread = new Thread(new Runnable() {
