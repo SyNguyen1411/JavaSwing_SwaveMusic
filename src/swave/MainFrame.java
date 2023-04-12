@@ -316,18 +316,18 @@ public class MainFrame extends javax.swing.JFrame {
         //add list song to pnl songList
         //------------------------------------
         //add song to panel main
-        songList.add(new Song(1, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "anGiDay.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
-        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "chamHet.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
-        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "chayNgayDi.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
-        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Con-mua-ngang-qua.jpg", "conMuaNgangQua.mp3", true, 1));
-        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
-        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
-        songList.add(new Song(7, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "anGiDay.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
-        songList.add(new Song(8, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
-        songList.add(new Song(9, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
-        songList.add(new Song(10, "Khi Người Mình Yêu Khóc", "Taylor Swift", "Phan Mạnh Quỳnh", "Pop", "anGiDay.txt", "khiNguoiMinhYeuKhoc.jpg", "khiNguoiMinhYeuKhoc.mp3", true, 1));
-        songList.add(new Song(11, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
-        songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
+//        songList.add(new Song(1, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "anGiDay.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
+//        songList.add(new Song(2, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "chamHet.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
+//        songList.add(new Song(3, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "chayNgayDi.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
+//        songList.add(new Song(4, "Cơn Mưa Ngang Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Con-mua-ngang-qua.jpg", "conMuaNgangQua.mp3", true, 1));
+//        songList.add(new Song(5, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
+//        songList.add(new Song(6, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
+//        songList.add(new Song(7, "Ăn gì đây", "Taylor Swift", "Hòa Minzy", "Pop", "anGiDay.txt", "anGiDay.jpg", "anGiDay.mp3", true, 1));
+//        songList.add(new Song(8, "Chấm Hết", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Cham-het.jpg", "chamHet.mp3", true, 1));
+//        songList.add(new Song(9, "Chạy Ngay Đi", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Chay_ngay_di.png", "chayNgayDi.mp3", true, 1));
+//        songList.add(new Song(10, "Khi Người Mình Yêu Khóc", "Taylor Swift", "Phan Mạnh Quỳnh", "Pop", "anGiDay.txt", "khiNguoiMinhYeuKhoc.jpg", "khiNguoiMinhYeuKhoc.mp3", true, 1));
+//        songList.add(new Song(11, "Em Của Ngày Hôm Qua", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Em-cua-ngay-hom-qua.jpg", "emCuaNgayHomQua.mp3", true, 1));
+//        songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
         //ADD SONG LOVE:
         List<LoveSong> lsList = lsDao.selectAllByUID(Login.user.getUserID());
         for (LoveSong loveSong : lsList) {
@@ -590,6 +590,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlMainScreen.setEventItemPlaylist(new EventItem() {
             @Override
             public void clickEvent(Component com, PlayList playist) {
+                songOfPlaylists.clear();
                 songOfPlaylistsID = (ArrayList<SongOfPlaylist>) songOfPlaylistDAO.selectSongOfPlaylists(playist.getPlaylistID());
                 for (SongOfPlaylist sop : songOfPlaylistsID) {
                     songOfPlaylists.add(songDAO.selectById(sop.getSongID()));
@@ -1091,9 +1092,10 @@ public class MainFrame extends javax.swing.JFrame {
             Song s = songDAO.selectById((Integer) objects[0]);
             listSongTrending.add(s);
         }
+        pnlMainScreen.getPnlDemoTrending().removeAll();
+
+        pnlMainScreen.getPnlTrendingSongList().getPnlSongList().removeAll();
         pnlMainScreen.fillTrendingSong((ArrayList<Song>) listSongTrending);
-//        pnlMainScreen.getPnlDemoTrending().removeAll();
-//        pnlMainScreen.fillTrendingSong((ArrayList<Song>) listSongTrending);
         //add Song trending
         for (Song data : listSongTrending) {
             pnlMainScreen.getPnlTrendingSongList().addSong(data, listSongTrending);

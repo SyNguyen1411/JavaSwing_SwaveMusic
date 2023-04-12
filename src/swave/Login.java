@@ -454,9 +454,8 @@ public class Login extends javax.swing.JFrame {
             if (acc.isStatus()) {
                 if (acc.getPassword().equals(pass)) {
                     user = uDao.selectById(username);
-                    boolean index = acc.isRole();
                     Auth.user = acc;
-                    loadDialog(index);
+                    loadDialog();
                 } else {
                     MsgBox.alert(this, "Mật khẩu không đúng");
                 }
@@ -466,7 +465,7 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-    private void loadDialog(boolean index) {
+    private void loadDialog() {
         DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
         this.setEnabled(false);
         loadPane.setVisible(true);

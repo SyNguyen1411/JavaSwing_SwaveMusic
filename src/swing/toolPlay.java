@@ -1,6 +1,8 @@
 package swing;
 
 import component.Slidebar;
+import dao.ListensDAO;
+import entity.Listens;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import swave.Login;
 import swave.MainFrame;
 
 /**
@@ -54,7 +57,8 @@ public class toolPlay extends javax.swing.JPanel {
     boolean lyrics = false;
     boolean library = false;
     public boolean comment = false;
-
+    private int timeListen = 0;
+    private ListensDAO ltDao = new ListensDAO();
     private Song data;
     public SongItem songItem;
     public MainFrame main;
@@ -443,8 +447,10 @@ public class toolPlay extends javax.swing.JPanel {
         running = !running;
         setRunning(running);
         if (running) {
+            timeListen = 0;
             Thread runningSong = new Thread(play);
             runningSong.start();
+
             main.itemSong.setRunning(running);
             main.itemSong.getLblWave().setVisible(running);
             main.itemSong.getLblIconPlay().setVisible(!running);
@@ -452,6 +458,7 @@ public class toolPlay extends javax.swing.JPanel {
             main.itemSong.selectRunning(running);
         } else {
             try {
+                timeListen = 0;
                 pauseSong();
                 main.itemSong.setRunning(running);
                 main.itemSong.getLblWave().setVisible(running);
@@ -684,6 +691,7 @@ public class toolPlay extends javax.swing.JPanel {
 
     public void fillData(Song data) {
         this.data = data;
+        timeListen = 0;
         lblAVTSong.setIcon(new ImageIcon(getClass().getResource("/img/song/" + data.getAVT())));
         lblNameSong.setText(data.getNameSong());
         lblSinger.setText(data.getSinger());
@@ -763,8 +771,16 @@ public class toolPlay extends javax.swing.JPanel {
             } else {
                 lblTimeStart1.setText("0" + minute + ":" + "0" + sec);
             }
+            timeListen++;
+            if (timeListen == 30) {
+                Listens listen = new Listens();
+                listen.setSongID(data.getSongID());
+                listen.setUserID(Login.user.getUserID());
+                ltDao.insert(listen);
+                System.out.println("thêm lượt nghe");
+            }
+
         } catch (IOException ex) {
-            System.out.println("Kết thúc bài hát");
         }
     }
 
