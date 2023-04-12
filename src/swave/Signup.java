@@ -337,7 +337,7 @@ public class Signup extends javax.swing.JFrame {
         if (!fullName.matches("[a-zA-Z]+")) {
             // name is invalid
             JOptionPane.showMessageDialog(null, "Invalid name. Please enter letters only.", "Error", JOptionPane.ERROR_MESSAGE);
-            txtFullname.equestFocus();
+            txtFullname.requestFocus();
         }
     }//GEN-LAST:event_txtFullnameActionPerformed
 
