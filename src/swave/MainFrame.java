@@ -84,6 +84,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         c = (CardLayout) pnlChange.getLayout();
         this.main = this;
+        pnlAddSong.mainFrame = this;
         pnlMainScreen.main = this;
         pnlMyPlaylist.main = this;
         pnlSongOfPlaylistPane.main = this;
@@ -1104,7 +1105,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
-    private void fillTrendingSong () throws UnsupportedAudioFileException, IOException, URISyntaxException {
+    public void fillTrendingSong () throws UnsupportedAudioFileException, IOException, URISyntaxException {
         listTrending.clear();
         listSongTrending.clear();
         listTrending = sdao.getTrending();
