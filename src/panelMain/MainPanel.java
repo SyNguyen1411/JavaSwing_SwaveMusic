@@ -48,9 +48,10 @@ public class MainPanel extends javax.swing.JPanel {
     private EventItem eventItemPlaylist;
     private StatisticDAO sdao = new StatisticDAO();
     private List<Object[]> listPlaylistTrending = new ArrayList<>();
+    
     private ArrayList<PlayList> listPlayLists = new ArrayList<>();
     private PlaylistDAO pdao = new PlaylistDAO();
-    private SongDAO songDAO = new SongDAO();
+    
 
     public EventItem getEventItemPlaylist() {
         return eventItemPlaylist;
@@ -468,6 +469,8 @@ public class MainPanel extends javax.swing.JPanel {
 
     public void fillTopPlaylist(){
         pnlDemoTopPlaylist.removeAll();
+        listPlaylistTrending.clear();
+        listPlayLists.clear();
         listPlaylistTrending = sdao.getTopPlaylist(7);
         for (Object[] objects : listPlaylistTrending) {
             PlayList pl = pdao.selectById((Integer) objects[0]);
@@ -476,6 +479,13 @@ public class MainPanel extends javax.swing.JPanel {
         }
         for (PlayList pl : listPlayLists) {
             addTopPlaylist(pl);
+        }
+    }
+    
+    public void fillTrendingSong(ArrayList<Song> listSongTrending){
+        pnlDemoTrending.removeAll();
+        for (Song song : listSongTrending) {
+            addTrendingSong(song);
         }
     }
     

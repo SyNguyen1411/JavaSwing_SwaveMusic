@@ -47,10 +47,11 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         lblAVT.setIcon(playlistFocus.toIcon());
         lblNamePlaylist.setText(playlistFocus.getPlaylistName());
 
-        pnlSonglist.removeAll();
+        pnlSonglist.getPnlSongList().removeAll();
         for (Song song : listSOngOfPlayList) {
             pnlSonglist.addSong(song, listSOngOfPlayList);
         }
+        
         revalidate();
         repaint();
     }
