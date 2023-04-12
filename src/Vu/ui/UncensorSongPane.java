@@ -301,6 +301,7 @@ public class UncensorSongPane extends javax.swing.JPanel {
 
     public void addSongToPnlListSong(Song song, GridBagConstraints gridBagConstraints, Integer index) {
         ListSongItemAddSongPanel listSongItemAddSongPanel = new ListSongItemAddSongPanel(song);
+        listSongItemAddSongPanel.getLblPosition().setText(String.valueOf(gridBagConstraints.gridy+1));
         if (index == 0) {
             listSongItemAddSongPanel.getLblEdit().addMouseListener(new MouseAdapter() {
                 @Override

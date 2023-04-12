@@ -6,6 +6,12 @@ package Vu.ui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import swave.MainFrame;
 
 /**
  *
@@ -186,6 +192,16 @@ public class AdminToolDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblTKMouseClicked
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
+        try {
+            ((MainFrame) getParent()).fillTrendingSong();
+            ((MainFrame) getParent()).getPnlMainScreen().fillTopPlaylist();
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_lblCloseMouseClicked
 

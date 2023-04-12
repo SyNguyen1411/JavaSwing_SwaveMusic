@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import swave.Login;
+import swave.MainFrame;
 import swing.utilcomponent.ScrollBarCustom;
 import utils.MsgBox;
 import utils.XFile;
@@ -34,6 +36,7 @@ public class AddSongPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddSong
      */
+    public MainFrame mainFrame;
     private EventItem eventLblEditSong;
     private EventItem eventLblDeleteSong;
     private EventItem eventBtnAdd;
@@ -91,6 +94,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         clearForm(2);
         fillTable();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1666,7 +1670,15 @@ public class AddSongPanel extends javax.swing.JPanel {
         listSongItemAddSongPanel.getLblDelete().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                deleteSong(song);
+                try {
+                    deleteSong(song);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(AddSongPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             @Override
@@ -1826,6 +1838,8 @@ public class AddSongPanel extends javax.swing.JPanel {
                 sdao.insert(song);
                 this.fillTable();
                 this.clearForm(1);
+                mainFrame.fillTrendingSong();
+                mainFrame.getPnlMainScreen().fillTopPlaylist();
                 MsgBox.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
                 MsgBox.alert(this, "Thêm mới thất bại!");
@@ -1841,6 +1855,8 @@ public class AddSongPanel extends javax.swing.JPanel {
                 sdao.update(song);
                 this.fillTable();
                 this.clearForm(2);
+                mainFrame.fillTrendingSong();
+                mainFrame.getPnlMainScreen().fillTopPlaylist();
                 MsgBox.alert(this, "Cập nhật thành công!");
             } catch (Exception e) {
                 MsgBox.alert(this, "Cập nhật thất bại!");
@@ -1849,11 +1865,13 @@ public class AddSongPanel extends javax.swing.JPanel {
         }
     }
 
-    public void deleteSong(Song song) {
+    public void deleteSong(Song song) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         if (MsgBox.confirm(this, "Bạn thực sự muốn xóa bài hát này? Có rất là nhiều người đang thưởng thức bài hát của bạn")) {
             try {
                 sdao.delete(song.getSongID());
                 this.fillTable();
+                mainFrame.fillTrendingSong();
+                mainFrame.getPnlMainScreen().fillTopPlaylist();
                 MsgBox.alert(this, "Xóa thành công!");
             } catch (HeadlessException e) {
                 MsgBox.alert(this, "Xóa thất bại!");
