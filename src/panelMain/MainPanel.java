@@ -6,6 +6,7 @@ package panelMain;
 
 import component.EventItem;
 import dao.PlaylistDAO;
+import dao.SongDAO;
 import dao.StatisticDAO;
 import entity.PlayList;
 import entity.Song;
@@ -46,9 +47,19 @@ public class MainPanel extends javax.swing.JPanel {
     private EventItem eventItem;
     private EventItem eventItemPlaylist;
     private StatisticDAO sdao = new StatisticDAO();
-    private List<Object[]> listPlaylistTrending;
-    private ArrayList<PlayList> listPlayLists;
+    private List<Object[]> listPlaylistTrending = new ArrayList<>();
+    private ArrayList<PlayList> listPlayLists = new ArrayList<>();
     private PlaylistDAO pdao = new PlaylistDAO();
+    private SongDAO songDAO = new SongDAO();
+
+    public EventItem getEventItemPlaylist() {
+        return eventItemPlaylist;
+    }
+
+    public void setEventItemPlaylist(EventItem eventItemPlaylist) {
+        this.eventItemPlaylist = eventItemPlaylist;
+    }
+    
 
     public EventItem getEventItem() {
         return eventItem;
@@ -98,11 +109,6 @@ public class MainPanel extends javax.swing.JPanel {
     public MainPanel() {
         initComponents();
         // Biến dùng tạm
-        for (int i = 0; i < 100; i++) {
-            dailyPlayLists.add(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
-            weeklyPlayLists.add(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
-            monthlyPlayLists.add(new PlayList(i, "LOFI LOVE " + i, i, true, "TK-06.jpg"));
-        }
 
         cardLayout = (CardLayout) this.getLayout();
         cardLPlaylistLayout = (CardLayout) pnlPlaylist.getLayout();
@@ -277,6 +283,7 @@ public class MainPanel extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 eventItemPlaylist.clickEvent(pnlDemoTopPlaylist, playlist);
+                main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
             }
 
             @Override
@@ -418,6 +425,13 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     public void fillTopPlaylistDaily() {
+        pnlPlaylistDaily.remove(this);
+        listPlaylistTrending = sdao.getTopPlaylist(1);
+        for (Object[] objects : listPlaylistTrending) {
+            PlayList pl = pdao.selectById((Integer) objects[0]);
+            System.out.println(pl.toString());
+            dailyPlayLists.add(pl);
+        }
         for (PlayList dailyPlayList : dailyPlayLists) {
             pnlPlaylistDaily.addPlayList(dailyPlayList, main);
         }
@@ -425,6 +439,13 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     public void fillTopPlaylistWeekly() {
+        pnlPlaylistDaily.remove(this);
+        listPlaylistTrending = sdao.getTopPlaylist(1);
+        for (Object[] objects : listPlaylistTrending) {
+            PlayList pl = pdao.selectById((Integer) objects[0]);
+            System.out.println(pl.toString());
+            weeklyPlayLists.add(pl);
+        }
         for (PlayList weeklyPlayList : weeklyPlayLists) {
             pnlPlaylistWeekly.addPlayList(weeklyPlayList, main);
         }
@@ -432,6 +453,13 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     public void fillTopPlaylistMonthly() {
+        pnlPlaylistDaily.remove(this);
+        listPlaylistTrending = sdao.getTopPlaylist(1);
+        for (Object[] objects : listPlaylistTrending) {
+            PlayList pl = pdao.selectById((Integer) objects[0]);
+            System.out.println(pl.toString());
+            monthlyPlayLists.add(pl);
+        }
         for (PlayList monthlyPlayList : monthlyPlayLists) {
             pnlPlaylistMonthly.addPlayList(monthlyPlayList, main);
         }
@@ -442,8 +470,9 @@ public class MainPanel extends javax.swing.JPanel {
         pnlDemoTopPlaylist.removeAll();
         listPlaylistTrending = sdao.getTopPlaylist(7);
         for (Object[] objects : listPlaylistTrending) {
-            listPlayLists.add(pdao.selectById((Integer) objects[0]));
-            
+            PlayList pl = pdao.selectById((Integer) objects[0]);
+            System.out.println(pl.toString());
+            listPlayLists.add(pl);
         }
         for (PlayList pl : listPlayLists) {
             addTopPlaylist(pl);

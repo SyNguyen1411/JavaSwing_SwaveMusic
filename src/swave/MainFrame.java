@@ -4,9 +4,13 @@ import Tien.ui.ChangePassword;
 import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
+import dao.PlaylistDAO;
+import dao.SongDAO;
+import dao.SongOfPlaylistDAO;
 import entity.PlayList;
 import entity.Search;
 import entity.Song;
+import entity.SongOfPlaylist;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -57,13 +61,18 @@ public class MainFrame extends javax.swing.JFrame {
     private CardLayout c;
     private ArrayList<Song> songLoveList = new ArrayList<>();
     private ArrayList<Song> songList = new ArrayList<>();
+    private ArrayList<Song> songOfPlaylists = new ArrayList<>();
     private ArrayList<PlayList> playlist = new ArrayList<>();
+    private ArrayList<SongOfPlaylist> songOfPlaylistsID = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
     public MainFrame main;
     private JPopupMenu menu;
     private PanelSearchSuggestion search;
     public SongItem itemSong;
+    private PlaylistDAO playlistDAO = new PlaylistDAO();
+    private SongDAO songDAO = new SongDAO();
+    private SongOfPlaylistDAO songOfPlaylistDAO = new SongOfPlaylistDAO();
 
     private UserTool userTool = new UserTool(this);
 
@@ -259,26 +268,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         //-----------------------------------
         //add my playlist:
-        playlist.add(new PlayList(1, "LOFI 2021", 2023, true, "playlist/playlist1.jpg"));
-        playlist.add(new PlayList(2, "HOT TREND 2023", 2023, true, "playlist/playlist2.jpg"));
-        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 2023, true, "playlist/playlist3.jpg"));
-        playlist.add(new PlayList(4, "SAD SONGS", 2023, true, "playlist/playlist4.jpg"));
-        playlist.add(new PlayList(5, "CHILL SONGS", 2023, true, "playlist/playlist1.jpg"));
-        playlist.add(new PlayList(6, "NHẠC REMIX", 2023, true, "playlist/playlist6.jpg"));
-        playlist.add(new PlayList(7, "SONG BTS", 2023, true, "playlist/playlist10.jpg"));
-        playlist.add(new PlayList(8, "RAP SONGS", 2023, true, "playlist/playlist2.jpg"));
-        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 2023, true, "playlist/playlist4.jpg"));
-        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 2023, true, "playlist/playlist10.jpg"));
-        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 2023, true, "playlist/playlist2.jpg"));
-        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2023, true, "playlist/playlist12.jpg"));
-        playlist.add(new PlayList(13, "CHILL STUDENTS ", 2023, true, "playlist/playlist13.jpg"));
-        playlist.add(new PlayList(14, "SLEEP SONGS", 2023, true, "playlist/playlist14.jpg"));
-        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 2023, true, "playlist/playlist15.jpg"));
-        playlist.add(new PlayList(16, "HOT SONGS", 2023, true, "playlist/playlist16.jpg"));
-        playlist.add(new PlayList(17, "TIKTOK 2023", 2023, true, "playlist/playlist12.jpg"));
-        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 2023, true, "playlist/playlist3.jpg"));
-        playlist.add(new PlayList(19, "LOVE SONGS", 2023, true, "playlist/playlist19.jpg"));
-        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 2023, true, "playlist/playlist2.jpg"));
+        playlist.add(new PlayList(1, "LOFI 2021", 2023, true, "playlist1.jpg"));
+        playlist.add(new PlayList(2, "HOT TREND 2023", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 2023, true, "playlist3.jpg"));
+        playlist.add(new PlayList(4, "SAD SONGS", 2023, true, "playlist4.jpg"));
+        playlist.add(new PlayList(5, "CHILL SONGS", 2023, true, "playlist1.jpg"));
+        playlist.add(new PlayList(6, "NHẠC REMIX", 2023, true, "playlist6.jpg"));
+        playlist.add(new PlayList(7, "SONG BTS", 2023, true, "playlist10.jpg"));
+        playlist.add(new PlayList(8, "RAP SONGS", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 2023, true, "playlist4.jpg"));
+        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 2023, true, "playlist10.jpg"));
+        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2023, true, "playlist12.jpg"));
+        playlist.add(new PlayList(13, "CHILL STUDENTS ", 2023, true, "playlist13.jpg"));
+        playlist.add(new PlayList(14, "SLEEP SONGS", 2023, true, "playlist14.jpg"));
+        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 2023, true, "playlist15.jpg"));
+        playlist.add(new PlayList(16, "HOT SONGS", 2023, true, "playlist16.jpg"));
+        playlist.add(new PlayList(17, "TIKTOK 2023", 2023, true, "playlist12.jpg"));
+        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 2023, true, "playlist3.jpg"));
+        playlist.add(new PlayList(19, "LOVE SONGS", 2023, true, "playlist19.jpg"));
+        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 2023, true, "playlist2.jpg"));
 
         for (PlayList playList : playlist) {
             pnlMyPlaylist.addList(playList);
@@ -310,24 +319,30 @@ public class MainFrame extends javax.swing.JFrame {
         songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
 
         //add list bài hát vào panel:
-        pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
+        //pnlSongOfPlaylistPane.listSOngOfPlayList = songLoveList;
         for (Song item : songList) {
             pnlMainScreen.addTrendingSong(item);
-            //pnlAddSong.fillPnlListSongDetails(item);
-            pnlSongOfPlaylistPane.addList(item);
+            //pnlSongOfPlaylistPane.addList(item);
 
             //add Song love for songLoveList:
             songLoveList.add(item);
 
         }
-
+        
+        
+        // Đổ bài hát từ playlist trending lên bài hát
+        
+        
         //------------------------------------
         //add playlist to panel main
+        pnlMainScreen.fillTopPlaylist();
+        
         for (PlayList item : playlist) {
-            pnlMainScreen.addTopPlaylist(item);
             pnlSearch.getPnlSearchAll().addPlaylist(item);
             pnlSearch.getPnlSearchPlaylist().addList(item);
         }
+        
+        
 
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
@@ -557,6 +572,50 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        // Add sự kiện khi chọn bài hát trong bài hát trending
+        // Chưa làm xong
+        pnlMainScreen.setEventItemPlaylist(new EventItem() {
+            @Override
+            public void clickEvent(Component com, PlayList playist) {
+                songOfPlaylistsID = (ArrayList<SongOfPlaylist>) songOfPlaylistDAO.selectSongOfPlaylists(playist.getPlaylistID());
+                for (SongOfPlaylist sop : songOfPlaylistsID) {
+                    songOfPlaylists.add(songDAO.selectById(sop.getSongID()));
+                }
+                System.out.println(songOfPlaylists);
+                pnlSongOfPlaylistPane.listSOngOfPlayList = songOfPlaylists;
+                pnlSongOfPlaylistPane.setPlaylistFocus(playist);
+                try {
+                    pnlSongOfPlaylistPane.fillData();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void itemClick(Search data) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void clickEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void EnterEvent(Component com, Song song) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void ExitEvent(Component com, Song song, MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
+        
         //add Song love for Pane:
         for (Song data : songLoveList) {
             pnlLikeSong.getPnlSonglist().addSong(data, songLoveList);
@@ -1039,6 +1098,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     
+
     
 
 

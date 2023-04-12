@@ -1,14 +1,9 @@
 package swing;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import entity.PlayList;
 import java.awt.Color;
+import javax.swing.JLabel;
 import model.borderImage;
-import swave.Login;
 import swave.MainFrame;
 
 /**
@@ -89,6 +84,7 @@ public class PlaylistItem extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
 
         main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
+        
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited

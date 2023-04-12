@@ -5,13 +5,6 @@
 package swing;
 
 import Tien.ui.EditPlaylist;
-import component.Button;
-import javax.accessibility.AccessibleContext;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.event.EventListenerList;
-import javax.swing.plaf.ComponentUI;
 import entity.PlayList;
 import entity.Song;
 import java.io.IOException;
@@ -19,9 +12,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import model.borderImage;
 import swave.MainFrame;
-import swing.SongList;
 
 /**
  *
@@ -44,6 +39,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
     public void addList(Song song) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         pnlSonglist.addSong(song, listSOngOfPlayList);
         revalidate();
+        repaint();
     }
 
     //Thêm PlayList và pnl Của Tôi
@@ -51,10 +47,12 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         lblAVT.setIcon(playlistFocus.toIcon());
         lblNamePlaylist.setText(playlistFocus.getPlaylistName());
 
+        pnlSonglist.removeAll();
         for (Song song : listSOngOfPlayList) {
             pnlSonglist.addSong(song, listSOngOfPlayList);
         }
         revalidate();
+        repaint();
     }
 
     public JLabel getjLabel1() {
