@@ -5,7 +5,6 @@ import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
 import dao.LoveSongDAO;
-import dao.PlaylistDAO;
 import dao.SongDAO;
 import dao.SongOfPlaylistDAO;
 import dao.StatisticDAO;
@@ -42,6 +41,7 @@ import panelMain.SongLovelistPane;
 import swing.CommentPane;
 import swing.PanelSearchSuggestion;
 import swing.SongItem;
+import swing.SongList;
 import swing.SongOfPlaylistPane;
 import swing.glasspanepopup.DefaultLayoutCallBack;
 import swing.glasspanepopup.DefaultOption;
@@ -533,7 +533,11 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void clickEvent(Component com, Song song) {
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardTrending");
-                SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(song.getSongID() - 1);
+                SongList songListPanel = (SongList) com;
+                ArrayList<Song> songs = songListPanel.getSongList();
+                int position = songs.indexOf(song);
+
+                SongItem songItem = (SongItem) pnlMainScreen.getPnlTrendingSongList().getPnlSongList().getComponent(position);
                 itemSong = songItem;
 
                 songItem.getLblStart().setVisible(false);
