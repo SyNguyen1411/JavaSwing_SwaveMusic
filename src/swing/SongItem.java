@@ -39,7 +39,7 @@ public class SongItem extends javax.swing.JPanel {
 
     public void setDataSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         this.data = data;
-        lblIconPlay.setText("" + data.getSongID());
+        lblIconPlay.setText("" + (listSong.indexOf(data) + 1));
         lblIconSong.setIcon(data.toIcon());
         lblNamSong.setText(data.getNameSong());
         getTimeSong();

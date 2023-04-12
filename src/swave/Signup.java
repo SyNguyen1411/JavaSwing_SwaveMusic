@@ -299,7 +299,7 @@ public class Signup extends javax.swing.JFrame {
         if (!txtFullname.getText().equals("")) {
             lblFullname.setText("");
         } else {
-            lblFullname.setText("Tên tài khoản");
+            lblFullname.setText("Họ và tên");
         }
     }//GEN-LAST:event_txtFullnameCaretUpdate
 
@@ -384,7 +384,7 @@ public class Signup extends javax.swing.JFrame {
         if (!txtEmail.getText().equals("")) {
             lblEmail.setText("");
         } else {
-        lblEmail.setText("Tên tài khoản");
+        lblEmail.setText("Email");
         }
     }//GEN-LAST:event_txtEmailCaretUpdate
 

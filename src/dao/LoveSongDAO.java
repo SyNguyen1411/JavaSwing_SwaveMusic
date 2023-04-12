@@ -5,6 +5,7 @@
 package dao;
 
 import entity.LoveSong;
+import entity.SongLoves;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,15 @@ import utils.JdbcHelper;
  *
  * @author Admin
  */
-public class LoveSongDAO extends SwaveDAO <LoveSong, LoveSong>{
+public class LoveSongDAO extends SwaveDAO<LoveSong, LoveSong> {
 
     final String INSERT_SQL = "INSERT INTO BAIHATYEUTHICH(MaBH, MaND) VALUES (?,?)";
     //final String UPDATE_SQL = "UPDATE BAIHATYEUTHICH SET TrangThai = ?, BaoCao = ? WHERE MaBL = ? AND MaND = ?";
     final String DELETE_SQL = "DELETE FROM BAIHATYEUTHICH WHERE MaBH = ? AND MaND = ?";
     final String SELECTALL_SQL = "SELECT * FROM BAIHATYEUTHICH";
     final String SELECTBYID_SQL = "SELECT * FROM BAIHATYEUTHICH WHERE MaBH = ? AND MaND = ?";
-    
+    final String SELECTALLBYUSERID_SQL = "SELECT * FROM BAIHATYEUTHICH WHERE MaND = ?";
+
     @Override
     public void insert(LoveSong entity) {
         JdbcHelper.update(INSERT_SQL, entity.getSongID(), entity.getUserID());
@@ -51,6 +53,14 @@ public class LoveSongDAO extends SwaveDAO <LoveSong, LoveSong>{
         return list.get(0);
     }
 
+    public List<LoveSong> selectAllByUID(int key) {
+        List<LoveSong> list = selectSql(SELECTALLBYUSERID_SQL, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
     @Override
     public List<LoveSong> selectSql(String Sql, Object... args) {
         List<LoveSong> list = new ArrayList<>();
@@ -68,5 +78,5 @@ public class LoveSongDAO extends SwaveDAO <LoveSong, LoveSong>{
         }
         return list;
     }
-    
+
 }

@@ -7,6 +7,7 @@ package swing;
 import Tien.ui.EditPlaylist;
 import entity.PlayList;
 import entity.Song;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         lblNamePlaylist.setText(playlistFocus.getPlaylistName());
 
         pnlSonglist.getPnlSongList().removeAll();
+        pnlSonglist.getPnlSongList().setPreferredSize(new Dimension(1273, 310));
         for (Song song : listSOngOfPlayList) {
             pnlSonglist.addSong(song, listSOngOfPlayList);
         }

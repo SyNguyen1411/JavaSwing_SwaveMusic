@@ -532,7 +532,7 @@ public class toolPlay extends javax.swing.JPanel {
 
         if (listSong != null) {
             index = index + 1;
-            if (index >= listSong.size() - 1) {
+            if (index > listSong.size() - 1) {
                 index = 0;
             }
 
@@ -568,7 +568,7 @@ public class toolPlay extends javax.swing.JPanel {
         main.itemSong.selectRunning(false);
         if (listSong != null) {
             index = index - 1;
-            if (index <= 0) {
+            if (index < 0) {
                 index = listSong.size() - 1;
             }
             data = listSong.get(index);
@@ -707,18 +707,26 @@ public class toolPlay extends javax.swing.JPanel {
                             pause = -1;
                             Thread runningThreadRelay = new Thread(play);
                             runningThreadRelay.start();
-                            System.out.println("lặp lại");
                             fillData(data);
                             loadLyricsFillData();
                         } else if (shuffle) {
                             int max = listSong.size() - 1;
                             int min = 0;
                             pause = -1;
-                            int shufferIndex = (int) (Math.random() * (max - min + 1) + min);
+                            int shufferIndex = listSong.indexOf(data);
+                            while (shufferIndex == listSong.indexOf(data)) {
+                                shufferIndex = (int) (Math.random() * (max - min + 1) + min);
+
+                            }
+
                             data = listSong.get(shufferIndex);
+                            SongItem item = new SongItem();
+                            item.setData(data);
+                            item.getTimeSong();
+                            data.minutetotalLength = item.minutetotalLength;
+                            data.secondTotalLength = item.secondTotalLength;
                             Thread runningThreadShuffer = new Thread(play);
                             runningThreadShuffer.start();
-                            System.out.println("phát ngẫu nhiên " + shufferIndex);
                             fillData(data);
                             loadLyricsFillData();
                         } else {
@@ -730,10 +738,16 @@ public class toolPlay extends javax.swing.JPanel {
                     Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        });
+        }
+        );
         runningThread.start();
+
         timeSongRunning.start();
     }
 

@@ -1,7 +1,20 @@
 package swing;
 
+import dao.PlaylistDAO;
+import dao.SongDAO;
+import dao.SongOfPlaylistDAO;
 import entity.PlayList;
+import entity.Song;
+import entity.SongOfPlaylist;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import model.borderImage;
 import swave.MainFrame;
@@ -17,10 +30,13 @@ public class PlaylistItem extends javax.swing.JPanel {
      */
     private MainFrame main;
     public PlayList data;
+    public List<Song> songList = new ArrayList<>();
+    private SongOfPlaylistDAO sopDao = new SongOfPlaylistDAO();
+    private SongDAO sDao = new SongDAO();
 
     public PlaylistItem() {
         initComponents();
-        
+
     }
 
     public void loadData(PlayList data) {
@@ -78,13 +94,34 @@ public class PlaylistItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        this.setBackground(new Color(69,33,70));
+        this.setBackground(new Color(69, 33, 70));
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        List<SongOfPlaylist> sopList = sopDao.selectSongOfPlaylists(data.getPlaylistID());
+        for (SongOfPlaylist songOfPlaylist : sopList) {
+            Song item = sDao.selectById(songOfPlaylist.getSongID());
+            songList.add(item);
+        }
+
+        main.getPnlSongOfPlaylistPane().getPnlSonglist().getPnlSongList().removeAll();
+        main.getPnlSongOfPlaylistPane().getPnlSonglist().getPnlSongList().setPreferredSize(new Dimension(1273, 310));
+        for (Song song : songList) {
+            try {
+                main.getPnlSongOfPlaylistPane().getPnlSonglist().addSong(song, songList);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
         main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
-        
+        main.getPnlSongOfPlaylistPane().revalidate();
+        main.getPnlSongOfPlaylistPane().getPnlSonglist().repaint();
+        main.getPnlSongOfPlaylistPane().repaint();
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
@@ -135,7 +172,6 @@ public class PlaylistItem extends javax.swing.JPanel {
         this.main = main;
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private model.borderImage lblAVT;
