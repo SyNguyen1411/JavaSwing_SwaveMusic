@@ -11,21 +11,25 @@ import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import panelMain.LoadingPane;
+import swave.DialogLoad;
+import swave.Login;
+import static swave.Login.main;
 import swave.MainFrame;
 
 /**
  *
  * @author Admin
  */
-public class AdminToolDialog extends javax.swing.JDialog {
+public class AdminToolDialog extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminToolDialog
      */
     private CardLayout c;
+    private AdminToolDialog toolMain;
 
     public AdminToolDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         setResizable(false);
@@ -36,10 +40,10 @@ public class AdminToolDialog extends javax.swing.JDialog {
         userManagermentPanel.adminFrame = this;
     }
 
-    private void init(){
-        
+    private void init() {
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,17 +194,7 @@ public class AdminToolDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblTKMouseClicked
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
-        try {
-            ((MainFrame) getParent()).fillTrendingSong();
-            ((MainFrame) getParent()).getPnlMainScreen().fillTopPlaylist();
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
+        loadDialog();
     }//GEN-LAST:event_lblCloseMouseClicked
 
     /**
@@ -248,8 +242,32 @@ public class AdminToolDialog extends javax.swing.JDialog {
     public UserManagermentPanel getUserManagermentPanel() {
         return userManagermentPanel;
     }
-    
-    
+
+    private void loadDialog() {
+        toolMain = this;
+        DialogLoad loadPane = new DialogLoad(this, false, "Đang cập nhật...");
+        this.setEnabled(false);
+        loadPane.setVisible(true);
+
+        Thread loadThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Login.main.fillTrendingSong();
+                    Login.main.getPnlMainScreen().fillTopPlaylist();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(AdminToolDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Login.main.setVisible(true);
+                toolMain.dispose();
+            }
+        });
+        loadThread.start();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Vu.ui.AllCommentPane allCommentPane;

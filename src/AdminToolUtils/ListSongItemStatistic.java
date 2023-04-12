@@ -33,6 +33,7 @@ public class ListSongItemStatistic extends javax.swing.JPanel {
         initComponents();
         init();
         Song songTemp = new Song();
+        System.out.println(song[2]);
         songTemp.setAVT((String) song[2]);
         lblPic.setIcon(songTemp.toIcon());
         lblSongName.setText((String) song[1]);

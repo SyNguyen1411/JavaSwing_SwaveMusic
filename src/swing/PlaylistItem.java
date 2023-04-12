@@ -99,6 +99,7 @@ public class PlaylistItem extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         List<SongOfPlaylist> sopList = sopDao.selectSongOfPlaylists(data.getPlaylistID());
+        songList.clear();
         for (SongOfPlaylist songOfPlaylist : sopList) {
             Song item = sDao.selectById(songOfPlaylist.getSongID());
             songList.add(item);
