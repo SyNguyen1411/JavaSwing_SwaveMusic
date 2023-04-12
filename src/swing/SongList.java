@@ -29,6 +29,16 @@ public class SongList extends javax.swing.JPanel {
     private EventItem eventLblStart;
     private ArrayList<Song> songLoveList;
     private SongItem runningSong;
+    private ArrayList<Song> songList;
+
+    public ArrayList<Song> getSongList() {
+        return songList;
+    }
+
+    public void setSongList(ArrayList<Song> songList) {
+        this.songList = songList;
+    }
+    
 
     public ArrayList<Song> getSongLoveList() {
         return songLoveList;
@@ -58,7 +68,7 @@ public class SongList extends javax.swing.JPanel {
 
     public void addSong(Song data, List<Song> list) throws UnsupportedAudioFileException, IOException, URISyntaxException {
         SongItem item = new SongItem();
-
+        songList = (ArrayList<Song>) list;
         item.listSong = list;
         item.setDataSong(data);
         item.getLblStart().addMouseListener(new MouseAdapter() {

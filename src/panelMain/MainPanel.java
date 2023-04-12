@@ -252,7 +252,7 @@ public class MainPanel extends javax.swing.JPanel {
         songItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                eventItem.clickEvent(pnlDemoTrending, song);
+                eventItem.clickEvent(pnlTrendingSongList, song);
             }
 
             @Override

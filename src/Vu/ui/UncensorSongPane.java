@@ -67,8 +67,15 @@ public class UncensorSongPane extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlListSong = new javax.swing.JPanel();
 
+        setMaximumSize(new java.awt.Dimension(1220, 807));
+        setMinimumSize(new java.awt.Dimension(1220, 807));
+        setPreferredSize(new java.awt.Dimension(1220, 807));
+
         jPanel1.setBackground(new java.awt.Color(36, 36, 36));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1220, 807));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1220, 807));
         jPanel1.setPreferredSize(new java.awt.Dimension(1220, 807));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -93,9 +100,9 @@ public class UncensorSongPane extends javax.swing.JPanel {
         comboBoxPanel1Layout.setHorizontalGroup(
             comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(comboBoxPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(cboSong, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         comboBoxPanel1Layout.setVerticalGroup(
             comboBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,11 +117,11 @@ public class UncensorSongPane extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(29, 29, 29)
                 .addComponent(findTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addComponent(comboBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,6 +132,8 @@ public class UncensorSongPane extends javax.swing.JPanel {
                     .addComponent(findTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
+
+        jPanel1.add(jPanel2);
 
         jPanel4.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -192,6 +201,7 @@ public class UncensorSongPane extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         pnlListSong.setBackground(new java.awt.Color(36, 36, 36));
+        pnlListSong.setMaximumSize(new java.awt.Dimension(1200, 2147483647));
         pnlListSong.setLayout(new java.awt.GridBagLayout());
         jScrollPane1.setViewportView(pnlListSong);
 
@@ -201,14 +211,15 @@ public class UncensorSongPane extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 12, Short.MAX_VALUE)
-                            .addGap(1202, 1202, 1202))
-                        .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jSeparator2)
+                        .addGap(1202, 1202, 1202))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -219,24 +230,11 @@ public class UncensorSongPane extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -278,6 +276,7 @@ public class UncensorSongPane extends javax.swing.JPanel {
         int position = pnlListSong.getComponentCount();
 
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = position;
         addSongToPnlListSong(song, gridBagConstraints, index);
@@ -301,7 +300,7 @@ public class UncensorSongPane extends javax.swing.JPanel {
 
     public void addSongToPnlListSong(Song song, GridBagConstraints gridBagConstraints, Integer index) {
         ListSongItemAddSongPanel listSongItemAddSongPanel = new ListSongItemAddSongPanel(song);
-        listSongItemAddSongPanel.getLblPosition().setText(String.valueOf(gridBagConstraints.gridy+1));
+        listSongItemAddSongPanel.getLblPosition().setText(String.valueOf(gridBagConstraints.gridy + 1));
         if (index == 0) {
             listSongItemAddSongPanel.getLblEdit().addMouseListener(new MouseAdapter() {
                 @Override
@@ -355,7 +354,7 @@ public class UncensorSongPane extends javax.swing.JPanel {
                 sdao.delete(song.getSongID());
                 if (index == 0) {
                     this.fillTableNotAllowedSong();
-                }else{
+                } else {
                     this.fillTable();
                 }
                 MsgBox.alert(this, "Xóa thành công!");
