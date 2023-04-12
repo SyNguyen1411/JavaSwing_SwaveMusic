@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -35,6 +37,16 @@ public class lyricsPane extends javax.swing.JPanel {
         pnlLyrics.repaint();
         pnlLyrics.revalidate();
     }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JPanel getPnlLyrics() {
+        return pnlLyrics;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
