@@ -25,7 +25,9 @@ public class AdminToolDialog extends javax.swing.JDialog {
         setResizable(false);
         c = (CardLayout) pnlChange.getLayout();
         c.show(pnlChange, "cardUS");
+        userManagermentPanel.getAccountListPane().loadData();
         lblAC.setForeground(Color.pink);
+        userManagermentPanel.adminFrame = this;
     }
 
     private void init(){
@@ -157,7 +159,6 @@ public class AdminToolDialog extends javax.swing.JDialog {
         lblComment.setForeground(Color.white);
         lblTK.setForeground(Color.white);
         c.show(pnlChange, "cardUS");
-
     }//GEN-LAST:event_lblACMouseClicked
 
     private void lblSongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSongMouseClicked
@@ -229,6 +230,12 @@ public class AdminToolDialog extends javax.swing.JDialog {
             }
         });
     }
+
+    public UserManagermentPanel getUserManagermentPanel() {
+        return userManagermentPanel;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Vu.ui.AllCommentPane allCommentPane;

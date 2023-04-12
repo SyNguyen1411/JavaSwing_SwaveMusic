@@ -18,6 +18,7 @@ public class AccountDAO extends SwaveDAO<Account, String> {
     final String DELETE_SQL = "DELETE FROM TAIKHOAN WHERE TenTK = ?";
     final String SELECTALL_SQL = "SELECT * FROM TAIKHOAN";
     final String SELECTBYID_SQL = "SELECT * FROM TAIKHOAN WHERE TenTK = ?";
+    final String UPDATE_STATUS_SQL = "UPDATE TAIKHOAN SET TrangThai = ? WHERE TenTK = ?";
 
     @Override
     public void insert(Account entity) {
@@ -72,4 +73,8 @@ public class AccountDAO extends SwaveDAO<Account, String> {
         JdbcHelper.update(UPDATE_PASS_SQL, password, userId);
     }
 
+    public void updateStatus(String userId, boolean status) {
+        JdbcHelper.update(UPDATE_STATUS_SQL, status, userId);
+    }
+    
 }
