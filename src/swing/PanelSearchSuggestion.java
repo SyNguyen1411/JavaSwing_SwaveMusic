@@ -6,6 +6,7 @@
 package swing;
 
 import component.EventItem;
+import dao.SearchDAO;
 import entity.Search;
 import java.awt.Color;
 import java.awt.Insets;
@@ -25,6 +26,8 @@ import net.miginfocom.swing.MigLayout;
 public class PanelSearchSuggestion extends javax.swing.JPanel {
 
     private EventItem event;
+    private SearchDAO sdao = new SearchDAO();
+    private List<Search> slist = new ArrayList<>();
 
     public void addEventClick(EventItem event) {
         this.event = event;
@@ -61,29 +64,14 @@ public class PanelSearchSuggestion extends javax.swing.JPanel {
     }
     
     public List<Search> dataSearch(String search) {
-        int limitData = 7;
+        int limitData = 10;
+        slist = sdao.selectAll(search);
         List<Search> list = new ArrayList<>();
-        String dataSearch[] = {"300 - Rise of an Empire",
-            "Cosmic Sin",
-            "Deadlock",
-            "Deliver Us from Eva",
-            "Empire of the Ants",
-            "Empire of the Sun",
-            "Empire Records",
-            "Empire State",
-            "Four Good Days",
-            "Frozen Fever",
-            "Frozen",
-            "The Courier",
-            "The First Purge",
-            "To Olivia",
-            "Underworld"};
-        for (String d : dataSearch) {
-            if (d.toLowerCase().contains(search)) {
-                list.add(new Search(d));
-                if (list.size() == limitData) {
-                    break;
-                }
+        
+        for (Search s : slist) {
+            list.add(s);
+            if (list.size() == limitData) {
+                break;
             }
         }
         return list;
