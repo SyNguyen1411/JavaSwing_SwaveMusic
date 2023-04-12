@@ -532,7 +532,7 @@ public class toolPlay extends javax.swing.JPanel {
 
         if (listSong != null) {
             index = index + 1;
-            if (index == listSong.size() - 1) {
+            if (index >= listSong.size() - 1) {
                 index = 0;
             }
 
@@ -568,7 +568,7 @@ public class toolPlay extends javax.swing.JPanel {
         main.itemSong.selectRunning(false);
         if (listSong != null) {
             index = index - 1;
-            if (index == 0) {
+            if (index <= 0) {
                 index = listSong.size() - 1;
             }
             data = listSong.get(index);

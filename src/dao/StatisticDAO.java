@@ -46,8 +46,8 @@ public class StatisticDAO {
     }    
     
     public List<Object[]> getTrending(){
-        String sql = "{CALL  proc_xepHang100Playlist(?)}";
-        String[] cols = {"MaPlayList", "TenPlayList", "HinhAnh", "TongLike"};
+        String sql = "{CALL  Trending}";
+        String[] cols = {"MaBH", "LuotNghe", "Trending"};
         return getListofArray(sql, cols);
     }
     

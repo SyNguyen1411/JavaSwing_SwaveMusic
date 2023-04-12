@@ -315,7 +315,9 @@ public class SongItem extends javax.swing.JPanel {
     }
 
     public void getTimeSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {
+        System.out.println(data.getFileSong());
         File source = new File(getClass().getResource("/mp3/" + data.getFileSong()).getFile());
+        
         Encoder encoder = new Encoder();
         try {
             MultimediaInfo mi = encoder.getInfo(source);
