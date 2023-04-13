@@ -60,7 +60,7 @@ public class CommentDAO extends SwaveDAO<Comment, Integer> {
                 entity.setCommentID(rs.getInt(1));
                 entity.setPosition(rs.getInt(2));
                 entity.setContent(rs.getString(3));
-                entity.setCommentDate(rs.getDate(4));
+                entity.setCommentDate(rs.getTimestamp(4));
                 entity.setSongID(rs.getInt(5));
                 entity.setUserID(rs.getInt(6));
                 list.add(entity);

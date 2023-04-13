@@ -366,13 +366,17 @@ public class EditInf extends javax.swing.JPanel {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            Path from = Paths.get(fAvt.getAbsolutePath());
-            Path to = Paths.get(file.getAbsolutePath());
-            try {
-                Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException ex) {
-                Logger.getLogger(EditInf.class.getName()).log(Level.SEVERE, null, ex);
-            }                        
+
+            if (fAvt != null) {
+                Path from = Paths.get(fAvt.getAbsolutePath());
+                Path to = Paths.get(file.getAbsolutePath());
+                try {
+                    Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    Logger.getLogger(EditInf.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
     }//GEN-LAST:event_lblEditMouseClicked
 
@@ -403,16 +407,24 @@ public class EditInf extends javax.swing.JPanel {
     }//GEN-LAST:event_lblChooseAvatarMouseClicked
 
     private void pnlEditAvtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlEditAvtMouseExited
-        double x = evt.getXOnScreen();
-        double y = evt.getYOnScreen();
-        double minXLocation = pnlEditAvt.getLocation().getX() + 320;
-        double maxXLocation = pnlEditAvt.getLocation().getX() + pnlEditAvt.getWidth() + 320;
-        double minYLocation = pnlEditAvt.getLocation().getY();
-        double maxYLocation = pnlEditAvt.getLocation().getY() + pnlEditAvt.getHeight();
-        System.out.println(x + " - " + y);
-        System.out.println(minXLocation + " _ " + maxXLocation);
-        if (!(x > minXLocation && x < maxXLocation)
-                || !(y > minYLocation && y < maxYLocation)) {
+//        double x = evt.getXOnScreen();
+//        double y = evt.getYOnScreen();
+//        double minXLocation = pnlEditAvt.getLocation().getX() + 320;
+//        double maxXLocation = pnlEditAvt.getLocation().getX() + pnlEditAvt.getWidth() + 320;
+//        double minYLocation = pnlEditAvt.getLocation().getY();
+//        double maxYLocation = pnlEditAvt.getLocation().getY() + pnlEditAvt.getHeight();
+//        System.out.println(x + " - " + y);
+//        System.out.println(minXLocation + " _ " + maxXLocation);
+//        if (!(x > minXLocation && x < maxXLocation)
+//                || !(y > minYLocation && y < maxYLocation)) {
+//
+//        }
+
+        try {
+            if (((evt.getX() < pnlEditAvt.getLocation().getX()) || (evt.getX() > pnlEditAvt.getLocation().getX()))
+                    && (pnlEditAvt.getMousePosition().getX() < pnlEditAvt.getLocation().getX())) {
+            }
+        } catch (Exception e) {
             pnlEditAvt.setVisible(false);
         }
     }//GEN-LAST:event_pnlEditAvtMouseExited

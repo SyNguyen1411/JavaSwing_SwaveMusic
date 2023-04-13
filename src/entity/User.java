@@ -92,7 +92,7 @@ public class User {
     }
 
     public Icon toIcon() {
-        return new ImageIcon(getClass().getResource(avt));
+        return new ImageIcon("../Swave/src/img/avt/" + avt);
     }
 
 }

@@ -3,10 +3,12 @@ package swing;
 import dao.CommentInteractionDAO;
 import entity.Comment;
 import entity.CommentInteraction;
+import java.security.Timestamp;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import swave.Login;
+import utils.XDate;
 
 /**
  *
@@ -38,15 +40,6 @@ public class CommentItem extends javax.swing.JPanel {
         this.dislike = dislike;
         this.AVT = AVT;
         initComponents();
-        lblNameUser.setText(nameUser);
-        lblContent.setText(Content);
-        lblCountLike.setText(like + "");
-        lblCountDislike.setText(dislike + "");
-        lblTime.setText("4 giờ trước");
-        System.out.println(AVT);
-        lblAVT.setBorder(a);
-        lblAVT.setIcon(new ImageIcon(getClass().getResource("/img/avt/" + AVT)));
-        childrenComment1.setVisible(false);
 
     }
 
@@ -254,6 +247,32 @@ public class CommentItem extends javax.swing.JPanel {
 
     public void setChildrenComment1(childrenComment childrenComment1) {
         this.childrenComment1 = childrenComment1;
+    }
+
+    public void loadData() {
+        lblNameUser.setText(nameUser);
+        lblContent.setText(Content);
+        lblCountLike.setText(like + "");
+        lblCountDislike.setText(dislike + "");
+        long currentTimestamp = System.currentTimeMillis();
+        long dateCommentTimestamp = data.getCommentDate().getTime();
+        long difference = currentTimestamp - dateCommentTimestamp;
+        long mm = difference / 60000;
+        long hh = Math.round(mm / 60);
+        System.out.println(currentTimestamp);
+        System.out.println(data.getCommentDate());
+        System.out.println(dateCommentTimestamp);
+        System.out.println(mm);
+        System.out.println(hh);
+        if (mm >= 60) {
+            lblTime.setText(hh + " giờ trước");
+        } else {
+            lblTime.setText(mm + " phút trước");
+        }
+        System.out.println(AVT);
+        lblAVT.setBorder(a);
+        lblAVT.setIcon(new ImageIcon("../Swave/src/img/avt/" + AVT));
+        childrenComment1.setVisible(false);
     }
 
 

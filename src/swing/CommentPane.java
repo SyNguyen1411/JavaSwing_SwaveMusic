@@ -60,6 +60,7 @@ public class CommentPane extends javax.swing.JPanel {
         item.js = jScrollPane1;
         item.getChildrenComment1().pane = this;
         item.data = data;
+        item.loadData();
         item.loadDataCommentIn();
         pnlComments.add(item);
 
