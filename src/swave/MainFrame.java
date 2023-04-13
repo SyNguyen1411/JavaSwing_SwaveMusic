@@ -1043,6 +1043,9 @@ public class MainFrame extends javax.swing.JFrame {
                 Login loginForm = new Login();
                 loginForm.setVisible(true);
                 main.setVisible(false);
+                if (main.getToolPlay1().player != null) {
+                    main.getToolPlay1().player.close();
+                }
             }
 
             @Override

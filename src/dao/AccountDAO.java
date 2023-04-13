@@ -12,7 +12,7 @@ import utils.JdbcHelper;
  */
 public class AccountDAO extends SwaveDAO<Account, String> {
 
-    final String INSERT_SQL = "INSERT INTO TAIKHOAN(TenTK, MatKhau, VaiTro, TrangThai) VALUES (?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO TAIKHOAN(TenTK, MatKhau) VALUES (?,?)";
     final String UPDATE_SQL = "UPDATE TAIKHOAN SET MatKhau = ?, TrangThai = ? WHERE TenTK = ?";
     final String UPDATE_PASS_SQL = "UPDATE TAIKHOAN SET MatKhau = ? WHERE TenTK = ?";
     final String DELETE_SQL = "DELETE FROM TAIKHOAN WHERE TenTK = ?";
@@ -22,8 +22,8 @@ public class AccountDAO extends SwaveDAO<Account, String> {
 
     @Override
     public void insert(Account entity) {
-        JdbcHelper.update(INSERT_SQL, entity.getUserID(), entity.getPassword(),
-                entity.isRole(), entity.isStatus());
+        JdbcHelper.update(INSERT_SQL, entity.getUserID(), entity.getPassword()
+               );
     }
 
     @Override
