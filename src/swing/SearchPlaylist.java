@@ -66,12 +66,12 @@ public class SearchPlaylist extends javax.swing.JPanel {
         revalidate();
     }
 
-    //Load danh sách playlist của tôi
-    public void loadPlaylist() {
-        for (PlayList playList : list) {
-            addList(playList);
-        }
-    }
+//    //Load danh sách playlist của tôi
+//    public void loadPlaylist() {
+//        for (PlayList playList : list) {
+//            addList(playList);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

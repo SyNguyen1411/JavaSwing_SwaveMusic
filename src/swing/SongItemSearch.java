@@ -3,6 +3,7 @@ package swing;
 import javax.swing.JLabel;
 import entity.Song;
 import components.borderImage;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,7 +20,7 @@ public class SongItemSearch extends javax.swing.JPanel {
         this.data = data;
         initComponents();
         setOpaque(false);
-        lblAVT.setIcon(data.toIcon());
+        lblAVT.setIcon(new ImageIcon(getClass().getResource("/img/song/"+data.getAVT())));
         lblSongName.setText(data.getNameSong());
     }
 

@@ -8,7 +8,7 @@ GO
 CREATE TABLE TAIKHOAN (
 	TenTK VARCHAR(20) NOT NULL,
 	MatKhau	VARCHAR(20),
-	VaiTro BIT DEFAULT 1,
+	VaiTro BIT DEFAULT 0,
 	TrangThai BIT DEFAULT 1
 )
 
@@ -16,7 +16,7 @@ GO
 CREATE TABLE NGUOIDUNG (
 	MaND INT IDENTITY NOT NULL, 
 	HoTen NVARCHAR(50),
-	NgaySinh DATE,
+	NgaySinh DATE DEFAULT GETDATE(),
 	GioiTinh BIT, -- Nam là 1 nữ là 0
 	Email VARCHAR(30),
 	Avatar VARCHAR(100),
@@ -141,16 +141,16 @@ ALTER TABLE BAOCAOBINHLUAN ADD CONSTRAINT FK_BAOCAOBINHLUAN_NGUOIDUNG FOREIGN KE
 GO
 ------------------------------------------
 -- Tao tai khoan
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('phanquiduc','123',0,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('tranhoangdanh','123',0,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('nguyenhuyvu','123',0,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('hothimongtien','123',0,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('tonnhatphi','123',0,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('nguyenvansi','123',0,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user1','123',1,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user2','123',1,1)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user3','123',1,0)
-INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user4','123',1,0)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('phanquiduc','123',1,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('tranhoangdanh','123',1,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('nguyenhuyvu','123',1,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('hothimongtien','123',1,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('tonnhatphi','123',1,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('nguyenvansi','123',1,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user1','123',0,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user2','123',0,1)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user3','123',0,0)
+INSERT INTO TAIKHOAN (TenTK, MatKhau, VaiTro, TrangThai) VALUES	('user4','123',0,0)
 GO
 --SELECT * FROM TAIKHOAN
 GO
@@ -1108,7 +1108,7 @@ go
 create proc proc_thongKeLuotNghe
 as
 begin
-	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTNGHE.MaBH) as 'TongNghe' from LUOTNGHE right join BAIHAT on LUOTNGHE.MaBH = BAIHAT.MaBH
+	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTNGHE.MaBH) as 'TongNghe' from LUOTNGHE join BAIHAT on LUOTNGHE.MaBH = BAIHAT.MaBH
 	group by BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh
 end
 go
@@ -1121,7 +1121,7 @@ go
 create proc proc_thongKeLuotThich
 as
 begin
-	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTYEUTHICH.MaBH) as 'TongLike' from LUOTYEUTHICH right join BAIHAT on LUOTYEUTHICH.MaBH = BAIHAT.MaBH
+	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTYEUTHICH.MaBH) as 'TongLike' from LUOTYEUTHICH join BAIHAT on LUOTYEUTHICH.MaBH = BAIHAT.MaBH
 	group by BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh
 end
 go

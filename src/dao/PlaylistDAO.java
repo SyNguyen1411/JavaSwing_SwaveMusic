@@ -21,6 +21,7 @@ public class PlaylistDAO extends SwaveDAO<PlayList, Integer> {
     final String DELETE_SQL = "DELETE FROM PLAYLIST WHERE MaPlayList = ?";
     final String SELECTALL_SQL = "SELECT * FROM PLAYLIST";
     final String SELECTBYID_SQL = "SELECT * FROM PLAYLIST WHERE MaPlayList = ?";
+    final String SELECTBYNAME_SQL = "SELECT * FROM PLAYLIST WHERE TenPlayList = ?";
     
 
     @Override
@@ -74,4 +75,20 @@ public class PlaylistDAO extends SwaveDAO<PlayList, Integer> {
         return list;
     }
 
+    public List<PlayList> selectByName(String name){
+        List<PlayList> list = selectSql(SELECTBYNAME_SQL, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+    
+    public List<PlayList> selectBySug(String name){
+        String SELECTBYSUG_SQL = "SELECT * FROM PLAYLIST WHERE TenPlayList LIKE N'%"+ name + "% AND TrangThai = 1";
+        List<PlayList> list = selectSql(SELECTBYSUG_SQL);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
 }

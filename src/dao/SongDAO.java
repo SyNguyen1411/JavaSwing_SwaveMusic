@@ -23,6 +23,7 @@ public class SongDAO extends SwaveDAO<Song,Integer> {
     final String SELECTALLSONGBYUSERID_SQL = "SELECT * FROM BAIHAT WHERE MaND = ? AND TrangThai = 1";
     final String SELECTBYID_SQL = "SELECT * FROM BAIHAT WHERE MaBH = ?";
     final String SELECTALLSONGNOTALLOWED_SQL = "SELECT * FROM BAIHAT WHERE TrangThai = 0";
+    final String SELECTBYNAME_SQL = "SELECT * FROM BAIHAT WHERE TenBH = ? AND TrangThai = 1";
     
     @Override
     public void insert(Song entity) {
@@ -94,4 +95,20 @@ public class SongDAO extends SwaveDAO<Song,Integer> {
         return list;
     }
     
+    public List<Song> selectByName(String name){
+        List<Song> list = selectSql(SELECTBYNAME_SQL, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+    
+    public List<Song> selectBySug(String name){
+        String SELECTBYSUG_SQL = "SELECT * FROM BAIHAT WHERE TenBH LIKE '%"+ name + "%' AND TrangThai = 1";
+        List<Song> list = selectSql(SELECTBYSUG_SQL);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
 }

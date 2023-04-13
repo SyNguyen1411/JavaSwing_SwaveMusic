@@ -16,7 +16,7 @@ import utils.JdbcHelper;
  */
 public class UserDAO extends SwaveDAO<User, String> {
 
-    final String INSERT_SQL = "INSERT INTO NGUOIDUNG(HoTen, NgaySinh, GioiTinh, Email, Avatar, TenTK) VALUES (?,?,?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO NGUOIDUNG(HoTen, GioiTinh, Email, Avatar, TenTK) VALUES (?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE NGUOIDUNG SET HoTen = ?, NgaySinh = ?, GioiTinh = ?, Email = ?, Avatar = ? WHERE TenTK = ?";
     final String DELETE_SQL = "DELETE FROM NGUOIDUNG WHERE TenTK = ?";
     final String SELECTALL_SQL = "SELECT * FROM NGUOIDUNG";
@@ -26,7 +26,7 @@ public class UserDAO extends SwaveDAO<User, String> {
 
     @Override
     public void insert(User entity) {
-        JdbcHelper.update(INSERT_SQL, entity.getFullname(), entity.getBirthDate(),
+        JdbcHelper.update(INSERT_SQL, entity.getFullname(),
                 entity.isGender(), entity.getEmail(), entity.getAvt(), entity.getAccount());
     }
 
