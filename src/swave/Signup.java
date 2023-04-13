@@ -4,6 +4,8 @@
  */
 package swave;
 
+import dao.AccountDAO;
+import dao.UserDAO;
 import entity.Account;
 import entity.User;
 import java.awt.CardLayout;
@@ -28,16 +30,17 @@ public class Signup extends javax.swing.JFrame {
      * Creates new form
      */
     public Login mainLogin;
-    
+    private UserDAO uDao = new UserDAO();
+    private AccountDAO aDao = new AccountDAO();
+
     public Signup(Login mainLogin) {
         this.mainLogin = mainLogin;
         initComponents();
         this.setLocationRelativeTo(null);
         simpleTitleBar1.init(this);
-        
+
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -304,31 +307,39 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFullnameCaretUpdate
 
     private void btnSignupggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupggActionPerformed
-        
+
     }//GEN-LAST:event_btnSignupggActionPerformed
 
     private void btnSignupSWAVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupSWAVEActionPerformed
-        
         String account = txtUsername.getText();
         String password = txtPassword.getText();
         String checkpass = txtCheckPass.getText();
         String fullName = txtFullname.getText();
         String email = txtEmail.getText();
         if (account.isEmpty() || password.isEmpty() || checkpass.isEmpty() || fullName.isEmpty() || email.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!");
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!");
         } else if (!password.equals(checkpass)) {
-        JOptionPane.showMessageDialog(this, "Mật khẩu không khớp!");
+            JOptionPane.showMessageDialog(this, "Mật khẩu không khớp!");
         } else {
-        JOptionPane.showMessageDialog(this, "Đăng ký thành công!");
-        this.mainLogin = mainLogin;
-        initComponents(); 
-        this.setVisible(true); 
-        dispose(); 
-        
-}
-        
-        
-        
+            Account aItem = new Account();
+            aItem.setUserID(account);
+            aItem.setPassword(password);
+            aDao.insert(aItem);
+            User uItem = new User();
+            uItem.setFullname(fullName);
+            uItem.setEmail(email);
+            uItem.setAvt("hothimongtien.png");
+            uItem.setAccount(account);
+            uDao.insert(uItem);
+            JOptionPane.showMessageDialog(this, "Đăng ký thành công!");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            txtCheckPass.setText("");
+            txtFullname.setText("");
+            txtEmail.setText("");
+        }
+
+
     }//GEN-LAST:event_btnSignupSWAVEActionPerformed
 
     private void txtFullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFullnameActionPerformed
@@ -349,27 +360,27 @@ public class Signup extends javax.swing.JFrame {
         if (!txtCheckPass.getText().equals("")) {
             lblCheckPass.setText("");
         } else {
-        lblCheckPass.setText("Xác nhận mật khẩu");
+            lblCheckPass.setText("Xác nhận mật khẩu");
         }
     }//GEN-LAST:event_txtCheckPassCaretUpdate
 
     private void txtCheckPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCheckPassActionPerformed
-  
-        String checkpass= txtCheckPass.getText();
+
+        String checkpass = txtCheckPass.getText();
         String password = txtPassword.getText();
         if (!password.equals(checkpass)) {
             JOptionPane.showMessageDialog(null, "Mật khẩu chính xác.");
         } else {
             JOptionPane.showMessageDialog(null, "Mật khẩu không chính xác.");
-               }
-            
+        }
+
     }//GEN-LAST:event_txtCheckPassActionPerformed
 
     private void txtUsernameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtUsernameCaretUpdate
         if (!txtUsername.getText().equals("")) {
             lblUsername.setText("");
         } else {
-        lblUsername.setText("Tên tài khoản");
+            lblUsername.setText("Tên tài khoản");
         }
     }//GEN-LAST:event_txtUsernameCaretUpdate
 
@@ -384,14 +395,14 @@ public class Signup extends javax.swing.JFrame {
         if (!txtEmail.getText().equals("")) {
             lblEmail.setText("");
         } else {
-        lblEmail.setText("Email");
+            lblEmail.setText("Email");
         }
     }//GEN-LAST:event_txtEmailCaretUpdate
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         String email = txtEmail.getText();
         if (!email.matches("\\\\b[\\\\w.%-]+@[-.\\\\w]+\\\\.[A-Za-z]{2,4}\\\\b")) {
-        JOptionPane.showMessageDialog(null, "Email không hợp lệ");
+            JOptionPane.showMessageDialog(null, "Email không hợp lệ");
         }
         /*// call API to check email
         boolean emailExists = checkEmailExists(email);
@@ -425,7 +436,7 @@ public class Signup extends javax.swing.JFrame {
         if (!txtPassword.getText().equals("")) {
             lblPassword.setText("");
         } else {
-        lblPassword.setText("Mật khẩu");
+            lblPassword.setText("Mật khẩu");
         }
     }//GEN-LAST:event_txtPasswordCaretUpdate
 
@@ -434,7 +445,7 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameAncestorMoved
 
     private void lblAcesssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAcesssMouseClicked
-        
+
     }//GEN-LAST:event_lblAcesssMouseClicked
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked

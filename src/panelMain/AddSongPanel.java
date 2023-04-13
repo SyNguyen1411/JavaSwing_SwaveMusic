@@ -520,7 +520,6 @@ public class AddSongPanel extends javax.swing.JPanel {
 
         lblAddPicDemo.setMaximumSize(new java.awt.Dimension(150, 150));
         lblAddPicDemo.setMinimumSize(new java.awt.Dimension(150, 150));
-        lblAddPicDemo.setPreferredSize(new java.awt.Dimension(150, 150));
         lblAddPicDemo.setSizeImage(new int[] {150, 150});
 
         javax.swing.GroupLayout lblAddPicDemoLayout = new javax.swing.GroupLayout(lblAddPicDemo);
@@ -867,7 +866,6 @@ public class AddSongPanel extends javax.swing.JPanel {
 
         lblEditPicDemo.setMaximumSize(new java.awt.Dimension(150, 150));
         lblEditPicDemo.setMinimumSize(new java.awt.Dimension(150, 150));
-        lblEditPicDemo.setPreferredSize(new java.awt.Dimension(150, 150));
         lblEditPicDemo.setSizeImage(new int[] {150, 150});
 
         javax.swing.GroupLayout lblEditPicDemoLayout = new javax.swing.GroupLayout(lblEditPicDemo);
@@ -1005,7 +1003,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         scrPane.setOpaque(false);
         scrPane.setPreferredSize(new java.awt.Dimension(1073, 350));
 
-        pnlListSongDetails.setBackground(new java.awt.Color(51, 255, 204));
+        pnlListSongDetails.setBackground(new java.awt.Color(0, 0, 0));
         pnlListSongDetails.setMaximumSize(new java.awt.Dimension(1073, 350));
         pnlListSongDetails.setMinimumSize(new java.awt.Dimension(1073, 350));
         pnlListSongDetails.setPreferredSize(new java.awt.Dimension(1073, 350));
