@@ -38,6 +38,8 @@ public class AdminToolDialog extends javax.swing.JFrame {
         userManagermentPanel.getAccountListPane().loadData();
         lblAC.setForeground(Color.pink);
         userManagermentPanel.adminFrame = this;
+        reportCommentPanel1.adminMain = this;
+        reportCommentPanel1.loadCommentStatics();
     }
 
     private void init() {
@@ -61,9 +63,8 @@ public class AdminToolDialog extends javax.swing.JFrame {
         pnlChange = new javax.swing.JPanel();
         userManagermentPanel = new Vu.ui.UserManagermentPanel();
         uncensorSongPane = new Vu.ui.UncensorSongPane();
-        reportCommentPanel = new Vu.ui.ReportCommentPanel();
-        allCommentPane = new Vu.ui.AllCommentPane();
         statisticLikePanel = new Vu.ui.StatisticLikePanel();
+        reportCommentPanel1 = new Vu.ui.ReportCommentPanel();
         menuBar1 = new AdminToolUtils.MenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -139,9 +140,8 @@ public class AdminToolDialog extends javax.swing.JFrame {
         pnlChange.setLayout(new java.awt.CardLayout());
         pnlChange.add(userManagermentPanel, "cardUS");
         pnlChange.add(uncensorSongPane, "cardUCS");
-        pnlChange.add(reportCommentPanel, "cardRM");
-        pnlChange.add(allCommentPane, "cardAM");
         pnlChange.add(statisticLikePanel, "cardSL");
+        pnlChange.add(reportCommentPanel1, "cardAM");
 
         getContentPane().add(pnlChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 0, 1219, -1));
         getContentPane().add(menuBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -270,7 +270,6 @@ public class AdminToolDialog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Vu.ui.AllCommentPane allCommentPane;
     private javax.swing.JLabel lblAC;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblComment;
@@ -278,7 +277,7 @@ public class AdminToolDialog extends javax.swing.JFrame {
     private javax.swing.JLabel lblTK;
     private AdminToolUtils.MenuBar menuBar1;
     private javax.swing.JPanel pnlChange;
-    private Vu.ui.ReportCommentPanel reportCommentPanel;
+    private Vu.ui.ReportCommentPanel reportCommentPanel1;
     private Vu.ui.StatisticLikePanel statisticLikePanel;
     private Vu.ui.UncensorSongPane uncensorSongPane;
     private Vu.ui.UserManagermentPanel userManagermentPanel;

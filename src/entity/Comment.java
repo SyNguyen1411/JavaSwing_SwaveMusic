@@ -4,6 +4,7 @@
  */
 package entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -14,14 +15,14 @@ public class Comment {
     private int commentID;
     private int position;
     private String content;
-    private Date commentDate;
+    private Timestamp commentDate;
     private int songID;
     private int userID;
 
     public Comment () {
     }
 
-    public Comment (int commentID, int position, String content, Date commentDate, int songID, int userID) {
+    public Comment (int commentID, int position, String content, Timestamp commentDate, int songID, int userID) {
         this.commentID = commentID;
         this.position = position;
         this.content = content;
@@ -62,11 +63,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getCommentDate () {
+    public Timestamp getCommentDate () {
         return commentDate;
     }
 
-    public void setCommentDate (Date commentDate) {
+    public void setCommentDate (Timestamp commentDate) {
         this.commentDate = commentDate;
     }
 
