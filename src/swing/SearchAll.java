@@ -40,12 +40,12 @@ public class SearchAll extends javax.swing.JPanel {
         revalidate();
     }
 
-    //Load danh sách Song của tôi
-    public void loadSong() {
-        for (Song song : listSong) {
-            addSong(song);
-        }
-    }
+//    //Load danh sách Song của tôi
+//    public void loadSong() {
+//        for (Song song : listSong) {
+//            addSong(song);
+//        }
+//    }
     
     //Thêm PlayList và pnl Của Tôi
     public void addPlaylist(PlayList playlist) {
@@ -53,12 +53,12 @@ public class SearchAll extends javax.swing.JPanel {
         revalidate();
     }
 
-    //Load danh sách playlist của tôi
-    public void loadPlaylist() {
-        for (PlayList playList : listPlaylist) {
-            addPlaylist(playList);
-        }
-    }
+//    //Load danh sách playlist của tôi
+//    public void loadPlaylist() {
+//        for (PlayList playList : listPlaylist) {
+//            addPlaylist(playList);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

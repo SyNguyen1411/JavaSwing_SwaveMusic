@@ -5,6 +5,7 @@ import Tien.ui.CreatPlaylist;
 import Vu.ui.AdminToolDialog;
 import component.EventItem;
 import dao.LoveSongDAO;
+import dao.PlaylistDAO;
 import dao.SongDAO;
 import dao.SongOfPlaylistDAO;
 import dao.StatisticDAO;
@@ -16,6 +17,7 @@ import entity.SongOfPlaylist;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -70,6 +72,8 @@ public class MainFrame extends javax.swing.JFrame {
     private ArrayList<SongOfPlaylist> songOfPlaylistsID = new ArrayList<>();
     private List<Object[]> listTrending = new ArrayList<>();
     private List<Song> listSongTrending = new ArrayList<>();
+    private List<Song> slist = new ArrayList<>();
+    private List<PlayList> plist = new ArrayList<>();
     private String appItemName;
     public Login loginForm;
     public MainFrame main;
@@ -80,6 +84,7 @@ public class MainFrame extends javax.swing.JFrame {
     private SongOfPlaylistDAO songOfPlaylistDAO = new SongOfPlaylistDAO();
     private StatisticDAO sdao = new StatisticDAO();
     private LoveSongDAO lsDao = new LoveSongDAO();
+    private PlaylistDAO pdao = new PlaylistDAO();
 
     private UserTool userTool = new UserTool(this);
 
@@ -352,10 +357,10 @@ public class MainFrame extends javax.swing.JFrame {
         //add trending to panel main
         fillTrendingSong();
 
-        for (PlayList item : playlist) {
-            pnlSearch.getPnlSearchAll().addPlaylist(item);
-            pnlSearch.getPnlSearchPlaylist().addList(item);
-        }
+//        for (PlayList item : playlist) {
+//            pnlSearch.getPnlSearchAll().addPlaylist(item);
+//            pnlSearch.getPnlSearchPlaylist().addList(item);
+//        }
 
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
@@ -644,6 +649,15 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.getLblLogo().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                try {
+                    fillTrendingSong();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardMain");
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardMain");
@@ -709,6 +723,15 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.getPnlHome().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                try {
+                    fillTrendingSong();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 undoChosen(appItemName);
                 c.show(pnlChange, "cardMain");
                 pnlMainScreen.getCardLayout().show(pnlMainScreen, "cardMain");
@@ -744,22 +767,28 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    slist = songDAO.selectBySug(toolBar.getFindTextField().getText());
+                    plist = pdao.selectBySug(toolBar.getFindTextField().getText());
                     c.show(pnlChange, "cardSearch");
-                    for (PlayList item : playlist) {
-                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
-                    }
-
-                    for (Song item : songList) {
-                        try {
-                            pnlSearch.getPnlSearchSong().addSong(item);
-                        } catch (UnsupportedAudioFileException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IOException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (URISyntaxException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    if (slist != null) {
+                        for (Song item : slist) {
+                            pnlSearch.getPnlSearchAll().addSong(item);
+                            try {
+                                pnlSearch.getPnlSearchSong().addSong(item);
+                            } catch (UnsupportedAudioFileException ex) {
+                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (URISyntaxException ex) {
+                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
-                        pnlSearch.getPnlSearchAll().addSong(item);
+                    }
+                    if (plist != null) {
+                        for (PlayList item : playlist) {
+                            pnlSearch.getPnlSearchAll().addPlaylist(item);
+                            pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                        }
                     }
                     repaint();
                     menu.setVisible(false);
@@ -1070,9 +1099,32 @@ public class MainFrame extends javax.swing.JFrame {
         search.addEventClick(new EventItem() {
             @Override
             public void itemClick(Search data) {
-                menu.setVisible(false);
                 toolBar.getFindTextField().setText(data.getText());
-
+                slist = songDAO.selectByName(data.getText());
+                plist = pdao.selectByName(data.getText());
+                c.show(pnlChange, "cardSearch");
+                if (slist != null) {
+                    for (Song item : slist) {
+                        pnlSearch.getPnlSearchAll().addSong(item);
+                        try {
+                            pnlSearch.getPnlSearchSong().addSong(item);
+                        } catch (UnsupportedAudioFileException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+                if (plist != null) {
+                    for (PlayList item : playlist) {
+                        pnlSearch.getPnlSearchAll().addPlaylist(item);
+                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                    }
+                }
+                repaint();
+                menu.setVisible(false);
             }
 
             @Override
@@ -1104,6 +1156,8 @@ public class MainFrame extends javax.swing.JFrame {
         pnlMainScreen.getPnlDemoTrending().removeAll();
 
         pnlMainScreen.getPnlTrendingSongList().getPnlSongList().removeAll();
+        pnlMainScreen.getPnlTrendingSongList().getPnlSongList().setPreferredSize(new Dimension(1073, 0));
+
         pnlMainScreen.fillTrendingSong((ArrayList<Song>) listSongTrending);
         //add Song trending
         for (Song data : listSongTrending) {
