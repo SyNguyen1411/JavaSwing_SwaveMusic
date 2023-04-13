@@ -451,7 +451,7 @@ public class Login extends javax.swing.JFrame {
         if (acc == null) {
             MsgBox.alert(this, "Tên tài khoản không đúng");
         } else {
-            if (!acc.isStatus()) {
+            if (acc.isStatus()) {
                 if (acc.getPassword().equals(pass)) {
                     user = uDao.selectById(username);
                     Auth.user = acc;
