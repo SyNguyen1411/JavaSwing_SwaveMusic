@@ -104,19 +104,29 @@ public class PlaylistItem extends javax.swing.JPanel {
             Song item = sDao.selectById(songOfPlaylist.getSongID());
             songList.add(item);
         }
+        main.getPnlSongOfPlaylistPane().setPlaylistFocus(data);
 
         main.getPnlSongOfPlaylistPane().getPnlSonglist().getPnlSongList().removeAll();
         main.getPnlSongOfPlaylistPane().getPnlSonglist().getPnlSongList().setPreferredSize(new Dimension(1273, 310));
-        for (Song song : songList) {
-            try {
-                main.getPnlSongOfPlaylistPane().getPnlSonglist().addSong(song, songList);
-            } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            main.getPnlSongOfPlaylistPane().fillData();
+//        for (Song song : songList) {
+//            try {
+//                main.getPnlSongOfPlaylistPane().getPnlSonglist().addSong(song, songList);
+//            } catch (UnsupportedAudioFileException ex) {
+//                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IOException ex) {
+//                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (URISyntaxException ex) {
+//                Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PlaylistItem.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         main.getC().show(main.getPnlChange(), "cardSongOfPlaylist");
