@@ -330,9 +330,11 @@ public class MainFrame extends javax.swing.JFrame {
 //        songList.add(new Song(12, "Nắng Ấm Xa Dần", "Taylor Swift", "Sơn Tùng MTP", "Pop", "anGiDay.txt", "Nang_Am_Xa_Dan.jpg", "nangAmXaDan.mp3", true, 1));
         //ADD SONG LOVE:
         List<LoveSong> lsList = lsDao.selectAllByUID(Login.user.getUserID());
-        for (LoveSong loveSong : lsList) {
-            Song item = songDAO.selectById(loveSong.getSongID());
-            songLoveList.add(item);
+        if (lsList != null) {
+            for (LoveSong loveSong : lsList) {
+                Song item = songDAO.selectById(loveSong.getSongID());
+                songLoveList.add(item);
+            }
         }
 
         //add Song love for Pane:
