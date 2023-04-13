@@ -248,7 +248,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
                 lblEditMouseClicked(evt);
             }
         });
-        pnlInforPlaylist.add(lblEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
+        pnlInforPlaylist.add(lblEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
 
         lblTile.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTile.setForeground(new java.awt.Color(143, 65, 148));
@@ -259,7 +259,7 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
         lblNamePlaylist.setForeground(new java.awt.Color(253, 178, 255));
         lblNamePlaylist.setText("LOFI CHILL 2023");
         lblNamePlaylist.setPreferredSize(new java.awt.Dimension(514, 55));
-        pnlInforPlaylist.add(lblNamePlaylist, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, -1, -1));
+        pnlInforPlaylist.add(lblNamePlaylist, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 470, 80));
 
         lblSumTime.setFont(new java.awt.Font("Segoe UI", 2, 20)); // NOI18N
         lblSumTime.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,7 +311,6 @@ public class SongOfPlaylistPane extends javax.swing.JPanel {
 
         pnlSongOfPlaylist.add(pnlTitleTable);
 
-        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator1.setPreferredSize(new java.awt.Dimension(1073, 3));
         pnlSongOfPlaylist.add(jSeparator1);
