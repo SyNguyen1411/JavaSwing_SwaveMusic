@@ -41,6 +41,7 @@ import panelMain.PlaylistPane;
 import panelMain.SearchPane;
 import panelMain.SongLovelistPane;
 import swing.CommentPane;
+import swing.ItemSearchSuggestion;
 import swing.PanelSearchSuggestion;
 import swing.SongItem;
 import swing.SongList;
@@ -284,26 +285,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         //-----------------------------------
         //add my playlist:
-        playlist.add(new PlayList(1, "LOFI 2021", 2023, true, "playlist1.jpg"));
-        playlist.add(new PlayList(2, "HOT TREND 2023", 2023, true, "playlist2.jpg"));
-        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 2023, true, "playlist3.jpg"));
-        playlist.add(new PlayList(4, "SAD SONGS", 2023, true, "playlist4.jpg"));
-        playlist.add(new PlayList(5, "CHILL SONGS", 2023, true, "playlist1.jpg"));
-        playlist.add(new PlayList(6, "NHẠC REMIX", 2023, true, "playlist6.jpg"));
-        playlist.add(new PlayList(7, "SONG BTS", 2023, true, "playlist10.jpg"));
-        playlist.add(new PlayList(8, "RAP SONGS", 2023, true, "playlist2.jpg"));
-        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 2023, true, "playlist4.jpg"));
-        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 2023, true, "playlist10.jpg"));
-        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 2023, true, "playlist2.jpg"));
-        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2023, true, "playlist12.jpg"));
-        playlist.add(new PlayList(13, "CHILL STUDENTS ", 2023, true, "playlist13.jpg"));
-        playlist.add(new PlayList(14, "SLEEP SONGS", 2023, true, "playlist14.jpg"));
-        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 2023, true, "playlist15.jpg"));
-        playlist.add(new PlayList(16, "HOT SONGS", 2023, true, "playlist16.jpg"));
-        playlist.add(new PlayList(17, "TIKTOK 2023", 2023, true, "playlist12.jpg"));
-        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 2023, true, "playlist3.jpg"));
-        playlist.add(new PlayList(19, "LOVE SONGS", 2023, true, "playlist19.jpg"));
-        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 2023, true, "playlist2.jpg"));
+        playlist.add(new PlayList(1, "LOFI 2021", 1, true, "playlist1.jpg"));
+        playlist.add(new PlayList(2, "HOT TREND 2023", 2, true, "playlist2.jpg"));
+        playlist.add(new PlayList(3, "NHẠC TIKTOK HAY", 3, true, "playlist3.jpg"));
+        playlist.add(new PlayList(4, "SAD SONGS", 4, true, "playlist4.jpg"));
+        playlist.add(new PlayList(5, "CHILL SONGS", 5, true, "playlist1.jpg"));
+        playlist.add(new PlayList(6, "NHẠC REMIX", 6, true, "playlist6.jpg"));
+        playlist.add(new PlayList(7, "SONG BTS", 7, true, "playlist10.jpg"));
+        playlist.add(new PlayList(8, "RAP SONGS", 8, true, "playlist2.jpg"));
+        playlist.add(new PlayList(9, "NHẠC CHILL 2023", 9, true, "playlist4.jpg"));
+        playlist.add(new PlayList(10, "CHILL LOFI 2023 ", 10, true, "playlist10.jpg"));
+        playlist.add(new PlayList(11, "TREND TIKTOK 2023 ", 1, true, "playlist2.jpg"));
+        playlist.add(new PlayList(12, "BÀI HÁY HAY ", 2, true, "playlist12.jpg"));
+        playlist.add(new PlayList(13, "CHILL STUDENTS ", 3, true, "playlist13.jpg"));
+        playlist.add(new PlayList(14, "SLEEP SONGS", 4, true, "playlist14.jpg"));
+        playlist.add(new PlayList(15, "CHILL SLEEP 2023", 5, true, "playlist15.jpg"));
+        playlist.add(new PlayList(16, "HOT SONGS", 6, true, "playlist16.jpg"));
+        playlist.add(new PlayList(17, "TIKTOK 2023", 7, true, "playlist12.jpg"));
+        playlist.add(new PlayList(18, "NHẠC TÂM TRẠNG", 8, true, "playlist3.jpg"));
+        playlist.add(new PlayList(19, "LOVE SONGS", 9, true, "playlist19.jpg"));
+        playlist.add(new PlayList(20, "NHẠC TRẺ REMIX", 10, true, "playlist2.jpg"));
 
         for (PlayList playList : playlist) {
             pnlMyPlaylist.addList(playList);
@@ -361,7 +362,6 @@ public class MainFrame extends javax.swing.JFrame {
 //            pnlSearch.getPnlSearchAll().addPlaylist(item);
 //            pnlSearch.getPnlSearchPlaylist().addList(item);
 //        }
-
         //add sự kiện cho nút play
         pnlLikeSong.getPnlSonglist().setEventLblStart(new EventItem() {
             @Override
@@ -597,7 +597,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         // Add sự kiện khi chọn playlist trong playlist top
-        // Chưa làm xong
         pnlMainScreen.setEventItemPlaylist(new EventItem() {
             @Override
             public void clickEvent(Component com, PlayList playist) {
@@ -767,6 +766,15 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    menu.setVisible(false);
+                    pnlSearch.getPnlSearchAll().getPnlSongOfSearchAll().getPnlSong().removeAll();
+                    pnlSearch.getPnlSearchAll().getPnlSongOfSearchAll().getPnlSong().setPreferredSize(new Dimension(1239, 300));
+                    pnlSearch.getPnlSearchAll().getPnlPlaylistOfSearchAll().getPnlPlaylist().removeAll();
+                    pnlSearch.getPnlSearchAll().getPnlPlaylistOfSearchAll().getPnlPlaylist().setPreferredSize(new Dimension(1239, 300));
+                    pnlSearch.getPnlSearchSong().getSongList1().getPnlSongList().removeAll();
+                    pnlSearch.getPnlSearchSong().getSongList1().getPnlSongList().setPreferredSize(new Dimension(1073, 100));
+                    pnlSearch.getPnlSearchPlaylist().getPnlPlaylist().removeAll();
+                    pnlSearch.getPnlSearchPlaylist().getPnlPlaylist().setPreferredSize(new Dimension(1100, 330));
                     slist = songDAO.selectBySug(toolBar.getFindTextField().getText());
                     plist = pdao.selectBySug(toolBar.getFindTextField().getText());
                     c.show(pnlChange, "cardSearch");
@@ -774,24 +782,20 @@ public class MainFrame extends javax.swing.JFrame {
                         for (Song item : slist) {
                             pnlSearch.getPnlSearchAll().addSong(item);
                             try {
-                                pnlSearch.getPnlSearchSong().addSong(item);
-                            } catch (UnsupportedAudioFileException ex) {
-                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
-                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (URISyntaxException ex) {
+                                pnlSearch.getPnlSearchSong().addSong(item, slist);
+                                pnlSearch.getPnlSearchSong().getSongList1().getPnlSongList().repaint();
+                            } catch (UnsupportedAudioFileException | IOException | URISyntaxException ex) {
                                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     }
                     if (plist != null) {
-                        for (PlayList item : playlist) {
+                        for (PlayList item : plist) {
                             pnlSearch.getPnlSearchAll().addPlaylist(item);
                             pnlSearch.getPnlSearchPlaylist().addPlayList(item);
                         }
                     }
                     repaint();
-                    menu.setVisible(false);
                 }
             }
         });
@@ -801,22 +805,33 @@ public class MainFrame extends javax.swing.JFrame {
             public void itemClick(Search data) {
                 menu.setVisible(false);
                 toolBar.getFindTextField().setText(data.getText());
+                pnlSearch.getPnlSearchAll().getPnlSongOfSearchAll().getPnlSong().removeAll();
+                pnlSearch.getPnlSearchAll().getPnlSongOfSearchAll().getPnlSong().setPreferredSize(new Dimension(1239, 300));
+                pnlSearch.getPnlSearchAll().getPnlSongOfSearchAll().getPnlSong().repaint();
+                pnlSearch.getPnlSearchAll().getPnlPlaylistOfSearchAll().getPnlPlaylist().removeAll();
+                pnlSearch.getPnlSearchAll().getPnlPlaylistOfSearchAll().getPnlPlaylist().setPreferredSize(new Dimension(1239, 330));
+                pnlSearch.getPnlSearchSong().getSongList1().getPnlSongList().removeAll();
+                pnlSearch.getPnlSearchSong().getSongList1().getPnlSongList().setPreferredSize(new Dimension(1073, 100));
+                pnlSearch.getPnlSearchPlaylist().getPnlPlaylist().removeAll();
+                pnlSearch.getPnlSearchPlaylist().getPnlPlaylist().setPreferredSize(new Dimension(1100, 330));
+                slist = songDAO.selectBySug(data.getText());
+                plist = pdao.selectBySug(data.getText());
                 c.show(pnlChange, "cardSearch");
-                for (PlayList item : playlist) {
-                    pnlSearch.getPnlSearchPlaylist().addPlayList(item);
-                }
-
-                for (Song item : songList) {
-                    try {
-                        pnlSearch.getPnlSearchSong().addSong(item);
-                    } catch (UnsupportedAudioFileException ex) {
-                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (URISyntaxException ex) {
-                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                if (slist != null) {
+                    for (Song item : slist) {
+                        pnlSearch.getPnlSearchAll().addSong(item);
+                        try {
+                            pnlSearch.getPnlSearchSong().addSong(item, slist);
+                        } catch (UnsupportedAudioFileException | IOException | URISyntaxException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                    pnlSearch.getPnlSearchAll().addSong(item);
+                }
+                if (plist != null) {
+                    for (PlayList item : plist) {
+                        pnlSearch.getPnlSearchAll().addPlaylist(item);
+                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
+                    }
                 }
                 repaint();
             }
@@ -1104,53 +1119,6 @@ public class MainFrame extends javax.swing.JFrame {
         menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
         menu.add(search);
         menu.setFocusable(false);
-        search.addEventClick(new EventItem() {
-            @Override
-            public void itemClick(Search data) {
-                toolBar.getFindTextField().setText(data.getText());
-                slist = songDAO.selectByName(data.getText());
-                plist = pdao.selectByName(data.getText());
-                c.show(pnlChange, "cardSearch");
-                if (slist != null) {
-                    for (Song item : slist) {
-                        pnlSearch.getPnlSearchAll().addSong(item);
-                        try {
-                            pnlSearch.getPnlSearchSong().addSong(item);
-                        } catch (UnsupportedAudioFileException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IOException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (URISyntaxException ex) {
-                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-                if (plist != null) {
-                    for (PlayList item : playlist) {
-                        pnlSearch.getPnlSearchAll().addPlaylist(item);
-                        pnlSearch.getPnlSearchPlaylist().addPlayList(item);
-                    }
-                }
-                repaint();
-                menu.setVisible(false);
-            }
-
-            @Override
-            public void clickEvent(Component com, Song song) {
-            }
-
-            @Override
-            public void clickEvent(Component com, PlayList playList) {
-            }
-
-            @Override
-            public void EnterEvent(Component com, Song song) {
-            }
-
-            @Override
-            public void ExitEvent(Component com, Song song, MouseEvent e) {
-            }
-        });
     }
 
     public void fillTrendingSong() throws UnsupportedAudioFileException, IOException, URISyntaxException {

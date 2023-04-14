@@ -15,8 +15,22 @@ import entity.Song;
  */
 public class SearchAll extends javax.swing.JPanel {
 
-    public static ArrayList<Song> listSong = new ArrayList<>();
-    public static ArrayList<PlayList> listPlaylist = new ArrayList<>();
+    public PlaylistOfSearchAll getPnlPlaylistOfSearchAll() {
+        return pnlPlaylistOfSearchAll;
+    }
+
+    public void setPnlPlaylistOfSearchAll(PlaylistOfSearchAll pnlPlaylistOfSearchAll) {    
+        this.pnlPlaylistOfSearchAll = pnlPlaylistOfSearchAll;
+    }
+
+    public SongOfSearchAll getPnlSongOfSearchAll() {
+        return pnlSongOfSearchAll;
+    }
+
+    public void setPnlSongOfSearchAll(SongOfSearchAll pnlSongOfSearchAll) {
+        this.pnlSongOfSearchAll = pnlSongOfSearchAll;
+    }
+
     
     /**
      * Creates new form SearchAll

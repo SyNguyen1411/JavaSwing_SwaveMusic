@@ -20,7 +20,7 @@ public class SongItemSearch extends javax.swing.JPanel {
         this.data = data;
         initComponents();
         setOpaque(false);
-        lblAVT.setIcon(new ImageIcon(getClass().getResource("/img/song/"+data.getAVT())));
+        lblAVT.setIcon(data.toIcon());
         lblSongName.setText(data.getNameSong());
     }
 

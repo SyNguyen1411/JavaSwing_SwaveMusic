@@ -228,8 +228,6 @@ public class SearchPane extends javax.swing.JPanel {
         pnlSearchAll.setVisible(true);
         pnlSearchSong.setVisible(false);
         pnlSearchPlaylist.setVisible(false);
-//        pnlSearchAll.loadSong();
-//        pnlSearchAll.loadPlaylist();
     }//GEN-LAST:event_btnSearchAllActionPerformed
 
     private void btnSearchSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchSongActionPerformed
@@ -243,7 +241,6 @@ public class SearchPane extends javax.swing.JPanel {
         pnlSearchAll.setVisible(false);
         pnlSearchSong.setVisible(false);
         pnlSearchPlaylist.setVisible(true);
-//        pnlSearchPlaylist.loadPlaylist();
     }//GEN-LAST:event_btnSearchPlaylistActionPerformed
 
     private void btnSearchAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchAllMouseClicked

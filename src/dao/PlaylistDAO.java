@@ -84,7 +84,7 @@ public class PlaylistDAO extends SwaveDAO<PlayList, Integer> {
     }
     
     public List<PlayList> selectBySug(String name){
-        String SELECTBYSUG_SQL = "SELECT * FROM PLAYLIST WHERE TenPlayList LIKE N'%"+ name + "% AND TrangThai = 1";
+        String SELECTBYSUG_SQL = "SELECT * FROM PLAYLIST WHERE (TenPlayList LIKE N'%"+ name + "%') AND (RiengTu = 0)";
         List<PlayList> list = selectSql(SELECTBYSUG_SQL);
         if (list.isEmpty()) {
             return null;
