@@ -4,11 +4,17 @@
  */
 package swing;
 
+import Vu.ui.ReportCommentPanel;
+import dao.CommentDAO;
+import dao.ReportCommentDAO;
 import entity.Comment;
 import entity.ReportComment;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JPanel;
+import utils.MsgBox;
 
 /**
  *
@@ -19,12 +25,57 @@ public class CommentStaticList extends javax.swing.JPanel {
     /**
      * Creates new form CommentStaticList
      */
-    public CommentStaticList() {
+    private CommentDAO cmDao = new CommentDAO();
+    private ReportCommentDAO rpcmDao = new ReportCommentDAO();
+
+    public CommentStaticList () {
         initComponents();
     }
 
-    public void addCommentStatic(ReportComment data) {
+    public void addCommentStatic (ReportComment data) {
         CommentStaticItem item = new CommentStaticItem(data);
+        item.getBtnDelete().addMouseListener(new MouseListener() {
+            private List<Comment> cmList;
+            private List<ReportComment> rpcmList = rpcmDao.selectAll();
+
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                cmDao.delete(data.getCommentID());
+
+//                for (ReportComment reportComment : rpcmList) {
+//                    cmList.add(cmDao.selectById(reportComment.getCommentID()));
+//                }
+                if (ReportCommentPanel.index == 0) //                
+                {
+                    cmList = cmDao.selectAll();
+                    loadLoadListAll(cmList);
+                }
+                else {
+                    rpcmList = rpcmDao.selectAll();
+                    loadLoadList(rpcmList);
+                }
+
+                MsgBox.alert(getParent(), "Xóa bình luận thành công");
+                pnlCommentStaticList.repaint();
+
+            }
+
+            @Override
+            public void mousePressed (MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased (MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered (MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited (MouseEvent e) {
+            }
+        });
         pnlCommentStaticList.add(item);
         System.out.println(pnlCommentStaticList.getComponentCount());
         if (pnlCommentStaticList.getComponentCount() >= 5) {
@@ -36,8 +87,49 @@ public class CommentStaticList extends javax.swing.JPanel {
         pnlCommentStaticList.revalidate();
     }
 
-    public void addCommentStatic(Comment data) {
+    public void addCommentStatic (Comment data) {
         CommentStaticItem item = new CommentStaticItem(data);
+        item.getBtnDelete().addMouseListener(new MouseListener() {
+            private List<Comment> cmList;
+            private List<ReportComment> rpcmList = rpcmDao.selectAll();
+
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                cmDao.delete(data.getCommentID());
+
+//                for (ReportComment reportComment : rpcmList) {
+//                    cmList.add(cmDao.selectById(reportComment.getCommentID()));
+//                }
+                if (ReportCommentPanel.index == 0) //                
+                {
+                    cmList = cmDao.selectAll();
+                    loadLoadListAll(cmList);
+                }
+                else {
+                    rpcmList = rpcmDao.selectAll();
+                    loadLoadList(rpcmList);
+                }
+                MsgBox.alert(getParent(), "Xóa bình luận thành công");
+                pnlCommentStaticList.repaint();
+
+            }
+
+            @Override
+            public void mousePressed (MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased (MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered (MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited (MouseEvent e) {
+            }
+        });
         pnlCommentStaticList.add(item);
         System.out.println(pnlCommentStaticList.getComponentCount());
         if (pnlCommentStaticList.getComponentCount() >= 5) {
@@ -49,7 +141,7 @@ public class CommentStaticList extends javax.swing.JPanel {
         pnlCommentStaticList.revalidate();
     }
 
-    public void loadLoadList(List<ReportComment> list) {
+    public void loadLoadList (List<ReportComment> list) {
         pnlCommentStaticList.removeAll();
         pnlCommentStaticList.setPreferredSize(new Dimension(955, 540));
         for (ReportComment comment : list) {
@@ -57,7 +149,7 @@ public class CommentStaticList extends javax.swing.JPanel {
         }
     }
 
-    public void loadLoadListAll(List<Comment> list) {
+    public void loadLoadListAll (List<Comment> list) {
         pnlCommentStaticList.removeAll();
         pnlCommentStaticList.setPreferredSize(new Dimension(955, 540));
         for (Comment comment : list) {
@@ -65,7 +157,7 @@ public class CommentStaticList extends javax.swing.JPanel {
         }
     }
 
-    public JPanel getPnlCommentStaticList() {
+    public JPanel getPnlCommentStaticList () {
         return pnlCommentStaticList;
     }
 
@@ -82,9 +174,9 @@ public class CommentStaticList extends javax.swing.JPanel {
         pnlCommentStaticList = new javax.swing.JPanel();
         scrollBar1 = new component.ScrollBar();
 
-        setOpaque(false);
+        setBackground(new java.awt.Color(0, 0, 0));
 
-        jscSongList.setBackground(new java.awt.Color(255, 255, 255));
+        jscSongList.setBackground(new java.awt.Color(0, 0, 0));
         jscSongList.setBorder(null);
         jscSongList.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jscSongList.setHorizontalScrollBar(null);
@@ -93,7 +185,7 @@ public class CommentStaticList extends javax.swing.JPanel {
         jscSongList.setVerticalScrollBar(scrollBar1);
         jscSongList.setViewportView(null);
 
-        pnlCommentStaticList.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCommentStaticList.setBackground(new java.awt.Color(0, 0, 0));
         pnlCommentStaticList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlCommentStaticList.setMinimumSize(new java.awt.Dimension(10, 0));
         pnlCommentStaticList.setOpaque(false);

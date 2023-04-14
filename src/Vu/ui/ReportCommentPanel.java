@@ -27,6 +27,7 @@ public class ReportCommentPanel extends javax.swing.JPanel {
     private List<ReportComment> rpcmList = new ArrayList<>();
     private List<Comment> cmList = new ArrayList<>();
     public AdminToolDialog adminMain;
+    public static int index = 0;
 
     public ReportCommentPanel() {
         initComponents();
@@ -231,6 +232,7 @@ public class ReportCommentPanel extends javax.swing.JPanel {
 
     private void cboCommentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCommentItemStateChanged
         if (cboComment.getSelectedIndex() == 0) {
+            index = 0;
             cmList = cmDao.selectAll();
             pnlCommentStaticList.loadLoadListAll(cmList);
             revalidate();
@@ -238,6 +240,7 @@ public class ReportCommentPanel extends javax.swing.JPanel {
             adminMain.repaint();
 
         } else if (cboComment.getSelectedIndex() == 1) {
+            index = 1;
             rpcmList = rpcmDao.selectAll();
             pnlCommentStaticList.loadLoadList(rpcmList);
             revalidate();

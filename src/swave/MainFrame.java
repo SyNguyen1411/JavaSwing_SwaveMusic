@@ -1010,6 +1010,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.pnlComment = pnlComment;
     }
 
+    public UserTool getUserTool () {
+        return userTool;
+    }
+
+    public void setUserTool (UserTool userTool) {
+        this.userTool = userTool;
+    }
+
     private void eventUserTool() {
         userTool.getPnlPersonalInfo().addMouseListener(new MouseAdapter() {
             @Override
@@ -1048,23 +1056,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
         });
-        userTool.getPnlIntroduction().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(165, 43, 168));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(199, 199, 199));
-            }
-
-        });
+//        userTool.getPnlIntroduction().addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//                userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(165, 43, 168));
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                userTool.getPnlIntroduction().getLblPanelName().setForeground(new Color(199, 199, 199));
+//            }
+//
+//        });
 
         userTool.getPnlLogout().addMouseListener(new MouseAdapter() {
             @Override

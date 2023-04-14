@@ -86,7 +86,7 @@ CREATE TABLE BINHLUAN (
 	MaBL INT IDENTITY NOT NULL,
 	STT INT,
 	NoiDung NVARCHAR(200),
-	NgayTao DATE DEFAULT GETDATE(),
+	NgayTao DATETIME DEFAULT GETDATE(),
 	MaBH INT,
 	MaND INT
 )
@@ -1108,7 +1108,7 @@ go
 create proc proc_thongKeLuotNghe
 as
 begin
-	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTNGHE.MaBH) as 'TongNghe' from LUOTNGHE join BAIHAT on LUOTNGHE.MaBH = BAIHAT.MaBH
+	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTNGHE.MaBH) as 'TongNghe' from LUOTNGHE right join BAIHAT on LUOTNGHE.MaBH = BAIHAT.MaBH
 	group by BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh
 end
 go
@@ -1121,7 +1121,7 @@ go
 create proc proc_thongKeLuotThich
 as
 begin
-	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTYEUTHICH.MaBH) as 'TongLike' from LUOTYEUTHICH join BAIHAT on LUOTYEUTHICH.MaBH = BAIHAT.MaBH
+	select BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh, COUNT(LUOTYEUTHICH.MaBH) as 'TongLike' from LUOTYEUTHICH right join BAIHAT on LUOTYEUTHICH.MaBH = BAIHAT.MaBH
 	group by BAIHAT.MaBH, BAIHAT.TenBH, BAIHAT.HinhAnh
 end
 go
