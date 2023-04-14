@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import entity.PlayList;
+import swave.MainFrame;
 
 /**
  *
@@ -15,6 +16,7 @@ import entity.PlayList;
 public class SearchPlaylist extends javax.swing.JPanel {
 
     public static ArrayList<PlayList> list = new ArrayList<>();
+    public MainFrame main;
 
     /**
      * Creates new form PlayList
@@ -26,6 +28,7 @@ public class SearchPlaylist extends javax.swing.JPanel {
 
     public void addPlayList(PlayList data) {
         PlaylistItem item = new PlaylistItem();
+        item.setMain(main);
         item.loadData(data);
         pnlPlaylist.add(item);
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount() - 1) % 4 == 0)) {
@@ -72,7 +75,6 @@ public class SearchPlaylist extends javax.swing.JPanel {
 //            addList(playList);
 //        }
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

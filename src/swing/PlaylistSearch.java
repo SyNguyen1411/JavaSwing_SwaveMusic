@@ -17,6 +17,8 @@ public class PlaylistSearch extends javax.swing.JPanel {
     /**
      * Creates new form PlayList
      */
+    
+    
     public PlaylistSearch() {
         initComponents();
         jscPlaylist.getViewport().setBackground(new Color(255, 255, 255, 0));
@@ -25,6 +27,7 @@ public class PlaylistSearch extends javax.swing.JPanel {
     public void addPlayList(PlayList data) {
         PlaylistItem item = new PlaylistItem();
         item.setData(data);
+
         pnlPlaylist.add(item);
         System.out.println(pnlPlaylist.getComponentCount());
         if (((pnlPlaylist.getComponentCount() - 1) != 0) && ((pnlPlaylist.getComponentCount() > 4))) {
