@@ -1274,13 +1274,13 @@ begin
 	begin
 		insert into @search
 			select TenBH from BAIHAT
-			where (TenBH like '%'+@Data+'%') or (CaSi like '%'+@Data+'%') or (NhacSi like '%'+@Data+'%') or (TheLoai like '%'+@Data+'%')
+			where ((TenBH like N'%'+@Data+'%') or (CaSi like N'%'+@Data+'%') or (NhacSi like N'%'+@Data+'%') or (TheLoai like N'%'+@Data+'%')) and (TrangThai = 1)
 	end
 
 	begin
 		insert into @search
 			select TenPlayList from PLAYLIST
-			where (TenPlayList like '%'+@Data+'%')
+			where (TenPlayList like N'%'+@Data+'%') and (RiengTu = 0)
 	end
 
 	select * from @search
@@ -1291,10 +1291,10 @@ exec proc_deXuatTimKiem N'an'
 
 
 
+SELECT * FROM BAIHAT WHERE (TenBH LIKE N'%Lạc trôi%') AND (TrangThai = 1)
 
 
-
-
+SELECT * FROM PLAYLIST WHERE (TenPlayList LIKE N'%Nhạc Giật%')
 
 
 
