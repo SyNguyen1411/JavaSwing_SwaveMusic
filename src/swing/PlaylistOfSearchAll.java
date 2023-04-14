@@ -18,8 +18,6 @@ import entity.PlayList;
  */
 public class PlaylistOfSearchAll extends javax.swing.JPanel {
 
-    public static ArrayList<PlayList> list = new ArrayList<>();
-
     /**
      * Creates new form PlaylistOfSearchAll
      */
@@ -43,6 +41,7 @@ public class PlaylistOfSearchAll extends javax.swing.JPanel {
         }
         repaint();
         pnlPlaylist.revalidate();
+        pnlPlaylist.repaint();
     }
 
     public JScrollPane getJscPlaylist() {

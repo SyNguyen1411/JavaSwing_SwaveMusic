@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import entity.Song;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
@@ -34,9 +35,9 @@ public class SearchSong extends javax.swing.JPanel {
         this.songList1 = songList1;
     }
 
-    public void addSong(Song data) throws UnsupportedAudioFileException, IOException, URISyntaxException {
-        songList1.addSong(data);
-        revalidate();
+    public void addSong(Song data, List<Song> a) throws UnsupportedAudioFileException, IOException, URISyntaxException {
+        songList1.addSong(data, a);
+        songList1.getPnlSongList().repaint();
     };
     
 
@@ -56,8 +57,8 @@ public class SearchSong extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(songList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 113, Short.MAX_VALUE)
+                .addComponent(songList1, javax.swing.GroupLayout.PREFERRED_SIZE, 1160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

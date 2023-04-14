@@ -3,9 +3,11 @@ package swing;
 import dao.PlaylistDAO;
 import dao.SongDAO;
 import dao.SongOfPlaylistDAO;
+import dao.UserDAO;
 import entity.PlayList;
 import entity.Song;
 import entity.SongOfPlaylist;
+import entity.User;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -33,6 +35,8 @@ public class PlaylistItem extends javax.swing.JPanel {
     public List<Song> songList = new ArrayList<>();
     private SongOfPlaylistDAO sopDao = new SongOfPlaylistDAO();
     private SongDAO sDao = new SongDAO();
+    private UserDAO uDao = new UserDAO();
+    private User user = new User();
 
     public PlaylistItem() {
         initComponents();
@@ -41,9 +45,10 @@ public class PlaylistItem extends javax.swing.JPanel {
 
     public void loadData(PlayList data) {
         this.data = data;
+        user = uDao.selectByIDUser(data.getUserID());
         lblAVT.setIcon(this.data.toIcon());
         lblPlaylistName.setText(this.data.getPlaylistName());
-        lblPlaylistAuthor.setText("By " + this.data.getUserID());
+        lblPlaylistAuthor.setText("By " + user.getFullname());
     }
 
     /**

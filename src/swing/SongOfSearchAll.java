@@ -33,15 +33,16 @@ public class SongOfSearchAll extends javax.swing.JPanel {
     public void addSong(Song data) {
         SongItemSearch item = new SongItemSearch(data);
         pnlSong.add(item);
-        if (pnlSong.getComponentCount() == 5){
-            pnlSong.setPreferredSize(new Dimension(1320, 300));
-        }
+//        if (pnlSong.getComponentCount() == 5){
+//            pnlSong.setPreferredSize(new Dimension(1320, 300));
+//        }
         if (((pnlSong.getComponentCount() - 1) != 0) && ((pnlSong.getComponentCount() - 1 > 4))) {
             pnlSong.setPreferredSize(new Dimension(pnlSong.getWidth() + 256, 300));
             validate();
         }
         repaint();
         pnlSong.revalidate();
+        pnlSong.repaint();
     }
 
     public JScrollPane getJscSong() {

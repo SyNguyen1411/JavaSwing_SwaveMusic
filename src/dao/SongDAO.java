@@ -104,7 +104,7 @@ public class SongDAO extends SwaveDAO<Song,Integer> {
     }
     
     public List<Song> selectBySug(String name){
-        String SELECTBYSUG_SQL = "SELECT * FROM BAIHAT WHERE TenBH LIKE '%"+ name + "%' AND TrangThai = 1";
+        String SELECTBYSUG_SQL = "SELECT * FROM BAIHAT WHERE ((TenBH LIKE N'%"+ name + "%') OR (NhacSi LIKE N'%"+ name + "%') OR (CaSi LIKE N'%"+ name + "%') OR (TheLoai LIKE N'%"+ name + "%')) AND (TrangThai = 1)";
         List<Song> list = selectSql(SELECTBYSUG_SQL);
         if (list.isEmpty()) {
             return null;
