@@ -93,6 +93,10 @@ public class AddSongPanel extends javax.swing.JPanel {
         clearForm(1);
         clearForm(2);
         fillTable();
+        pnlEditInfo.repaint();
+        pnlEditInfo.revalidate();
+        pnlAddInfo.repaint();
+        pnlAddInfo.revalidate();
     }
 
     /**
@@ -513,9 +517,9 @@ public class AddSongPanel extends javax.swing.JPanel {
         pnlAddInfo.setMaximumSize(new java.awt.Dimension(300, 300));
         pnlAddInfo.setMinimumSize(new java.awt.Dimension(300, 300));
         pnlAddInfo.setPreferredSize(new java.awt.Dimension(300, 300));
-        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25);
-        flowLayout2.setAlignOnBaseline(true);
-        pnlAddInfo.setLayout(flowLayout2);
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25);
+        flowLayout1.setAlignOnBaseline(true);
+        pnlAddInfo.setLayout(flowLayout1);
 
         lblAddPicDemo.setMaximumSize(new java.awt.Dimension(150, 150));
         lblAddPicDemo.setMinimumSize(new java.awt.Dimension(150, 150));
@@ -859,9 +863,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         pnlEditInfo.setMaximumSize(new java.awt.Dimension(300, 300));
         pnlEditInfo.setMinimumSize(new java.awt.Dimension(300, 300));
         pnlEditInfo.setPreferredSize(new java.awt.Dimension(300, 300));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25);
-        flowLayout1.setAlignOnBaseline(true);
-        pnlEditInfo.setLayout(flowLayout1);
+        pnlEditInfo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25));
 
         lblEditPicDemo.setMaximumSize(new java.awt.Dimension(150, 150));
         lblEditPicDemo.setMinimumSize(new java.awt.Dimension(150, 150));
@@ -1295,10 +1297,7 @@ public class AddSongPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditSongActionPerformed
 
     private void init() {
-        
         this.setOpaque(false);
-        lblAddDemoSong.setPreferredSize(new Dimension(150, 150));
-        lblEditDemoSong.setPreferredSize(new Dimension(150, 150));
         setBackground(new Color(0, 0, 0, 1));
 
         pnlAddSongMenu.setOpaque(false);

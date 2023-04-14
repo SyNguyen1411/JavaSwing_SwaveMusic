@@ -739,8 +739,8 @@
                   </SubComponents>
                   <LayoutCode>
                     <CodeStatement>
-                      <CodeExpression id="1_flowLayout2">
-                        <CodeVariable name="flowLayout2" type="4096" declaredType="java.awt.FlowLayout"/>
+                      <CodeExpression id="1_flowLayout1">
+                        <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
                         <ExpressionOrigin>
                           <ExpressionProvider type="CodeConstructor">
                             <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
@@ -765,7 +765,7 @@
                         </ExpressionOrigin>
                       </CodeExpression>
                       <StatementProvider type="CodeExpression">
-                        <CodeExpression id="1_flowLayout2"/>
+                        <CodeExpression id="1_flowLayout1"/>
                       </StatementProvider>
                       <Parameters>
                         <CodeExpression id="2"/>
@@ -774,7 +774,7 @@
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="1_flowLayout2"/>
+                      <CodeExpression id="1_flowLayout1"/>
                       <StatementProvider type="CodeMethod">
                         <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                       </StatementProvider>
@@ -799,7 +799,7 @@
                         <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="1_flowLayout2"/>
+                        <CodeExpression id="1_flowLayout1"/>
                       </Parameters>
                     </CodeStatement>
                   </LayoutCode>
@@ -1350,6 +1350,10 @@
                       <Dimension value="[300, 300]"/>
                     </Property>
                   </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                    <Property name="verticalGap" type="int" value="25"/>
+                  </Layout>
                   <SubComponents>
                     <Container class="model.borderImage" name="lblEditPicDemo">
                       <Properties>
@@ -1422,72 +1426,6 @@
                       </Events>
                     </Component>
                   </SubComponents>
-                  <LayoutCode>
-                    <CodeStatement>
-                      <CodeExpression id="7_flowLayout1">
-                        <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
-                        <ExpressionOrigin>
-                          <ExpressionProvider type="CodeConstructor">
-                            <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
-                          </ExpressionProvider>
-                          <Parameters>
-                            <CodeExpression id="8">
-                              <ExpressionOrigin>
-                                <Value type="int" value="1"/>
-                              </ExpressionOrigin>
-                            </CodeExpression>
-                            <CodeExpression id="9">
-                              <ExpressionOrigin>
-                                <Value type="int" value="5"/>
-                              </ExpressionOrigin>
-                            </CodeExpression>
-                            <CodeExpression id="10">
-                              <ExpressionOrigin>
-                                <Value type="int" value="25"/>
-                              </ExpressionOrigin>
-                            </CodeExpression>
-                          </Parameters>
-                        </ExpressionOrigin>
-                      </CodeExpression>
-                      <StatementProvider type="CodeExpression">
-                        <CodeExpression id="7_flowLayout1"/>
-                      </StatementProvider>
-                      <Parameters>
-                        <CodeExpression id="8"/>
-                        <CodeExpression id="9"/>
-                        <CodeExpression id="10"/>
-                      </Parameters>
-                    </CodeStatement>
-                    <CodeStatement>
-                      <CodeExpression id="7_flowLayout1"/>
-                      <StatementProvider type="CodeMethod">
-                        <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
-                      </StatementProvider>
-                      <Parameters>
-                        <CodeExpression id="11">
-                          <ExpressionOrigin>
-                            <Value type="boolean" value="true"/>
-                          </ExpressionOrigin>
-                        </CodeExpression>
-                      </Parameters>
-                    </CodeStatement>
-                    <CodeStatement>
-                      <CodeExpression id="12_pnlEditInfo">
-                        <CodeVariable name="pnlEditInfo" type="8194" declaredType="javax.swing.JPanel"/>
-                        <ExpressionOrigin>
-                          <ExpressionProvider type="ComponentRef">
-                            <ComponentRef name="pnlEditInfo"/>
-                          </ExpressionProvider>
-                        </ExpressionOrigin>
-                      </CodeExpression>
-                      <StatementProvider type="CodeMethod">
-                        <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
-                      </StatementProvider>
-                      <Parameters>
-                        <CodeExpression id="7_flowLayout1"/>
-                      </Parameters>
-                    </CodeStatement>
-                  </LayoutCode>
                 </Container>
               </SubComponents>
             </Container>

@@ -308,7 +308,7 @@ INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Đ�
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Phim', 0,'nhacPhim.jpg', 3)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Thiền', 0,'nhacThien.jpg', 3)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Dân Gian', 0,'nhacDanGian.jpg', 3)
-INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'99%', 0,'99%.jpg', 3)
+INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'99%', 0,'99.jpg', 3)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'42 Độ Album', 0,'42DoAlbum.jpg', 4)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Hoàng', 0,'hoang.jpg', 4)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Link', 0,'link.jpg', 4)
@@ -352,7 +352,7 @@ INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Instrumenta
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Chùa', 0,'nhacChua.jpg', 7)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Rap Diz', 0,'rapDiz.jpg', 8)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Trend', 0,'trend.jpg', 8)
-INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'1%', 0,'1%.jpg', 8)
+INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'1%', 0,'1.jpg', 8)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'EDM', 0,'EDM.jpg', 8)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Đỏ', 0,'nhacDo.jpg', 8)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Mashup', 0,'mashup.jpg', 8)
@@ -373,7 +373,7 @@ INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Blue
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Acoustic', 0,'nhacAcoustic.jpg', 10)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Dance', 0,'nhacDance.jpg', 10)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Rnb', 0,'nhacRnb.jpg', 10)
-INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Đương Đại', 0,'nhacĐuongai.jpg', 10)
+INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Đương Đại', 0,'nhacDuongDai.jpg', 10)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Underground', 0,'nhacUnderground.jpg', 10)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Trừu Tượng', 0,'nhactruuTuong.jpg', 10)
 INSERT INTO PLAYLIST (TenPlayList, RiengTu, HinhAnh, MaND) VALUES (N'Nhạc Disco', 0,'nhacDisco.jpg', 10)
@@ -1307,3 +1307,4 @@ SELECT * FROM PLAYLIST WHERE (TenPlayList LIKE N'%Nhạc Giật%')
 
 
 
+select * from PLAYLIST
