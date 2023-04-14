@@ -31,9 +31,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.Port;
-//import javax.sound.sampled.LineUnavailableException;
-//import javax.sound.sampled.Mixer;
-//import javax.sound.sampled.Port;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -79,7 +76,6 @@ public class toolPlay extends javax.swing.JPanel {
         public void run() {
             f = new File(getClass().getResource("/mp3/" + data.getFileSong()).getFile());
             try {
-                System.out.println("Đang chạy nhạc");
                 fi = new FileInputStream(f);
                 bi = new BufferedInputStream(fi);
                 player = new Player(bi);
@@ -92,11 +88,8 @@ public class toolPlay extends javax.swing.JPanel {
                     player.play();
                 }
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JavaLayerException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     };
@@ -464,9 +457,7 @@ public class toolPlay extends javax.swing.JPanel {
                 main.itemSong.getLblWave().setVisible(running);
                 main.itemSong.getLblStart().setVisible(!running);
             } catch (IOException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_lblRunMouseClicked
@@ -515,7 +506,6 @@ public class toolPlay extends javax.swing.JPanel {
     private void slMusicMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slMusicMouseReleased
         slMusic.setValue(loading);
         timePause = loading * time;
-        System.out.println(timePause);
         try {
             fi.skip(timePause);
             pause = fi.available();
@@ -523,13 +513,11 @@ public class toolPlay extends javax.swing.JPanel {
             Thread runningThread = new Thread(play);
             runningThread.start();
         } catch (IOException ex) {
-            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_slMusicMouseReleased
 
     private void slidebar2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slidebar2StateChanged
         setGain(slidebar2.getValue());
-        System.out.println(slidebar2.getValue());
         setVolunm(slidebar2.getValue());
     }//GEN-LAST:event_slidebar2StateChanged
 
@@ -561,11 +549,8 @@ public class toolPlay extends javax.swing.JPanel {
                 main.itemSong.selectRunning(false);
                 loadLyricsFillData();
             } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (URISyntaxException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_lblNextMouseClicked
@@ -596,11 +581,8 @@ public class toolPlay extends javax.swing.JPanel {
                 main.itemSong.selectRunning(false);
                 loadLyricsFillData();
             } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             } catch (URISyntaxException ex) {
-                Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -622,7 +604,6 @@ public class toolPlay extends javax.swing.JPanel {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro\n" + e);
         }
     }
 
@@ -743,13 +724,9 @@ public class toolPlay extends javax.swing.JPanel {
                         }
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (UnsupportedAudioFileException ex) {
-                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (URISyntaxException ex) {
-                    Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -777,7 +754,6 @@ public class toolPlay extends javax.swing.JPanel {
                 listen.setSongID(data.getSongID());
                 listen.setUserID(Login.user.getUserID());
                 ltDao.insert(listen);
-                System.out.println("thêm lượt nghe");
             }
 
         } catch (IOException ex) {
@@ -808,7 +784,6 @@ public class toolPlay extends javax.swing.JPanel {
         try {
             fileInputStream = new FileInputStream(url);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(toolPlay.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Scanner scanner = new Scanner(fileInputStream);
@@ -824,8 +799,6 @@ public class toolPlay extends javax.swing.JPanel {
                 scanner.close();
                 fileInputStream.close();
             } catch (IOException ex) {
-                Logger.getLogger(toolPlay.class.getName())
-                        .log(Level.SEVERE, null, ex);
             }
         }
     }
