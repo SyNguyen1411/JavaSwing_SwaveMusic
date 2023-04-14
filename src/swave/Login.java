@@ -482,6 +482,10 @@ public class Login extends javax.swing.JFrame {
                 } catch (URISyntaxException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                if (!Auth.user.isRole()) {
+                    main.getUserTool().getPnlAdminTool().setVisible(false);
+                }
+                main.getToolBar().setUserName(user.getFullname());
                 main.setVisible(true);
                 loginForm.dispose();
             }

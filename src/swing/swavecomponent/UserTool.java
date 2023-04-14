@@ -4,6 +4,7 @@
  */
 package swing.swavecomponent;
 
+import java.awt.Dimension;
 import swave.MainFrame;
 
 /**
@@ -44,13 +45,13 @@ public class UserTool extends javax.swing.JPanel {
         this.pnlAdminTool = pnlAdminTool;
     }
 
-    public UserToolComponent getPnlIntroduction () {
-        return pnlIntroduction;
-    }
-
-    public void setPnlIntroduction (UserToolComponent pnlIntroduction) {
-        this.pnlIntroduction = pnlIntroduction;
-    }
+//    public UserToolComponent getPnlIntroduction () {
+//        return pnlIntroduction;
+//    }
+//
+//    public void setPnlIntroduction (UserToolComponent pnlIntroduction) {
+//        this.pnlIntroduction = pnlIntroduction;
+//    }
 
     public UserToolComponent getPnlLogout () {
         return pnlLogout;
@@ -77,33 +78,41 @@ public class UserTool extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         pnlPersonalInfo = new swing.swavecomponent.UserToolComponent();
         pnlAdminTool = new swing.swavecomponent.UserToolComponent();
-        pnlIntroduction = new swing.swavecomponent.UserToolComponent();
         pnlLogout = new swing.swavecomponent.UserToolComponent();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setMaximumSize(new java.awt.Dimension(248, 200));
         setMinimumSize(new java.awt.Dimension(248, 150));
-        setPreferredSize(new java.awt.Dimension(248, 200));
-        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
-        add(pnlPersonalInfo);
-        add(pnlAdminTool);
-        add(pnlIntroduction);
-        add(pnlLogout);
+        setPreferredSize(new java.awt.Dimension(248, 100));
+        setLayout(new java.awt.GridBagLayout());
+        add(pnlPersonalInfo, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        add(pnlAdminTool, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        add(pnlLogout, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void init(){
         pnlPersonalInfo.getLblPanelName().setText("Thông tin cá nhân");
         pnlAdminTool.getLblPanelName().setText("Công cụ cho Admin");
-        pnlIntroduction.getLblPanelName().setText("Giới thiệu");
+        //pnlIntroduction.getLblPanelName().setText("Giới thiệu");
         pnlLogout.getLblPanelName().setText("Đăng xuất");
+        this.setPreferredSize(null);
+        this.setMaximumSize(new Dimension(this.getMaximumSize().width, this.getPreferredSize().height));
+        this.validate();
+        this.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.swavecomponent.UserToolComponent pnlAdminTool;
-    private swing.swavecomponent.UserToolComponent pnlIntroduction;
     private swing.swavecomponent.UserToolComponent pnlLogout;
     private swing.swavecomponent.UserToolComponent pnlPersonalInfo;
     // End of variables declaration//GEN-END:variables

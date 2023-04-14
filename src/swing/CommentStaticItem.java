@@ -1,5 +1,6 @@
 package swing;
 
+import AdminToolUtils.ButtonDelete;
 import dao.CommentDAO;
 import entity.Comment;
 import entity.ReportComment;
@@ -33,8 +34,19 @@ public class CommentStaticItem extends javax.swing.JPanel {
     public void loadData() {
         lblUser.setText(data.getUserID() + "");
         Comment item = cmDao.selectById(data.getCommentID());
+        dataComment = item;
         lblComment.setText(item.getContent());
     }
+
+    public ButtonDelete getBtnDelete () {
+        return btnDelete;
+    }
+
+    public void setBtnDelete (ButtonDelete btnDelete) {
+        this.btnDelete = btnDelete;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,6 +108,7 @@ public class CommentStaticItem extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 

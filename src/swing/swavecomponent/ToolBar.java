@@ -66,6 +66,10 @@ public class ToolBar extends javax.swing.JPanel {
         this.userPanel = userPanel;
     }
 
+    public void setUserName(String name){
+        this.userPanel.getLblName().setText(name);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
