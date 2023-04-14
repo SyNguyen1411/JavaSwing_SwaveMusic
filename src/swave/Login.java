@@ -389,28 +389,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameCaretUpdate
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-//        if ((txtUsername.getText().equals("nhom2")) && (txtPassword.getText().equals("nhom2"))) {
-//            DialogLoad loadPane = new DialogLoad(this, false, "Đang đăng nhập...");
-//            loadPane.setVisible(true);
-//            loginForm = this;
-//            Thread loadThread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        main = new MainFrame();
-//                    } catch (UnsupportedAudioFileException ex) {
-//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (URISyntaxException ex) {
-//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    main.setVisible(true);
-//                    loginForm.dispose();
-//                }
-//            });
-//            loadThread.start();
-//        }
         login();
     }//GEN-LAST:event_btnLoginMouseClicked
 

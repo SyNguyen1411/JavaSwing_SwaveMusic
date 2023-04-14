@@ -26,6 +26,14 @@ public class DialogLoad extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         lblTextLoad.setText(textLoad);
     }
+    
+//    public DialogLoad(java.awt.Frame parent, boolean modal, String textLoad) {
+//        super(parent, modal);
+//        initComponents();
+//        this.setBackground(new Color(0, 0, 0, 0));
+//        this.setLocationRelativeTo(null);
+//        lblTextLoad.setText(textLoad);
+//    }
 
     private void loading() {
         while (true) {

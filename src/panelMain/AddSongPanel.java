@@ -94,7 +94,6 @@ public class AddSongPanel extends javax.swing.JPanel {
         clearForm(2);
         fillTable();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1180,7 +1179,7 @@ public class AddSongPanel extends javax.swing.JPanel {
                 File dest = new File("../Swave/src/img/song/" + fileName);
                 File destAbsolutePath = new File(dest.getCanonicalPath());
                 XFile.copyFileUsingStream(source, destAbsolutePath);
-                song.setAVT( fileChooser.getSelectedFile().getName());
+                song.setAVT(fileChooser.getSelectedFile().getName());
                 btnAddPic.setText(song.getAVT());
                 lblAddPicDemo.setIcon(song.toIcon());
                 repaint();
@@ -1249,7 +1248,7 @@ public class AddSongPanel extends javax.swing.JPanel {
         fileChooser.addChoosableFileFilter(extFilter);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
-            try {         
+            try {
                 File source = new File(fileChooser.getSelectedFile().getAbsolutePath());
                 String fileName = (String) fileChooser.getSelectedFile().getName();
                 File dest = new File("../Swave/src/img/song/" + fileName);
@@ -1298,6 +1297,8 @@ public class AddSongPanel extends javax.swing.JPanel {
     private void init() {
         
         this.setOpaque(false);
+        lblAddDemoSong.setPreferredSize(new Dimension(150, 150));
+        lblEditDemoSong.setPreferredSize(new Dimension(150, 150));
         setBackground(new Color(0, 0, 0, 1));
 
         pnlAddSongMenu.setOpaque(false);
@@ -1395,6 +1396,7 @@ public class AddSongPanel extends javax.swing.JPanel {
                 lrpnlAddSong.getComponent(0).setVisible(false);
                 lrpnlAddSong.setPosition(lrpnlAddSong.getComponent(0), 1);
                 lrpnlAddSong.setPosition(pnlSubListSong, 0);
+                fillTable();
                 pnlSubListSong.setVisible(true);
             }
 
@@ -1409,7 +1411,7 @@ public class AddSongPanel extends javax.swing.JPanel {
             }
 
         });
-        
+
     }
 
     private void addSongInit() {
@@ -1837,9 +1839,7 @@ public class AddSongPanel extends javax.swing.JPanel {
                 sdao.insert(song);
                 this.fillTable();
                 this.clearForm(1);
-                mainFrame.fillTrendingSong();
-                mainFrame.getPnlMainScreen().fillTopPlaylist();
-                MsgBox.alert(this, "Thêm mới thành công!");
+                MsgBox.alert(this, "Đã gửi yêu cầu đăng tải bài hát lên!");
             } catch (Exception e) {
                 MsgBox.alert(this, "Thêm mới thất bại!");
                 e.printStackTrace();
@@ -1893,7 +1893,6 @@ public class AddSongPanel extends javax.swing.JPanel {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
             e.printStackTrace();
         }
-
     }
 
     private boolean isValidated(int action) {

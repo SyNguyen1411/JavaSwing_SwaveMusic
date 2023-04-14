@@ -14,7 +14,7 @@ public class SongItemSearch extends javax.swing.JPanel {
     /**
      * Creates new form PlaylistItem
      */
-    Song data;
+    private Song data;
     
     public SongItemSearch(Song data) {
         this.data = data;

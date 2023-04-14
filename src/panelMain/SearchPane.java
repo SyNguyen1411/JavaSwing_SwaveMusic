@@ -8,6 +8,7 @@ import components.ButtonMenuSearch;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JLayeredPane;
+import swave.MainFrame;
 import swing.SearchAll;
 import swing.SearchPlaylist;
 import swing.SearchSong;
@@ -21,6 +22,8 @@ public class SearchPane extends javax.swing.JPanel {
     /**
      * Creates new form Search
      */
+    
+    
     public SearchPane() {
         initComponents();
         setBackground(Color.BLACK);
@@ -200,7 +203,7 @@ public class SearchPane extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lrpnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lrpnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 1273, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSearchAll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
